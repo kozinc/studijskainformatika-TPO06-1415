@@ -30,7 +30,8 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('welcome');
+        //\DB::insert('insert into nosilec (id, ime, priimek, vloga, email, geslo) values (?, ?, ?, ?, ?, ?)', [1, 'Dayle', 'Novak', 'redni', 'dn@gmail.com', 'password']);
+		return view('login');
 	}
 
 }
