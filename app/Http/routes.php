@@ -17,6 +17,8 @@ Route::get('home', 'HomeController@index');
 
 Route::post('login', 'LoginController@login_handler');
 
+Route::post('addnew', 'AddStudentsController@addFromText');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
