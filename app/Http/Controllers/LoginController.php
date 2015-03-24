@@ -30,6 +30,27 @@ class LoginController extends Controller {
      */
     public function login_handler(){
 
+        //IP preko 'trusted' naslova (localhost)
+        //Se zaenkrat nikamor ne hrani, napacne prijave se stejejo v seji
+        $request = \Request::instance();
+        $request->setTrustedProxies(array('127.0.0.1'));
+        $ip_address = $request->getClientIp();
+
+        if (\Session::has('st_prijav')){
+            $st = \Session::get('st_prijav');
+            $st++;
+            \Session::set('st_prijav', $st);
+        }
+        else {
+            \Session::set('st_prijav', 0);
+        }
+
+        if(\Session::get('st_prijav') >= 3){
+            \Session::flash("error", "Tvoj IP bo zaradi prevelikega števila napačnih prijav nekoč zaklenjen!");
+            return redirect()->back();
+        }
+
+        //obdelava (ne) vnesenih podatkov
         $this_username = \Input::get('username');
         $this_password = \Input::get('password');
 
