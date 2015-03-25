@@ -7,6 +7,7 @@ class Student extends Model {
     protected $table = 'student';
     protected $fillable = ['vpisna', 'ime', 'priimek', 'email', 'geslo'];
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function studijskiProgrami()
     {

@@ -7,13 +7,9 @@ class StudijskiProgram extends Model {
 
 
     use SoftDeletes;
-
     protected $table = 'studijski_program';
-
     protected $fillable = ['ime','oznaka','opis','stopnja','trajanje_leta','stevilo_semestrov','KT','klasius_srv'];
-
     protected $guarded = ['id'];
-
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     public function predmeti()

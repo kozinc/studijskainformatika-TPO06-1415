@@ -6,13 +6,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Nosilec extends Model {
 
     use SoftDeletes;
-
     protected $table = 'nosilec';
-
     protected $fillable = ['ime','priimek', 'vloga', ];
-
     protected $guarded = ['id','geslo','email'];
-
     protected $dates = ['created_at','deleted_at','updated_at'];
 
     public function predmeti()

@@ -6,13 +6,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Predmet extends Model {
 
     use SoftDeletes;
-
     protected $table = 'predmet';
-
     protected $fillable = ['naziv','opis','id_nosilca','KT','tip','id_modula'];
-
     protected $guarded = ['id'];
-
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     public function studijski_programi()
