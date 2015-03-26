@@ -47,7 +47,7 @@ class LoginController extends Controller {
 
         if(\Session::get('st_prijav') >= 3){
             \Session::flash("error", "Tvoj IP bo zaradi prevelikega števila napačnih prijav nekoč zaklenjen!");
-            return redirect()->back();
+            //return redirect()->back();
         }
 
         //obdelava (ne) vnesenih podatkov
@@ -69,7 +69,8 @@ class LoginController extends Controller {
             \Session::flash("error", "Geslo se ne ujema z vpisno številko!");
             return redirect()->back();
         }
-        echo "Have a good day!";
+
+        return view('home');
 
     }
 }
