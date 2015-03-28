@@ -1,7 +1,16 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Veronikaz
- * Date: 27.3.2015
- * Time: 15:00
- */
+<?php namespace App\Http\Controllers;
+
+class LoginController extends Controller {
+
+    public function __construct() {
+        $this->middleware('guest');
+    }
+
+    public function get_all_students(){
+        $users = App/Models/Student::all();
+        foreach ($users as $user){
+            echo $user->ime;
+        }
+    }
+
+}

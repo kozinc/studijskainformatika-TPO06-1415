@@ -13,11 +13,11 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@datoteka');
+Route::get('add_from_file', 'HomeController@datoteka');
 
-Route::post('home', 'HomeController@datoteka');
+Route::get('get_students', 'HomeController@seznam');
 
-Route::post('login', 'LoginController@login_handler');
+Route::post('home', 'LoginController@login_handler');
 
 Route::post('addnew', 'AddStudentsController@addFromText');
 

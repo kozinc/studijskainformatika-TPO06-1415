@@ -12,4 +12,8 @@ class HomeController extends Controller {
         return view('addnew');
     }
 
+    public function seznam(){
+       return view('seznam');
+    }
+
 }
