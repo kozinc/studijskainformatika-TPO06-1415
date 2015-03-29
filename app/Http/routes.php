@@ -17,6 +17,8 @@ Route::get('home', 'HomeController@datoteka');
 
 Route::post('home', 'HomeController@datoteka');
 
+Route::post('home', 'VpisniList@obrazecVpisniList');
+
 Route::post('login', 'LoginController@login_handler');
 
 Route::post('addnew', 'AddStudentsController@addFromText');

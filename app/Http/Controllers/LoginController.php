@@ -59,6 +59,7 @@ class LoginController extends Controller {
             return redirect()->back();
         }
 
+
         $user = \DB::table('student')->where('vpisna', $this_username)->first();
 
         if(is_null($user)){

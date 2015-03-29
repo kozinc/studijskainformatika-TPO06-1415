@@ -31,8 +31,6 @@ class StudentTableSeeder extends Seeder {
         App\Models\Student::create(['vpisna' => '63130385', 'ime' => 'Nejc', 'priimek' => 'Bizjak', 'email' => 'necobizjak@gmail.com','geslo' => 'nejcbizjak', 'emso' => 'EmsoOdNejca', 'posta' => '5272', 'datum_rojstva' => '1991-07-13', 'obcina_rojstva' => 'Nova Gorica']);
 
 
-        App\Models\Predmet::create(['naziv' => 'TPO', 'opis' => 'opisTPO', 'priimek' => 'Blažič', 'email' => 'veronikablazic@gmail.com','geslo' => 'veronikablazic', 'emso' => 'EmsoOdVeroni', 'posta' => '5000', 'datum_rojstva' => '1993-09-23', 'obcina_rojstva' => 'Nova Gorica']);
-
     }
 
 }
