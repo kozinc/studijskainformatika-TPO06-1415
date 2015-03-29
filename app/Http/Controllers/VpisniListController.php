@@ -30,8 +30,11 @@ class VpisniListController extends Controller {
      */
     public function obrazecVpisniList(){
 
+
         return view('vpisnilist',['vpisnaStevilka'=>'63120340']);
-        //nafilaj kar lahko
+        //nafilaj kar lahk
+        return view('vpisniList');
+
 
     }
 }
