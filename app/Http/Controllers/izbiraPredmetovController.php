@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-class VpisniListController extends Controller {
+class izbiraPredmetovController extends Controller {
 
     /*
     |--------------------------------------------------------------------------
@@ -28,10 +28,9 @@ class VpisniListController extends Controller {
      *
      * @return Response
      */
-    public function obrazecVpisniList(){
+    public function vpisniListHandler(){
 
-        return view('vpisnilist',['vpisnaStevilka'=>'63120340']);
-        //nafilaj kar lahko
-
+        //pogledamo ce je vse kul, ce je->izbor predmetov
+        return view('izbiraPredmetov');
     }
 }

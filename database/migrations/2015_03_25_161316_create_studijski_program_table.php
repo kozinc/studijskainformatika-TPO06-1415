@@ -17,6 +17,7 @@ class CreateStudijskiProgramTable extends Migration {
             $table->increments('id');
             $table->string('ime');
             $table->string('oznaka');
+            $table->string('kraj_izvajanja');
             $table->text('opis');
             $table->integer('stopnja');
             $table->integer('trajanje_leta');
