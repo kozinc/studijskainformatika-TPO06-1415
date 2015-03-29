@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class IzpitniRok extends Model {
 
     use SoftDeletes;
-
     protected $table = 'izpitni_rok';
-
     protected $fillable = ['izpitni_rok', 'datum', 'studijsko_leto'];
-
     protected $guarded = ['id_predmeta'];
+    public $timestamps = false;
 
     public function predmet()
     {

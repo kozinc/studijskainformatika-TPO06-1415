@@ -11,14 +11,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Modul extends Model {
 
     use SoftDeletes;
-
     protected $table = 'modul';
-
     protected $fillable = ['ime','opis'];
-
     protected $guarded = ['id'];
-
     protected $dates = ['created_at','deleted_at','updated_at'];
+    public $timestamps = false;
 
     public function predmeti()
     {
