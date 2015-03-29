@@ -10,6 +10,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Modul extends Model {
 
+    /**
+     * @property integer $id
+     * @property string $ime
+     * @property string $opis
+     * @property \Carbon\Carbon $created_at
+     * @property \Carbon\Carbon $updated_at
+     **/
     use SoftDeletes;
     protected $table = 'modul';
     protected $fillable = ['ime','opis'];

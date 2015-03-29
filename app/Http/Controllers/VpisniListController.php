@@ -30,11 +30,6 @@ class LoginController extends Controller {
      */
     public function obrazecVpisniList(){
 
-
-    }
-
-    public function obrazecVpisniList(){
-
         return view('vpisniList');
 
     }
