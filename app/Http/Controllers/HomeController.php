@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Student;
+use App\Models\Student;
 
 class HomeController extends Controller {
 

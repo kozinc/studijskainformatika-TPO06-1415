@@ -21,6 +21,8 @@ class CreateStudentPredmetTable extends Migration {
             $table->integer('semester');
             $table->string('studijsko_leto');
             $table->integer('ocena');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
 

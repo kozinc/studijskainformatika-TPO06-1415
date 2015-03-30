@@ -31,3 +31,10 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('predmeti', 'PredmetController@index');
+Route::get('predmeti/{id}', 'PredmetController@show' );
+Route::get('predmeti/{id}/edit', 'PredmetController@edit');
+Route::post('predmeti/{id}/edit', 'PredmetController@update');
+
+

@@ -18,6 +18,7 @@ class CreateModulTable extends Migration {
         $table->string('ime');
         $table->text('opis');
         $table->timestamps();
+        $table->softDeletes();
 
     });
 }
