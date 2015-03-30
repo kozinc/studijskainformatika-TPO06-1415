@@ -7,10 +7,10 @@ class LoginController extends Controller {
     }
 
     public function get_all_students(){
-        $users = App/Models/Student::all();
-        foreach ($users as $user){
-            echo $user->ime;
-        }
+
+        /*$predmeti = \App\Models\Predmet::lists('naziv', 'id');
+        return View::make('addnew')->with('predmeti', $predmeti);*/
+
     }
 
 }

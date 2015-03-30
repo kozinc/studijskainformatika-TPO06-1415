@@ -36,20 +36,23 @@ class LoginController extends Controller {
 
         if(strlen($this_username) < 1 || strlen($this_password) < 1){
             \Session::flash("error", "Manjkajoče uporabniško ime ali geslo!");
-            add_to_session();
+            self::add_to_session();
             return redirect()->back();
         }
 
+       // $user = \DB::table('student')->where('vpisna', $this_username)->first();
+
         $user = \App\Models\Student::where('vpisna', $this_username)->first();
+
 
         if(is_null($user)){
             \Session::flash("error", "Uporabnik s takšno vpisno številko ne obstaja!");
-            add_to_session();
+            self::add_to_session();
             return redirect()->back();
         }
         if($this_password != ($user->geslo)){
             \Session::flash("error", "Geslo se ne ujema z vpisno številko!");
-            add_to_session();
+            self::add_to_session();
             return redirect()->back();
         }
 
