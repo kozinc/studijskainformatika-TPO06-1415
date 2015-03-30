@@ -22,6 +22,7 @@ class CreatePredmetTable extends Migration {
             $table->string('tip');
             $table->integer('id_modula')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
 
 

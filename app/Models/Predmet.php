@@ -21,6 +21,11 @@ class Predmet extends Model {
         return $this->belongsTo('App\Models\Modul','id_modula');
     }
 
+    public function nosilec()
+    {
+        return $this->belongsTo('App\Models\Nosilec','id_nosilca');
+    }
+
     public function izpitni_roki()
     {
         return $this->hasMany('App\Models\IzpitniRok','id_predmeta');

@@ -24,6 +24,7 @@ class CreateStudijskiProgramTable extends Migration {
             $table->integer('KT');
             $table->integer('klasius_srv');
             $table->timestamps();
+            $table->softDeletes();
         });
 	}
 

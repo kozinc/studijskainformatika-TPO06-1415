@@ -21,6 +21,7 @@ class CreateNosilecTable extends Migration {
             $table->string('email');
             $table->string('geslo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
