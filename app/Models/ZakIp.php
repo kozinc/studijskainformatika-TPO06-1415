@@ -1,10 +1,8 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ZakIp extends Model {
-    use SoftDeletes;
     protected $table = 'zaklenjeni_ip';
     protected $fillable = ['ip', 'datum_odklenitve'];
     protected $guarded = ['id'];
