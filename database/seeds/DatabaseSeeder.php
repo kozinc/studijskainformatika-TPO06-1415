@@ -72,6 +72,9 @@ class TableSeeder extends Seeder {
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1]);
 
+        DB::table('student_program')->truncate();
+        DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>'Vpis v višji letnik.', 'nacin_studija'=>'redni']);
+
 
         DB::table('referent')->truncate();
         App\Models\Referent::create(['email'=>'zdenka.velikonja@fri.uni-lj.si', 'geslo'=>Hash::make('geslo'), 'ime'=>'Zdenka','priimek'=>'Velikonja']);
