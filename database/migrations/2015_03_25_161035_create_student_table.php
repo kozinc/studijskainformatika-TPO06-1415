@@ -24,6 +24,7 @@ class CreateStudentTable extends Migration {
             $table->string('email');
             $table->string('geslo');
             $table->string('emso');
+            $table->string('naslov');
             $table->string('kraj');
             $table->integer('posta');
             $table->string('drzava');
