@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="kt">Kreditne točke</label>
-            <input id="kt" name="kt" value="{{ $predmet->id }}">
+            <input id="kt" name="kt" value="{{ $predmet->KT }}">
         </div>
         <div class="form-group">
             <label for="tip">Tip predmeta</label>
@@ -40,6 +40,15 @@
                 <option value="modulski"@if($predmet->tip=='modulski') {{ "selected" }} @endif>Modulski</option>
                 <option value="strokovni-izbirni"@if($predmet->tip=='strokovni-izbirni') {{ "selected" }} @endif>Strokovni izbirni</option>
                 <option value="prosto-izbirini"@if($predmet->tip=='prosto-izbirni') {{ "selected" }} @endif>Prosto izbirni</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="modul">Modul</label>
+            <select name="id_modula" id="modul">
+                <option value="0">--- izberi modul ---</option>
+                @foreach($moduli as $modul)
+                    <option value="{{ $modul->id }}">{{ $modul->ime }}</option>
+                @endforeach
             </select>
         </div>
             <input type="submit" value="Shrani" >

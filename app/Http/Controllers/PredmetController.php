@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Modul;
 use App\Models\Nosilec;
 use App\Models\Predmet;
 
@@ -29,7 +30,10 @@ class PredmetController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$nosilci = Nosilec::all();
+        $moduli = Modul::all();
+        return view('predmetCreate', ['nosilci'=>$nosilci, 'moduli'=>$moduli]);
+
 	}
 
 	/**
@@ -37,9 +41,28 @@ class PredmetController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$predmet = new Predmet();
+        $predmet->id_nosilca = (int)$request['id_nosilca'];
+        $predmet->tip = $request['tip'];
+        $predmet->KT = (int)$request['KT'];
+        $predmet->naziv = $request['naziv'];
+        if($predmet->tip == 'modulski'){
+            $predmet->id_modula = (int)$request['id_modula'];
+        }else{
+            $predmet->id_modula = NULL;
+        }
+        $check = $predmet->save();
+
+        $nosilci = Nosilec::all();
+        $moduli = Modul::all();
+        if($predmet->id > 0){
+           // return view('predmetEdit/'.$predmet->id, ['predmet'=>$predmet, 'nosilci'=>$nosilci, 'moduli'=>$moduli, 'odgovor'=>'Predmet uspešno ustvarjen!']);
+            return redirect('predmeti/'.$predmet->id);
+        }else{
+            return view('predmetCreate', ['nosilci'=>$nosilci, 'moduli'=>$moduli]);
+        }
 	}
 
 	/**
@@ -64,7 +87,8 @@ class PredmetController extends Controller {
 	{
         $predmet = Predmet::find($id);
         $nosilci = Nosilec::all();
-		return view('predmet_edit',['predmet'=>$predmet, 'nosilci'=>$nosilci]);
+        $moduli = Modul::all();
+		return view('predmetEdit',['predmet'=>$predmet, 'nosilci'=>$nosilci, 'moduli'=>$moduli]);
 	}
 
 	/**
@@ -75,20 +99,21 @@ class PredmetController extends Controller {
 	 */
 	public function update($id, Request $request)
 	{
-		$predmet = Predmet::find($id);
+		$predmet = Predmet::find((int)$id);
         $predmet->naziv = $request['naziv'];
         $predmet->opis = $request['opis'];
-        $predmet->kt = $request['kt'];
-        $predmet->id_nosilca = $request['id_nosilca'];
+        $predmet->KT = (int)$request['kt'];
+        $predmet->id_nosilca = (int)$request['id_nosilca'];
         $predmet->tip = $request['tip'];
         if($predmet->tip == 'modulski'){
-            $predmet->id_modula = $request['id_modula'];
+            $predmet->id_modula = (int)$request['id_modula'];
         }else{
             $predmet->id_modula = NULL;
         }
-        $predmet->save();
+        $check = $predmet->save();
+
         $nosilci = Nosilec::all();
-        return view('predmeti_edit', ['predmet'=>$predmet,'nosilci'=>$nosilci, 'status'=>'success', 'odgovor'=>'Predmet uspešno posodobljen!']);
+        return view('predmetEdit', ['predmet'=>$predmet,'nosilci'=>$nosilci, 'status'=>'success', 'odgovor'=>'Predmet uspešno posodobljen!']);
 
 
 	}
