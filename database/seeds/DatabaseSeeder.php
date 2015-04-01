@@ -50,6 +50,11 @@ class TableSeeder extends Seeder {
         App\Models\Nosilec::create(['id'=>4,'ime'=>'Matjaž' ,'priimek'=>'Branko Jurič', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mazjaz.juric@fri.uni-lj.si']);
         App\Models\Nosilec::create(['id'=>5,'ime'=>'Aleš' ,'priimek'=>'Smrdel', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'ales.smrdel@fri.uni-lj.si']);
 
+        DB::table('student_predmet')->truncate();
+        App\Models\StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        App\Models\StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        App\Models\StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+
         DB::table('modul')->truncate();
         $modul1 = App\Models\Modul::create(['ime'=>'Razvoj programske opreme','opis'=>'']);
 
@@ -71,6 +76,9 @@ class TableSeeder extends Seeder {
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>2,'letnik'=>1, 'semester'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1, 'semester'=>2]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1, 'senester'=>2]);
+
+        DB::table('student_program')->truncate();
+        DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>'Vpis v višji letnik.', 'nacin_studija'=>'redni']);
 
 
         DB::table('referent')->truncate();

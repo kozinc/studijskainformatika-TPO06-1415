@@ -19,6 +19,9 @@ class CreateStudentProgramTable extends Migration {
             $table->integer('id_programa')->unsigned();
             $table->string('vrsta_vpisa');
             $table->string('nacin_studija');
+            $table->date('vloga_oddana');
+            $table->date('vloga_potrjena');
+            $table->integer('prosta_izbira');
             $table->date('datum_vpisa');
             $table->string('studijsko_leto');
             $table->integer('letnik');
