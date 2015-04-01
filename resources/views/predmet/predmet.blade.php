@@ -19,4 +19,6 @@
             </tr>
 
     </table>
+
+    <a href="{{ $predmet->id }}/edit">Spremeni</a>
 @endsection
