@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<<<<<<< HEAD
 
     <div class="panel panel-default">
     <div class="panel-heading">
@@ -24,20 +25,33 @@
     </div>
     </div>
 
+=======
+>>>>>>> 2583c8480fe054be4386f5a71bf6ead22ffcef38
     <table class="table">
         <tr>
             <th>Šifra</th>
             <th>Ime</th>
             <th>Tip</th>
             <th>Nosilec</th>
+            <th>Kreditne točke</th>
         </tr>
 
+<<<<<<< HEAD
         <tr>
             <td>{{ $predmet->id }}</td>
             <td>{{ $predmet->naziv }}</td>
             <td>{{ $predmet->tip }}</td>
             <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
         </tr>
+=======
+            <tr>
+                <td>{{ $predmet->id }}</td>
+                <td>{{ $predmet->naziv }}</td>
+                <td>{{ $predmet->tip }}</td>
+                <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
+                <td>{{ $predmet->KT }}</td>
+            </tr>
+>>>>>>> 2583c8480fe054be4386f5a71bf6ead22ffcef38
 
     </table>
 @endsection

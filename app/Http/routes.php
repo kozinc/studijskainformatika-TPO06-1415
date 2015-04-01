@@ -28,8 +28,11 @@ Route::controllers([
 ]);
 
 Route::get('predmeti', 'PredmetController@index');
+Route::get('predmeti/create', 'PredmetController@create');
+Route::post('predmeti/create', 'PredmetController@store');
 Route::get('predmeti/{id}', 'PredmetController@show' );
 Route::get('predmeti/{id}/edit', 'PredmetController@edit');
 Route::post('predmeti/{id}/edit', 'PredmetController@update');
+
 
 
