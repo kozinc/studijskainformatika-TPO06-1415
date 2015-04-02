@@ -38,7 +38,7 @@ class LoginController extends Controller {
             }
         }
 
-        if(\Session::get('st_prijav') >= 3){
+        if(\Session::get('st_prijav') > 3){
             date_default_timezone_set('Europe/Ljubljana');
             $date = strtotime("+1 days");
             $date = date('Y:m:d H:i:s', $date);
@@ -47,6 +47,7 @@ class LoginController extends Controller {
             $lock_ip -> ip = $ip_address;
             $lock_ip -> datum_odklenitve = $date;
             $lock_ip -> save();
+            \Session::set('st_prijav', 0);
             \Session::flash("error", "Zaradi prevelikega števila napačnih prijav, bo vaš IP zaklenjen 24h");
             return redirect()->back();
         }

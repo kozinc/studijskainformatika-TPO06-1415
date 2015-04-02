@@ -53,6 +53,11 @@ class TableSeeder extends Seeder {
         App\Models\Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
 
 
+        DB::table('student_predmet')->truncate();
+        App\Models\StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        App\Models\StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        App\Models\StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+
         DB::table('modul')->truncate();
         $modul1 = App\Models\Modul::create(['ime'=>'Razvoj programske opreme','opis'=>'']);
 
@@ -72,12 +77,19 @@ class TableSeeder extends Seeder {
         DB::table('program_modul')->insert(['id_programa'=>1, 'id_modula'=>1]);
 
         DB::table('program_predmet')->truncate();
+<<<<<<< HEAD
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>1,'letnik'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>2,'letnik'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>8,'letnik'=>3]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>9,'letnik'=>3]);
+=======
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>1,'letnik'=>1, 'semester'=>1]);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>2,'letnik'=>1, 'semester'=>1]);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1, 'semester'=>2]);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1, 'senester'=>2]);
+>>>>>>> 1f2e0fdf8ed6a655a339c698f90a55d7f3e9eb8e
 
         DB::table('student_program')->truncate();
         DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>'Vpis v višji letnik.', 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-25', 'datum_vpisa'=>'2014-09-25', 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);

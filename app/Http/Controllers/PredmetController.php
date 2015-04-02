@@ -19,7 +19,7 @@ class PredmetController extends Controller {
 	public function index()
 	{
         $predmeti = Predmet::all();
-        return view('predmeti',['predmeti'=>$predmeti]);
+        return view('predmet/predmeti',['predmeti'=>$predmeti]);
 
 	}
 
@@ -32,7 +32,7 @@ class PredmetController extends Controller {
 	{
 		$nosilci = Nosilec::all();
         $moduli = Modul::all();
-        return view('predmetCreate', ['nosilci'=>$nosilci, 'moduli'=>$moduli]);
+        return view('predmet/predmetCreate', ['nosilci'=>$nosilci, 'moduli'=>$moduli]);
 
 	}
 
@@ -61,7 +61,7 @@ class PredmetController extends Controller {
            // return view('predmetEdit/'.$predmet->id, ['predmet'=>$predmet, 'nosilci'=>$nosilci, 'moduli'=>$moduli, 'odgovor'=>'Predmet uspešno ustvarjen!']);
             return redirect('predmeti/'.$predmet->id);
         }else{
-            return view('predmetCreate', ['nosilci'=>$nosilci, 'moduli'=>$moduli]);
+            return view('predmet/predmetCreate', ['nosilci'=>$nosilci, 'moduli'=>$moduli]);
         }
 	}
 
@@ -74,7 +74,7 @@ class PredmetController extends Controller {
 	public function show($id)
 	{
 		$predmet = Predmet::find($id);
-        return view('predmet',['predmet'=>$predmet]);
+        return view('predmet/predmet',['predmet'=>$predmet]);
 	}
 
 	/**
@@ -88,7 +88,7 @@ class PredmetController extends Controller {
         $predmet = Predmet::find($id);
         $nosilci = Nosilec::all();
         $moduli = Modul::all();
-		return view('predmetEdit',['predmet'=>$predmet, 'nosilci'=>$nosilci, 'moduli'=>$moduli]);
+		return view('predmet/predmetEdit',['predmet'=>$predmet, 'nosilci'=>$nosilci, 'moduli'=>$moduli]);
 	}
 
 	/**
@@ -112,8 +112,7 @@ class PredmetController extends Controller {
         }
         $check = $predmet->save();
 
-        $nosilci = Nosilec::all();
-        return view('predmetEdit', ['predmet'=>$predmet,'nosilci'=>$nosilci, 'status'=>'success', 'odgovor'=>'Predmet uspešno posodobljen!']);
+        return redirect('predmeti/'.$predmet->id);
 
 
 	}
