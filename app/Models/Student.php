@@ -18,4 +18,11 @@ class Student extends Model {
     {
         return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_predmeta', 'id_studenta');
     }
+
+    public function studentProgram()
+    {
+        return $this->hasMany('App\Models\StudentProgram', 'id_studenta');
+
+    }
 }
+
