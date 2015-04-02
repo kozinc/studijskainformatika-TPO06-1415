@@ -14,7 +14,9 @@ class StudijskiProgram extends Model {
 
     public function predmeti()
     {
+
         return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik')->orderBy('letnik','semester','asc');
+
     }
 
     public function moduli()
@@ -25,6 +27,3 @@ class StudijskiProgram extends Model {
     public function studenti()
     {
         return $this->belongsToMany('App\Models\Student', 'student_program', 'id_studenta', 'id_programa');
-    }
-
-}

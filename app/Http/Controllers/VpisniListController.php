@@ -1,5 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Models\StudijskiProgram;
+use App\Models\StudentProgram;
+
+
 class VpisniListController extends Controller {
 
     /*
@@ -30,31 +35,15 @@ class VpisniListController extends Controller {
      */
     public function obrazecVpisniList(){
 
-        $student = \App\Models\Student::where ('email', '=', 'nezabelej@gmail.com')->first();
-        //$student_program = \App\Models\StudentProgram::where ('id_studenta', '=', $student->id);
-        //id_programa (in kar sledi iz programa), vrsta_vpisa, nacin_studija, letnik se prebere iz zetona
-        //recimo da je id_programa 1
-        //$studijski_program = \App\Models\StudijskiProgram::find(1);
-       // return $studijski_program->ime;
+        $student = Student::where ('email', '=', 'nezabelej@gmail.com')->first();
+        $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
+        $program = StudijskiProgram::find($programStudenta->id_programa);
+        $prviVpis = $programStudenta->where('id_programa','=',$program->id)->first();
+        $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
 
-        return view('vpisnilist',['vpisnaStevilka'=> $student->vpisna,
-                                  'ime' => $student->ime,
-                                  'priimek' => $student->priimek,
-                                  'datum_rojstva' => $student->datum_rojstva,
-                                  'obcina_rojstva' => $student->obcina_rojstva,
-                                  'drzava_rojstva' => $student->drzava_rojstva,
-                                  'emso' => $student->emso,
-                                  'davcna' => $student->davcna,
-                                  'spol' => $student->spol,
-                                  'naslov' => $student->naslov,
-                                  'posta' => $student->posta,
-                                  'kraj' => $student->kraj,
-                                  'drzava' => $student->drzava,
-                                  'drzavljanstvo' => $student->drzavljanstvo,
-                                  'email' => $student->email,
-                                  'telefon' => $student->telefon,
-                                  'studijski_program' => "Imeštpr"
-        ]);
+
+        return view('vpisnilist',['student'=>$student , 'programStudenta'=>$programStudenta,
+                    'program'=>$program, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
 
     }
 }
