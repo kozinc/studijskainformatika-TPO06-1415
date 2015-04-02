@@ -8,11 +8,16 @@
         <h3>{{ $i.'. letnik' }}</h3>
         @foreach($ptogram->predmeti as $predmet)
             @if($predmet->pivot->letnik == $i)
-                @P
+                <select name="{{ $i.'-letnik' }}">
+
+                </select>
             @endif
         @endforeach
-        <select name="{{ $i.'.letnik' }}">
 
-        </select>
+        @foreach($predmeti as $predmet)
+            <select>
+                <o
+            </select>
+        @endforeach
     @endfor
 @endsection
