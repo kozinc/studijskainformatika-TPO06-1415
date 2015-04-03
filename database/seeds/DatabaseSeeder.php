@@ -2,6 +2,15 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
+use App\Models\StudijskiProgram;
+use App\Models\Nosilec;
+use App\Models\Predmet;
+use App\Models\Modul;
+use App\Models\StudentPredmet;
+use App\Models\Referent;
+use App\Models\ProgramLetnik;
+
 
 class DatabaseSeeder extends Seeder {
 
@@ -22,74 +31,74 @@ class DatabaseSeeder extends Seeder {
 
 class TableSeeder extends Seeder {
 
-
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('student')->truncate();
-        App\Models\Student::create(['vpisna' => '63120340', 'ime' => 'Neža', 'priimek' => 'Belej', 'email' => 'nezabelej@gmail.com','geslo' => 'nezabelej', 'emso' => '0812992505123', 'davcna' => '12345678', 'spol' => 'ženski', 'naslov' => 'Brstnik 4', 'kraj' => 'Laško', 'posta' => '3270', 'drzava' => 'Slovenija', 'datum_rojstva'=>'1992-12-08', 'obcina_rojstva' => 'Trbovlje', 'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'telefon' => '031683852']);
-        App\Models\Student::create(['vpisna' => '63120136', 'ime' => 'Veronika', 'priimek' => 'Blažič', 'email' => 'veronikablazic@gmail.com','geslo' => 'veronikablazic', 'emso' => 'EmsoOdVeroni', 'posta' => '5000', 'datum_rojstva' => '1993-09-23', 'obcina_rojstva' => 'Nova Gorica']);
-        App\Models\Student::create(['vpisna' => '63130385', 'ime' => 'Nejc', 'priimek' => 'Bizjak', 'email' => 'necobizjak@gmail.com','geslo' => 'nejcbizjak', 'emso' => 'EmsoOdNejca', 'posta' => '5272', 'datum_rojstva' => '1991-07-13', 'obcina_rojstva' => 'Nova Gorica']);
+        Student::create(['vpisna' => '63120340', 'ime' => 'Neža', 'priimek' => 'Belej', 'email' => 'nezabelej@gmail.com','geslo' => 'nezabelej', 'emso' => '0812992505123', 'davcna' => '12345678', 'spol' => 'ženski', 'naslov' => 'Brstnik 4', 'kraj' => 'Laško', 'posta' => '3270', 'drzava' => 'Slovenija', 'datum_rojstva'=>'1992-12-08', 'obcina_rojstva' => 'Trbovlje', 'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'telefon' => '031683852']);
+        Student::create(['vpisna' => '63120136', 'ime' => 'Veronika', 'priimek' => 'Blažič', 'email' => 'veronikablazic@gmail.com','geslo' => 'veronikablazic', 'emso' => 'EmsoOdVeroni', 'posta' => '5000', 'datum_rojstva' => '1993-09-23', 'obcina_rojstva' => 'Nova Gorica']);
+        Student::create(['vpisna' => '63130385', 'ime' => 'Nejc', 'priimek' => 'Bizjak', 'email' => 'necobizjak@gmail.com','geslo' => 'nejcbizjak', 'emso' => 'EmsoOdNejca', 'posta' => '5272', 'datum_rojstva' => '1991-07-13', 'obcina_rojstva' => 'Nova Gorica']);
 
         DB::table('studijski_program')->truncate();
-        $prog1 = App\Models\StudijskiProgram::create(['ime'=>'Univerzitetni program Računalništvo in informatika','oznaka'=>'BUN-RI','opis'=>
+        $prog1 = StudijskiProgram::create(['ime'=>'Univerzitetni program Računalništvo in informatika','oznaka'=>'BUN-RI','opis'=>
             'Študij računalništva in informatike na Fakulteti za računalništvo in informatiko Univerze v Ljubljani je študij z najdaljšo tradicijo na tem področju v Sloveniji. Študentom ponuja temeljna in praktična znanja, ki so potrebna za delo v stroki, v skladu z najsodobnejšimi merili in standardi, ki za tovrstno izobraževanje veljajo v svetu. Zaradi izbirnosti v programu naši diplomanti niso strogo usmerjeni le v stroko, temveč so široko razgledani in visoko usposobljeni strokovnjaki.',
+
             'stopnja'=>1, 'kraj_izvajanja' => 'Ljubljana', 'trajanje_leta'=>3, 'stevilo_semestrov'=>6, 'KT'=>180, 'klasius_srv'=>16204]);
-        App\Models\StudijskiProgram::create(['ime'=>'Visokošolski program Računalništvo in informatika','oznaka'=>'BVS-RI','opis'=>
+        StudijskiProgram::create(['ime'=>'Visokošolski program Računalništvo in informatika','oznaka'=>'BVS-RI','opis'=>
             'Tako kot drugi prvostopenjski študiji tudi Visokošolski strokovni študij traja tri leta. Prvi letnik je sestavljen iz nabora obveznih predmetov, ki študentom dajejo osnovna matematična, teoretična in strokovna znanja. V drugem in tretjem letniku se študenti z izbiranjem predmetov usmerijo v zaželene strokovne profile. Nabor predmetov pri posameznem profilu je določen z odvisnostmi med predmeti, ki nakazujejo poti oz. znanja, ki jih mora študent osvojiti. Ti predmeti predstavljajo različna področja računalništva (spletne tehnologije, programska oprema, strojna oprema, informacijski sistemi...) in študenta vodijo, da med študijem izbere dve različni področji računalništva, to je, dve ožji strokovni področji, ki ga najbolj zanimata.',
             'stopnja'=>1, 'trajanje_leta'=>3, 'stevilo_semestrov'=>6, 'KT'=>180, 'klasius_srv'=>16203]);
-        App\Models\StudijskiProgram::create(['ime'=>'Magistrski študijski program druge stopnje Računalništvo in informatika','oznaka'=>'BMAG-RI','opis'=>
+        StudijskiProgram::create(['ime'=>'Magistrski študijski program druge stopnje Računalništvo in informatika','oznaka'=>'BMAG-RI','opis'=>
             'Magistrski študijski program druge stopnje Računalništvo in informatika daje bodočim magistrom znanje in spretnosti, da bodo sposobni slediti razvoju in tehnološkim spremembam ter se vključiti v razvojno in znanstveno delo, ki nudi izjemne možnosti za zaposlitev v Sloveniji in po svetu.
             Predmetnik omogoča oblikovanje študija glede na lastne želje, motivacijo in nagnjenja. Izbirne vsebine pokrivajo široko paleto področij in tehnologij ter tako dovoljujejo različne strokovne specializacije.',
             'stopnja'=>2, 'trajanje_leta'=>2, 'stevilo_semestrov'=>4, 'KT'=>120, 'klasius_srv'=>17003]);
 
-        DB::table('nosilec')->truncate();
-        App\Models\Nosilec::create(['id'=>1,'ime'=>'Viljan' ,'priimek'=>'Mahnič', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'viljan.mahnic@fri.uni-lj.si']);
-        App\Models\Nosilec::create(['id'=>2,'ime'=>'Neža' ,'priimek'=>'Mramor Kosta', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'neza.mramor@fri.uni-lj.si']);
-        App\Models\Nosilec::create(['id'=>3,'ime'=>'Gašper' ,'priimek'=>'Fijavž', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'gasper.fijavz@fri.uni-lj.si']);
-        App\Models\Nosilec::create(['id'=>4,'ime'=>'Matjaž' ,'priimek'=>'Branko Jurič', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mazjaz.juric@fri.uni-lj.si']);
-        App\Models\Nosilec::create(['id'=>5,'ime'=>'Aleš' ,'priimek'=>'Smrdel', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'ales.smrdel@fri.uni-lj.si']);
-        App\Models\Nosilec::create(['id'=>6,'ime'=>'Franc' ,'priimek'=>'Solina', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'franc.solina@fri.uni-lj.si']);
-        App\Models\Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
+        DB::table('program_letnik')->truncate();
+        ProgramLetnik::create(['id_programa'=>1, 'letnik'=>1, 'KT'=>60,'stevilo_obveznih_predmetov'=>10, 'stevilo_strokovnih_predmetov'=>0,'stevilo_prostih_predmetov'=>0, 'stevilo_modulov'=>0]);
+        ProgramLetnik::create(['id_programa'=>1, 'letnik'=>2 ,'KT'=>60,'stevilo_obveznih_predmetov'=>8, 'stevilo_strokovnih_predmetov'=>1,'stevilo_prostih_predmetov'=>1, 'stevilo_modulov'=>0]);
+        ProgramLetnik::create(['id_programa'=>1, 'letnik'=>3, 'KT'=>60,'stevilo_obveznih_predmetov'=>3, 'stevilo_strokovnih_predmetov'=>0,'stevilo_prostih_predmetov'=>1, 'stevilo_modulov'=>2]);
+        ProgramLetnik::create(['id_programa'=>3, 'letnik'=>1, 'KT'=>60,'stevilo_obveznih_predmetov'=>4, 'stevilo_strokovnih_predmetov'=>5,'stevilo_prostih_predmetov'=>2, 'stevilo_modulov'=>0]);
+        ProgramLetnik::create(['id_programa'=>3, 'letnik'=>2, 'KT'=>60,'stevilo_obveznih_predmetov'=>1, 'stevilo_strokovnih_predmetov'=>6,'stevilo_prostih_predmetov'=>0, 'stevilo_modulov'=>0]);
 
+        DB::table('nosilec')->truncate();
+        Nosilec::create(['id'=>1,'ime'=>'Viljan' ,'priimek'=>'Mahnič', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'viljan.mahnic@fri.uni-lj.si']);
+        Nosilec::create(['id'=>2,'ime'=>'Neža' ,'priimek'=>'Mramor Kosta', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'neza.mramor@fri.uni-lj.si']);
+        Nosilec::create(['id'=>3,'ime'=>'Gašper' ,'priimek'=>'Fijavž', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'gasper.fijavz@fri.uni-lj.si']);
+        Nosilec::create(['id'=>4,'ime'=>'Matjaž' ,'priimek'=>'Branko Jurič', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mazjaz.juric@fri.uni-lj.si']);
+        Nosilec::create(['id'=>5,'ime'=>'Aleš' ,'priimek'=>'Smrdel', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'ales.smrdel@fri.uni-lj.si']);
+        Nosilec::create(['id'=>6,'ime'=>'Franc' ,'priimek'=>'Solina', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'franc.solina@fri.uni-lj.si']);
+        Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
 
         DB::table('student_predmet')->truncate();
-        App\Models\StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
-        App\Models\StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
-        App\Models\StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
 
         DB::table('modul')->truncate();
-        $modul1 = App\Models\Modul::create(['ime'=>'Razvoj programske opreme','opis'=>'']);
+        $modul1 = Modul::create(['ime'=>'Razvoj programske opreme','opis'=>'']);
 
         DB::table('predmet')->truncate();
-        $p1 = App\Models\Predmet::create(['naziv'=>'Programiranje 1','opis'=>'Cilj predmeta je študentom predstaviti osnovne koncepte objektno usmerjenega programiranja v enem izmed splošno namenskih programskih jezikov 3. generacije in jih usposobiti za samostojen razvoj enostavnih računalniških programov.','id_nosilca'=>1,'KT'=>6,'tip'=>'obvezni']);
-        $p2 = App\Models\Predmet::create(['naziv'=>'Osnove matematične analize','opis'=>'Matematična analiza je področje matematike, ki se ukvarja s funkcijami. Funkcija je formalen opis dejstva, da sta dve količini odvisni, in odvisnosti med njima (na primer, dolžina dneva je odvisna od letnega časa, račun pri blagajni je odvisen od tega, kaj je v košarici, uspeh na izpitu od časa, vloženega v učenje, primerov je še in še). Pri tem predmetu vas želimo bolje spoznati s funkcijami. Zakaj? No, zato, ker jih boste potrebovali pri drugih, računalniških predmetih in kasneje pri svojem delu v računalništvu in informatiki. Več, ko boste o njih vedeli, bolj si boste lahko z njimi pomagali in možnosti so tu skoraj neizčrpne.',
+        $p1 = Predmet::create(['naziv'=>'Programiranje 1','opis'=>'Cilj predmeta je študentom predstaviti osnovne koncepte objektno usmerjenega programiranja v enem izmed splošno namenskih programskih jezikov 3. generacije in jih usposobiti za samostojen razvoj enostavnih računalniških programov.','id_nosilca'=>1,'KT'=>6,'tip'=>'obvezni']);
+        $p2 = Predmet::create(['naziv'=>'Osnove matematične analize','opis'=>'Matematična analiza je področje matematike, ki se ukvarja s funkcijami. Funkcija je formalen opis dejstva, da sta dve količini odvisni, in odvisnosti med njima (na primer, dolžina dneva je odvisna od letnega časa, račun pri blagajni je odvisen od tega, kaj je v košarici, uspeh na izpitu od časa, vloženega v učenje, primerov je še in še). Pri tem predmetu vas želimo bolje spoznati s funkcijami. Zakaj? No, zato, ker jih boste potrebovali pri drugih, računalniških predmetih in kasneje pri svojem delu v računalništvu in informatiki. Več, ko boste o njih vedeli, bolj si boste lahko z njimi pomagali in možnosti so tu skoraj neizčrpne.',
             'id_nosilca'=>2,'KT'=>6,'tip'=>'obvezni']);
-        $p3 = App\Models\Predmet::create(['naziv'=>'Diskretne strukture','opis'=>'Z matematiko je križ. Diskretne strukture so matematika. Zato so z Diskretnimi strukturami tudi same sitnosti. Ah, šalo na stran. Predstavimo raje, kaj bi zamudili, če bi se Diskretnim strukturam izognili. Če vemo, da je 1+1=2 in 2+2=5, potem bi morali verjeti tudi, da je 3+3=7, mar ne? Sešteli bi lahko obe "enačbi", na primer. Toda v tem primeru moramo verjeti tudi, da so vse krave iste barve. Tega pa si najbrž ne bi mislili.','id_nosilca'=>3,'KT'=>6,'tip'=>'obvezni']);
-        $p4 = App\Models\Predmet::create(['naziv'=>'Matematično modeliranje','opis'=>'Cilj predmeta je nadgraditi osnovno poznavanje in razumevanje pojmov matematične analize in linearne algebre z zahtevnejšimi pojmi, prikazati njihovo uporabo pri matematičnem modeliranju pojavov v računalništvu in drugih znanostih in osnovne metode za računanje dobljenih modelov.','id_nosilca'=>2,'KT'=>6,'tip'=>'strokovni-izbirni']);
-        App\Models\Predmet::create(['naziv'=>'Postopki razvoja programske opreme','opis'=>'Cilj predmeta je pridobiti znanja o postopkih razvoja programske opreme s posebnim poudarkom na razvoju strežniških (server-side, datacenter, cloud) aplikacij, torej aplikacij, ki se uporabljajo v velikih informacijskih sistemih podjetij ali velikih spletnih aplikacij (npr. Facebook, LinkedIn, spletnih trgovin kot so Amazon, mimovrste, ebay in podobnih).','id_nosilca'=>4,'KT'=>6,'tip'=>'modulski','id_modula'=>1]);
-        App\Models\Predmet::create(['naziv'=>'Spletno programiranje','opis'=>'Pri predmetu Spletno programiranje se bomo posvetili pregledu nad tehnologijami, ki se uporabljajo pri delovanju spleta, spletnih strežnikov, brskalnikov in spletnih aplikacij. Pregledali bomo osnove izdelave in oblikovanja spletnih strani (HTML5, CSS, XML) ter jih nadgradili s pregledom tehnologij na strani klienta (JavaScript) in strežnika (PHP, AJAX, JavaServer, ASP.NET, Ruby/Rails, spletne storitve).','id_nosilca'=>5,'KT'=>6,'tip'=>'modulski','id_modula'=>1]);
-        App\Models\Predmet::create(['naziv'=>'Tehnologije programske opreme','opis'=>'Predstavljajte si razvijalca programske opreme, od katerega naročnik želi, da izdela rešitev, ki mu bo (seveda s pomočjo računalnika) olajšala delo na določenem področju. Razvijalec mora najprej ugotoviti, kakšne so zahteve uporabnikov, na podlagi tega izdelati načrt rešitve, napisati potrebne programe, jih stestirati in predati v uporabo ter nato vzdrževati do konca njihove življenjske dobe. Pri predmetu Tehnologija programske opreme se boste naučili, kako to narediti z uporabo najnovejših pristopov k razvoju programske opreme.','id_nosilca'=>1,'KT'=>6,'tip'=>'modulski','id_modula'=>1]);
-        App\Models\Predmet::create(['naziv'=>'Komuniciranje in vodenje projektov','opis'=>'Prvi cilj predmeta je osvežitev in nadgradnja osnovnih komunikacijskih kompetenc (pisno izražanje, govor, komuniciranje po medmrežju), predvsem v povezavi s poročanjem o strokovnih temah in z uporabo sodobnih informacijskih tehnologij. Drugi del predmeta študente seznani z osnovnimi načini organizacije projektnega načina dela.','id_nosilca'=>6,'KT'=>6,'tip'=>'obvezni']);
-        App\Models\Predmet::create(['naziv'=>'Ekonomika in podjetništvo','opis'=>'Temeljni namen predmeta je seznanitev študenta s področjem ekonomske znanosti na ravni združb (podjetij, zavodov itn.), zato da bo usposobljen dojemati vsebino tistih strokovnih pogovorov, ki vsebujejo ekonomske pojme, ter dejavno sodelovati v njih. Iz tega namena izvedeni cilji so zagotoviti tako poznavanje temeljnih ekonomskih pojmov in njihove medsebojne odvisnosti kot tudi sposobnost vključevanja teh pojmov v razmere praktičnega dela, zlasti v zvezi z ustanavljanjem in delovanjem podjetij v lasti gospodarskih družb, ko se bo kot diplomant soočil s potrebo ovrednotenja določenih stanj, procesov in izidov.','id_nosilca'=>7,'KT'=>6,'tip'=>'obvezni']);
+        $p3 = Predmet::create(['naziv'=>'Diskretne strukture','opis'=>'Z matematiko je križ. Diskretne strukture so matematika. Zato so z Diskretnimi strukturami tudi same sitnosti. Ah, šalo na stran. Predstavimo raje, kaj bi zamudili, če bi se Diskretnim strukturam izognili. Če vemo, da je 1+1=2 in 2+2=5, potem bi morali verjeti tudi, da je 3+3=7, mar ne? Sešteli bi lahko obe "enačbi", na primer. Toda v tem primeru moramo verjeti tudi, da so vse krave iste barve. Tega pa si najbrž ne bi mislili.','id_nosilca'=>3,'KT'=>6,'tip'=>'obvezni']);
+        $p4 = Predmet::create(['naziv'=>'Matematično modeliranje','opis'=>'Cilj predmeta je nadgraditi osnovno poznavanje in razumevanje pojmov matematične analize in linearne algebre z zahtevnejšimi pojmi, prikazati njihovo uporabo pri matematičnem modeliranju pojavov v računalništvu in drugih znanostih in osnovne metode za računanje dobljenih modelov.','id_nosilca'=>2,'KT'=>6,'tip'=>'strokovni-izbirni']);
+        Predmet::create(['naziv'=>'Postopki razvoja programske opreme','opis'=>'Cilj predmeta je pridobiti znanja o postopkih razvoja programske opreme s posebnim poudarkom na razvoju strežniških (server-side, datacenter, cloud) aplikacij, torej aplikacij, ki se uporabljajo v velikih informacijskih sistemih podjetij ali velikih spletnih aplikacij (npr. Facebook, LinkedIn, spletnih trgovin kot so Amazon, mimovrste, ebay in podobnih).','id_nosilca'=>4,'KT'=>6,'tip'=>'modulski','id_modula'=>1]);
+        Predmet::create(['naziv'=>'Spletno programiranje','opis'=>'Pri predmetu Spletno programiranje se bomo posvetili pregledu nad tehnologijami, ki se uporabljajo pri delovanju spleta, spletnih strežnikov, brskalnikov in spletnih aplikacij. Pregledali bomo osnove izdelave in oblikovanja spletnih strani (HTML5, CSS, XML) ter jih nadgradili s pregledom tehnologij na strani klienta (JavaScript) in strežnika (PHP, AJAX, JavaServer, ASP.NET, Ruby/Rails, spletne storitve).','id_nosilca'=>5,'KT'=>6,'tip'=>'modulski','id_modula'=>1]);
+        Predmet::create(['naziv'=>'Tehnologije programske opreme','opis'=>'Predstavljajte si razvijalca programske opreme, od katerega naročnik želi, da izdela rešitev, ki mu bo (seveda s pomočjo računalnika) olajšala delo na določenem področju. Razvijalec mora najprej ugotoviti, kakšne so zahteve uporabnikov, na podlagi tega izdelati načrt rešitve, napisati potrebne programe, jih stestirati in predati v uporabo ter nato vzdrževati do konca njihove življenjske dobe. Pri predmetu Tehnologija programske opreme se boste naučili, kako to narediti z uporabo najnovejših pristopov k razvoju programske opreme.','id_nosilca'=>1,'KT'=>6,'tip'=>'modulski','id_modula'=>1]);
+        Predmet::create(['naziv'=>'Komuniciranje in vodenje projektov','opis'=>'Prvi cilj predmeta je osvežitev in nadgradnja osnovnih komunikacijskih kompetenc (pisno izražanje, govor, komuniciranje po medmrežju), predvsem v povezavi s poročanjem o strokovnih temah in z uporabo sodobnih informacijskih tehnologij. Drugi del predmeta študente seznani z osnovnimi načini organizacije projektnega načina dela.','id_nosilca'=>6,'KT'=>6,'tip'=>'obvezni']);
+        Predmet::create(['naziv'=>'Ekonomika in podjetništvo','opis'=>'Temeljni namen predmeta je seznanitev študenta s področjem ekonomske znanosti na ravni združb (podjetij, zavodov itn.), zato da bo usposobljen dojemati vsebino tistih strokovnih pogovorov, ki vsebujejo ekonomske pojme, ter dejavno sodelovati v njih. Iz tega namena izvedeni cilji so zagotoviti tako poznavanje temeljnih ekonomskih pojmov in njihove medsebojne odvisnosti kot tudi sposobnost vključevanja teh pojmov v razmere praktičnega dela, zlasti v zvezi z ustanavljanjem in delovanjem podjetij v lasti gospodarskih družb, ko se bo kot diplomant soočil s potrebo ovrednotenja določenih stanj, procesov in izidov.','id_nosilca'=>7,'KT'=>6,'tip'=>'obvezni']);
 
         DB::table('program_modul')->truncate();
         DB::table('program_modul')->insert(['id_programa'=>1, 'id_modula'=>1]);
 
         DB::table('program_predmet')->truncate();
-<<<<<<< HEAD
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>1,'letnik'=>1]);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>2,'letnik'=>1]);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1]);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1]);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>8,'letnik'=>3]);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>9,'letnik'=>3]);
-=======
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>1,'letnik'=>1, 'semester'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>2,'letnik'=>1, 'semester'=>1]);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1, 'semester'=>2]);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1, 'senester'=>2]);
->>>>>>> 1f2e0fdf8ed6a655a339c698f90a55d7f3e9eb8e
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1, 'semester'=>2]);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>8,'letnik'=>3]);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>9,'letnik'=>3]);
+
 
         DB::table('student_program')->truncate();
         DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>'Vpis v višji letnik.', 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-25', 'datum_vpisa'=>'2014-09-25', 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);
@@ -97,8 +106,8 @@ class TableSeeder extends Seeder {
 
 
         DB::table('referent')->truncate();
-        App\Models\Referent::create(['email'=>'zdenka.velikonja@fri.uni-lj.si', 'geslo'=>Hash::make('geslo'), 'ime'=>'Zdenka','priimek'=>'Velikonja']);
-        App\Models\Referent::create(['email'=>'metka.runovc@fri.uni-lj.si', 'geslo'=>Hash::make('geslo'), 'ime'=>'Metka','priimek'=>'Runovc']);
+        Referent::create(['email'=>'zdenka.velikonja@fri.uni-lj.si', 'geslo'=>Hash::make('geslo'), 'ime'=>'Zdenka','priimek'=>'Velikonja']);
+        Referent::create(['email'=>'metka.runovc@fri.uni-lj.si', 'geslo'=>Hash::make('geslo'), 'ime'=>'Metka','priimek'=>'Runovc']);
 
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

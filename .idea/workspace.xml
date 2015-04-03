@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42881d3b-a2d8-43ce-9922-06cb6e75afbc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/appLogin.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/menu.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" afterPath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/app.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/login.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_162000_create_program_letnik.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Models/ProgramLetnik.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_161316_create_studijski_program_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_161316_create_studijski_program_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php" />
+      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\studijskainformatika\.idea\workspace.xml" afterPath="C:\xampp\htdocs\studijskainformatika\.idea\workspace.xml" />
     </list>
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,9 +101,16 @@
       <file leaf-file-name="DatabaseSeeder.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
-              <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="2057">
+              <caret line="85" column="107" selection-start-line="85" selection-start-column="107" selection-end-line="85" selection-end-column="107" />
+              <folding>
+                <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -441,7 +448,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
           <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
-          <folding />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -483,7 +497,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
           <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
-          <folding />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -525,7 +546,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
           <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
-          <folding />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -567,7 +595,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
           <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
-          <folding />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -609,7 +644,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1513">
           <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
-          <folding />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -702,9 +744,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1513">
-          <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="2057">
+          <caret line="85" column="107" selection-start-line="85" selection-start-column="107" selection-end-line="85" selection-end-column="107" />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
