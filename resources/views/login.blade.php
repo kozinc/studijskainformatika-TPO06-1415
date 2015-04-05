@@ -1,4 +1,4 @@
-@extends('app')
+@extends('appLogin')
 
 @section('content')
     <div class="form-group"  style="width:300px; margin: auto; margin-top: 200px">

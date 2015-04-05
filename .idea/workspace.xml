@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42881d3b-a2d8-43ce-9922-06cb6e75afbc" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_161935_create_program_predmet_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_161935_create_program_predmet_table.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_171733_create_program_modul_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_171733_create_program_modul_table.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_173841_create_predmet_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_173841_create_predmet_table.php" />
@@ -20,6 +21,14 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/programi.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/programi.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_162000_create_program_letnik.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Models/ProgramLetnik.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_161316_create_studijski_program_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_161316_create_studijski_program_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php" />
+      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\studijskainformatika\.idea\workspace.xml" afterPath="C:\xampp\htdocs\studijskainformatika\.idea\workspace.xml" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
     </list>
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,6 +56,7 @@
     <option name="GROUP_BY_TYPE" value="true" />
     <option name="SORT_CHILDREN" value="false" />
     <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+<<<<<<< HEAD
     <PATH>
       <PATH_ELEMENT>
         <option name="myItemId" />
@@ -57,6 +67,8 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
+=======
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -64,46 +76,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file leaf-file-name="Predmet.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Predmet.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="765">
               <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+=======
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.538462" vertical-offset="14" max-vertical-offset="782">
+              <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="47" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="predmeti.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmeti.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-11.115385" vertical-offset="0" max-vertical-offset="561">
               <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+=======
+      <file leaf-file-name="StudijskiProgram.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.961538" vertical-offset="0" max-vertical-offset="595">
+              <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="programi.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/program/programi.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-17.26923" vertical-offset="44" max-vertical-offset="612">
               <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+=======
+      <file leaf-file-name="vpisnilist.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/vpisnilist.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="3162">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="program.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/program/program.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="680">
               <caret line="28" column="136" selection-start-line="28" selection-start-column="136" selection-end-line="28" selection-end-column="136" />
+=======
+      <file leaf-file-name="app.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/app.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.59882003" vertical-offset="291" max-vertical-offset="1190">
+              <caret line="41" column="82" selection-start-line="41" selection-start-column="82" selection-end-line="41" selection-end-column="82" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="programPredmetnik.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -119,17 +164,47 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.65384614" vertical-offset="51" max-vertical-offset="1717">
               <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+=======
+      <file leaf-file-name="login.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/login.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="425">
+              <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudijskiProgram.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
+      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="255">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseSeeder.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="578">
               <caret line="16" column="151" selection-start-line="16" selection-start-column="151" selection-end-line="16" selection-end-column="151" />
               <folding />
+=======
+            <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="2057">
+              <caret line="85" column="107" selection-start-line="85" selection-start-column="107" selection-end-line="85" selection-end-column="107" />
+              <folding>
+                <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+                <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+              </folding>
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
             </state>
           </provider>
         </entry>
@@ -144,6 +219,7 @@
       <list>
         <option value="$PROJECT_DIR$/resources/views/program.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/programPredmetnik.blade.php" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/database/migrations/2015_03_25_172021_create_program_predmet_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_03_25_161316_create_studijski_program_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_03_25_162000_create_program_letnik.php" />
@@ -175,6 +251,22 @@
         <option value="$PROJECT_DIR$/resources/views/program/program.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
         <option value="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" />
+=======
+        <option value="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/program/programi.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/program/program.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" />
+        <option value="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_03_25_172021_create_program_predmet_table.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
+        <option value="$PROJECT_DIR$/resources/views/appLogin.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/login.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
       </list>
     </option>
   </component>
@@ -199,8 +291,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -254,15 +346,17 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
+<<<<<<< HEAD
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+=======
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="studijskainformatika" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
@@ -280,6 +374,9 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="program" />
+=======
+              <option name="myItemId" value="views" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -296,6 +393,7 @@
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -310,23 +408,49 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+=======
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Project Files" />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="SearchEverywhereHistoryKey" value="studijskiProg&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/StudijskiProgram.php&#10;programC&#9;null&#9;null&#10;program&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/program/programi.blade.php&#10;predme&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/predmet/predmeti.blade.php&#10;predmet.php&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/Predmet.php&#10;nosi&#9;null&#9;null&#10;modul&#9;null&#9;null&#10;app.blade&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/app.blade.php&#10;predmet&#9;null&#9;null&#10;route&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Http/routes.php&#10;predmeti.blade&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/predmet/predmeti.blade.php&#10;studijsk&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/StudijskiProgram.php&#10;app.php&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/config/app.php&#10;routes&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Http/routes.php&#10;app.&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/config/app.php&#10;oute&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Http/routes.php&#10;studij&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/StudijskiProgram.php&#10;predmet.&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/Predmet.php&#10;student&#9;null&#9;null&#10;studi&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/StudijskiProgram.php&#10;predmetc&#9;null&#9;null&#10;predmeti&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/predmeti.blade.php&#10;studijskiP&#9;null&#9;null&#10;routes.php&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Http/routes.php" />
+=======
+    <property name="SearchEverywhereHistoryKey" value="routes&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/routes.php&#10;studi&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/StudijskiProgram.php&#10;predmetc&#9;null&#9;null&#10;predmeti&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/predmeti.blade.php&#10;studijskiP&#9;null&#9;null&#10;studij&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Http/Controllers/StudijskiProgramController.php&#10;routes.php&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Http/routes.php" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
     <property name="dynamic.classpath" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="210" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="209" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="210" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="884" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="210" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="209" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="210" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="884" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+<<<<<<< HEAD
       <recent name="C:\wamp\www\studijskainformatika\resources\views\pdf" />
+=======
+      <recent name="C:\xampp\htdocs\studijskainformatika\resources\views" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
       <recent name="C:\wamp\www\studijskainformatika\resources\views\predmet" />
       <recent name="C:\wamp\www\studijskainformatika\resources\views\program" />
     </key>
@@ -345,7 +469,15 @@
       <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
+<<<<<<< HEAD
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+=======
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -373,13 +505,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1544196" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -398,26 +531,54 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
+=======
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15488432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26156813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32841823" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1544196" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25452608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15495208" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399137" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -443,6 +604,16 @@
           <url>file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php</url>
           <line>89</line>
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php</url>
+          <line>51</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php</url>
+          <line>20</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
       <option name="time" value="3" />
     </breakpoint-manager>
@@ -451,8 +622,210 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Routing/Router.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="-6.8076925" vertical-offset="19815" max-vertical-offset="23562">
           <caret line="1186" column="0" selection-start-line="1186" selection-start-column="0" selection-end-line="1186" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="782">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="910" max-vertical-offset="1819">
+          <caret line="90" column="69" selection-start-line="90" selection-start-column="69" selection-end-line="90" selection-end-column="69" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="391">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
+          <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="910" max-vertical-offset="1819">
+          <caret line="90" column="69" selection-start-line="90" selection-start-column="69" selection-end-line="90" selection-end-column="69" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="391">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="578">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
+          <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="910" max-vertical-offset="1819">
+          <caret line="90" column="69" selection-start-line="90" selection-start-column="69" selection-end-line="90" selection-end-column="69" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="391">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="578">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
+          <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="782">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="910" max-vertical-offset="1819">
+          <caret line="90" column="69" selection-start-line="90" selection-start-column="69" selection-end-line="90" selection-end-column="69" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="867">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="1904">
+          <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="867">
+          <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
+          <folding />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
         </state>
       </provider>
     </entry>
@@ -465,29 +838,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="-6.8076925" vertical-offset="928" max-vertical-offset="5100">
           <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="910" max-vertical-offset="1819">
+          <caret line="90" column="69" selection-start-line="90" selection-start-column="69" selection-end-line="90" selection-end-column="69" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.0" vertical-offset="1209" max-vertical-offset="4437">
           <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Worksheet.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.29443446" vertical-offset="6313" max-vertical-offset="49147">
           <caret line="405" column="0" selection-start-line="405" selection-start-column="0" selection-end-line="405" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="595">
+          <caret line="16" column="156" selection-start-line="16" selection-start-column="156" selection-end-line="16" selection-end-column="156" />
+          <folding />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/AbstractHandler.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="-23.346153" vertical-offset="2215" max-vertical-offset="3077">
           <caret line="175" column="34" selection-start-line="175" selection-start-column="34" selection-end-line="175" selection-end-column="34" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1513">
+          <caret line="70" column="107" selection-start-line="70" selection-start-column="107" selection-end-line="70" selection-end-column="107" />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
         </state>
       </provider>
     </entry>
@@ -597,6 +1003,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
@@ -623,14 +1030,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="910" max-vertical-offset="1819">
+          <caret line="90" column="69" selection-start-line="90" selection-start-column="69" selection-end-line="90" selection-end-column="69" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="2057">
+          <caret line="85" column="107" selection-start-line="85" selection-start-column="107" selection-end-line="85" selection-end-column="107" />
+          <folding>
+            <marker date="1428085221658" expanded="true" signature="680:1113" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="1415:1650" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="9675:10184" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10211:10855" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="10882:11309" placeholder="..." />
+            <marker date="1428085221658" expanded="true" signature="11336:12041" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/program/programPredmetnikEdit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="391">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="1088">
           <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
+=======
+    <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="704">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           <folding />
         </state>
       </provider>
@@ -653,6 +1098,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="833">
           <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="51" />
           <folding />
@@ -707,10 +1153,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="612">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="-18.961538" vertical-offset="0" max-vertical-offset="595">
+          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/appLogin.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7872648" vertical-offset="0" max-vertical-offset="691">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="uml://DATABASE/467d9eb3-01b6-4b2a-8a6c-f1cd5bf542ad.schema:studijska_informatika">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -839,10 +1298,16 @@
     <entry file="dbDummy://dbtable:/5448a37a/467d9eb3-01b6-4b2a-8a6c-f1cd5bf542ad/studijska_informatika..studijski_program">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+=======
+    <entry file="file://$PROJECT_DIR$/resources/views/menu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="717">
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -853,6 +1318,13 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
+          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           <folding />
         </state>
       </provider>
@@ -870,22 +1342,37 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_171733_create_program_modul_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.568662" vertical-offset="0" max-vertical-offset="748">
           <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+=======
+    <entry file="file://$PROJECT_DIR$/resources/views/vpisnilist.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3162">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_173841_create_predmet_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.568662" vertical-offset="0" max-vertical-offset="765">
           <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.538462" vertical-offset="14" max-vertical-offset="782">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="47" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_161935_create_program_predmet_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.62852114" vertical-offset="0" max-vertical-offset="748">
@@ -946,6 +1433,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8380282" vertical-offset="0" max-vertical-offset="799">
           <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+=======
+    <entry file="file://$PROJECT_DIR$/resources/views/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59882003" vertical-offset="291" max-vertical-offset="1190">
+          <caret line="41" column="82" selection-start-line="41" selection-start-column="82" selection-end-line="41" selection-end-column="82" />
+>>>>>>> 84dc2ccaf770ef3fa8362f998563655ebd5c0605
           <folding />
         </state>
       </provider>
