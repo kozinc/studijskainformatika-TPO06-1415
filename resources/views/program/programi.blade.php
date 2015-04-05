@@ -28,6 +28,4 @@
             </tr>
         @endforeach
     </table>
-
-    <a href="programi/{{ $program->id  }}/predmetnik" class="button">Predmetnik</a>
 @endsection

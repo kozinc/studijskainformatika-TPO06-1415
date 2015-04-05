@@ -145,6 +145,9 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Barryvdh\DomPDF\ServiceProvider'
 
 	],
 
@@ -195,6 +198,8 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
         'Form'=> 'Illuminate\Html\FormFacade',
         'HTML'=> 'Illuminate\Html\HtmlFacade',
+        'Excel'=> 'Maatwebsite\Excel\Facades\Excel',
+        'PDF' => 'Barryvdh\DomPDF\Facade'
 
 	],
 

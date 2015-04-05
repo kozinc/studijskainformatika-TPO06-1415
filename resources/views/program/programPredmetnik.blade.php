@@ -17,7 +17,7 @@
                 <td>{{ $predmet->pivot->letnik }}</td>
                 <td>{{ $predmet->id }}</td>
                 <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
-                <td>{{ $predmet->tip }}</td>
+                <td>{{ $predmet->pivot->tip }}</td>
                 <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
                 <td>{{ $predmet->KT }}</td>
             </tr>

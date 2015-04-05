@@ -24,8 +24,12 @@
             <td>{{ $program->klasius_srv }}</td>
         </tr>
     </table>
-    <a href="{{ action('StudijskiProgramController@edit_predmetnik', ['id'=>$program->id]) }}">Sprememni</a>
-    <br>
-    <a href="{{ $program->id }}/predmetnik">Predmetnik</a>
+    <div>
+        <a class="btn btn-default" href="{{ $program->id }}/predmetnik">Predmetnik</a>
+        <a class="btn btn-default" href="{{ action('StudijskiProgramController@edit_predmetnik', ['id'=>$program->id]) }}">Sprememni</a>
+    </div>
+
+
+
 
 @endsection

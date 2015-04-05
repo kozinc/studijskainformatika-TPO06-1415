@@ -16,7 +16,7 @@
 
         @foreach($predmeti as $predmet)
             <select>
-                <o
+
             </select>
         @endforeach
     @endfor
