@@ -5,8 +5,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StudijskiProgram extends Model
 {
-
-
     use SoftDeletes;
     protected $table = 'studijski_program';
     protected $fillable = ['ime', 'oznaka', 'opis', 'stopnja', 'trajanje_leta', 'stevilo_semestrov', 'KT', 'klasius_srv', 'kraj_izvajanja'];
@@ -15,7 +13,7 @@ class StudijskiProgram extends Model
 
     public function predmeti()
     {
-        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik')->orderBy('letnik', 'semester', 'asc');
+        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip')->orderBy('letnik', 'semester', 'asc');
     }
 
     public function moduli()

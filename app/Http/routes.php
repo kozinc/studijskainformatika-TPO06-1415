@@ -26,6 +26,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+Route::post('predmeti/export', 'PredmetController@export');
 Route::get('predmeti', 'PredmetController@index');
 Route::get('predmeti/create', 'PredmetController@create');
 Route::post('predmeti/create', 'PredmetController@store');
@@ -43,6 +44,8 @@ Route::get('programi/{id}/predmetnik', 'StudijskiProgramController@show_predmetn
 Route::post('programi/{id}/predmetnik/edit', 'StudijskiProgramController@edit_predmetnik');
 Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@create_predmetnik');
 Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@store_predmetnik');
+
+
 
 
 

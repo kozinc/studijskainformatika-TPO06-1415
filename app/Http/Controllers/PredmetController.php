@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Modul;
 use App\Models\Nosilec;
 use App\Models\Predmet;
+use Illuminate\Support\Facades\Redirect;
+use App\Helpers\ExportHelper;
 
 use Illuminate\Http\Request;
 
@@ -22,6 +24,38 @@ class PredmetController extends Controller {
         return view('predmet/predmeti',['predmeti'=>$predmeti]);
 
 	}
+
+    public function export(Request $request){
+        $content = [];
+        $title = '';
+        if($request['target'] == 'predmeti') {
+            $predmeti = Predmet::all();
+            $content[] = ['Id', 'Naziv', 'Tip', 'Nosilec'];
+            foreach ($predmeti as $predmet) {
+                $content[] = [$predmet->id, $predmet->naziv, $predmet->tip, $predmet->nosilec->ime .' '. $predmet->nosilec->priimek];
+            }
+            $title = 'Seznam predmetov';
+
+        }elseif($request['target'] == 'predmet' && $request['id']>0) {
+            $predmet = Predmet::find((int)$request['id']);
+            $modul = '';
+            if(!empty($predmet->modul)){
+                $modul = $predmet->modul->ime;
+            }
+            $content[] = ['id', 'naziv', 'id_nosilca', 'KT', 'tip','id_modula'];
+            $content[] = [$predmet->id, $predmet->naziv, $predmet->nosilec->ime .' '.$predmet->nosilec->priimek, $predmet->KT, $predmet->tip, $modul];
+            $title = $predmet->naziv;
+        }
+
+
+        if(isset($request['csv'])){
+            return ExportHelper::make_csv($content, $title, '');
+        }elseif(isset($request['pdf'])){
+            return ExportHelper::make_pdf($content, $title, '');
+        }
+
+        return Redirect::back();
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -53,7 +87,7 @@ class PredmetController extends Controller {
         }else{
             $predmet->id_modula = NULL;
         }
-        $check = $predmet->save();
+        $predmet->save();
 
         $nosilci = Nosilec::all();
         $moduli = Modul::all();
@@ -74,6 +108,7 @@ class PredmetController extends Controller {
 	public function show($id)
 	{
 		$predmet = Predmet::find($id);
+
         return view('predmet/predmet',['predmet'=>$predmet]);
 	}
 

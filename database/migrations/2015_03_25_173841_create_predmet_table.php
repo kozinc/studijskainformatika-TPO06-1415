@@ -19,7 +19,6 @@ class CreatePredmetTable extends Migration {
             $table->text('opis');
             $table->integer('id_nosilca')->unsigned();
             $table->integer('KT');
-            $table->string('tip');
             $table->integer('id_modula')->unsigned();
             $table->timestamps();
             $table->softDeletes();
