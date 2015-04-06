@@ -3,9 +3,6 @@
 @section('content')
 
     <div class="form-group" style="width:300px; margin: auto; margin-top: 200px">
-        <p style="color:#ff3640">!! Na vrhu datoteke mora biti prazna vrstica</p>
-        <p style="color:#ff3640">Id se računa tako, da se prešteje vse študente, ni automatsko !!</p><br/>
-
         {!! Form::open(array('action' => 'AddStudentsController@addFromText', 'files' => true)) !!}
             <label for="exampleInputFile">Vnesi nove študente iz tekstovne datoteke</label>
             <br/><br/>

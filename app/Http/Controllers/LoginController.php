@@ -67,10 +67,10 @@ class LoginController extends Controller {
             return redirect()->back();
         }
 
-        $user = \App\Models\Student::where('vpisna', $this_username)->first();
+        $user = \App\Models\Student::where('email', $this_username)->first();
 
         if(is_null($user)){
-            \Session::flash("error", "Uporabnik s takšno vpisno številko ne obstaja!");
+            \Session::flash("error", "Uporabnik s takšnim e-mailom ne obstaja!");
             $this->add_to_session();
             return redirect()->back();
         }

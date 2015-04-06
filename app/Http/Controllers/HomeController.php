@@ -12,11 +12,8 @@ class HomeController extends Controller {
         return view('addnew');
     }
 
-    public function seznam(){
-
-        $predmeti = \App\Models\Predmet::lists('naziv', 'id');
-        //return View::make('seznam')->with('predmeti', $predmeti);
-
+    public function home(){
+        return null;
     }
 
 }

@@ -9,7 +9,7 @@
     <div class="form-group"  style="width:300px; margin: auto; margin-top: 200px">
         {!! Form::open(array('action' => 'LoginController@login_handler')) !!}
             <div class="form-group">
-                {!! Form::label('username', 'Vpisna številka:') !!}
+                {!! Form::label('username', 'E-mail:') !!}
                 {!! Form::text('username', null, array('class' => 'form-control')) !!}
             </div>
             <div class="form-group">
