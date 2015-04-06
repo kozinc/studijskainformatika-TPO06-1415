@@ -23,6 +23,8 @@ class CreateStudentTable extends Migration {
             $table->string('telefon');
             $table->string('email');
             $table->string('geslo');
+            $table->string('novo_geslo');
+            $table->string('ponastavitev_gesla');
             $table->string('emso');
             $table->string('naslov');
             $table->string('kraj');
