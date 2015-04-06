@@ -4,6 +4,13 @@ use App\Models\Student;
 use App\Models\StudijskiProgram;
 use App\Models\StudentProgram;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+
+use DB;
+use App\Quotation;
 
 
 
@@ -87,27 +94,133 @@ class VpisniListController extends Controller {
         $id_programa = $request['id'];
         $programStudenta = StudentProgram::find($id_programa);
 
-        //oznacimo, da je zeton izkoriscen
-        $programStudenta->vloga_oddana = date('Y-m-d');
-        $programStudenta->save();
-
         //shranimo oz. posodobimo podatke o studentu
         $student = Student::find($request['id_studenta']);
-        $student->ime = $request['ime'];
-        $student->priimek = $request['priimek'];
-        $student->spol = $request['spol'];
+
+     /*   //validacija imena inj priimka
+        if (ctype_alpha ($request['ime']) && ctype_alpha($request['priimek']))
+        {
+            $student->ime = $request['ime'];
+            $student->priimek = $request['priimek'];
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Ime in priimek naj vsebujeta le črke.']);
+        }
+
+        //validacija datuma rojstva
+        if (!strtotime($request['datum_rojstva']))
+        {
+            return Redirect::back()->withErrors(['Neveljaven datum rojstva!']);
+        }
+        else
+        {
+            $student->datum_rojstva = $request['datum_rojstva'];
+        }
+        if (($request['spol'] == "ženski") || ($request['spol'] == "moški"))
+        {
+            $student->spol = $request['spol'];
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Spol ni pravilno označen! Napiši "moški" oz. "ženski". ']);
+        }
+
+        //validacija EMSO
+        if (is_numeric($request['emso']) && strlen($request['emso']) == 13)
+        {
+
+            //primerjaj z datumom rojstva
+            if ( (substr($request['emso'], 0, 2) == date('d', strtotime($student->datum_rojstva)) ) &&
+                 (substr($request['emso'], 2, 2) == date('m', strtotime($student->datum_rojstva)) ) &&
+                 (substr($request['emso'], 4, 3) == substr(date('Y', strtotime($student->datum_rojstva)), 1, 3) ) )
+            {
+                //primerjaj s spolom
+                if ($student->spol == "ženski")
+                {
+                    if (substr($request['emso'], 7, 3) != "505")
+                    {
+                        return Redirect::back()->withErrors(['EMSO se ne ujema s spolom.']);
+                    }
+                    else
+                    {
+                        $student->emso = $request['emso'];
+                    }
+                }
+                elseif ($student->spol == "moški")
+                {
+                    if (substr($request['emso'], 7, 3) != "500")
+                    {
+                        return Redirect::back()->withErrors(['EMSO se ne ujema s spolom.']);
+                    }
+                    else
+                    {
+                        $student->emso = $request['emso'];
+                    }
+                }
+
+            }
+            else
+            {
+                return Redirect::back()->withErrors(['EMSO se ne ujema z datumom rojstva.']);
+            }
+
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['EMSO mora biti sestavljen iz 13 številk.']);
+        }
+
+        //Validacija drzave rojstva in skladnosti drzave in obcine rojstva
+        if (!is_null(DB::table('drzava')->where('naziv', $request['drzava_rojstva'])->first()))
+        {
+            if (DB::table('drzava')->where('naziv', $request['drzava_rojstva'])->first()->naziv == "Slovenija")
+            {
+                if (!is_null(DB::table('obcina')->where('naziv', $request['obcina_rojstva'])->first()))
+                {
+                    $student->drzava_rojstva = $request['drzava_rojstva'];
+                    $student->obcina_rojstva = $request['obcina_rojstva'];
+                }
+                else
+                {
+                    return Redirect::back()->withErrors(['Občina se ne ujema z državo.']);
+
+                }
+            }
+            else
+            {
+                $student->drzava_rojstva = $request['drzava_rojstva'];
+                $student->obcina_rojstva = $request['obcina_rojstva'];
+            }
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Država rojstva ne obstaja.']);
+        }*/
+
+        //Validacija obstoja drzave, obcine in poste.
+        if (!is_null(DB::table('drzava')->where('naziv', $request['drzava'])->first()) &&
+            !is_null(DB::table('obcina')->where('naziv', $request['obcina'])->first()) &&
+            !is_null(DB::table('posta')->where('postna_stevilka', $request['posta'])->first()) )
+        {
+            $student->obcina = $request['obcina'];
+            $student->posta = $request['posta'];
+            $student->drzava = $request['drzava'];
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Neveljavna država / neveljavna občina / neveljavna poštna številka!']);
+        }
+
         $student->telefon = $request['telefon'];
-        $student->emso = $request['emso'];
         $student->naslov = $request['naslov'];
-        $student->kraj = $request['kraj'];
-        $student->posta = $request['posta'];
-        $student->drzava = $request['drzava'];
-        $student->datum_rojstva = $request['datum_rojstva'];
-        $student->obcina_rojstva = $request['obcina_rojstva'];
-        $student->drzava_rojstva = $request['drzava_rojstva'];
         $student->davcna = $request['davcna'];
         $student->drzavljanstvo = $request['drzavljanstvo'];
         $student->save();
+
+        //oznacimo, da je zeton izkoriscen
+        $programStudenta->vloga_oddana = date('Y-m-d');
+        $programStudenta->save();
 
         return view ('vpisnilist', ['empty'=>0]);
     }

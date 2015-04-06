@@ -36,7 +36,7 @@ class TableSeeder extends Seeder {
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('student')->truncate();
-        Student::create(['vpisna' => '63120340', 'ime' => 'Neža', 'priimek' => 'Belej', 'email' => 'nezabelej@gmail.com','geslo' => 'nezabelej', 'emso' => '0812992505123', 'davcna' => '12345678', 'spol' => 'ženski', 'naslov' => 'Brstnik 4', 'kraj' => 'Laško', 'posta' => '3270', 'drzava' => 'Slovenija', 'datum_rojstva'=>'1992-12-08', 'obcina_rojstva' => 'Trbovlje', 'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'telefon' => '031683852']);
+        Student::create(['vpisna' => '63120340', 'ime' => 'Neža', 'priimek' => 'Belej', 'email' => 'nezabelej@gmail.com','geslo' => 'nezabelej', 'emso' => '0812992505123', 'davcna' => '12345678', 'spol' => 'ženski', 'naslov' => 'Brstnik 4', 'obcina' => 'Laško', 'posta' => '3270', 'drzava' => 'Slovenija', 'datum_rojstva'=>'1992-12-08', 'obcina_rojstva' => 'Trbovlje', 'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'telefon' => '031683852']);
         Student::create(['vpisna' => '63120136', 'ime' => 'Veronika', 'priimek' => 'Blažič', 'email' => 'veronikablazic@gmail.com','geslo' => 'veronikablazic', 'emso' => '2309993505223', 'posta' => '5000', 'datum_rojstva' => '1993-09-23', 'obcina_rojstva' => 'Nova Gorica']);
         Student::create(['vpisna' => '63130385', 'ime' => 'Nejc', 'priimek' => 'Bizjak', 'email' => 'necobizjak@gmail.com','geslo' => 'nejcbizjak', 'emso' => '1307991500333', 'posta' => '5272', 'datum_rojstva' => '1991-07-13', 'obcina_rojstva' => 'Nova Gorica']);
         Student::create(['ime' => 'Janez', 'priimek' => 'Novak', 'email' => 'janeznovak@gmail.com', 'geslo' =>'janeznovak' ]);
