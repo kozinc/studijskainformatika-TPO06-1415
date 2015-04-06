@@ -10,7 +10,7 @@ class AddStudentsController extends Controller {
 
         $file = \Input::file('file');
 
-        $counter = 0;
+        $counter= 0;
         $name = "";
         $surname = "";
         $program = "";
@@ -25,37 +25,32 @@ class AddStudentsController extends Controller {
 
             if (count($words) > 0) {
 
-                if (($counter == 0) && ($words[0] == 'IME')) {
-                    $name = $words[1];
+                if(count($words) < 4){
+                    $counter = 1;
+                }
+                else{
+
+                    $name = $words[0];
                     if (strlen($name) > 30) {
                         $error = 1;
                     }
-                    $counter++;
-                } else if (($counter == 1) && ($words[0] == 'PRIIMEK')) {
+
                     $surname = $words[1];
                     if (strlen($surname) > 30) {
                         $error = 1;
                     }
-                    $counter++;
-                } else if (($counter == 2) && ($words[0] == 'PROGRAM')) {
-                    $program = $words[1];
+
+                    $program = $words[2];
                     if (strlen($program) > 7) {
                         $error = 1;
                     }
-                    $counter++;
-                } else if (($counter == 3) && ($words[0] == 'E_MAIL')) {
-                    $email = $words[1];
-                    if (strlen($email) > 30) {
+
+                    $email = $words[3];
+                    if (strlen($email) > 60) {
                         $error = 1;
                     }
-                    $counter++;
-                }
-
-                if ($counter == 4) {
 
                     if ($error == 0) {
-
-                        $id = \App\Models\Student::all()->count();
 
                         $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
                         $pass = array(); //remember to declare $pass as an array
@@ -67,27 +62,36 @@ class AddStudentsController extends Controller {
                         $password = implode($pass);
 
                         $student = new \App\Models\Student;
-                        $student -> id = $id;
-                        $student -> vpisna = 0;
                         $student -> ime = $name;
                         $student -> priimek = $surname;
                         $student -> email = $email;
-                        $student -> studijski_program = 1;
                         $student -> geslo = $password;
-                        $student -> emso = 9;
-                        $student -> posta = 5000;
-                        $student -> datum_rojstva = '1-1-2101';
-                        $student -> obcina_rojstva = 'bla';
-
                         $student -> save();
-                    }
 
-                    $counter = 0;
-                    $name = '';
-                    $surname = '';
-                    $email = '';
-                    $program = '';
+                        $id = $student -> id;
+                        $predmet_id = 0;
+
+                        if($program == 'BUN-RI'){
+                            $predmet_id = 1;
+                        }
+                        else if($program == 'BVS-RI'){
+                            $predmet_id = 2;
+                        }
+                        else if($program == 'BMAG-RI'){
+                            $predmet_id = 3;
+                        }
+
+                        $student_program = new \App\Models\StudentProgram;
+                        $student_program -> id_studenta = $id;
+                        $student_program -> id_programa = $predmet_id;
+                        $student_program -> save();
+                    }
                 }
+
+                $name = '';
+                $surname = '';
+                $email = '';
+                $program = '';
             }
         }
 
@@ -95,7 +99,12 @@ class AddStudentsController extends Controller {
             \Session::flash("debug", "Prišlo je do napake pri shranjevanju v bazo, razlog: polja vsebujejo preveč znakov");
             \DB::rollback();
         }
+        else if($counter == 1){
+            \Session::flash("debug", "Prišlo je do napake pri shranjevanju v bazo, razlog: manjkajoči podatki o študentu");
+            \DB::rollback();
+        }
         else{
+            \Session::flash("debug", "Podatki so bili uspešno shranjeni!");
             \DB::commit();
         }
 
