@@ -13,6 +13,7 @@
 
 Route::get('/', 'WelcomeController@index');
 Route::get('add_from_file', 'HomeController@datoteka');
+Route::get('home', 'HomeController@home');
 Route::get('seznam', 'ListStudentsController@get_all_students');
 Route::get('/vpisnilist', 'VpisniListController@obrazecVpisniList');
 Route::post('/vpisnilist', 'VpisniListController@handlerVpisniList');
