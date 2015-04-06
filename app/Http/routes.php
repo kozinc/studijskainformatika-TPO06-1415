@@ -15,8 +15,7 @@ Route::get('/', 'WelcomeController@index');
 Route::get('add_from_file', 'HomeController@datoteka');
 Route::get('seznam', 'ListStudentsController@get_all_students');
 Route::get('/vpisnilist', 'VpisniListController@obrazecVpisniList');
-
-Route::post('/izbirapredmetov', 'izbiraPredmetovController@vpisniListHandler');
+Route::post('/vpisnilist', 'VpisniListController@handlerVpisniList');
 Route::post('login', 'LoginController@login_handler');
 Route::post('home', 'LoginController@login_handler');
 Route::post('addnew', 'AddStudentsController@addFromText');

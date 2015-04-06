@@ -3,18 +3,21 @@
 @section('content')
 
     <div class="container jumbotron">
-        <div class="page-header">
-            <h1>Vpisni list</h1>
-        </div>
+        @if($empty == 1)
+            <div class="page-header">
+                <h1>Vpisni list</h1>
+            </div>
 
-        {!! Form::open(array('action' => 'izbiraPredmetovController@vpisniListHandler', 'class' => 'form-horizontal')) !!}
+            {!! Form::open(array('action' => 'VpisniListController@handlerVpisniList', 'method'=>'post', 'class' => 'form-horizontal')) !!}
+            <input type="hidden" name="id" value="{{ $programStudenta->id }}">
+            <input type="hidden" name="id_studenta" value="{{ $student->id }}">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2>Podatki o študentu</h2>
                     <div class="form-group">
                         <div class="col-lg-3">
-                            {!! Form::label('vpisnaStevilka', 'Vpisna številka:') !!}
-                            {!! Form::text('vpisnaStevilka', $student->vpisna, array('class' => 'form-control')) !!}
+                            {!! Form::label('vpisna_stevilka', 'Vpisna številka:') !!}
+                            {!! Form::text('vpisna_stevilka', $student->vpisna, array('class' => 'form-control', 'disabled')) !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -29,8 +32,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
-                            {!! Form::label('datum_rojstva', 'Datum rojstva:') !!}
-                            {!! Form::text('datum_rojstva', $student->datum_rojstva, array('class' => 'form-control', 'placeholder' => 'LLLL-MM-DD')) !!}
+                            <label for="datum_rojstva">Datum rojstva:</label>
+                            <input type="text" id="datum_rojstva" name="datum_rojstva" value="{{ ($student->datum_rojstva=="0000-00-00")?'':$student->datum_rojstva }}" class="form-control" placeholder="LLLL-MM-DD" >
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('obcina_rojstva', 'Občina rojstva:') !!}
@@ -66,7 +69,7 @@
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('posta', 'Poštna številka:') !!}
-                            {!! Form::text('posta', $student->posta, array('class' => 'form-control')) !!}
+                            <input type="text" name="posta" value="{{ $student->posta?$student->posta:'' }}" class="form-control">
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('drzava', 'Država:') !!}
@@ -104,37 +107,38 @@
                     <div class="form-group">
                         <div class="col-lg-6">
                             {!! Form::label('studijski_program', 'Študijski program:') !!}
-                            {!! Form::text('studijski_program', $program->ime, array('class' => 'form-control')) !!}
+                            {!! Form::text('studijski_program', $program->ime, array('class' => 'form-control','disabled')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('oznaka', 'Oznaka:') !!}
-                            {!! Form::text('oznaka', $program->oznaka, array('class' => 'form-control')) !!}
+                            {!! Form::text('oznaka', $program->oznaka, array('class' => 'form-control','disabled')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('stopnja', 'Stopnja:') !!}
-                            {!! Form::text('stopnja', $program->stopnja, array('class' => 'form-control')) !!}
+                            {!! Form::text('stopnja', $program->stopnja, array('class' => 'form-control','disabled')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('kraj_izvajanja', 'Kraj izvajanja:') !!}
-                            {!! Form::text('kraj_izvajanja', $program->kraj_izvajanja, array('class' => 'form-control')) !!}
+                            {!! Form::text('kraj_izvajanja', $program->kraj_izvajanja, array('class' => 'form-control','disabled')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('vrsta_vpisa', 'Vrsta vpisa:') !!}
-                            {!! Form::text('vrsta_vpisa', $programStudenta->vrsta_vpisa, array('class' => 'form-control')) !!}
+                            {!! Form::text('vrsta_vpisa', $programStudenta->vrsta_vpisa, array('class' => 'form-control', 'disabled')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('nacin_studija', 'Način študija:') !!}
-                            {!! Form::text('nacin_studija', $programStudenta->nacin_studija, array('class' => 'form-control')) !!}
+                            {!! Form::text('nacin_studija', $programStudenta->nacin_studija, array('class' => 'form-control', 'disabled')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('letnik', 'Letnik:') !!}
-                            {!! Form::text('letnik', $programStudenta->letnik, array('class' => 'form-control')) !!}
+                            <input type="text" name="letnik" value="{{ $programStudenta->letnik}}" class="form-control" disabled>
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -175,7 +179,10 @@
             @endif
             {!! Form::submit('Pošlji vpisni list.', array('class' => 'btn btn-success')) !!}
 
-        {!! Form::close() !!}
+            {!! Form::close() !!}
+        @else
+            Vloga je že oddana.
+        @endif
 
     </div>
 @endsection
