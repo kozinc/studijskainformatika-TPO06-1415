@@ -46,6 +46,10 @@ Route::post('programi/{id}/predmetnik/edit', 'StudijskiProgramController@edit_pr
 Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@create_predmetnik');
 Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@store_predmetnik');
 
+Route::get('studenti', 'StudentController@searchForm');
+Route::post('studenti', 'StudentController@search');
+Route::get('studenti/{id}', 'StudentController@show');
+
 
 
 
