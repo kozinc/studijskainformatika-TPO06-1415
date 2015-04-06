@@ -75,11 +75,14 @@ class LoginController extends Controller {
             return redirect()->back();
         }
         if(!\Hash::check($this_password, $user->geslo)){
-            \Session::flash("error", "Geslo se ne ujema z vpisno številko!");
+            \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
             $this->add_to_session();
             return redirect()->back();
         }
+
+        \Session::set("session_id", $this_username);
         return view('home');
+
     }
 
     public function passwordReset(){
