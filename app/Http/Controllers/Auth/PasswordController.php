@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller {
-
+    protected $redirectTo = '/home';
 	/*
 	|--------------------------------------------------------------------------
 	| Password Reset Controller
