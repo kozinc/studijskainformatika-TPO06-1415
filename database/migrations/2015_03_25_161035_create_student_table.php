@@ -27,7 +27,7 @@ class CreateStudentTable extends Migration {
             $table->string('ponastavitev_gesla');
             $table->string('emso');
             $table->string('naslov');
-            $table->string('kraj');
+            $table->string('obcina');
             $table->integer('posta');
             $table->string('drzava');
             $table->date('datum_rojstva');
