@@ -28,6 +28,10 @@ Route::post('addnew', 'AddStudentsController@addFromText');
 Route::post('seznam', 'ListStudentsController@getStudents');
 Route::get('ponastavitev-gesla/{koda}', 'LoginController@passwordResetPotrditev');
 
+Route::get('nepotrjene-vloge', 'VpisniListController@nepotrjeneVloge');
+Route::get('nepotrjene-vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
+
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

@@ -2,15 +2,18 @@
 
 @section('content')
     <div class="form-group" style="width:500px; margin: auto; margin-top: 200px">
+        <button id="printMe" type="button" class="btn btn-default" aria-label="Left Align">
+            Print
+        </button>
+        <br><br>
         {!! Form::open(array('action' => 'ListStudentsController@getStudents')) !!}
             {!! Form::select('predmeti', $predmeti, $predmet_id) !!}
             <br/><br/>
-            {!! Form::select('leta', $leta, Input::old('leta')) !!}
+            {!! Form::select('leta', $leta, $leto_id) !!}
             <br/><br/>
             {!! Form::submit('Izpiši študente', array('class' => 'btn btn-danger')) !!}
         {!! Form::close() !!}
         <br/><br/>
-
         @if($student_list != '')
         <table class="table">
             <tr>
@@ -24,7 +27,7 @@
                     <td>{{ $s->id }}</td>
                     <td>{{ $s->vpisna }}</td>
                     <td>{{ $s->ime }} {{ $s->priimek }}</td>
-                    <td>?</td>
+                    <td>{{ $s->vrstavpisa }}</td>
                 </tr>
             @endforeach
         </table>
