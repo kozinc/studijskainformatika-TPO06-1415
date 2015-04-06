@@ -8,6 +8,13 @@
                 <h1>Vpisni list</h1>
             </div>
 
+            @if($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    {{$errors->first()}}
+                </div>
+            @endif
+
+
             {!! Form::open(array('action' => 'VpisniListController@handlerVpisniList', 'method'=>'post', 'class' => 'form-horizontal')) !!}
             <input type="hidden" name="id" value="{{ $programStudenta->id }}">
             <input type="hidden" name="id_studenta" value="{{ $student->id }}">
@@ -64,8 +71,8 @@
                             {!! Form::text('naslov', $student->naslov, array('class' => 'form-control')) !!}
                         </div>
                         <div class="col-lg-3">
-                            {!! Form::label('kraj', 'Kraj:') !!}
-                            {!! Form::text('kraj', $student->kraj, array('class' => 'form-control')) !!}
+                            {!! Form::label('obcina', 'Občina:') !!}
+                            {!! Form::text('obcina', $student->obcina, array('class' => 'form-control')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('posta', 'Poštna številka:') !!}

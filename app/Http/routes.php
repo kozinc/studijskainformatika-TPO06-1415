@@ -21,6 +21,7 @@ Route::post('login', 'LoginController@login_handler');
 Route::post('home', 'LoginController@login_handler');
 Route::post('addnew', 'AddStudentsController@addFromText');
 Route::post('seznam', 'ListStudentsController@getStudents');
+Route::get('ponastavitev-gesla/{koda}', 'LoginController@passwordResetPotrditev');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -41,8 +42,8 @@ Route::post('programi/create', 'StudijskiProgramController@store');
 Route::get('programi/{id}', 'StudijskiProgramController@show');
 Route::get('programi/{id}/edit', 'StudijskiProgramController@edit');
 Route::post('programi/{id}/edit', 'StudijskiProgramController@update');
-Route::get('programi/{id}/predmetnik', 'StudijskiProgramController@show_predmetnik');
-Route::post('programi/{id}/predmetnik/edit', 'StudijskiProgramController@edit_predmetnik');
+Route::get('programi/{id}/predmetnik', 'StudijskiProgramController@showPredmetnik');
+Route::post('programi/{id}/predmetnik/edit', 'StudijskiProgramController@editPredmetnik');
 Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@create_predmetnik');
 Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@store_predmetnik');
 

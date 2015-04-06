@@ -1,6 +1,11 @@
 @extends('appLogin')
 
 @section('content')
+    @if(isset($msg))
+        <div class="panel panel-primary">
+            {{ $msg }}
+        </div>
+    @endif
     <div class="form-group"  style="width:300px; margin: auto; margin-top: 200px">
         {!! Form::open(array('action' => 'LoginController@login_handler')) !!}
             <div class="form-group">
@@ -15,7 +20,7 @@
                 <div class="alert alert-info">{{ Session::get('error') }}</div>
             @endif
             {!! Form::submit('Prijava', array('class' => 'btn btn-danger')) !!}
-            <a href="/password/email" class="btn btn-default">Pozabil Geslo?</a>
+            <input type="submit" name="password-reset" class="btn btn-default" value="Pozabil Geslo?">
         {!! Form::close() !!}
     </div>
 @endsection

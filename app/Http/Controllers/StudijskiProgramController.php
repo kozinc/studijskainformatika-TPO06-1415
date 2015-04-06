@@ -86,12 +86,12 @@ class StudijskiProgramController extends Controller {
 		//
 	}
 
-    public function show_predmetnik($id){
+    public function showPredmetnik($id){
         $program = StudijskiProgram::find((int)$id);
         return view('program/programPredmetnik',['program'=>$program] );
     }
 
-    public function edit_predmetnik($id){
+    public function editPredmetnik($id){
         $program = StudijskiProgram::find((int)$id);
         $predmeti = Predmet::all();
         $moduli = Modul::all();

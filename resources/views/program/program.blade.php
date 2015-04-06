@@ -26,7 +26,7 @@
     </table>
     <div>
         <a class="btn btn-default" href="{{ $program->id }}/predmetnik">Predmetnik</a>
-        <a class="btn btn-default" href="{{ action('StudijskiProgramController@edit_predmetnik', ['id'=>$program->id]) }}">Sprememni</a>
+        <a class="btn btn-default" href="{{ action('StudijskiProgramController@editPredmetnik', ['id'=>$program->id]) }}">Sprememni</a>
     </div>
 
 
