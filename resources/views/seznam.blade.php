@@ -5,7 +5,7 @@
         {!! Form::open(array('action' => 'ListStudentsController@getStudents')) !!}
             {!! Form::select('predmeti', $predmeti, $predmet_id) !!}
             <br/><br/>
-            {!! Form::select('leta', $leta, Input::old('leta')) !!}
+            {!! Form::select('leta', $leta, $leto_id) !!}
             <br/><br/>
             {!! Form::submit('Izpiši študente', array('class' => 'btn btn-danger')) !!}
         {!! Form::close() !!}
@@ -24,7 +24,7 @@
                     <td>{{ $s->id }}</td>
                     <td>{{ $s->vpisna }}</td>
                     <td>{{ $s->ime }} {{ $s->priimek }}</td>
-                    <td>?</td>
+                    <td>{{ $s->vrstavpisa }}</td>
                 </tr>
             @endforeach
         </table>

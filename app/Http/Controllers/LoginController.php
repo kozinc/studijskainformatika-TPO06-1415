@@ -73,6 +73,8 @@ class LoginController extends Controller {
             $this->add_to_session();
             return redirect()->back();
         }
+
+        \Session::set("session_id", $this_username);
         return view('home');
     }
 }
