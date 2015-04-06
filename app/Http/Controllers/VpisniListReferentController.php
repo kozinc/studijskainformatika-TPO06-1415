@@ -1,0 +1,103 @@
+<?php namespace App\Http\Controllers;
+
+use App\Models\Student;
+use App\Models\StudijskiProgram;
+use App\Models\StudentProgram;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+
+use DB;
+use App\Quotation;
+
+
+
+class VpisniListReferentController extends Controller {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Welcome Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller renders the "marketing page" for the application and
+    | is configured to only allow guests. Like most of the other sample
+    | controllers, you are free to modify or remove it as you desire.
+    |
+    */
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
+    /**
+     * Show the application welcome screen to the user.
+     *
+     * @return Response
+     */
+    public function obrazecVpisniList(){
+
+        return view ('/referent/vpisnilistReferent', ['studentNajden'=>0]);
+
+    }
+
+    public function handlerVpisniList(Request $request)
+    {
+
+    }
+
+    public function searchStudent(Request $request)
+    {
+        $student = Student::where('vpisna', '=', $request['iskalni_niz'])->first();
+
+        if (!is_null($student))
+        {
+            $programStudenta = $student->studentProgram()->orderBy('id','desc')->first();
+            //preverimo za 1.vpis
+            if ($student->vpisna == 0)
+            {
+                //generiramo vpisno stevilko in jo shranimo
+                $leto = (date('Y'));
+                $leto = substr ($leto, 2);
+                $novaVpisna =  '63'.$leto;
+                $letosnjiStudentZadnji = Student::where('vpisna', 'LIKE', $novaVpisna.'%')->orderBy('vpisna','desc')->first();
+                $student->vpisna = $novaVpisna.substr($letosnjiStudentZadnji->vpisna, 4) + 1;
+                $student->save();
+                $program = StudijskiProgram::find($programStudenta->id_programa);
+                // return ( $program->ime);
+                $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',1);
+                $programStudenta->vrsta_vpisa = "Prvi vpis v 1.letnik";
+                $programStudenta->nacin_studija = "redni";
+                $programStudenta->letnik = 1;
+                $programStudenta->save();
+                return view('vpisnilist',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
+                    'program'=>$program, 'datum_prvega_vpisa' => date('Y-m-d'), 'predmetiObvezni' => $predmetiObvezni]);
+
+            }
+            else
+            {
+                $programStudenta = $student->studentProgram()->orderBy('id','desc')->first();
+                $program = StudijskiProgram::find($programStudenta->id_programa);
+                $prviVpis = $programStudenta->where('id_programa','=',$program->id)->first();
+                $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
+
+                return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'programStudenta'=>$programStudenta,
+                    'program'=>$program, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
+            }
+
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Napačna vpisna številka.']);
+        }
+
+    }
+
+}

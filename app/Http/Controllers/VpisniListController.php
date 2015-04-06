@@ -49,9 +49,9 @@ class VpisniListController extends Controller {
 
         //preverimo ce obstaja zeton
         $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
+
         if(!is_null($programStudenta))
         {
-
             //preverimo za 1.vpis
             if ($student->vpisna == 0)
             {
@@ -63,10 +63,12 @@ class VpisniListController extends Controller {
                 $student->vpisna = $novaVpisna.substr($letosnjiStudentZadnji->vpisna, 4) + 1;
                 $student->save();
                 $program = StudijskiProgram::find($programStudenta->id_programa);
-                $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
+               // return ( $program->ime);
+                $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',1);
                 $programStudenta->vrsta_vpisa = "Prvi vpis v 1.letnik";
                 $programStudenta->nacin_studija = "redni";
                 $programStudenta->letnik = 1;
+                $programStudenta->save();
                 return view('vpisnilist',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
                     'program'=>$program, 'datum_prvega_vpisa' => date('Y-m-d'), 'predmetiObvezni' => $predmetiObvezni]);
 
@@ -87,7 +89,6 @@ class VpisniListController extends Controller {
             return view ('vpisnilist', ['empty' => 0]);
         }
 
-
     }
 
     public function handlerVpisniList(Request $request){
@@ -97,7 +98,7 @@ class VpisniListController extends Controller {
         //shranimo oz. posodobimo podatke o studentu
         $student = Student::find($request['id_studenta']);
 
-     /*   //validacija imena inj priimka
+        //validacija imena inj priimka
         if (ctype_alpha ($request['ime']) && ctype_alpha($request['priimek']))
         {
             $student->ime = $request['ime'];
@@ -196,7 +197,7 @@ class VpisniListController extends Controller {
         else
         {
             return Redirect::back()->withErrors(['Država rojstva ne obstaja.']);
-        }*/
+        }
 
         //Validacija obstoja drzave, obcine in poste.
         if (!is_null(DB::table('drzava')->where('naziv', $request['drzava'])->first()) &&
