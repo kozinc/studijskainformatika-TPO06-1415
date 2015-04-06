@@ -20,6 +20,7 @@ class CreateForeignKeysTable extends Migration {
         Schema::table('student_program', function($table) {
             $table->foreign('id_studenta')->references('id')->on('student');
             $table->foreign('id_programa')->references('id')->on('studijski_program');
+            $table->foreign('vrsta_vpisa')->references('sifra')->on('vrsta_vpisa');
         });
 
         Schema::table('program_modul', function($table) {

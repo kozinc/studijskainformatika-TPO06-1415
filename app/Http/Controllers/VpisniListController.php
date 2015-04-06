@@ -225,4 +225,25 @@ class VpisniListController extends Controller {
         return view ('vpisnilist', ['empty'=>0]);
     }
 
+    public function nepotrjeneVloge(){
+        $studentProgrami = StudentProgram::nepotrjeneVloge();
+        //dd($studentProgrami->first());
+        return view('vloge', ['vloge' => $studentProgrami]);
+    }
+
+    public function potrdiVlogo($id){
+        $vloga = StudentProgram::find((int)$id);
+        $studentProgrami = StudentProgram::nepotrjeneVloge();
+        if(!is_null($vloga)){
+            $status = $vloga->potrdi();
+            if($status){
+                $msg = 'Vloga potrjena';
+                //return Redirect::back()->with('odgovor','Vloga potrjena');
+                return redirect('nepotrjene-vloge')->with('odgovor','Vloga potrjena');
+            }
+        }
+
+        return Redirect::back()->with(['vloge'=>$studentProgrami])->withErrors(['Napaka pri potrjevanju vloge']);
+    }
+
 }
