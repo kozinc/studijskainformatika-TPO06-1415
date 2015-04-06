@@ -13,6 +13,21 @@ class ListStudentsController extends Controller {
     }
 
     function cmp($a, $b){
+        $a1 = substr($a->priimek, 0, 1);
+        $b1 = substr($b->priimek, 0, 1);
+
+        setlocale(LC_CTYPE, 'POSIX');
+        $a1 = iconv("ISO-8859-1", "UTF-8", $a1);
+        echo $a1;
+
+        if($a1 == "Č"){
+            echo "bla";
+            if(strcmp("D", $b1) <= 0){
+
+                return -1;
+            }
+        }
+
         return strcmp($a->priimek, $b->priimek);
     }
 
