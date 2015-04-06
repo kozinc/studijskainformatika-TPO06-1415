@@ -23,6 +23,12 @@ class CreateStudijskiProgramTable extends Migration {
             $table->integer('trajanje_leta');
             $table->integer('stevilo_semestrov');
             $table->integer('KT');
+            $table->integer('stevilo_obveznih_predmetov')->unsigned();
+            $table->integer('stevilo_strokovnih_predmetov')->unsigned();
+            $table->integer('stevilo_prostih_predmetov')->unsigned();
+            $table->integer('stevilo_modulov')->unsigned();
+            $table->integer('KT_za_napredovanje')->unsigned();
+            $table->integer('KT_za_ponavljanje')->unsigned();
             $table->integer('klasius_srv');
             $table->timestamps();
             $table->softDeletes();

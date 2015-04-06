@@ -1,4 +1,4 @@
-@extends('app')
+@extends('appLogin')
 
 @section('content')
     <div class="form-group"  style="width:300px; margin: auto; margin-top: 200px">
@@ -15,6 +15,7 @@
                 <div class="alert alert-info">{{ Session::get('error') }}</div>
             @endif
             {!! Form::submit('Prijava', array('class' => 'btn btn-danger')) !!}
+            <a href="/password/email" class="btn btn-default">Pozabil Geslo?</a>
         {!! Form::close() !!}
     </div>
 @endsection

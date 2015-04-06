@@ -5,19 +5,22 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProgramPredmetTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('program_predmet', function(Blueprint $table)
         {
             $table->increments('id');
             $table->integer('id_programa')->unsigned();
+            $table->string('studijsko_leto');
             $table->integer('id_predmeta')->unsigned();
             $table->integer('letnik');
+            $table->integer('semester')->unsigned();
+            $table->string('tip');
         });
 
 

@@ -18,6 +18,8 @@ class CreateProgramModulTable extends Migration {
             $table->integer('id_programa')->unsigned();
             $table->integer('id_modula')->unsigned();
             $table->integer('letnik')->unsigned();
+            $table->string('tip');
+            $table->string('studijsko_leto');
 
         });
 
