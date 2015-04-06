@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Student;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller {
 
@@ -20,6 +22,10 @@ class LoginController extends Controller {
 
     public function login_handler(){
 
+        $password_reset = \Input::get('password-reset');
+        if(isset($password_reset)){
+            return $this->passwordReset();
+        }
         $request = \Request::instance();
         $request->setTrustedProxies(array('127.0.0.1'));
         $ip_address = $request->getClientIp();
@@ -61,18 +67,48 @@ class LoginController extends Controller {
             return redirect()->back();
         }
 
-        $user = \App\Models\Student::where('vpisna', $this_username)->first();
+        $user = \App\Models\Student::where('email', $this_username)->first();
 
         if(is_null($user)){
-            \Session::flash("error", "Uporabnik s takšno vpisno številko ne obstaja!");
+            \Session::flash("error", "Uporabnik s takšnim e-mailom ne obstaja!");
             $this->add_to_session();
             return redirect()->back();
         }
-        if($this_password != ($user->geslo)){
+        if(!\Hash::check($this_password, $user->geslo)){
             \Session::flash("error", "Geslo se ne ujema z vpisno številko!");
             $this->add_to_session();
             return redirect()->back();
         }
         return view('home');
     }
+
+    public function passwordReset(){
+        $mail = \Input::get('username');
+        $student = Student::where('vpisna', '=', $mail)->first();
+
+        if(!is_null($student)){
+            $student->passwordReset();
+        }
+        return redirect()->back()->with(['msg'=>'Novo geslo je bilo poslano na vaš email.']);
+    }
+
+    public function passwordResetPotrditev($koda){
+
+        $pos = strpos($koda, '-');
+        $id = substr($koda, 0, $pos);
+        $student = Student::find((int)$id);
+
+        if(!is_null($student)){
+            $potrditev = substr($koda, $pos+1);
+            $status = $student->passwordResetPotrditev($potrditev);
+            if($status){
+                $msg = 'Geslo ponastavljeno!';
+            }else{
+                $msg = 'Napaka pri ponastavljanju gesla';
+            }
+            return redirect('/')->with(['msg'=>$msg]);
+        }
+        return false;
+    }
+
 }

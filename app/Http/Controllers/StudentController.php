@@ -3,12 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Models\StudijskiProgram;
-use App\Models\Predmet;
-use App\Models\Modul;
 use Illuminate\Http\Request;
+use App\Models\Student;
 
-class StudijskiProgramController extends Controller {
+class StudentController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -17,9 +15,23 @@ class StudijskiProgramController extends Controller {
 	 */
 	public function index()
 	{
-		$programi = StudijskiProgram::all();
-        return view('program/programi', ['programi'=>$programi]);
+		//
 	}
+
+    public function searchForm(){
+        return view('student/iskanjeStudenta');
+    }
+
+    public function search(Request $request){
+        $search = $request['iskalnik_studentov'];
+        $studenti = Student::where('vpisna', 'LIKE', '%'.$search.'%')->orWhere('ime', 'LIKE', $search.'%')->orWhere('priimek', 'LIKE', $search.'%')->get();
+        $return = [];
+        if($request['return_type']=='json'){
+            return response($studenti->toJson,200,['Content-Type'=>'application/json']);
+        }
+        return view('student/iskanjeStudenta', ['studenti'=>$studenti]);
+
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -49,8 +61,8 @@ class StudijskiProgramController extends Controller {
 	 */
 	public function show($id)
 	{
-		$program = StudijskiProgram::find((int)$id);
-        return view('program/program', ['program'=>$program]);
+		$student = Student::find($id);
+        return view('student/studentInfo');
 	}
 
 	/**
@@ -85,17 +97,5 @@ class StudijskiProgramController extends Controller {
 	{
 		//
 	}
-
-    public function showPredmetnik($id){
-        $program = StudijskiProgram::find((int)$id);
-        return view('program/programPredmetnik',['program'=>$program] );
-    }
-
-    public function editPredmetnik($id){
-        $program = StudijskiProgram::find((int)$id);
-        $predmeti = Predmet::all();
-        $moduli = Modul::all();
-        return view('program/programPredmetnikEdit', ['program'=>$program, 'predmeti'=>$predmeti, 'moduli'=>$moduli]);
-    }
 
 }
