@@ -19,6 +19,7 @@ class StudijskiProgramController extends Controller {
 	{
 		$programi = StudijskiProgram::all();
         return view('program/programi', ['programi'=>$programi]);
+        
 	}
 
 	/**
