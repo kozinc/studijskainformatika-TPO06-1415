@@ -52,20 +52,14 @@ class AddStudentsController extends Controller {
 
                     if ($error == 0) {
 
-                        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-                        $pass = array(); //remember to declare $pass as an array
-                        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-                        for ($i = 0; $i < 8; $i++) {
-                            $n = rand(0, $alphaLength);
-                            $pass[] = $alphabet[$n];
-                        }
-                        $password = implode($pass);
+
+                        $password = str_random(8);
 
                         $student = new \App\Models\Student;
                         $student -> ime = $name;
                         $student -> priimek = $surname;
                         $student -> email = $email;
-                        $student -> geslo = $password;
+                        $student -> geslo = \Hash::make($password);
                         $student -> save();
 
                         $id = $student -> id;
