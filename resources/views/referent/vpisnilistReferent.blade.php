@@ -44,7 +44,7 @@
                 @endif
 
                 {!! Form::open( array('action' => 'VpisniListReferentController@handlerVpisniList', 'method'=>'post', 'class' => 'form-horizontal')) !!}
-
+                <input type="hidden" name="id" value="{{ $programStudenta->id }}">
                 <input type="hidden" name="id_studenta" value="{{ $student->id }}">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -207,7 +207,7 @@
                 {!! Form::close() !!}
 
             @else
-                Žeton študenta za vpis je izkoriščen. Ali ponovno odprem vpis?
+                {!!$sporocilo!!}
             @endif
 
         @endif

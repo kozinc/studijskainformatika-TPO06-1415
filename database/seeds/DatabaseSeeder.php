@@ -40,7 +40,7 @@ class TableSeeder extends Seeder {
 
         Student::create(['vpisna' => '63120340', 'ime' => 'Neža', 'priimek' => 'Belej', 'email' => 'nezabelej@gmail.com','geslo' => \Hash::make('nezabelej'), 'emso' => '0812992505123', 'davcna' => '12345678', 'spol' => 'ženski', 'naslov' => 'Brstnik 4', 'obcina' => 'Laško', 'posta' => '3270', 'drzava' => 'Slovenija', 'datum_rojstva'=>'1992-12-08', 'obcina_rojstva' => 'Trbovlje', 'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'telefon' => '031683852']);
         Student::create(['vpisna' => '63120136', 'ime' => 'Veronika', 'priimek' => 'Blažič', 'email' => 'veronikablazic@gmail.com','geslo' => \Hash::make('veronikablazic'), 'emso' => '2309993505223', 'posta' => '5000', 'datum_rojstva' => '1993-09-23', 'obcina_rojstva' => 'Nova Gorica']);
-        Student::create(['vpisna' => '63130385', 'ime' => 'Nejc', 'priimek' => 'Bizjak', 'email' => 'necobizjak@gmail.com','geslo' => \Hash::make('nejcbizjak'), 'emso' => '1307991500333', 'posta' => '5272', 'datum_rojstva' => '1991-07-13', 'obcina_rojstva' => 'Nova Gorica']);
+        Student::create(['vpisna' => '63130385', 'ime' => 'Nejc', 'priimek' => 'Bizjak', 'email' => 'neco.bizjak@gmail.com','geslo' => \Hash::make('nejcbizjak'), 'emso' => '1307991500333', 'posta' => '5272', 'datum_rojstva' => '1991-07-13', 'obcina_rojstva' => 'Nova Gorica']);
         Student::create(['ime' => 'Janez', 'priimek' => 'Novak', 'email' => 'janeznovak@gmail.com', 'geslo' =>\Hash::make('janeznovak') ]);
         Student::create(['vpisna' => '63150000', 'ime' => 'Miha', 'priimek' => 'Vesel', 'email' => 'mihavesel@gmail.com','geslo' => \Hash::make('mihavesel'), 'emso' => '2207994500234', 'posta' => '3000', 'datum_rojstva' => '1994-07-22', 'obcina_rojstva' => 'Celje']);
         Student::create(['vpisna' => '63150001', 'ime' => 'Samo', 'priimek' => 'Veter', 'email' => 'samoveter@gmail.com','geslo' => \Hash::make('samoveter'), 'emso' => '0707994500334', 'posta' => '1000', 'datum_rojstva' => '1994-07-07', 'obcina_rojstva' => 'Ljubljana']);
@@ -77,9 +77,9 @@ class TableSeeder extends Seeder {
         Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
 
         DB::table('student_predmet')->truncate();
-        StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
-        StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
-        StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>7, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
+        StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
+        StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>7, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
 
         DB::table('modul')->truncate();
         $modul1 = Modul::create(['ime'=>'Razvoj programske opreme','opis'=>'']);

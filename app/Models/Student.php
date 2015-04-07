@@ -18,13 +18,22 @@ class Student extends Model {
 
     public function Predmeti()
     {
-        return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_predmeta', 'id_studenta');
+        return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_predmeta', 'id_studenta')->withPivot('');
     }
 
     public function studentProgram()
     {
         return $this->hasMany('App\Models\StudentProgram', 'id_studenta');
 
+    }
+
+    public function trenutniProgram(){
+        return $this->studijskiProgrami()->withPivot('letnik', 'studijsko_leto', 'vrsta_vpisa', 'nacin_studija', 'datum_vpisa','vloga_potrjena')->wherePivot('studijsko_leto','=',date('y').'/'.date('Y',strtotime('+1 year')))->first();
+    }
+
+    public function trenutniPredmeti()
+    {
+        return $this->Predmeti()->withPivot('letnik','semester','studijsko_leto','ocena')->wherePivot('studijsko_leto','=',date('y').'/'.date('Y',strtotime('+1 year')));
     }
 
     public function passwordReset(){

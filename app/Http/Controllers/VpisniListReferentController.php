@@ -49,18 +49,23 @@ class VpisniListReferentController extends Controller {
 
     }
 
-    public function handlerVpisniList(Request $request)
-    {
-
-    }
-
     public function searchStudent(Request $request)
     {
         $student = Student::where('email', '=', $request['iskalni_niz'])->first();
+        if (!is_null($student))
+        {
+            return Redirect('/vpisnilistReferent/'.$student->id);
+        }
+        return Redirect::back();
+    }
+
+
+    public function prikaziStudenta($id)
+    {
+        $student = Student::find($id);
 
         if (!is_null($student))
         {
-            //$programStudenta = $student->studentProgram()->orderBy('id','desc')->first();
 
             //preverimo ce obstaja zeton
             $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
@@ -101,15 +106,155 @@ class VpisniListReferentController extends Controller {
             }
             else
             {
-                return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0]);
+                $sporocilo = "Žeton študenta za vpis je izkoriščen. Ali ponovno odprem vpis?";
+                return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0, 'sporocilo'=> $sporocilo]);
             }
 
         }
         else
         {
-            return Redirect::back()->withErrors(['Napačna vpisna številka.']);
+            return Redirect::back()->withErrors(['Napačen email.']);
         }
 
+    }
+
+    public function handlerVpisniList(Request $request)
+    {
+        $id_programa = $request['id'];
+        $programStudenta = StudentProgram::find($id_programa);
+
+        //shranimo oz. posodobimo podatke o studentu
+        $student = Student::find($request['id_studenta']);
+
+        //validacija imena inj priimka
+        if (ctype_alpha ($request['ime']) && ctype_alpha($request['priimek']))
+        {
+            $student->ime = $request['ime'];
+            $student->priimek = $request['priimek'];
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Ime in priimek naj vsebujeta le črke.']);
+        }
+
+        //validacija datuma rojstva
+        if (!strtotime($request['datum_rojstva']))
+        {
+            return Redirect::back()->withErrors(['Neveljaven datum rojstva!']);
+        }
+        else
+        {
+            $student->datum_rojstva = $request['datum_rojstva'];
+        }
+        if (($request['spol'] == "ženski") || ($request['spol'] == "moški"))
+        {
+            $student->spol = $request['spol'];
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Spol ni pravilno označen! Napiši "moški" oz. "ženski". ']);
+        }
+
+        //validacija EMSO
+        if (is_numeric($request['emso']) && strlen($request['emso']) == 13)
+        {
+
+            //primerjaj z datumom rojstva
+            if ( (substr($request['emso'], 0, 2) == date('d', strtotime($student->datum_rojstva)) ) &&
+                (substr($request['emso'], 2, 2) == date('m', strtotime($student->datum_rojstva)) ) &&
+                (substr($request['emso'], 4, 3) == substr(date('Y', strtotime($student->datum_rojstva)), 1, 3) ) )
+            {
+                //primerjaj s spolom
+                if ($student->spol == "ženski")
+                {
+                    if (substr($request['emso'], 7, 3) != "505")
+                    {
+                        return Redirect::back()->withErrors(['EMSO se ne ujema s spolom.']);
+                    }
+                    else
+                    {
+                        $student->emso = $request['emso'];
+                    }
+                }
+                elseif ($student->spol == "moški")
+                {
+                    if (substr($request['emso'], 7, 3) != "500")
+                    {
+                        return Redirect::back()->withErrors(['EMSO se ne ujema s spolom.']);
+                    }
+                    else
+                    {
+                        $student->emso = $request['emso'];
+                    }
+                }
+
+            }
+            else
+            {
+                return Redirect::back()->withErrors(['EMSO se ne ujema z datumom rojstva.']);
+            }
+
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['EMSO mora biti sestavljen iz 13 številk.']);
+        }
+
+        //Validacija drzave rojstva in skladnosti drzave in obcine rojstva
+        if (!is_null(DB::table('drzava')->where('naziv', $request['drzava_rojstva'])->first()))
+        {
+            if (DB::table('drzava')->where('naziv', $request['drzava_rojstva'])->first()->naziv == "Slovenija")
+            {
+                if (!is_null(DB::table('obcina')->where('naziv', $request['obcina_rojstva'])->first()))
+                {
+                    $student->drzava_rojstva = $request['drzava_rojstva'];
+                    $student->obcina_rojstva = $request['obcina_rojstva'];
+                }
+                else
+                {
+                    return Redirect::back()->withErrors(['Občina se ne ujema z državo.']);
+
+                }
+            }
+            else
+            {
+                $student->drzava_rojstva = $request['drzava_rojstva'];
+                $student->obcina_rojstva = $request['obcina_rojstva'];
+            }
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Država rojstva ne obstaja.']);
+        }
+
+        //Validacija obstoja drzave, obcine in poste.
+        if (!is_null(DB::table('drzava')->where('naziv', $request['drzava'])->first()) &&
+            !is_null(DB::table('obcina')->where('naziv', $request['obcina'])->first()) &&
+            !is_null(DB::table('posta')->where('postna_stevilka', $request['posta'])->first()) )
+        {
+            $student->obcina = $request['obcina'];
+            $student->posta = $request['posta'];
+            $student->drzava = $request['drzava'];
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Neveljavna država / neveljavna občina / neveljavna poštna številka!']);
+        }
+
+        $student->telefon = $request['telefon'];
+        $student->naslov = $request['naslov'];
+        $student->davcna = $request['davcna'];
+        $student->drzavljanstvo = $request['drzavljanstvo'];
+        $student->save();
+
+        //oznacimo, da je zeton izkoriscen
+        $programStudenta->vloga_oddana = date('Y-m-d');
+        $programStudenta->vloga_potrjena = date('Y-m-d');
+        $programStudenta->datum_vpisa = date('Y-m-d');
+        $programStudenta->save();
+        $sporocilo = "Vloga uspešno oddana in potrjena.";
+
+        return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0,'sporocilo'=> $sporocilo]);
     }
 
 }
