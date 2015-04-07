@@ -17,6 +17,11 @@ Route::get('home', 'HomeController@home');
 Route::get('seznam', 'ListStudentsController@get_all_students');
 Route::get('/vpisnilist', 'VpisniListController@obrazecVpisniList');
 Route::post('/vpisnilist', 'VpisniListController@handlerVpisniList');
+
+Route::get('/vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
+Route::post('/vpisnilistReferent', 'VpisniListReferentController@handlerVpisniList');
+Route::post('/vpisnilistReferent', 'VpisniListReferentController@searchStudent');
+
 Route::post('login', 'LoginController@login_handler');
 Route::post('home', 'LoginController@login_handler');
 Route::post('addnew', 'AddStudentsController@addFromText');
