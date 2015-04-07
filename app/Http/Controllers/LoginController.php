@@ -27,7 +27,7 @@ class LoginController extends Controller {
             return $this->passwordReset();
         }
         $request = \Request::instance();
-        $request->setTrustedProxies(array('127.0.0.1'));
+        //$request->setTrustedProxies(array('127.0.0.1'));
         $ip_address = $request->getClientIp();
 
         $locked_ip = \App\Models\ZakIp::where('ip', $ip_address) -> first();
@@ -68,16 +68,27 @@ class LoginController extends Controller {
         }
 
         $user = \App\Models\Student::where('email', $this_username)->first();
+        $referent = \App\Models\Referent::where('email', $this_username)->first();
 
-        if(is_null($user)){
+        if(is_null($user) && is_null($referent)){
             \Session::flash("error", "Uporabnik s takšnim e-mailom ne obstaja!");
             $this->add_to_session();
             return redirect()->back();
         }
-        if(!\Hash::check($this_password, $user->geslo)){
-            \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
-            $this->add_to_session();
-            return redirect()->back();
+
+        if(is_null($user)){
+            if(!\Hash::check($this_password, $referent->geslo)){
+                \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
+                $this->add_to_session();
+                return redirect()->back();
+            }
+        }
+        else {
+            if(!\Hash::check($this_password, $user->geslo)){
+                \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
+                $this->add_to_session();
+                return redirect()->back();
+            }
         }
 
         \Session::set("session_id", $this_username);
