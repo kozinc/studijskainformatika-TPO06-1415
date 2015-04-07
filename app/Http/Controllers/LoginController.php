@@ -92,7 +92,15 @@ class LoginController extends Controller {
         }
 
         \Session::set("session_id", $this_username);
-        return view('home');
+
+        if (substr(\Session::get('session_id'), strlen(\Session::get('session_id')) - 14) == "@fri.uni-lj.si" )
+        {
+            return Redirect(action('VpisniListReferentController@obrazecVpisniList'));
+        }
+        else
+        {
+            return Redirect(action('VpisniListController@obrazecVpisniList'));
+        }
 
     }
 

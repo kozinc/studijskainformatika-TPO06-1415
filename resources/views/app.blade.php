@@ -25,19 +25,22 @@
 
             @if (substr(\Session::get('session_id'), strlen(\Session::get('session_id')) - 14) == "@fri.uni-lj.si" )
                 <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a>
+                </div>
+                <div class="navbar-header">
                     <a class="navbar-brand" href="{{ action('VpisniListReferentController@obrazecVpisniList') }}">Vpisni list</a>
                 </div>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmetnik</a>
+                    <a class="navbar-brand" href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a>
                 </div>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmetnik</a>
+                    <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
                 </div>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmetnik</a>
+                    <a class="navbar-brand" href="{{ action('ListStudentsController@getStudents') }}">Seznam vpisanih študentov v predmet</a>
                 </div>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmetnik</a>
+                    <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
                 </div>
             @else
                 <div class="navbar-header">
