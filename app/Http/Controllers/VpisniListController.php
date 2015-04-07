@@ -229,7 +229,7 @@ class VpisniListController extends Controller {
     }
 
     public function seznamVlog(){
-        $studentProgrami = StudentProgram::nepotrjeneVloge();
+        $studentProgrami = StudentProgram::orderBy('vloga_potrjena','asc')->orderBy('studijsko_leto','desc')->get();
         //dd($studentProgrami->first());
         return view('vloge', ['vloge' => $studentProgrami]);
     }

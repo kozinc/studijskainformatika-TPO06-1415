@@ -19,7 +19,6 @@
             </tr>
         @endforeach
     </table>
-    <a href="{{ action('PredmetController@seznamVpisanih',['id'=>$predmet->id, 'studijskoLeto'=>date('Y').'-'.date('Y',strtotime('+1 year'))]) }}" class="btn btn-default">Seznam vpisanih</a>
     <form action="{{ action('PredmetController@export') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="target" value="predmeti">
