@@ -225,7 +225,7 @@ class VpisniListController extends Controller {
         $programStudenta->vloga_oddana = date('Y-m-d');
         $programStudenta->save();
 
-        return view ('vpisnilist', ['empty'=>0]);
+        return view ('vpisniList', ['empty'=>0]);
     }
 
     public function seznamVlog(){
