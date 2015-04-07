@@ -3,20 +3,34 @@
 @section('content')
 
     <div class="container jumbotron">
-        @if($empty == 1)
-            <div class="page-header">
-                <h1>Vpisni list</h1>
+        <div class="page-header">
+            <h1>Vpisni list</h1>
+            <h3>Prosimo, da pred vpisom študentu omogočite vpis pod rubriko <em>Omogoči vpis.</em></h3>
+            <h3>Po vpisu študenta bo vpis samodejno potrjen.</h3>
+        </div>
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                {{$errors->first()}}
             </div>
+        @endif
 
-            @if($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    {{$errors->first()}}
+        @if($studentNajden == 0)
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            {!! Form::open( array('action' => 'VpisniListReferentController@searchStudent', 'method'=>'post', 'class' => 'form-horizontal')) !!}
+                            {!! Form::label('iskalni_niz', 'Vpisna številka študenta:') !!}
+                            {!! Form::text('iskalni_niz', null, array('class' => 'form-control')) !!} <br>
+                            {!! Form::submit('Išči.', array('class' => 'btn btn-default')) !!}
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
                 </div>
-            @endif
+            </div>
+        @else
+             {!! Form::open( array('action' => 'VpisniListReferentController@handlerVpisniList', 'method'=>'post', 'class' => 'form-horizontal')) !!}
 
-
-           {!! Form::open( array('action' => 'VpisniListController@handlerVpisniList', 'method'=>'post', 'class' => 'form-horizontal')) !!}
-            <input type="hidden" name="id" value="{{ $programStudenta->id }}">
             <input type="hidden" name="id_studenta" value="{{ $student->id }}">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -83,14 +97,8 @@
                             {!! Form::text('drzava', $student->drzava, array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-lg-3">
-                            {!! Form::label('drzavljanstvo', 'Državljanstvo:') !!}
-                            {!! Form::text('drzavljanstvo', $student->drzavljanstvo, array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
                 </div>
-            </div>
+             </div>
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -107,44 +115,43 @@
                     </div>
                 </div>
             </div>
-
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2>Podatki o vpisu</h2>
                     <div class="form-group">
                         <div class="col-lg-6">
                             {!! Form::label('studijski_program', 'Študijski program:') !!}
-                            {!! Form::text('studijski_program', $program->ime, array('class' => 'form-control','disabled')) !!}
+                            {!! Form::text('studijski_program', $program->ime, array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('oznaka', 'Oznaka:') !!}
-                            {!! Form::text('oznaka', $program->oznaka, array('class' => 'form-control','disabled')) !!}
+                            {!! Form::text('oznaka', $program->oznaka, array('class' => 'form-control')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('stopnja', 'Stopnja:') !!}
-                            {!! Form::text('stopnja', $program->stopnja, array('class' => 'form-control','disabled')) !!}
+                            {!! Form::text('stopnja', $program->stopnja, array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('kraj_izvajanja', 'Kraj izvajanja:') !!}
-                            {!! Form::text('kraj_izvajanja', $program->kraj_izvajanja, array('class' => 'form-control','disabled')) !!}
+                            {!! Form::text('kraj_izvajanja', $program->kraj_izvajanja, array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('vrsta_vpisa', 'Vrsta vpisa:') !!}
-                            {!! Form::text('vrsta_vpisa', $programStudenta->vrsta_vpisa, array('class' => 'form-control', 'disabled')) !!}
+                            {!! Form::text('vrsta_vpisa', $programStudenta->vrsta_vpisa, array('class' => 'form-control')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('nacin_studija', 'Način študija:') !!}
-                            {!! Form::text('nacin_studija', $programStudenta->nacin_studija, array('class' => 'form-control', 'disabled')) !!}
+                            {!! Form::text('nacin_studija', $programStudenta->nacin_studija, array('class' => 'form-control')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('letnik', 'Letnik:') !!}
-                            <input type="text" name="letnik" value="{{ $programStudenta->letnik}}" class="form-control" disabled>
+                            <input type="text" name="letnik" value="{{ $programStudenta->letnik}}" class="form-control">
 
                         </div>
                     </div>
@@ -157,38 +164,11 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Predmeti</h2>
-                    <table class="table">
-                        <tr>
-                            <th>Obvezni predmeti</th>
-                        </tr>
-                        @foreach($predmetiObvezni->get() as $predmet)
-                            <tr>
-                                <td>{{ $predmet->naziv }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                    <table class="table">
-                        <tr>
-                            <th>Izbirni predmeti</th>
-                        </tr>
-
-                    </table>
-                </div>
-            </div>
-
-
-
-            @if (Session::has('error'))
+             @if (Session::has('error'))
                 <div class="alert alert-info">{{ Session::get('error') }}</div>
-            @endif
-            {!! Form::submit('Pošlji vpisni list.', array('class' => 'btn btn-success')) !!}
-
-            {!! Form::close() !!}
-        @else
-            Vloga je že oddana.
+             @endif
+             {!! Form::submit('Pošlji vpisni list.', array('class' => 'btn btn-success')) !!}
+             {!! Form::close() !!}
         @endif
 
     </div>

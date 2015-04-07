@@ -87,7 +87,7 @@ class LoginController extends Controller {
 
     public function passwordReset(){
         $mail = \Input::get('username');
-        $student = Student::where('vpisna', '=', $mail)->first();
+        $student = Student::where('email', '=', $mail)->first();
 
         if(!is_null($student)){
             $student->passwordReset();

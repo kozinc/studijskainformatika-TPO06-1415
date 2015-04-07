@@ -4,7 +4,7 @@
 
     <div class="form-group" style="width:300px; margin: auto; margin-top: 200px">
         {!! Form::open(array('action' => 'AddStudentsController@addFromText', 'files' => true)) !!}
-            <label for="exampleInputFile">Vnesi nove študente iz tekstovne datoteke</label>
+            <label for="exampleInputFile">Vnesi nove študente iz tekstovne datoteke. Študenti bodo dobili pravico vpisa v 1.letnik navedenega programa.</label>
             <br/><br/>
             {!! Form::file('file') !!}
             <p class="help-block"> IME 30 znakov </p>
