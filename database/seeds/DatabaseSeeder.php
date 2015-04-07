@@ -77,9 +77,9 @@ class TableSeeder extends Seeder {
         Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
 
         DB::table('student_predmet')->truncate();
-        StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
-        StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
-        StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>7, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>1, 'ocena'=>8]);
+        StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
+        StudentPredmet::create(['id'=>2, 'id_studenta'=>2, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
+        StudentPredmet::create(['id'=>3, 'id_studenta'=>1, 'id_predmeta'=>7, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
 
         DB::table('modul')->truncate();
         $modul1 = Modul::create(['ime'=>'Razvoj programske opreme','opis'=>'']);

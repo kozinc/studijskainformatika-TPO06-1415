@@ -3,8 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\VrstaVpisa;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\Redirect;
 
 class StudentController extends Controller {
 
@@ -62,7 +64,7 @@ class StudentController extends Controller {
 	public function show($id)
 	{
 		$student = Student::find($id);
-        return view('student/studentInfo');
+        return view('student/studentInfo', ['student'=>$student]);
 	}
 
 	/**
@@ -86,6 +88,24 @@ class StudentController extends Controller {
 	{
 		//
 	}
+
+    public function predmetnik($id)
+    {
+        $student = Student::find($id);
+        if(!is_null($student)){
+            $predmeti = $student->trenutniPredmeti();
+            $program = $student->trenutniProgram();
+            if(!is_null($program)){
+                $vrsta_vpisa = VrstaVpisa::find($program->pivot->vrsta_vpisa);
+            }else{
+                $vrsta_vpisa = null;
+            }
+
+            return view('studentPredmetnik', ['student'=>$student, 'predmeti'=>$predmeti, 'program'=>$program, 'vrsta_vpisa'=>$vrsta_vpisa]);
+        }
+        return \Redirect::back();
+
+    }
 
 	/**
 	 * Remove the specified resource from storage.

@@ -17,6 +17,7 @@
             <th>Student</th>
             <th>Program</th>
             <th>Letnik</th>
+            <th>Predmetnik</th>
             <th>Vrsta vpisa</th>
             <th>Nacin studija</th>
             <th>Studijsko leto</th>
@@ -28,9 +29,10 @@
         @foreach($vloge as $vloga)
             <tr>
                 <td>{{ $vloga->id }}</td>
-                <td>{{ $vloga->student->ime }} {{ $vloga->student->priimek }}</td>
-                <td>{{ $vloga->studijski_program->ime }}</td>
+                <td><a href="{{ action('StudentController@show', ['id'=>$vloga->student->id]) }}">{{ $vloga->student->ime }} {{ $vloga->student->priimek }}</a></td>
+                <td><a href="{{ action('StudijskiProgramController@show', ['id'=>$vloga->studijski_program->id])}}">{{ $vloga->studijski_program->ime }}</a></td>
                 <td>{{ $vloga->letnik }}</td>
+                <td><a href="{{ action() }}">Ogled predmetnika</a></td>
                 <td>{{ $vloga->vrstaVpisa->ime }}</td>
                 <td>{{ $vloga->nacin_studija }}</td>
                 <td>{{ $vloga->vloga_oddana }}</td>

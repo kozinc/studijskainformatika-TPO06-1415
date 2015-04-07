@@ -21,6 +21,7 @@ Route::post('login', 'LoginController@login_handler');
 Route::post('home', 'LoginController@login_handler');
 Route::post('addnew', 'AddStudentsController@addFromText');
 Route::post('seznam', 'ListStudentsController@getStudents');
+
 Route::get('ponastavitev-gesla/{koda}', 'LoginController@passwordResetPotrditev');
 
 Route::get('nepotrjene-vloge', 'VpisniListController@nepotrjeneVloge');
@@ -54,6 +55,7 @@ Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@stor
 Route::get('studenti', 'StudentController@searchForm');
 Route::post('studenti', 'StudentController@search');
 Route::get('studenti/{id}', 'StudentController@show');
+Route::get('studenti/{id}/predmetnik', 'StudentController@predmetnik');
 
 
 
