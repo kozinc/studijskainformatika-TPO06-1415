@@ -13,8 +13,8 @@
                 {!! Form::text('username', null, array('class' => 'form-control')) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('password', 'Geslo:') !!}
-                {!! Form::text('password', null, array('class' => 'form-control')) !!}
+                <label for="password">Geslo:</label>
+                <input type="password" id="password" name="password" class="form-control" value="">
             </div>
             @if (Session::has('error'))
                 <div class="alert alert-info">{{ Session::get('error') }}</div>

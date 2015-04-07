@@ -33,7 +33,11 @@
                 <td><a href="{{ action('StudijskiProgramController@show', ['id'=>$vloga->studijski_program->id])}}">{{ $vloga->studijski_program->ime }}</a></td>
                 <td>{{ $vloga->letnik }}</td>
                 <td><a href="{{ action('StudentController@predmetnik', ['id'=>$vloga->student->id]) }}">Ogled predmetnika</a></td>
-                <td>{{ $vloga->vrstaVpisa->ime }}</td>
+                <td>
+                    @if(!is_null($vloga->vrstaVpisa))
+                        {{ $vloga->vrstaVpisa->ime }}
+                    @endif
+                </td>
                 <td>{{ $vloga->nacin_studija }}</td>
                 <td>{{ $vloga->studijsko_leto }}</td>
                 <td>{{ $vloga->vloga_oddana }}</td>
