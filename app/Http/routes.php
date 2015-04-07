@@ -22,6 +22,7 @@ Route::get('/vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniLis
 Route::post('/vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
 Route::get('/vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
 Route::post('/vpisnilistReferent/najdiStudenta', 'VpisniListReferentController@searchStudent');
+Route::post('/vpisnilistReferent/{id}/ponovi', 'VpisniListReferentController@ponoviVlogo');
 
 Route::post('login', 'LoginController@login_handler');
 Route::post('home', 'LoginController@login_handler');
