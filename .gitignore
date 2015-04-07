@@ -1,5 +1,5 @@
 /vendor
 /node_modules
 .idea
-/config/database.php
 /config/database_backup.php
+.env
