@@ -29,8 +29,8 @@ Route::post('seznam', 'ListStudentsController@getStudents');
 
 Route::get('ponastavitev-gesla/{koda}', 'LoginController@passwordResetPotrditev');
 
-Route::get('nepotrjene-vloge', 'VpisniListController@nepotrjeneVloge');
-Route::get('nepotrjene-vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
+Route::get('vloge', 'VpisniListController@seznamVlog');
+Route::get('vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
 
 
 Route::controllers([

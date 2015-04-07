@@ -12,6 +12,10 @@
             {!! Form::select('leta', $leta, $leto_id) !!}
             <br/><br/>
             {!! Form::submit('Izpiši študente', array('class' => 'btn btn-danger')) !!}
+        @if(!empty($student_list))
+            <input type="submit" class="btn" name="csv" value="Izvoz v CSV">
+            <input type="submit" class="btn" name="pdf" value="Izvoz v PDF">
+         @endif
         {!! Form::close() !!}
         <br/><br/>
         @if($student_list != '')
@@ -20,6 +24,7 @@
                 <th>Šifra</th>
                 <th>Vpisna številka</th>
                 <th>Ime</th>
+                <th>Ocena</th>
                 <th>Vrsta vpisa</th>
             </tr>
             @foreach($student_list as $s)
@@ -27,7 +32,8 @@
                     <td>{{ $s->id }}</td>
                     <td>{{ $s->vpisna }}</td>
                     <td>{{ $s->ime }} {{ $s->priimek }}</td>
-                    <td>{{ $s->vrstavpisa }}</td>
+                    <td>{{ $s->ocena }}</td>
+                    <td>{{ $vrsteVpisa->get($s->vrstavpisa)->ime }}</td>
                 </tr>
             @endforeach
         </table>

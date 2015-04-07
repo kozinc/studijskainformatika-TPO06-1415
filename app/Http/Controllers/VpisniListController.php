@@ -226,7 +226,7 @@ class VpisniListController extends Controller {
         return view ('vpisnilist', ['empty'=>0]);
     }
 
-    public function nepotrjeneVloge(){
+    public function seznamVlog(){
         $studentProgrami = StudentProgram::nepotrjeneVloge();
         //dd($studentProgrami->first());
         return view('vloge', ['vloge' => $studentProgrami]);
@@ -240,7 +240,7 @@ class VpisniListController extends Controller {
             if($status){
                 $msg = 'Vloga potrjena';
                 //return Redirect::back()->with('odgovor','Vloga potrjena');
-                return redirect('nepotrjene-vloge')->with('odgovor','Vloga potrjena');
+                return redirect('vloge')->with('odgovor','Vloga potrjena');
             }
         }
 

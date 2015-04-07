@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Helpers\ExportHelper;
+use App\Models\VrstaVpisa;
+
 class ListStudentsController extends Controller {
 
     public function __construct() {
@@ -137,6 +140,7 @@ class ListStudentsController extends Controller {
             $student_id = $s->id_studenta;
             $student = \App\Models\Student::find($student_id);
             $student['vrstavpisa'] = \App\Models\StudentProgram::where('id_studenta', $student_id)->pluck('vrsta_vpisa');
+            $student['ocena'] = $s->ocena;
             array_push($student_list, $student);
         }
 
@@ -148,7 +152,22 @@ class ListStudentsController extends Controller {
 
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
+        $vrsteVpisa = VrstaVpisa::all()->keyBy('sifra');
 
-        return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id);
+        $csv = \Input::get('csv');
+        $pdf = \Input::get('pdf');
+        if(!is_null($csv) || !is_null($pdf)){
+            $export_content = [['Šifra','Vpisna številka','Ime','Ocena','Vrsta vpisa']];
+            foreach($student_list as $s){
+                $export_content[] = [$s->id, $s->vpisna, $s->ime.' '.$s->priimek, $s->ocena, $vrsteVpisa->get($s->vrstavpisa)->ime];
+            }
+            if(!is_null($pdf)){
+                return ExportHelper::make_pdf($export_content,'Seznam vpisanih');
+            }else{
+                ExportHelper::make_csv($export_content,'Seznam vpisanih');
+            }
+        }
+
+        return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
     }
 }
