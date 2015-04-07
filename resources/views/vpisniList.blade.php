@@ -136,7 +136,7 @@
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('vrsta_vpisa', 'Vrsta vpisa:') !!}
-                            {!! Form::text('vrsta_vpisa', $programStudenta->vrsta_vpisa, array('class' => 'form-control', 'disabled')) !!}
+                            {!! Form::text('vrsta_vpisa', $vrsta_vpisa, array('class' => 'form-control', 'disabled')) !!}
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('nacin_studija', 'Način študija:') !!}
@@ -188,7 +188,7 @@
 
             {!! Form::close() !!}
         @else
-            Vloga je že oddana.
+            Vloga je oddana.
         @endif
 
     </div>
