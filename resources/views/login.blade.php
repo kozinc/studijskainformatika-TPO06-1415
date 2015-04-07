@@ -20,7 +20,8 @@
                 <div class="alert alert-info">{{ Session::get('error') }}</div>
             @endif
             {!! Form::submit('Prijava', array('class' => 'btn btn-danger')) !!}
-            <input type="submit" name="password-reset" class="btn btn-default" value="Pozabil Geslo?">
+            <input type="submit" name="password-reset" class="btn btn-default" value="Pozabil Geslo?"><br><br>
+            Ob kliku na 'Pozabil geslo?' se vam na zgoraj napisani email pošlje novo geslo.
         {!! Form::close() !!}
     </div>
 @endsection

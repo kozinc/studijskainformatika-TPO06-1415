@@ -19,8 +19,9 @@ Route::get('/vpisnilist', 'VpisniListController@obrazecVpisniList');
 Route::post('/vpisnilist', 'VpisniListController@handlerVpisniList');
 
 Route::get('/vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
-Route::post('/vpisnilistReferent', 'VpisniListReferentController@handlerVpisniList');
-Route::post('/vpisnilistReferent', 'VpisniListReferentController@searchStudent');
+Route::post('/vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
+Route::get('/vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
+Route::post('/vpisnilistReferent/najdiStudenta', 'VpisniListReferentController@searchStudent');
 
 Route::post('login', 'LoginController@login_handler');
 Route::post('home', 'LoginController@login_handler');
@@ -29,8 +30,8 @@ Route::post('seznam', 'ListStudentsController@getStudents');
 
 Route::get('ponastavitev-gesla/{koda}', 'LoginController@passwordResetPotrditev');
 
-Route::get('nepotrjene-vloge', 'VpisniListController@nepotrjeneVloge');
-Route::get('nepotrjene-vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
+Route::get('vloge', 'VpisniListController@seznamVlog');
+Route::get('vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
 
 
 Route::controllers([
