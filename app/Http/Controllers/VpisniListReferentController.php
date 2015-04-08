@@ -59,6 +59,17 @@ class VpisniListReferentController extends Controller {
         return Redirect::back();
     }
 
+    public function ponoviVlogo($id)
+    {
+        $student = Student::find($id);
+        $programStudenta = $student->studentProgram()->orderBy('id','desc')->first();
+        $programStudenta->vloga_oddana = null;
+        $programStudenta->vloga_potrjena = null;
+        $programStudenta->save();
+
+        return Redirect::back();
+    }
+
 
     public function prikaziStudenta($id)
     {

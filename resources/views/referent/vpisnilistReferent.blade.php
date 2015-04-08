@@ -207,7 +207,15 @@
                 {!! Form::close() !!}
 
             @else
-                {!!$sporocilo!!}
+                @if ($sporocilo == "Žeton študenta za vpis je izkoriščen. Ali ponovno odprem vpis?")
+                    {!!$sporocilo!!}
+                    <form method="post" action="{{ action('VpisniListReferentController@ponoviVlogo',['id'=>$student->id]) }}" class="form-horizontal">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="submit" class="btn btn-success" value="Da.">
+                    </form>
+                @else
+                    {!!$sporocilo!!}
+                @endif
             @endif
 
         @endif

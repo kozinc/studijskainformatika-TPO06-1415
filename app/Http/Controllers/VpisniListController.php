@@ -70,7 +70,7 @@ class VpisniListController extends Controller {
                 $programStudenta->nacin_studija = "redni";
                 $programStudenta->letnik = 1;
                 $programStudenta->save();
-                return view('vpisnilist',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
+                return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
                     'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('Y-m-d'), 'predmetiObvezni' => $predmetiObvezni]);
 
             }
@@ -81,14 +81,14 @@ class VpisniListController extends Controller {
                 $prviVpis = $programStudenta->where('id_programa','=',$program->id)->where('id_studenta','=', $student->id)->first();
                 $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
 
-                return view('vpisnilist',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
+                return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
                     'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
             }
 
         }
         else
         {
-            return view ('vpisnilist', ['empty' => 0]);
+            return view ('vpisniList', ['empty' => 0]);
         }
 
     }
@@ -225,11 +225,11 @@ class VpisniListController extends Controller {
         $programStudenta->vloga_oddana = date('Y-m-d');
         $programStudenta->save();
 
-        return view ('vpisnilist', ['empty'=>0]);
+        return view ('vpisniList', ['empty'=>0]);
     }
 
     public function seznamVlog(){
-        $studentProgrami = StudentProgram::nepotrjeneVloge();
+        $studentProgrami = StudentProgram::orderBy('vloga_potrjena','asc')->orderBy('studijsko_leto','desc')->get();
         //dd($studentProgrami->first());
         return view('vloge', ['vloge' => $studentProgrami]);
     }
