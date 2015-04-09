@@ -80,6 +80,7 @@ class VpisniListReferentController extends Controller {
 
             //preverimo ce obstaja zeton
             $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
+            return $programStudenta->id;
 
             if(!is_null($programStudenta))
             {
@@ -155,7 +156,7 @@ class VpisniListReferentController extends Controller {
         }
         else
         {
-            $student->datum_rojstva = $request['datum_rojstva'];
+            $student->datum_rojstva = date('Y-m-d', strtotime($request['datum_rojstva']));
         }
         if (($request['spol'] == "ženski") || ($request['spol'] == "moški"))
         {

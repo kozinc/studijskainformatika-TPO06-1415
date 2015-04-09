@@ -6,6 +6,7 @@
         @if($empty == 1)
             <div class="page-header">
                 <h1>Vpisni list</h1>
+                <h2>Obrazec za študente</h2>
             </div>
 
             @if($errors->any())
@@ -40,7 +41,7 @@
                     <div class="form-group">
                         <div class="col-lg-3">
                             <label for="datum_rojstva">Datum rojstva:</label>
-                            <input type="text" id="datum_rojstva" name="datum_rojstva" value="{{ ($student->datum_rojstva=="0000-00-00")?'':$student->datum_rojstva }}" class="form-control" placeholder="LLLL-MM-DD" >
+                            <input type="text" id="datum_rojstva" name="datum_rojstva" value="{{ ($student->datum_rojstva=="0000-00-00")?'':date('d.m.Y',strtotime($student->datum_rojstva)) }}" class="form-control" placeholder="DD.MM.LLLL" >
                         </div>
                         <div class="col-lg-3">
                             {!! Form::label('obcina_rojstva', 'Občina rojstva:') !!}
@@ -151,7 +152,7 @@
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::label('datum_prvega_vpisa', 'Datum prvega vpisa v ta program:') !!}
-                            {!! Form::text('datum_prvega_vpisa', $datum_prvega_vpisa, array('class' => 'form-control')) !!}
+                            {!! Form::text('datum_prvega_vpisa', date('d.m.Y',strtotime($datum_prvega_vpisa)), array('class' => 'form-control', 'disabled')) !!}
                         </div>
                     </div>
                 </div>

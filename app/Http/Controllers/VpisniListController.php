@@ -49,6 +49,7 @@ class VpisniListController extends Controller {
 
         //preverimo ce obstaja zeton
         $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
+        return $programStudenta->id;
 
         if(!is_null($programStudenta))
         {
@@ -71,7 +72,7 @@ class VpisniListController extends Controller {
                 $programStudenta->letnik = 1;
                 $programStudenta->save();
                 return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
-                    'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('Y-m-d'), 'predmetiObvezni' => $predmetiObvezni]);
+                    'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('d.m.Y'), 'predmetiObvezni' => $predmetiObvezni]);
 
             }
             else
@@ -118,7 +119,7 @@ class VpisniListController extends Controller {
         }
         else
         {
-            $student->datum_rojstva = $request['datum_rojstva'];
+            $student->datum_rojstva = date('Y-m-d', strtotime($request['datum_rojstva']));
         }
         if (($request['spol'] == "ženski") || ($request['spol'] == "moški"))
         {
