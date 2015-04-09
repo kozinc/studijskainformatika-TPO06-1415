@@ -16,6 +16,7 @@ class AddStudentsController extends Controller {
         $program = "";
         $email = "";
         $error = 0;
+        $no_students = 0;
 
         \DB::beginTransaction();
 
@@ -60,6 +61,7 @@ class AddStudentsController extends Controller {
                         $student -> priimek = $surname;
                         $student -> email = $email;
                         $student -> geslo = \Hash::make($password);
+                        $no_students++;
                         $student -> save();
 
                         $id = $student -> id;
@@ -100,7 +102,7 @@ class AddStudentsController extends Controller {
             \DB::rollback();
         }
         else{
-            \Session::flash("debug", "Podatki so bili uspešno shranjeni!");
+            \Session::flash("debug", "Podatki so bili uspešno shranjeni! Število vnešenih študentov: $no_students");
             \DB::commit();
         }
 
