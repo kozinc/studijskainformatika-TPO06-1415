@@ -172,7 +172,7 @@
                         <div class="form-group">
                             <div class="col-lg-3">
                                 {!! Form::label('datum_prvega_vpisa', 'Datum prvega vpisa v ta program:') !!}
-                                {!! Form::text('datum_prvega_vpisa', ($datum_prvega_vpisa=="01.01.1970")?'':date('d.m.Y',strtotime($datum_prvega_vpisa)), array('class' => 'form-control')) !!}
+                                {!! Form::text('datum_prvega_vpisa', ($datum_prvega_vpisa==null)?'':date('d.m.Y',strtotime($datum_prvega_vpisa)), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                     </div>

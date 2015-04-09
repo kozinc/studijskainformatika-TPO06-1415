@@ -80,7 +80,6 @@ class VpisniListReferentController extends Controller {
 
             //preverimo ce obstaja zeton
             $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
-            return $programStudenta->id;
 
             if(!is_null($programStudenta))
             {

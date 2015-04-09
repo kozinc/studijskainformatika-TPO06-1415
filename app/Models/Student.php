@@ -23,7 +23,7 @@ class Student extends Model {
 
     public function studentProgram()
     {
-        return $this->hasMany('App\Models\StudentProgram', 'id_studenta');
+        return $this->hasMany('App\Models\StudentProgram', 'id_studenta')->orderBy('studijsko_leto','desc');
 
     }
 

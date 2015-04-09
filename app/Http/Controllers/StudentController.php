@@ -64,7 +64,10 @@ class StudentController extends Controller {
 	public function show($id)
 	{
 		$student = Student::find($id);
-        return view('student/studentInfo', ['student'=>$student]);
+        $studentProgrami= $student->studentProgram;
+        //dd($studentProgrami);
+        $vrsteVpisa = VrstaVpisa::all();
+        return view('student/studentInfo', ['student'=>$student, 'studentProgrami'=>$studentProgrami, 'vrsteVpisa'=>$vrsteVpisa]);
 	}
 
 	/**
@@ -89,7 +92,7 @@ class StudentController extends Controller {
 		//
 	}
 
-    public function predmetnik($id)
+    public function elektronskiIndeks($id)
     {
         $student = Student::find($id);
         if(!is_null($student)){

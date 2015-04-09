@@ -68,13 +68,13 @@ class TableSeeder extends Seeder {
         ProgramLetnik::create(['id_programa'=>3, 'letnik'=>2, 'KT'=>60,'stevilo_obveznih_predmetov'=>1, 'stevilo_strokovnih_predmetov'=>6,'stevilo_prostih_predmetov'=>0, 'stevilo_modulov'=>0]);
 
         DB::table('nosilec')->truncate();
-        Nosilec::create(['id'=>1,'ime'=>'Viljan' ,'priimek'=>'Mahnič', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'viljan.mahnic@fri.uni-lj.si']);
-        Nosilec::create(['id'=>2,'ime'=>'Neža' ,'priimek'=>'Mramor Kosta', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'neza.mramor@fri.uni-lj.si']);
-        Nosilec::create(['id'=>3,'ime'=>'Gašper' ,'priimek'=>'Fijavž', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'gasper.fijavz@fri.uni-lj.si']);
-        Nosilec::create(['id'=>4,'ime'=>'Matjaž' ,'priimek'=>'Branko Jurič', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mazjaz.juric@fri.uni-lj.si']);
-        Nosilec::create(['id'=>5,'ime'=>'Aleš' ,'priimek'=>'Smrdel', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'ales.smrdel@fri.uni-lj.si']);
-        Nosilec::create(['id'=>6,'ime'=>'Franc' ,'priimek'=>'Solina', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'franc.solina@fri.uni-lj.si']);
-        Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>'', 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
+        Nosilec::create(['id'=>1,'ime'=>'Viljan' ,'priimek'=>'Mahnič', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('viljanmahnic'), 'email'=>'viljan.mahnic@fri.uni-lj.si']);
+        Nosilec::create(['id'=>2,'ime'=>'Neža' ,'priimek'=>'Mramor Kosta', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('nezamramorkosta'), 'email'=>'neza.mramor@fri.uni-lj.si']);
+        Nosilec::create(['id'=>3,'ime'=>'Gašper' ,'priimek'=>'Fijavž', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('gasperfijavz'), 'email'=>'gasper.fijavz@fri.uni-lj.si']);
+        Nosilec::create(['id'=>4,'ime'=>'Matjaž' ,'priimek'=>'Branko Jurič', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('matjazbrankojuric'), 'email'=>'mazjaz.juric@fri.uni-lj.si']);
+        Nosilec::create(['id'=>5,'ime'=>'Aleš' ,'priimek'=>'Smrdel', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('alessmrdel'), 'email'=>'ales.smrdel@fri.uni-lj.si']);
+        Nosilec::create(['id'=>6,'ime'=>'Franc' ,'priimek'=>'Solina', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('francsolina'), 'email'=>'franc.solina@fri.uni-lj.si']);
+        Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('matejadrnovsek'), 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
 
         DB::table('student_predmet')->truncate();
         StudentPredmet::create(['id'=>1, 'id_studenta'=>1, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
