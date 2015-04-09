@@ -170,4 +170,21 @@ class ListStudentsController extends Controller {
 
         return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
     }
+
+    public function getPotrdilo($id){
+
+        $student =  \App\Models\Student::find($id);
+        $student_program = \App\Models\StudentProgram::where('id_studenta', $id)->first();
+        $id_programa = $student_program->id_programa;
+        $program = \App\Models\StudijskiProgram::where('id', $id_programa)->first();
+
+        $danes = date('d.m.Y');
+        $datum_rojstva = $student->datum_rojstva;
+        $datum_rojstva = date("d.m.Y", strtotime($datum_rojstva));
+        return \View::make('potrdiloVpis')->with('date', $danes)->with('ime', $student->ime)->with('priimek', $student->priimek)->with('vpisna', $student->vpisna)->with('datum_rojstva', $datum_rojstva)->with('kraj_rojstva', $student->obcina_rojstva)->with('letnik', $student_program->letnik)->with('studijsko_leto', $student_program->studijsko_leto)->with('vrsta_vpisa', $student_program->nacin_studija)->with('program', $program->ime);
+    }
+
+    public function returnBack(){
+        return view('student/iskanjeStudenta');
+    }
 }

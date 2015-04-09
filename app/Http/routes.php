@@ -18,6 +18,8 @@ Route::get('seznam', 'ListStudentsController@get_all_students');
 Route::get('vpisnilist', 'VpisniListController@obrazecVpisniList');
 Route::post('vpisnilist', 'VpisniListController@handlerVpisniList');
 
+Route::get('potrdiloVpis', 'ListStudentsController@getPotrdilo');
+
 Route::get('vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
 Route::post('vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
 Route::get('vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
@@ -61,6 +63,8 @@ Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@stor
 
 Route::get('studenti', 'StudentController@searchForm');
 Route::post('studenti', 'StudentController@search');
+Route::get('potrdilo/{id}', 'ListStudentsController@getPotrdilo');
+Route::get('studenti', 'ListStudentsController@returnBack');
 Route::get('studenti/{id}', 'StudentController@show');
 Route::get('studenti/{id}/predmetnik', 'StudentController@predmetnik');
 

@@ -16,6 +16,7 @@
             <th>Priimek</th>
             <th>Email</th>
             <th>Telefonska številka</th>
+            <th></th>
         </tr>
         @if(isset($studenti))
             @foreach($studenti as $student)
@@ -25,6 +26,7 @@
                     <td><a href="{{ action('StudentController@show',['id'=>$student->id]) }}">{{ $student->priimek }}</a></td>
                     <td>{{ $student->email }}</td>
                     <td>{{ $student->telefon }}</td>
+                    <td><a href="{{ action('ListStudentsController@getPotrdilo',['id'=>$student->id]) }}">Natisni potrdilo o vpisu</a></td>
                 </tr>
             @endforeach
         @endif
