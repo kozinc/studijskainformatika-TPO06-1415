@@ -69,22 +69,30 @@ class LoginController extends Controller {
 
         $user = \App\Models\Student::where('email', $this_username)->first();
         $referent = \App\Models\Referent::where('email', $this_username)->first();
+        $nosilec = \App\Models\Nosilec::where('email', $this_username)->first();
 
-        if(is_null($user) && is_null($referent)){
+        if(is_null($user) && is_null($referent) && is_null($nosilec)){
             \Session::flash("error", "Uporabnik s takšnim e-mailom ne obstaja!");
             $this->add_to_session();
             return redirect()->back();
         }
 
-        if(is_null($user)){
+        if(is_null($user) && is_null($nosilec)){
             if(!\Hash::check($this_password, $referent->geslo)){
                 \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
                 $this->add_to_session();
                 return redirect()->back();
             }
         }
-        else {
+        else if(is_null($referent) && is_null($nosilec)){
             if(!\Hash::check($this_password, $user->geslo)){
+                \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
+                $this->add_to_session();
+                return redirect()->back();
+            }
+        }
+        else {
+            if(!\Hash::check($this_password, $nosilec->geslo)){
                 \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
                 $this->add_to_session();
                 return redirect()->back();
