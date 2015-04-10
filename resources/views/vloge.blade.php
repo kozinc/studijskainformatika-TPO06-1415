@@ -49,6 +49,11 @@
                         <p>Potrjeno</p>
                     @endif
                 </td>
+                <td>
+                    @if ($vloga->vloga_potrjena)
+                        <a href="{{ action('ListStudentsController@getPotrdilo',['id'=>$vloga->student->id]) }}">Natisni potrdilo o vpisu</a>
+                    @endif
+                </td>
             </tr>
         @endforeach
     </table>
