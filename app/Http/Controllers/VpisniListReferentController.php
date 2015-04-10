@@ -51,7 +51,10 @@ class VpisniListReferentController extends Controller {
 
     public function searchStudent(Request $request)
     {
-        $student = Student::where('email', '=', $request['iskalni_niz'])->first();
+        $search = $request['iskalni_niz'];
+        $student = Student::where('vpisna', 'LIKE', '%'.$search.'%')->orWhere('ime', 'LIKE', $search.'%')->orWhere('priimek', 'LIKE', $search.'%')->first();
+
+
         if (!is_null($student))
         {
             return Redirect('/vpisnilistReferent/'.$student->id);
@@ -97,22 +100,24 @@ class VpisniListReferentController extends Controller {
                     $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',1);
                     $programStudenta->vrsta_vpisa = 1;
                     $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();
+                    $vrste_vpisa = VrstaVpisa::all();
                     $programStudenta->nacin_studija = "redni";
                     $programStudenta->letnik = 1;
                     $programStudenta->save();
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty'=>1, 'programStudenta'=>$programStudenta,
-                        'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('Y-m-d'), 'predmetiObvezni' => $predmetiObvezni]);
+                        'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('Y-m-d'), 'predmetiObvezni' => $predmetiObvezni]);
 
                 }
                 else
                 {
                     $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();
                     $program = StudijskiProgram::find($programStudenta->id_programa);
+                    $vrste_vpisa = VrstaVpisa::all();
                     $prviVpis = $programStudenta->where('id_programa','=',$program->id)->where('id_studenta','=', $student->id)->first();
                     $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
 
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta,
-                        'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
+                        'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
                 }
             }
             else
@@ -259,6 +264,9 @@ class VpisniListReferentController extends Controller {
         $student->save();
 
         //oznacimo, da je zeton izkoriscen
+
+        $programStudenta->vrsta_vpisa = $request['vrsta_vpisa'];
+        $programStudenta->nacin_studija = $request['nacin_studija'];
         $programStudenta->vloga_oddana = date('Y-m-d');
         $programStudenta->vloga_potrjena = date('Y-m-d');
         $programStudenta->datum_vpisa = date('Y-m-d');

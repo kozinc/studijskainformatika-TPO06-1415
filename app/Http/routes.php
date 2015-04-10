@@ -67,6 +67,8 @@ Route::get('potrdilo/{id}', 'ListStudentsController@getPotrdilo');
 Route::get('potrdilo', 'ListStudentsController@getPotrdila');
 Route::get('studenti', 'ListStudentsController@returnBack');
 Route::get('studenti/{id}', 'StudentController@show');
+Route::get('studenti/{id}/nov-zeton', 'StudentController@novZeton');
+Route::post('studenti/{id}/nov-zeton', 'StudentController@ustvariNovZeton');
 Route::get('studenti/{idStudenta}/indeks/{idStudentProgram}', 'StudentController@elektronskiIndeks');
 
 

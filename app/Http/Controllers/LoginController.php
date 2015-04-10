@@ -103,7 +103,7 @@ class LoginController extends Controller {
 
         if (substr(\Session::get('session_id'), strlen(\Session::get('session_id')) - 14) == "@fri.uni-lj.si" )
         {
-            return Redirect(action('VpisniListReferentController@obrazecVpisniList'));
+            return Redirect(action('StudentController@searchForm'));
         }
         else
         {

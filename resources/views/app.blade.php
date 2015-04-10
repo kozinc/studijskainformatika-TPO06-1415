@@ -27,9 +27,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a>
                 </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ action('VpisniListReferentController@obrazecVpisniList') }}">Vpisni list</a>
-                </div>
+
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a>
                 </div>

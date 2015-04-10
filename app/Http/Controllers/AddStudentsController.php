@@ -54,8 +54,7 @@ class AddStudentsController extends Controller {
                     if ($error == 0) {
 
 
-                        $password = str_random(8);
-
+                        $password = strtolower($name.$surname);
                         $student = new \App\Models\Student;
                         $student -> ime = $name;
                         $student -> priimek = $surname;
