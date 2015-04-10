@@ -2,23 +2,21 @@ $(document).ready(function(){
 
     $('.jqueryte').jqte();
 
-   /* $('#iskalnik_studentov').on('change', function(){
+    $('#studijski_program_ajax').change(function(){
+        var kraj_izvajanja = $('option:selected', this).data('kraj_izvajanja');
+        var oznaka = $('option:selected', this).data('oznaka');
+        var stopnja = $('option:selected', this).data('stopnja');
+        var trajanje = $('option:selected', this).data('trajanje_leta');
+        $('#oznaka').html(oznaka);
+        $('#kraj_izvajanja').html(kraj_izvajanja);
+        $('#stopnja').html(stopnja);
 
-        var search = $(this).val();
-        if(search.length > 1){
-            $.ajax({
-                type: 'POST',
-                url: $('#iskalnik_studentov_form').attr('action'),
-                data: '_token='+$('#_token').val()+'&data='+search+'&return_type=json',
-                success: function(data) {
-                    alert(data);
-                },
-                fail: function(error){
-                    alert(error);
-                }
-            });
+        if(trajanje<3){
+            $('#letnik-3').hide();
+        }else{
+            $('#letnik-3').show();
         }
-    }); */
+    });
 
     $('#printMe').click(function(){
         window.print();

@@ -17,7 +17,6 @@
             <th>Student</th>
             <th>Program</th>
             <th>Letnik</th>
-            <th>Predmetnik</th>
             <th>Vrsta vpisa</th>
             <th>Nacin studija</th>
             <th>Studijsko leto</th>
@@ -32,7 +31,6 @@
                 <td><a href="{{ action('StudentController@show', ['id'=>$vloga->student->id]) }}">{{ $vloga->student->ime }} {{ $vloga->student->priimek }}</a></td>
                 <td><a href="{{ action('StudijskiProgramController@show', ['id'=>$vloga->studijski_program->id])}}">{{ $vloga->studijski_program->ime }}</a></td>
                 <td>{{ $vloga->letnik }}</td>
-                <td><a href="{{ action('StudentController@predmetnik', ['id'=>$vloga->student->id]) }}">Ogled predmetnika</a></td>
                 <td>
                     @if(!is_null($vloga->vrstaVpisa))
                         {{ $vloga->vrstaVpisa->ime }}

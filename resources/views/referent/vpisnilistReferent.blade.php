@@ -4,24 +4,25 @@
 
     <div class="container jumbotron">
 
+        <div class="page-header">
+            <h1>Vpisni list</h1>
+            <h2>Obrazec za referenta</h2>
+            <h3>Po vpisu študenta bo vpis samodejno potrjen.</h3>
+        </div>
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                {{$errors->first()}}
+            </div>
+        @endif
+
 
         @if($studentNajden == 0)
-            <div class="page-header">
-                <h1>Vpisni list</h1>
-                <h3>Prosimo, da pred vpisom študentu omogočite vpis pod rubriko <em>Omogoči vpis.</em></h3>
-                <h3>Po vpisu študenta bo vpis samodejno potrjen.</h3>
-            </div>
-            @if($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    {{$errors->first()}}
-                </div>
-            @endif
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="form-group">
                         <div class="col-lg-3">
                             {!! Form::open( array('action' => 'VpisniListReferentController@searchStudent', 'method'=>'post', 'class' => 'form-horizontal')) !!}
-                            {!! Form::label('iskalni_niz', 'Email študenta:') !!}
+                            {!! Form::label('iskalni_niz', 'Ime in priimek ali vpisna številka:') !!}
                             {!! Form::text('iskalni_niz', null, array('class' => 'form-control')) !!} <br>
                             {!! Form::submit('Išči.', array('class' => 'btn btn-default')) !!}
                             {!! Form::close() !!}
@@ -32,16 +33,6 @@
         @else
 
             @if($empty == 1)
-                <div class="page-header">
-                    <h1>Vpisni list</h1>
-                    <h3>Prosimo, da pred vpisom študentu omogočite vpis pod rubriko <em>Omogoči vpis.</em></h3>
-                    <h3>Po vpisu študenta bo vpis samodejno potrjen.</h3>
-                </div>
-                @if($errors->any())
-                    <div class="alert alert-danger" role="alert">
-                        {{$errors->first()}}
-                    </div>
-                @endif
 
                 {!! Form::open( array('action' => 'VpisniListReferentController@handlerVpisniList', 'method'=>'post', 'class' => 'form-horizontal')) !!}
                 <input type="hidden" name="id" value="{{ $programStudenta->id }}">
@@ -68,7 +59,7 @@
                         <div class="form-group">
                             <div class="col-lg-3">
                                 <label for="datum_rojstva">Datum rojstva:</label>
-                                <input type="text" id="datum_rojstva" name="datum_rojstva" value="{{ ($student->datum_rojstva=="0000-00-00")?'':$student->datum_rojstva }}" class="form-control" placeholder="LLLL-MM-DD" >
+                                <input type="text" id="datum_rojstva" name="datum_rojstva" value="{{ ($student->datum_rojstva=="0000-00-00")?'':date('d.m.Y',strtotime($student->datum_rojstva)) }}" class="form-control" placeholder="DD.MM.LLLL" >
                             </div>
                             <div class="col-lg-3">
                                 {!! Form::label('obcina_rojstva', 'Občina rojstva:') !!}
@@ -155,10 +146,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 {!! Form::label('vrsta_vpisa', 'Vrsta vpisa:') !!}
-                                {!! Form::text('vrsta_vpisa', $vrsta_vpisa, array('class' => 'form-control')) !!}
+                                <div class="btn btn-default dropdown-toggle">
+                                    <select name="vrsta_vpisa">
+                                        @foreach($vrste_vpisa as $vp)
+                                            <option value="{{ $vp->sifra }}" @if($vp->sifra == $programStudenta->vrsta_vpisa) {{ 'selected' }} @endif>
+                                                {{ $vp->ime }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-lg-3">
                                 {!! Form::label('nacin_studija', 'Način študija:') !!}
                                 {!! Form::text('nacin_studija', $programStudenta->nacin_studija, array('class' => 'form-control')) !!}
@@ -172,7 +173,7 @@
                         <div class="form-group">
                             <div class="col-lg-3">
                                 {!! Form::label('datum_prvega_vpisa', 'Datum prvega vpisa v ta program:') !!}
-                                {!! Form::text('datum_prvega_vpisa', $datum_prvega_vpisa, array('class' => 'form-control')) !!}
+                                {!! Form::text('datum_prvega_vpisa', ($datum_prvega_vpisa==null)?'':date('d.m.Y',strtotime($datum_prvega_vpisa)), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                     </div>

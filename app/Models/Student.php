@@ -6,7 +6,7 @@ use App\Helpers\MailHelper;
 class Student extends Model {
 
     protected $table = 'student';
-    protected $fillable = ['vpisna', 'ime', 'priimek', 'email', 'geslo', 'emso', 'naslov', 'obcina', 'posta', 'drzava', 'datum_rojstva', 'obcina_rojstva', 'drzava_rojstva', 'davcna', 'drzavljanstvo', 'spol', 'telefon'];
+    protected $fillable = ['vpisna', 'ime', 'priimek', 'email', 'geslo', 'emso', 'naslov', 'obcina', 'posta', 'drzava', 'naslovPosta', 'obcinaPosta', 'postaPosta', 'drzavaPosta', 'datum_rojstva', 'obcina_rojstva', 'drzava_rojstva', 'davcna', 'drzavljanstvo', 'spol', 'telefon'];
     protected $guarded = ['id', 'ponastavitev_gesla', 'novo_geslo'];
 
     public $timestamps = false;
@@ -23,7 +23,7 @@ class Student extends Model {
 
     public function studentProgram()
     {
-        return $this->hasMany('App\Models\StudentProgram', 'id_studenta');
+        return $this->hasMany('App\Models\StudentProgram', 'id_studenta')->orderBy('studijsko_leto','desc');
 
     }
 

@@ -1,8 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use App\Helpers\DateHelper;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\StudentProgram;
+use App\Models\StudijskiProgram;
 use App\Models\VrstaVpisa;
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -35,6 +38,53 @@ class StudentController extends Controller {
 
     }
 
+    public function novZeton($id){
+        $student = Student::find($id);
+        $vrsteVpisa = VrstaVpisa::all();
+        $programi = StudijskiProgram::all();
+        return view('/referent/novVpisniList',['student'=>$student ,'vrste_vpisa'=>$vrsteVpisa, 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>null,
+            'programi'=>$programi, 'datum_prvega_vpisa' => '']);
+    }
+
+    public function ustvariNovZeton($id, Request $r)
+    {
+        $student = Student::find($id);
+        if(!is_null($student))
+        {
+            $programStudent = new StudentProgram();
+            $programStudent->id_studenta = $student->id;
+            $studijskiProgram = StudijskiProgram::find($r['studijski_program']);
+            if(!is_null($studijskiProgram)){
+                $programStudent->id_programa = $studijskiProgram->id;
+            }else{
+                return Redirect::back()->withErrors('Študijski program ne obstaja!');
+            }
+            if((int)$r['letnik'] > 0 && (int)$r['letnik']<= $studijskiProgram->trajanje_leta){
+                $programStudent->letnik = (int)$r['letnik'];
+            }else{
+                return Redirect::back()->withErrors('Letnik se ne ujemas programom!');
+            }
+            $programStudent->nacin_studija = $r['nacin_studija'];
+            $programStudent->vrsta_vpisa = (int)$r['vrsta_vpisa'];
+            $studijsko_leto = DateHelper::studijskoLeto($r['studijsko_leto']);
+            if(!empty($studijsko_leto)) {
+                $programStudent->studijsko_leto = $r['studijsko_leto'];
+            }else{
+                return Redirect::back()->withErrors('Študijsko leto je v napačnem formatu!');
+            }
+            $programStudent->datum_vpisa = date('Y-m-d',strtotime($r['datum_vpisa']));
+            if($r['prosta_izbira']){
+                $programStudent->prosta_izbira = 1;
+            }else{
+                $programStudent->prosta_izbira = 0;
+            }
+            $programStudent->save();
+
+            return Redirect( action('StudentController@show', ['id'=>$student->id]));
+        }
+        return Redirect::back()->withErrors('Študent ne obstaja');
+    }
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -64,7 +114,10 @@ class StudentController extends Controller {
 	public function show($id)
 	{
 		$student = Student::find($id);
-        return view('student/studentInfo', ['student'=>$student]);
+        $studentProgrami= $student->studentProgram;
+        //dd($studentProgrami);
+        $vrsteVpisa = VrstaVpisa::all();
+        return view('student/studentInfo', ['student'=>$student, 'studentProgrami'=>$studentProgrami, 'vrsteVpisa'=>$vrsteVpisa]);
 	}
 
 	/**
@@ -89,7 +142,7 @@ class StudentController extends Controller {
 		//
 	}
 
-    public function predmetnik($id)
+    public function elektronskiIndeks($id)
     {
         $student = Student::find($id);
         if(!is_null($student)){

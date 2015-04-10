@@ -3,21 +3,17 @@
 @section('content')
 
     <div class="container jumbotron">
-        @if($empty == 1)
-            <div class="page-header">
-                <h1>Vpisni list</h1>
-                <h2>Obrazec za študente</h2>
+
+        <div class="page-header">
+            <h1>Žeton za vpis</h1>
+        </div>
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                {{$errors->first()}}
             </div>
-
-            @if($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    {{$errors->first()}}
-                </div>
-            @endif
-
-
-           {!! Form::open( array('action' => 'VpisniListController@handlerVpisniList', 'method'=>'post', 'class' => 'form-horizontal')) !!}
-            <input type="hidden" name="id" value="{{ $programStudenta->id }}">
+        @endif
+        <form action="{{ action('StudentController@ustvariNovZeton',['id'=>$student->id]) }}" method="post" class="form-horizontal">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <input type="hidden" name="id_studenta" value="{{ $student->id }}">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -84,36 +80,6 @@
                             {!! Form::text('drzava', $student->drzava, array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-lg-3">
-                            {!! Form::label('drzavljanstvo', 'Državljanstvo:') !!}
-                            {!! Form::text('drzavljanstvo', $student->drzavljanstvo, array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Naslov za pošiljanje</h2>
-                    <div class="form-group">
-                        <div class="col-lg-3">
-                            {!! Form::label('naslovPosta', 'Naslov:') !!}
-                            {!! Form::text('naslovPosta', $student->naslovPosta, array('class' => 'form-control')) !!}
-                        </div>
-                        <div class="col-lg-3">
-                            {!! Form::label('obcinaPosta', 'Občina:') !!}
-                            {!! Form::text('obcinaPosta', $student->obcinaPosta, array('class' => 'form-control')) !!}
-                        </div>
-                        <div class="col-lg-3">
-                            {!! Form::label('postaPosta', 'Poštna številka:') !!}
-                            {!! Form::text('postaPosta', $student->postaPosta, array('class' => 'form-control')) !!}
-                        </div>
-                        <div class="col-lg-3">
-                            {!! Form::label('drzavaPosta', 'Država:') !!}
-                            {!! Form::text('drzavaPosta', $student->drzavaPosta, array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -132,89 +98,77 @@
                     </div>
                 </div>
             </div>
-
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2>Podatki o vpisu</h2>
+                    <label for="studijsko_leto">Študijsko leto</label>
+                    <input type="text" id="studijsko_leto" name="studijsko_leto" placeholder="yyyy/yyyy">
+                    <label for="studijski_program_ajax">Študijski program</label>
+                        <select name="studijski_program" id="studijski_program_ajax">
+                            <option value="0" data-oznaka="" data-stopnja="" data-kraj_izvajanja="" data-trajanje_leta="" >---izberi študijski program---</option>
+                            @foreach($programi as $pr)
+                                <option value="{{ $pr->id }}" data-oznaka="{{ $pr->oznaka }}" data-stopnja="{{ $pr->stopnja }}" data-trajanje_leta="{{ $pr->trajanje_leta }}" data-kraj_izvajanja="{{ $pr->kraj_izvajanja }}">
+                                    {{ $pr->ime }}
+                                </option>
+                            @endforeach
+                        </select>
                     <div class="form-group">
-                        <div class="col-lg-6">
-                            {!! Form::label('studijski_program', 'Študijski program:') !!}
-                            {!! Form::text('studijski_program', $program->ime, array('class' => 'form-control','disabled')) !!}
+                        <div class="col-lg-3">
+                            <label>Oznaka:</label>
+                            <span id="oznaka"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Stopnja:</label>
+                            <span id="stopnja"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-3">
-                            {!! Form::label('oznaka', 'Oznaka:') !!}
-                            {!! Form::text('oznaka', $program->oznaka, array('class' => 'form-control','disabled')) !!}
-                        </div>
-                        <div class="col-lg-3">
-                            {!! Form::label('stopnja', 'Stopnja:') !!}
-                            {!! Form::text('stopnja', $program->stopnja, array('class' => 'form-control','disabled')) !!}
+                            <label>Kraj izvajanja:</label>
+                            <span id="kraj_izvajanja"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-3">
-                            {!! Form::label('kraj_izvajanja', 'Kraj izvajanja:') !!}
-                            {!! Form::text('kraj_izvajanja', $program->kraj_izvajanja, array('class' => 'form-control','disabled')) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             {!! Form::label('vrsta_vpisa', 'Vrsta vpisa:') !!}
-                            {!! Form::text('vrsta_vpisa', $vrsta_vpisa, array('class' => 'form-control', 'disabled')) !!}
-                        </div>
-                        <div class="col-lg-3">
-                            {!! Form::label('nacin_studija', 'Način študija:') !!}
-                            {!! Form::text('nacin_studija', $programStudenta->nacin_studija, array('class' => 'form-control', 'disabled')) !!}
-                        </div>
-                        <div class="col-lg-3">
-                            {!! Form::label('letnik', 'Letnik:') !!}
-                            <input type="text" name="letnik" value="{{ $programStudenta->letnik}}" class="form-control" disabled>
-
+                            <div class="btn btn-default dropdown-toggle">
+                                <select name="vrsta_vpisa">
+                                    @foreach($vrste_vpisa as $vp)
+                                        <option value="{{ $vp->sifra }}">
+                                            {{ $vp->ime }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
+                         <select name="nacin_studija">
+                             <option value="redni">Redni</option>
+                             <option value="izredni">Izredni</option>
+                         </select>
+                        <label for="letnik">Letnik:</label>
+                        <select name="letnik" id="letnik">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option id="letnik-3" value="3">3</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
                         <div class="col-lg-3">
-                            {!! Form::label('datum_prvega_vpisa', 'Datum prvega vpisa v ta program:') !!}
-                            {!! Form::text('datum_prvega_vpisa', ($datum_prvega_vpisa==null)?'':date('d.m.Y',strtotime($datum_prvega_vpisa)), array('class' => 'form-control', 'disabled')) !!}
+                            <label for="datum_prvega_vpisa">Datum prvega vpisa:</label>
+                            <input type="text" name="datum_prvega_vpisa" id="datum_prvega_vpisa" placeholder="dd.mm.yyyy" value="">
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Predmeti</h2>
-                    <table class="table">
-                        <tr>
-                            <th>Obvezni predmeti</th>
-                        </tr>
-                        @foreach($predmetiObvezni->get() as $predmet)
-                            <tr>
-                                <td>{{ $predmet->naziv }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                    <table class="table">
-                        <tr>
-                            <th>Izbirni predmeti</th>
-                        </tr>
-
-                    </table>
-                </div>
-            </div>
-
-
 
             @if (Session::has('error'))
                 <div class="alert alert-info">{{ Session::get('error') }}</div>
             @endif
-            {!! Form::submit('Pošlji vpisni list.', array('class' => 'btn btn-success')) !!}
-
-            {!! Form::close() !!}
-        @else
-            Vloga je oddana.
-        @endif
-
+            <input type="submit" value="Shrani žeton" class="btn btn-success">
+        </form>
     </div>
+
 @endsection
