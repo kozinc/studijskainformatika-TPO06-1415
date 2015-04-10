@@ -30,10 +30,11 @@ class CreateStudentTable extends Migration {
             $table->string('obcina');
             $table->integer('posta');
             $table->string('drzava');
-            $table->string('naslovPosta');
-            $table->string('obcinaPosta');
-            $table->integer('postaPosta');
-            $table->string('drzavaPosta');
+            $table->string('naslovZacasni');
+            $table->string('obcinaZacasni');
+            $table->integer('postaZacasni');
+            $table->string('drzavaZacasni');
+            $table->integer('posiljanje');
             $table->date('datum_rojstva');
             $table->string('obcina_rojstva');
             $table->string('drzava_rojstva');
