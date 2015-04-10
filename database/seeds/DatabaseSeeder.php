@@ -45,6 +45,22 @@ class TableSeeder extends Seeder {
         Student::create(['vpisna' => '63150000', 'ime' => 'Miha', 'priimek' => 'Vesel', 'email' => 'mihavesel@gmail.com','geslo' => \Hash::make('mihavesel'), 'emso' => '2207994500234', 'posta' => '3000', 'datum_rojstva' => '1994-07-22', 'obcina_rojstva' => 'Celje']);
         Student::create(['vpisna' => '63150001', 'ime' => 'Samo', 'priimek' => 'Veter', 'email' => 'samoveter@gmail.com','geslo' => \Hash::make('samoveter'), 'emso' => '0707994500334', 'posta' => '1000', 'datum_rojstva' => '1994-07-07', 'obcina_rojstva' => 'Ljubljana']);
 
+        Student::create(['ime' => 'Luka', 'priimek' => 'Mustaš', 'email' => 'janezmustas@gmail.com','geslo' => \Hash::make('janezmustas'), 'emso' => '2006995500434', 'posta' => '1000', 'datum_rojstva' => '1995-06-20', 'obcina_rojstva' => 'Ljubljana']);
+
+        Student::create(['vpisna' => '63150002', 'ime' => 'Janez', 'priimek' => 'Mustaš', 'email' => 'janezmustas@gmail.com','geslo' => \Hash::make('janezmustas'), 'emso' => '0806994500434', 'posta' => '1000', 'datum_rojstva' => '1994-06-08', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63150003', 'ime' => 'Marko', 'priimek' => 'Petač', 'email' => 'markopetac@gmail.com','geslo' => \Hash::make('markopetac'), 'emso' => '0806994500534', 'posta' => '1000', 'datum_rojstva' => '1994-06-08', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63150004', 'ime' => 'Ivanka', 'priimek' => 'Uhan', 'email' => 'ivankauhan@gmail.com','geslo' => \Hash::make('ivankauhan'), 'emso' => '0101994505535', 'posta' => '1000', 'datum_rojstva' => '1994-01-01', 'obcina_rojstva' => 'Ljubljana']);
+
+        Student::create(['vpisna' => '63140014', 'ime' => 'Jagoda', 'priimek' => 'Lipoglavšek', 'email' => 'jagodalipoglavsek@gmail.com','geslo' => \Hash::make('ivankauhan'), 'emso' => '0101993505535', 'posta' => '1000', 'datum_rojstva' => '1993-01-01', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63140015', 'ime' => 'Gregor', 'priimek' => 'Ivanec', 'email' => 'gregorivanec@gmail.com','geslo' => \Hash::make('gregorivanec'), 'emso' => '0110993500559', 'posta' => '1000', 'datum_rojstva' => '1993-10-01', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63140016', 'ime' => 'Jurij', 'priimek' => 'Opeka', 'email' => 'jurijopeka@gmail.com','geslo' => \Hash::make('jurijopeka'), 'emso' => '0110993500537', 'posta' => '1000', 'datum_rojstva' => '1993-10-01', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63140017', 'ime' => 'Nikolaj', 'priimek' => 'Mulec', 'email' => 'nikolajmulec@gmail.com','geslo' => \Hash::make('nikolajmulec'), 'emso' => '1911993505935', 'posta' => '1000', 'datum_rojstva' => '1993-11-19', 'obcina_rojstva' => 'Ljubljana']);
+
+        Student::create(['vpisna' => '63130007', 'ime' => 'Arnold', 'priimek' => 'Schwartzeneger', 'email' => 'arnoldschwartzeneger@gmail.com','geslo' => \Hash::make('arnoldschwartzeneger'), 'emso' => '1901993505935', 'posta' => '1000', 'datum_rojstva' => '1992-01-19', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63130008', 'ime' => 'Evelyn', 'priimek' => 'Borin', 'email' => 'evelynborin@gmail.com','geslo' => \Hash::make('evelynborin'), 'emso' => '1902993505935', 'posta' => '1000', 'datum_rojstva' => '1992-02-19', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63130009', 'ime' => 'Miha', 'priimek' => 'Dlan', 'email' => 'mihadlan@gmail.com','geslo' => \Hash::make('mihadlan'), 'emso' => '1903993505935', 'posta' => '1000', 'datum_rojstva' => '1992-03-19', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63130010', 'ime' => 'Rok', 'priimek' => 'Pogorelec', 'email' => 'rokpogorelec@gmail.com','geslo' => \Hash::make('rokpogorelec'), 'emso' => '1904993505935', 'posta' => '1000', 'datum_rojstva' => '1992-04-19', 'obcina_rojstva' => 'Ljubljana']);
+        Student::create(['vpisna' => '63120012', 'ime' => 'Štefan', 'priimek' => 'Zimic', 'email' => 'stefanzimic@gmail.com','geslo' => \Hash::make('stefanzimic'), 'emso' => '1905993505935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana']);
 
 
         DB::table('studijski_program')->truncate();
@@ -115,6 +131,21 @@ class TableSeeder extends Seeder {
         DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2013-09-20', 'vloga_potrjena'=>'2014-09-25', 'datum_vpisa'=>'2014-09-25', 'studijsko_leto'=>'2013/2014', 'letnik'=>2 ]);
         DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>3 ]);
         DB::table('student_program')->insert(['id_studenta'=>2, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2015-04-01', 'vloga_potrjena'=>null, 'datum_vpisa'=>null, 'studijsko_leto'=>'2015/2016', 'letnik'=>1 ]);
+
+        DB::table('student_program')->insert(['id_studenta'=>6, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>1 ]);
+        DB::table('student_program')->insert(['id_studenta'=>7, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>1 ]);
+        DB::table('student_program')->insert(['id_studenta'=>8, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>1 ]);
+
+        DB::table('student_program')->insert(['id_studenta'=>9, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);
+        DB::table('student_program')->insert(['id_studenta'=>10, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);
+        DB::table('student_program')->insert(['id_studenta'=>11, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);
+        DB::table('student_program')->insert(['id_studenta'=>12, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);
+
+        DB::table('student_program')->insert(['id_studenta'=>13, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>3 ]);
+        DB::table('student_program')->insert(['id_studenta'=>14, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>3 ]);
+        DB::table('student_program')->insert(['id_studenta'=>15, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>3 ]);
+        DB::table('student_program')->insert(['id_studenta'=>16, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>3 ]);
+        DB::table('student_program')->insert(['id_studenta'=>17, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>3 ]);
 
         DB::table('referent')->truncate();
         Referent::create(['email'=>'zdenka.velikonja@fri.uni-lj.si', 'geslo'=>Hash::make('zdenkavelikonja'), 'ime'=>'Zdenka','priimek'=>'Velikonja']);
