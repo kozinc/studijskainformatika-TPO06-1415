@@ -129,6 +129,10 @@
                         </div>
                     </div>
                     <div class="form-group">
+                       <label>Prosta izbira predmetov</label>
+                        <input type="checkbox" name="prosta_izbira">
+                    </div>
+                    <div class="form-group">
                         <div class="col-lg-2">
                             {!! Form::label('vrsta_vpisa', 'Vrsta vpisa:') !!}
                             <div class="btn btn-default dropdown-toggle">
