@@ -21,10 +21,14 @@
 </head>
 <body onload="window.print()">
 
-    <div class="form-group" style="width: 800px; margin: auto; margin-top: 200px">
+    <div style="position: absolute; top: 5%; left: 50%; width: auto; height: auto; margin-left: -125px;">
+        {!! HTML::image('http://www.culture.si/images/thumb/6/6c/Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg/576px-Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg.png', 'Logo - ni povezave', array( 'width' => 250, 'height' => 150 )) !!}
+    </div>
+
+    <div class="form-group" style="width: 800px; margin: auto; margin-top: 250px">
+
 
         <a class="hidden-print" href="{{ action('ListStudentsController@returnBack') }}">Nazaj na seznam študentov</a>
-
         <h2>Potrdilo o vpisu</h2>
         <br><br>
         <p>Vpisna številka: {!!$vpisna!!}</p><br/>
