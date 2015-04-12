@@ -19,7 +19,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body style="font-family: DejaVu Sans; font-size: 12px;">
 
     <div style="position: absolute; top: 5%; left: 50%; width: auto; height: auto; margin-left: -125px;">
         {!! HTML::image('http://www.culture.si/images/thumb/6/6c/Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg/576px-Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg.png', 'Logo - ni povezave', array( 'width' => 250, 'height' => 150 )) !!}
@@ -29,9 +29,10 @@
 
         <!--<a class="hidden-print" href="{{ action('ListStudentsController@potrdilo_pdf') }}">Pretvori v pdf</a><br>
         <a class="hidden-print" href="{{ action('ListStudentsController@returnBack') }}">Nazaj na seznam študentov</a>-->
-        <h3 style="font-size: 20pt">Potrdilo o vpisu</h3>
-        <br><br><br><br>
-        <p>Vpisna številka: {!!$vpisna!!}</p><br/>
+        <br>
+        <h3 style="font-size: 18pt">Potrdilo o vpisu</h3>
+        <br><br><br><br><br><br>
+        <p>Vpisna številka: {!!$vpisna!!}</p><br/><br/><br/>
             <div style="width: 50%; display: inline-block; border-right: thin solid #aaaaaa">
                 <p>Potrjujemo, da je {!!$ime!!} {!!$priimek!!}</p>
                 <p>rojen-a {!!$datum_rojstva!!}, v kraju {!!$kraj_rojstva!!}</p>
@@ -44,7 +45,7 @@
             </div>
             <div style="width: 30%; display: inline-block; margin: 1em;">
                 <p>Uradne opombe: </p>
-                <br><br><br><br>
+                <br><br><br><br><br>
                 <p>Žig:</p>
                 <br><br><br><br><br>
                 <p>Dekan:</p>
