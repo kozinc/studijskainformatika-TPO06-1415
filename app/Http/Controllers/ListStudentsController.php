@@ -181,7 +181,10 @@ class ListStudentsController extends Controller {
         $danes = date('d.m.Y');
         $datum_rojstva = $student->datum_rojstva;
         $datum_rojstva = date("d.m.Y", strtotime($datum_rojstva));
-        return \View::make('potrdiloVpis')->with('date', $danes)->with('ime', $student->ime)->with('priimek', $student->priimek)->with('vpisna', $student->vpisna)->with('datum_rojstva', $datum_rojstva)->with('kraj_rojstva', $student->obcina_rojstva)->with('letnik', $student_program->letnik)->with('studijsko_leto', $student_program->studijsko_leto)->with('vrsta_vpisa', $student_program->nacin_studija)->with('program', $program->ime);
+
+        $pdf = \App::make('dompdf');
+        $pdf->loadHTML(\View::make('potrdiloVpis')->with('date', $danes)->with('ime', $student->ime)->with('priimek', $student->priimek)->with('vpisna', $student->vpisna)->with('datum_rojstva', $datum_rojstva)->with('kraj_rojstva', $student->obcina_rojstva)->with('letnik', $student_program->letnik)->with('studijsko_leto', $student_program->studijsko_leto)->with('vrsta_vpisa', $student_program->nacin_studija)->with('program', $program->ime));
+        return $pdf->stream('my.pdf',array('Attachment'=>0));
     }
 
     public function returnBack(){
