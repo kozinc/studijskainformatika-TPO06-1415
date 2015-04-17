@@ -159,12 +159,6 @@
                         </select>
 
                     </div>
-                    <div class="form-group">
-                        <div class="col-lg-3">
-                            <label for="datum_prvega_vpisa">Datum prvega vpisa:</label>
-                            <input type="text" name="datum_prvega_vpisa" id="datum_prvega_vpisa" placeholder="dd.mm.yyyy" value="">
-                        </div>
-                    </div>
                 </div>
             </div>
 

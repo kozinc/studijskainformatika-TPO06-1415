@@ -257,6 +257,21 @@ class VpisniListReferentController extends Controller {
             return Redirect::back()->withErrors(['Neveljavna država / neveljavna občina / neveljavna poštna številka!']);
         }
 
+        // 'naslovZacasni', 'obcinaZacasni', 'postaZacasni', 'drzavaZacasni'
+        if(!empty($request['naslovZacasni']) && !empty($request['obcinaZacasni']) && !empty($request['postaZacasni']) && !empty($request['drzavaZacasni']))
+        {
+            $student->naslovZacasni = $request['naslovZacasni'];
+            $student->obcinaZacasni = $request['obcinaZacasni'];
+            $student->postaZacasni = $request['postaZacasni'];
+            $student->drzavaZacasni = $request['drzavaZacasni'];
+            if($request['posiljanje']==1){
+                $student->posiljanje=1;
+            }
+        }else{
+            if($request['posiljanje']==1){
+                return Redirect::back()->withErrors(['Naslov za pošiljanje neveljaven.']);
+            }
+        }
         $student->telefon = $request['telefon'];
         $student->naslov = $request['naslov'];
         $student->davcna = $request['davcna'];

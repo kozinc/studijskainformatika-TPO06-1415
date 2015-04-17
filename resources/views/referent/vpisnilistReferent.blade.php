@@ -86,6 +86,17 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-3">
+                                {!! Form::label('drzavljanstvo', 'Državljanstvo:') !!}
+                                {!! Form::text('drzavljanstvo', $student->drzavljanstvo, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>Stalni naslov</h2>
+                        <div class="form-group">
+                            <div class="col-lg-3">
                                 {!! Form::label('naslov', 'Naslov:') !!}
                                 {!! Form::text('naslov', $student->naslov, array('class' => 'form-control')) !!}
                             </div>
@@ -101,6 +112,42 @@
                                 {!! Form::label('drzava', 'Država:') !!}
                                 {!! Form::text('drzava', $student->drzava, array('class' => 'form-control')) !!}
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>Začasni naslov</h2>
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                {!! Form::label('naslovZacasni', 'Naslov:') !!}
+                                {!! Form::text('naslovZacasni', $student->naslovZacasni, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="col-lg-3">
+                                {!! Form::label('obcinaZacasni', 'Občina:') !!}
+                                {!! Form::text('obcinaZacasni', $student->obcinaZacasni, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="col-lg-3">
+                                {!! Form::label('postaZacasni', 'Poštna številka:') !!}
+                                {!! Form::text('postaZacasni', $student->postaZacasni, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="col-lg-3">
+                                {!! Form::label('drzavaZacasni', 'Država:') !!}
+                                {!! Form::text('drzavaZacasni', $student->drzavaZacasni, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>Naslov za pošiljanje</h3>
+                        <div class="radio">
+                            <label for="stalni"><input type="radio" id="stalni" name="posiljanje" value="0" @if($student->posiljanje==0){{ 'checked' }}@endif>Stalni</label>
+                        </div>
+                        <div class="radio">
+                            <label for="zacasni"><input type="radio" id="zacasni" name="posiljanje" value="1"  @if($student->posiljanje==1){{ 'checked' }}@endif>Začasni</label>
                         </div>
                     </div>
                 </div>

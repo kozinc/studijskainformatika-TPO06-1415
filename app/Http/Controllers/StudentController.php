@@ -72,7 +72,6 @@ class StudentController extends Controller {
             }else{
                 return Redirect::back()->withErrors('Študijsko leto je v napačnem formatu!');
             }
-            $programStudent->datum_vpisa = date('Y-m-d',strtotime($r['datum_vpisa']));
             if($r['prosta_izbira']){
                 $programStudent->prosta_izbira = 1;
             }else{
