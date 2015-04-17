@@ -23,7 +23,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
 
-            @if (substr(\Session::get('session_id'), strlen(\Session::get('session_id')) - 14) == "@fri.uni-lj.si" )
+            @if (substr(\Session::get('vloga'), strlen(\Session::get('session_id')) - 14) == "@fri.uni-lj.si" )
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a>
                 </div>
