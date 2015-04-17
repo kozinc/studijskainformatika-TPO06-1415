@@ -71,6 +71,11 @@ Route::get('studenti/{id}', 'StudentController@show');
 Route::get('studenti/{id}/nov-zeton', 'StudentController@novZeton');
 Route::post('studenti/{id}/nov-zeton', 'StudentController@ustvariNovZeton');
 Route::get('studenti/{idStudenta}/indeks/{idStudentProgram}', 'StudentController@elektronskiIndeks');
+Route::get('studenti/{idStudenta}/sklepi/{idSklepa}', 'SklepController@edit');
+Route::post('studenti/{idStudenta}/sklepi/{idSklepa}', 'SklepController@update');
+Route::get('studenti/{idStudenta}/nov-sklep', 'SklepController@create');
+Route::post('studenti/{idStudenta}/nov-sklep', 'SklepController@store');
+
 
 
 

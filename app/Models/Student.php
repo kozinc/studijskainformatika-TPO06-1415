@@ -21,6 +21,11 @@ class Student extends Model {
         return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_predmeta', 'id_studenta')->withPivot('');
     }
 
+    public function sklepi()
+    {
+        return $this->hasMany('App\Models\Sklep', 'id_studenta');
+    }
+
     public function studentProgram()
     {
         return $this->hasMany('App\Models\StudentProgram', 'id_studenta')->orderBy('studijsko_leto','desc');
