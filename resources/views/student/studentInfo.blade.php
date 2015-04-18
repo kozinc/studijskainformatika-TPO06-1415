@@ -56,4 +56,23 @@
 
     @endforeach
     </table>
+
+    <table class="table">
+        <caption>Sklepi</caption>
+        <tr>
+            <th>Id</th>
+            <th>Datum</th>
+            <th>Vsebina</th>
+            <th>Uredi</th>
+        </tr>
+        @foreach($student->sklepi as $sklep)
+            <tr>
+                <td>{{ $sklep->id }}</td>
+                <td>{{ date('d.m.Y',strtotime($sklep->datum)) }}</td>
+                <td>{{ $sklep->vsebina }}</td>
+                <td><a href="{{ action('SklepController@edit', ['idStudenta'=>$student->id, 'idSklepa'=>$sklep->id]) }}">Uredi sklep</a></td>
+            </tr>
+        @endforeach
+    </table>
+    <a href="{{ action('SklepController@create',['idStudenta'=>$student->id]) }}" class="btn btn-danger">Nov sklep</a>
 @endsection
