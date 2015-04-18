@@ -81,6 +81,7 @@ class LoginController extends Controller {
 
         if(is_null($user) && is_null($nosilec)){
             $vloga = "referent";
+            \Session::set("imepriimek", $referent->ime.' '.$referent->priimek);
             if(!\Hash::check($this_password, $referent->geslo)){
                 \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
                 $this->add_to_session();
@@ -89,6 +90,7 @@ class LoginController extends Controller {
         }
         else if(is_null($referent) && is_null($nosilec)){
             $vloga = "student";
+            \Session::set("imepriimek", $user->ime.' '.$user->priimek);
             if(!\Hash::check($this_password, $user->geslo)){
                 \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
                 $this->add_to_session();
@@ -97,6 +99,7 @@ class LoginController extends Controller {
         }
         else {
             $vloga = "ucitelj";
+            \Session::set("imepriimek", $nosilec->ime.' '.$nosilec->priimek);
             if(!\Hash::check($this_password, $nosilec->geslo)){
                 \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
                 $this->add_to_session();
@@ -110,7 +113,7 @@ class LoginController extends Controller {
         if (\Session::get("vloga") == "referent") {
             return Redirect(action('StudentController@searchForm'));
         }
-        else {
+        else if (\Session::get("vloga") == "student"){
             return Redirect(action('VpisniListController@obrazecVpisniList'));
         }
     }

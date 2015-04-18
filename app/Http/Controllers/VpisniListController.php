@@ -46,50 +46,59 @@ class VpisniListController extends Controller {
     public function obrazecVpisniList(){
 
         $student = Student::where ('email', '=', (\Session::get('session_id')))->first();
-
-        //preverimo ce obstaja zeton
-        $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
-
-        if(!is_null($programStudenta))
+        $vloga = (\Session::get('vloga'));
+        if (is_null($student) || $vloga != "student")
         {
-            //preverimo za 1.vpis
-            if ($student->vpisna == 0)
+            return redirect()->action('WelcomeController@index');
+        }
+        else
+        {
+            //preverimo ce obstaja zeton
+            $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
+
+            if(!is_null($programStudenta))
             {
-                //generiramo vpisno stevilko in jo shranimo
-                $leto = (date('Y'));
-                $leto = substr ($leto, 2);
-                $novaVpisna =  '63'.$leto;
-                $letosnjiStudentZadnji = Student::where('vpisna', 'LIKE', $novaVpisna.'%')->orderBy('vpisna','desc')->first();
-                $student->vpisna = $novaVpisna.substr($letosnjiStudentZadnji->vpisna, 4) + 1;
-                $student->save();
-                $program = StudijskiProgram::find($programStudenta->id_programa);
-               // return ( $program->ime);
-                $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',1);
-                $programStudenta->vrsta_vpisa = 1;
-                $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();
-                $programStudenta->nacin_studija = "redni";
-                $programStudenta->letnik = 1;
-                $programStudenta->save();
-                return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
-                    'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('d.m.Y'), 'predmetiObvezni' => $predmetiObvezni]);
+                //preverimo za 1.vpis
+                if ($student->vpisna == 0)
+                {
+                    //generiramo vpisno stevilko in jo shranimo
+                    $leto = (date('Y'));
+                    $leto = substr ($leto, 2);
+                    $novaVpisna =  '63'.$leto;
+                    $letosnjiStudentZadnji = Student::where('vpisna', 'LIKE', $novaVpisna.'%')->orderBy('vpisna','desc')->first();
+                    $student->vpisna = $novaVpisna.substr($letosnjiStudentZadnji->vpisna, 4) + 1;
+                    $student->save();
+                    $program = StudijskiProgram::find($programStudenta->id_programa);
+                    // return ( $program->ime);
+                    $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',1);
+                    $programStudenta->vrsta_vpisa = 1;
+                    $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();
+                    $programStudenta->nacin_studija = "redni";
+                    $programStudenta->letnik = 1;
+                    $programStudenta->save();
+                    return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
+                        'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('d.m.Y'), 'predmetiObvezni' => $predmetiObvezni]);
+
+                }
+                else
+                {
+                    $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();
+                    $program = StudijskiProgram::find($programStudenta->id_programa);
+                    $prviVpis = $programStudenta->where('id_programa','=',$program->id)->where('id_studenta','=', $student->id)->first();
+                    $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
+
+                    return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
+                        'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
+                }
 
             }
             else
             {
-                $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();
-                $program = StudijskiProgram::find($programStudenta->id_programa);
-                $prviVpis = $programStudenta->where('id_programa','=',$program->id)->where('id_studenta','=', $student->id)->first();
-                $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
-
-                return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
-                    'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
+                return view ('vpisniList', ['empty' => 0]);
             }
+        }
 
-        }
-        else
-        {
-            return view ('vpisniList', ['empty' => 0]);
-        }
+
 
     }
 

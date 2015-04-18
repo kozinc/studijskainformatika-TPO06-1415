@@ -29,8 +29,10 @@ class WelcomeController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
+    {
+        \Session::forget('session_id');
+        \Session::forget('vloga');
         return view('login');
-	}
+    }
 
 }

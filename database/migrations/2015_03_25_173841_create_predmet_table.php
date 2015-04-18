@@ -15,6 +15,7 @@ class CreatePredmetTable extends Migration {
         Schema::create('predmet', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->integer('sifra');
             $table->string('naziv');
             $table->text('opis');
             $table->integer('id_nosilca')->unsigned();
