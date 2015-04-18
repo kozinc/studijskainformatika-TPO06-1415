@@ -7,7 +7,7 @@ class Predmet extends Model {
 
     use SoftDeletes;
     protected $table = 'predmet';
-    protected $fillable = ['naziv','opis','id_nosilca','KT','id_modula'];
+    protected $fillable = ['sifra','naziv','opis','id_nosilca','KT','id_modula'];
     protected $guarded = ['id'];
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 

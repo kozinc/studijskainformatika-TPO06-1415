@@ -30,12 +30,8 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
     {
-        return view('login');
-    }
-
-    public function logout()
-    {
-        
+        \Session::forget('session_id');
+        \Session::forget('vloga');
         return view('login');
     }
 

@@ -2,6 +2,7 @@
 
 use App\Models\Student;
 use App\Models\StudijskiProgram;
+use App\Models\Referent;
 use App\Models\StudentProgram;
 use App\Models\VrstaVpisa;
 use Illuminate\Http\Request;
@@ -45,7 +46,18 @@ class VpisniListReferentController extends Controller {
      */
     public function obrazecVpisniList(){
 
-        return view ('/referent/vpisnilistReferent', ['studentNajden'=>0]);
+        $referent = Referent::where ('email', '=', (\Session::get('session_id')))->first();
+        $vloga = (\Session::get('vloga'));
+
+        if (is_null($referent) || $vloga != "referent")
+        {
+            return redirect('/');
+        }
+        else
+        {
+            return view ('/referent/vpisnilistReferent', ['studentNajden'=>0]);
+        }
+
 
     }
 

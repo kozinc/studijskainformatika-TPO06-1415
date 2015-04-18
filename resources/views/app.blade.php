@@ -23,36 +23,47 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
 
+
             @if (\Session::get('vloga') == "referent" )
                 <div class="navbar-header">
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('VpisniListReferentController@obrazecVpisniList') }}">Vpisni list</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('ListStudentsController@getStudents') }}">Seznam vpisanih študentov v predmet</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
                 </div>
             @elseif (\Session::get('vloga') == "student" )
                 <div class="navbar-header">
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('VpisniListController@obrazecVpisniList')  }}">Vpisni list</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('KartotecniListController@prikazKartotecniList')  }}">Kartotečni list</a>
                 </div>
             @endif
-            <div class="nav navbar-nav navbar-right">
-                <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
-            </div>
+
         </div>
     </nav>
 

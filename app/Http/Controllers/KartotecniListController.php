@@ -9,6 +9,7 @@ use App\Models\StudijskiProgram;
 use App\Models\VrstaVpisa;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\StudentPredmet;
 use Illuminate\Support\Facades\Redirect;
 
 class KartotecniListController extends Controller
@@ -24,8 +25,15 @@ class KartotecniListController extends Controller
         $vloga = (\Session::get('vloga'));
         if (is_null($student) || $vloga != "student")
         {
-            return view('/');
+            return redirect()->action('WelcomeController@index');
         }
-        return view('kartotecniList');
+        else
+        {
+
+            $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena');
+            $predmeti = StudentPredmet::where('id_studenta','=',$student->id);
+            return view('kartotecniList', ['programi'=>$programiStudenta, 'predmeti'=>$predmeti]);
+        }
+
     }
 }
