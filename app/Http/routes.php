@@ -79,6 +79,11 @@ Route::get('studenti/{idStudenta}/nov-sklep', 'SklepController@create');
 Route::post('studenti/{idStudenta}/nov-sklep', 'SklepController@store');
 
 
+Route::get('izpitni_roki/nov_izpitni_rok', 'IzpitniRokController@getNovIzpitniRok');
+Route::get('izpitni_roki/uredi_izpitni_rok', 'IzpitniRokController@getSpremeniIzpitniRok');
+Route::post('izpitni_roki/uredi_izpitni_rok', 'IzpitniRokController@getPredmetRoki');
+Route::get('izpitni_roki/uredi_izpitni_rok/{id}', 'IzpitniRokController@brisiIzpitniRok');
+
 
 
 

@@ -7,17 +7,16 @@
 	<title>E-študij FRI</title>
 
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-te-1.4.0.css') }}" rel="stylesheet">
 
-	<!-- Fonts -->
+    <!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+	<!-- [endif]-->
+
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -46,10 +45,18 @@
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('ListStudentsController@getStudents') }}">Seznam vpisanih študentov v predmet</a>
                 </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
+                </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
                 </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
+                </div>
+
             @elseif (\Session::get('vloga') == "student" )
+
                 <div class="navbar-header">
                     <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
                 </div>
@@ -74,6 +81,5 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/jquery-te-1.4.0.min.js') }}"></script>
     <script src="{{ asset('js/functions.js') }}"></script>
-
 </body>
 </html>

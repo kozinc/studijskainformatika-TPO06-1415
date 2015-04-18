@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     $('.jqueryte').jqte();
 
     $('#studijski_program_ajax').change(function(){
@@ -17,9 +16,4 @@ $(document).ready(function(){
             $('#letnik-3').show();
         }
     });
-
-    $('#printMe').click(function(){
-        window.print();
-    });
-
 });
