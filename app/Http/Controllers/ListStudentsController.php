@@ -131,7 +131,6 @@ class ListStudentsController extends Controller {
         $predmet_id = \Input::get('predmeti');
         $leto_id = \Input::get('leta');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
-        $leto = $leta[$leto_id];
 
         $student_predmet_list = \App\Models\StudentPredmet::where('id_predmeta', $predmet_id)->where('studijsko_leto', $leto)->get();
         $student_list = array();
