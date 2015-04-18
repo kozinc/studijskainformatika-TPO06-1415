@@ -48,14 +48,30 @@
     </div>
 </nav>
 
-<div class="form-group" style="width:700px; margin: auto; margin-top: 200px">
+    <div class="form-group" style="width:700px; margin: auto; margin-top: 200px">
 
         {!! Form::open(array('action' => 'IzpitniRokController@getPredmetRoki')) !!}
             {!! Form::select('predmeti', $predmeti, $predmet_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
-            <br/><br/>
-            {!! Form::submit('Izpiši izpitne roke za izbrani predmet', array('class' => 'btn btn-danger')) !!}
+            {!! Form::submit('Izpiši izpitne roke', array('class' => 'btn btn-danger')) !!}
         {!! Form::close() !!}
         <br/>
+
+        @if($izpitni_roki != '' || Session::get('izpitni_roki_sporocilo') != "")
+            <button id="izpit_button"  class="btn btn-default">Dodaj izpitni rok</button>
+            <br/>
+
+            <div  id="obrazec_izpit" style="background-color: #FAFAFA">
+                <div class="form-group" id="obrazec_izpit" style="width:200px; margin-left: 10px">
+                    <br>
+                    {!! Form::open(array('action' => 'IzpitniRokController@dodajIzpitniRok')) !!}
+                        {!! Form::text('date', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker')) !!}
+                    <br/>
+                        {!! Form::submit('Dodaj', array('class' => 'btn btn-danger')) !!}<br/><br/>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+            <br><br>
+        @endif
 
         @if (Session::has('izpitni_roki_sporocilo'))
             @if (Session::get('izpitni_roki_sporocilo') != "")
@@ -63,8 +79,6 @@
                 <br/>
             @endif
         @endif
-
-        <p>Datum: <input type="text" id="datepicker" readonly="readonly"></p>
 
         @if($izpitni_roki != '')
             <table class="table table-hover">
@@ -101,6 +115,19 @@
                 dateFormat: 'dd.mm.yy'
             });
         });
+
+        $(document).ready(function() {
+            $('#obrazec_izpit').hide();
+            $('#izpit_button').show();
+
+            $('#izpit_button').click(function() {
+                $('#izpit_button').hide();
+                $('#obrazec_izpit').show('slow');
+                return false;
+            });
+        });
+
+
     </script>
 
 </body>

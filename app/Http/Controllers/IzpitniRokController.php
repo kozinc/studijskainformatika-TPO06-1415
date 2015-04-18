@@ -17,17 +17,16 @@ class IzpitniRokController extends Controller {
 
     public function getPredmetRoki(){
         $predmet_id = \Input::get('predmeti');
+        \Session::set("izbrani_predmet", $predmet_id);
         $izpitni_roki = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->get();
         $izpitni_roki_list = array();
 
         foreach ($izpitni_roki as $i) {
             $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
-
             $today = date("Y-m-d");
             if($today < $i->datum){
                 $i['ocene'] = "Spremeni/Briši";
             }
-
             if($i['st_prijav'] > 0){
                 $bla = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->first();
                 if($bla->ocena != 0 && $i['ocene'] == null){
@@ -36,8 +35,6 @@ class IzpitniRokController extends Controller {
             }
             array_push($izpitni_roki_list, $i);
         }
-
-
         if(sizeof($izpitni_roki_list) == 0){
             $izpitni_roki_list = '';
             \Session::set("izpitni_roki_sporocilo", "Za predmet ni razpisanih izpitnih rokov");
@@ -45,7 +42,6 @@ class IzpitniRokController extends Controller {
         else{
             \Session::set("izpitni_roki_sporocilo", "");
         }
-
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', $predmet_id)->with('izpitni_roki', $izpitni_roki_list);
     }
@@ -53,6 +49,30 @@ class IzpitniRokController extends Controller {
     public function brisiIzpitniRok($id){
         \App\Models\IzpitniRok::where('id', $id)->delete();
         \DB::table('student_izpit')->where('id_izpitnega_roka', $id)->delete();
+        return self::getSpremeniIzpitniRok();
+    }
+
+    public function dodajIzpitniRok(){
+        $predmet_id = \Session::get("izbrani_predmet");
+        $izpitni_roki = new \App\Models\IzpitniRok;
+
+        $date = \Input::get('date');
+        echo $date;
+        $deli_datuma = explode('.', $date);
+        $datum = $deli_datuma[2] . "-"  . $deli_datuma[1] . "-" . $deli_datuma[0];
+
+        echo $datum;
+
+        if($date != ""){
+            $izpitni_roki->datum = $datum;
+            $izpitni_roki->id_predmeta = $predmet_id;
+            $izpitni_roki->save();
+            \Session::set("izpitni_roki_sporocilo", "Izpitni rok je bil uspešno shranjen");
+        }
+        else{
+           \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - vnesite datum");
+        }
+
         return self::getSpremeniIzpitniRok();
     }
 }
