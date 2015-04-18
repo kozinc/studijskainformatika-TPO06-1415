@@ -9,7 +9,8 @@
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,7 +22,6 @@
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-
 
             @if (\Session::get('vloga') == "referent" )
                 <div class="navbar-header">
@@ -45,14 +45,11 @@
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('ListStudentsController@getStudents') }}">Seznam vpisanih študentov v predmet</a>
                 </div>
-                <div class="navbar-header">
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
-                </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
                 </div>
 
             @elseif (\Session::get('vloga') == "student" )
