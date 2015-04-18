@@ -29,8 +29,14 @@ class WelcomeController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
+    {
         return view('login');
-	}
+    }
+
+    public function logout()
+    {
+        
+        return view('login');
+    }
 
 }

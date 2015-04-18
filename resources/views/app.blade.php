@@ -23,7 +23,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
 
-            @if (substr(\Session::get('vloga'), strlen(\Session::get('session_id')) - 14) == "@fri.uni-lj.si" )
+            @if (\Session::get('vloga') == "referent" )
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a>
                 </div>
@@ -42,14 +42,14 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
                 </div>
-            @else
+            @elseif (\Session::get('vloga') == "student" )
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ action('VpisniListController@obrazecVpisniList')  }}">Vpisni list</a>
                 </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ action('KartotecniListController@prikazKartotecniList')  }}">Kartotečni list</a>
+                </div>
             @endif
-
-
-
             <div class="nav navbar-nav navbar-right">
                 <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
             </div>
