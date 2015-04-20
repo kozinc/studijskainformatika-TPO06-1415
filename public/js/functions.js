@@ -24,9 +24,14 @@ $(document).ready(function(){
         }else{
             div_predmetnik = $('#letnik-'+letnik);
         }
+        $('.predmetnik-form').each(function(){
+            $(this).hide();
+        });
 
         div_predmetnik.siblings().each(function(){
-            $(this).hide();
+            if(!$(this).hasClass('dodaj-predmet')){
+                $(this).hide();
+            }
         });
         div_predmetnik.show();
 
@@ -36,4 +41,31 @@ $(document).ready(function(){
         $(this).addClass('active');
 
     });
+
+    $('.odpri-predmetnik-form').click(function(){
+       $('.predmetnik-form').toggle();
+    });
+
+    $('#tip-select').change(function(){
+        var tip = $(this).val();
+        $('.letnik').show();
+        if(tip=='modulski'){
+            $('.modul').show();
+        }else if(tip == 'prosto-izbirni'){
+            $('.modul').hide();
+            $('.letnik').hide();
+        }
+
+    });
+
+    $('.modul-select').change(function(){
+        var value = $(this).val();
+        if(value=='new'){
+            $('.nov-modul').show();
+        }else{
+            $('.nov-modul').hide();
+        }
+    });
+
 });
+

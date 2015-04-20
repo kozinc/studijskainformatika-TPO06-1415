@@ -90,8 +90,8 @@ class StudijskiProgramController extends Controller {
 
     public function showPredmetnik($id){
         $program = StudijskiProgram::find((int)$id);
-        //$program_letniki = $program->
-        return view('program/programPredmetnik',['program'=>$program] );
+        $predmeti = Predmet::all();
+        return view('program/programPredmetnik',['program'=>$program, 'predmeti'=>$predmeti] );
     }
 
     public function editPredmetnik($id){
