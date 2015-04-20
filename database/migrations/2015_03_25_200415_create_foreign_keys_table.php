@@ -23,19 +23,18 @@ class CreateForeignKeysTable extends Migration {
             $table->foreign('vrsta_vpisa')->references('sifra')->on('vrsta_vpisa');
         });
 
-        Schema::table('program_modul', function($table) {
-            $table->foreign('id_modula')->references('id')->on('modul');
+        Schema::table('modul', function($table) {
             $table->foreign('id_programa')->references('id')->on('studijski_program');
         });
 
         Schema::table('program_predmet', function($table) {
             $table->foreign('id_programa')->references('id')->on('studijski_program');
             $table->foreign('id_predmeta')->references('id')->on('predmet');
+            $table->foreign('id_modula')->references('id')->on('modul');
         });
 
         Schema::table('predmet', function($table) {
             $table->foreign('id_nosilca')->references('id')->on('nosilec');
-            $table->foreign('id_modula')->references('id')->on('modul');
         });
 
         Schema::table('izpitni_rok', function($table) {

@@ -147,7 +147,10 @@ class TableSeeder extends Seeder {
 
 
         DB::table('modul')->truncate();
-        $modul1 = Modul::create(['ime'=>'Razvoj programske opreme','opis'=>'']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Razvoj programske opreme','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2013/2014']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Razvoj programske opreme','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2014/2015']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Razvoj programske opreme','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2015/2016']);
+
 
         DB::table('predmet')->truncate();
         Predmet::create(['sifra'=>'63277','naziv'=>'Programiranje 1','opis'=>'Cilj predmeta je študentom predstaviti osnovne koncepte objektno usmerjenega programiranja v enem izmed splošno namenskih programskih jezikov 3. generacije in jih usposobiti za samostojen razvoj enostavnih računalniških programov.','id_nosilca'=>1,'KT'=>6]);
@@ -158,25 +161,23 @@ class TableSeeder extends Seeder {
         Predmet::create(['sifra'=>'63213','naziv'=>'Verjetnost in statistika', 'opis'=>'Cilj predmeta je študentom računalništva in informatike predstaviti osnovne verjetnosti in statistike.', 'id_nosilca'=>8, 'KT'=>6, 'tip'=>'obvezni']);
         Predmet::create(['sifra'=>'63219','naziv'=>'Matematično modeliranje','opis'=>'Cilj predmeta je nadgraditi osnovno poznavanje in razumevanje pojmov matematične analize in linearne algebre z zahtevnejšimi pojmi, prikazati njihovo uporabo pri matematičnem modeliranju pojavov v računalništvu in drugih znanostih in osnovne metode za računanje dobljenih modelov.','id_nosilca'=>2,'KT'=>6,'tip'=>'strokovni-izbirni']);
 
-        Predmet::create(['sifra'=>'63254','naziv'=>'Postopki razvoja programske opreme','opis'=>'Cilj predmeta je pridobiti znanja o postopkih razvoja programske opreme s posebnim poudarkom na razvoju strežniških (server-side, datacenter, cloud) aplikacij, torej aplikacij, ki se uporabljajo v velikih informacijskih sistemih podjetij ali velikih spletnih aplikacij (npr. Facebook, LinkedIn, spletnih trgovin kot so Amazon, mimovrste, ebay in podobnih).','id_nosilca'=>4,'KT'=>6,'id_modula'=>1]);
-        Predmet::create(['sifra'=>'63255','naziv'=>'Spletno programiranje','opis'=>'Pri predmetu Spletno programiranje se bomo posvetili pregledu nad tehnologijami, ki se uporabljajo pri delovanju spleta, spletnih strežnikov, brskalnikov in spletnih aplikacij. Pregledali bomo osnove izdelave in oblikovanja spletnih strani (HTML5, CSS, XML) ter jih nadgradili s pregledom tehnologij na strani klienta (JavaScript) in strežnika (PHP, AJAX, JavaServer, ASP.NET, Ruby/Rails, spletne storitve).','id_nosilca'=>5,'KT'=>6,'id_modula'=>1]);
-        Predmet::create(['sifra'=>'63256','naziv'=>'Tehnologije programske opreme','opis'=>'Predstavljajte si razvijalca programske opreme, od katerega naročnik želi, da izdela rešitev, ki mu bo (seveda s pomočjo računalnika) olajšala delo na določenem področju. Razvijalec mora najprej ugotoviti, kakšne so zahteve uporabnikov, na podlagi tega izdelati načrt rešitve, napisati potrebne programe, jih stestirati in predati v uporabo ter nato vzdrževati do konca njihove življenjske dobe. Pri predmetu Tehnologija programske opreme se boste naučili, kako to narediti z uporabo najnovejših pristopov k razvoju programske opreme.','id_nosilca'=>1,'KT'=>6,'id_modula'=>1]);
+        Predmet::create(['sifra'=>'63254','naziv'=>'Postopki razvoja programske opreme','opis'=>'Cilj predmeta je pridobiti znanja o postopkih razvoja programske opreme s posebnim poudarkom na razvoju strežniških (server-side, datacenter, cloud) aplikacij, torej aplikacij, ki se uporabljajo v velikih informacijskih sistemih podjetij ali velikih spletnih aplikacij (npr. Facebook, LinkedIn, spletnih trgovin kot so Amazon, mimovrste, ebay in podobnih).','id_nosilca'=>4,'KT'=>6]);
+        Predmet::create(['sifra'=>'63255','naziv'=>'Spletno programiranje','opis'=>'Pri predmetu Spletno programiranje se bomo posvetili pregledu nad tehnologijami, ki se uporabljajo pri delovanju spleta, spletnih strežnikov, brskalnikov in spletnih aplikacij. Pregledali bomo osnove izdelave in oblikovanja spletnih strani (HTML5, CSS, XML) ter jih nadgradili s pregledom tehnologij na strani klienta (JavaScript) in strežnika (PHP, AJAX, JavaServer, ASP.NET, Ruby/Rails, spletne storitve).','id_nosilca'=>5,'KT'=>6]);
+        Predmet::create(['sifra'=>'63256','naziv'=>'Tehnologije programske opreme','opis'=>'Predstavljajte si razvijalca programske opreme, od katerega naročnik želi, da izdela rešitev, ki mu bo (seveda s pomočjo računalnika) olajšala delo na določenem področju. Razvijalec mora najprej ugotoviti, kakšne so zahteve uporabnikov, na podlagi tega izdelati načrt rešitve, napisati potrebne programe, jih stestirati in predati v uporabo ter nato vzdrževati do konca njihove življenjske dobe. Pri predmetu Tehnologija programske opreme se boste naučili, kako to narediti z uporabo najnovejših pristopov k razvoju programske opreme.','id_nosilca'=>1,'KT'=>6]);
         Predmet::create(['sifra'=>'63246','naziv'=>'Komuniciranje in vodenje projektov','opis'=>'Prvi cilj predmeta je osvežitev in nadgradnja osnovnih komunikacijskih kompetenc (pisno izražanje, govor, komuniciranje po medmrežju), predvsem v povezavi s poročanjem o strokovnih temah in z uporabo sodobnih informacijskih tehnologij. Drugi del predmeta študente seznani z osnovnimi načini organizacije projektnega načina dela.','id_nosilca'=>6,'KT'=>6]);
         Predmet::create(['sifra'=>'63248','naziv'=>'Ekonomika in podjetništvo','opis'=>'Temeljni namen predmeta je seznanitev študenta s področjem ekonomske znanosti na ravni združb (podjetij, zavodov itn.), zato da bo usposobljen dojemati vsebino tistih strokovnih pogovorov, ki vsebujejo ekonomske pojme, ter dejavno sodelovati v njih. Iz tega namena izvedeni cilji so zagotoviti tako poznavanje temeljnih ekonomskih pojmov in njihove medsebojne odvisnosti kot tudi sposobnost vključevanja teh pojmov v razmere praktičnega dela, zlasti v zvezi z ustanavljanjem in delovanjem podjetij v lasti gospodarskih družb, ko se bo kot diplomant soočil s potrebo ovrednotenja določenih stanj, procesov in izidov.','id_nosilca'=>7,'KT'=>6]);
 
         Predmet::create(['sifra'=>'63508', 'naziv'=>'Algoritmi','opis'=>'Govorimo o algoritmih in podatkovnih strukturah. To so za računalnikarja orodja, s katerimi realizira svoje, še tako divje ideje.','id_nosilca'=>9,'KT'=>6]);
 
-
-        DB::table('program_modul')->truncate();
-        DB::table('program_modul')->insert(['id_programa'=>1, 'id_modula'=>1, 'letnik'=>1, 'studijsko_leto'=>'2014/2015']);
-
         DB::table('program_predmet')->truncate();
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>1,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>2,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1, 'semester'=>2,'tip'=>'strokovno-izbirni', 'studijsko_leto'=>'2014/2015']);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>8,'letnik'=>3, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>9,'letnik'=>3, 'semester'=>2,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>6,'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>1, 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>7,'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>1, 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>8,'letnik'=>3, 'semester'=>2,'tip'=>'modulski', 'id_modula'=>1, 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>9,'letnik'=>3, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2014/2015']);
 
 
         DB::table('student_program')->truncate();

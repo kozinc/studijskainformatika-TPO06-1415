@@ -41,6 +41,7 @@ class DeleteEverything extends Migration {
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        Schema::dropIfExists('migrations');
         Schema::dropIfExists('izpitni_rok');
         Schema::dropIfExists('modul');
         Schema::dropIfExists('nosilec');

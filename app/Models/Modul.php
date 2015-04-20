@@ -19,19 +19,19 @@ class Modul extends Model {
      **/
     use SoftDeletes;
     protected $table = 'modul';
-    protected $fillable = ['ime','opis'];
+    protected $fillable = ['id_programa','ime','opis', 'letnik', 'studijsko_leto'];
     protected $guarded = ['id'];
     protected $dates = ['created_at','deleted_at','updated_at'];
     public $timestamps = false;
 
     public function predmeti()
     {
-        return $this->hasMany('App\Models\Predmet','id_modula');
+        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_modula',  'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->orderBy('letnik', 'semester', 'asc');
     }
 
     public function programi()
     {
-        return $this->belongsToMany('App\Models\StudijskiProgram', 'program_modul', 'id_programa', 'id_modula');
+        return $this->belongsTo('App\Models\StudijskiProgram', 'id_programa');
     }
 
  }

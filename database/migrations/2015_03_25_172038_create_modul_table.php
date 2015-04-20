@@ -15,8 +15,11 @@ class CreateModulTable extends Migration {
     Schema::create('modul', function(Blueprint $table)
     {
         $table->increments('id');
+        $table->integer('id_programa')->unsigned();
         $table->string('ime');
         $table->text('opis');
+        $table->integer('letnik')->unsigned();
+        $table->string('studijsko_leto');
         $table->timestamps();
         $table->softDeletes();
 
