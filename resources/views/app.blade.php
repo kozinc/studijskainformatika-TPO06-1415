@@ -58,7 +58,6 @@
                 </div>
 
             @elseif (\Session::get('vloga') == "student" )
-
                 <div class="navbar-header">
                     <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
                 </div>
@@ -70,6 +69,16 @@
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('KartotecniListController@prikazKartotecniList')  }}">Kartotečni list</a>
+                </div>
+            @elseif (\Session::get('vloga') == "ucitelj" )
+                <div class="navbar-header">
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
                 </div>
             @endif
 

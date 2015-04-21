@@ -110,11 +110,17 @@ class LoginController extends Controller {
         \Session::set("session_id", $this_username);
         \Session::set("vloga", $vloga);
 
-        if (\Session::get("vloga") == "referent") {
+        if (\Session::get("vloga") == "referent")
+        {
             return Redirect(action('StudentController@searchForm'));
         }
-        else if (\Session::get("vloga") == "student"){
-            return Redirect(action('VpisniListController@obrazecVpisniList'));
+        else if (\Session::get("vloga") == "student")
+        {
+            return Redirect(action('KartotecniListController@prikazKartotecniList'));
+        }
+        else if (\Session::get("vloga") == "ucitelj")
+        {
+            return Redirect(action('StudentController@searchForm'));
         }
     }
 

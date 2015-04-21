@@ -31,6 +31,7 @@
                                 <th>KT</th>
                                 <th>Ocena</th>
                             </tr>
+                            <div style="display:none">{{$kt=0}}{{$ocena=0}}{{$stevilo=0}}</div>
                             @foreach($predmeti->get() as $predmet)
                                 @if($predmet->studijsko_leto == $program->studijsko_leto)
                                     <tr>
@@ -41,11 +42,21 @@
                                         <td></td>
                                         <td></td>
                                         <td>{{$predmet->predmet->KT}}</td>
+                                        @if ($predmet->ocena!=0)
+                                            <div style="display:none">{{$kt=$kt+$predmet->predmet->KT}}</div>
+                                        @endif
                                         <td>{{($predmet->ocena==0)?'':$predmet->ocena}}</td>
+                                        <div style="display:none">{{$ocena=$ocena+$predmet->ocena}}{{$stevilo++}}</div>
                                     </tr>
                                 @endif
                             @endforeach
                         </table>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                Povprečna ocena: {{($stevilo==0)?'':($ocena/$stevilo)}}<br><br>
+                                Število KT: {{$kt}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach

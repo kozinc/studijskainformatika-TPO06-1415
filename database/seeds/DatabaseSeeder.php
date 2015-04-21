@@ -90,20 +90,87 @@ class TableSeeder extends Seeder {
         Nosilec::create(['id'=>7,'ime'=>'Mateja' ,'priimek'=>'Drnovšek', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('matejadrnovsek'), 'email'=>'mateja.drnovsek@fri.uni-lj.si']);
         Nosilec::create(['id'=>8,'ime'=>'Aleksandar' ,'priimek'=>'Jurišić', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('aleksandarjurisic'), 'email'=>'aleksandar.jurisic@fri.uni-lj.si']);
         Nosilec::create(['id'=>9,'ime'=>'Marko' ,'priimek'=>'Robnik Šikonja', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('markorobniksikonja'), 'email'=>'marko.robniksikonja@fri.uni-lj.si']);
+        Nosilec::create(['id'=>10,'ime'=>'Nikolaj' ,'priimek'=>'Zimic', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('nikolajzimic'), 'email'=>'nikolaj.zimic@fri.uni-lj.si']);
+        Nosilec::create(['id'=>11,'ime'=>'Irena' ,'priimek'=>'Drevenšek Olenik', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('irenadrevensekolenik'), 'email'=>'irena.drevensekolenik@fri.uni-lj.si']);
+        Nosilec::create(['id'=>12,'ime'=>'Boštjan' ,'priimek'=>'Slivnik', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('bostjanslivnik'), 'email'=>'bostjan.slivnik@fri.uni-lj.si']);
+        Nosilec::create(['id'=>13,'ime'=>'Bojan' ,'priimek'=>'Orel', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('bojanorel'), 'email'=>'bojan.orel@fri.uni-lj.si']);
+        Nosilec::create(['id'=>14,'ime'=>'Marko' ,'priimek'=>'Bajec', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('markobajec'), 'email'=>'marko.bajec@fri.uni-lj.si']);
+        Nosilec::create(['id'=>15,'ime'=>'Zoran' ,'priimek'=>'Bosnić', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('zoranbosnic'), 'email'=>'zoran.bosnic@fri.uni-lj.si']);
+        Nosilec::create(['id'=>16,'ime'=>'Franc' ,'priimek'=>'Jager', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('francjager'), 'email'=>'franc.jager@fri.uni-lj.si']);
+        Nosilec::create(['id'=>17,'ime'=>'Igor' ,'priimek'=>'Kononenko', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('igorkononenko'), 'email'=>'igor.kononenko@fri.uni-lj.si']);
+        Nosilec::create(['id'=>18,'ime'=>'Branko' ,'priimek'=>'Šter', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('brankoster'), 'email'=>'branko.ster@fri.uni-lj.si']);
+        Nosilec::create(['id'=>19,'ime'=>'Borut' ,'priimek'=>'Robič', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('borutrobic'), 'email'=>'borut.robic@fri.uni-lj.si']);
+        Nosilec::create(['id'=>20,'ime'=>'Dejan' ,'priimek'=>'Lavbič', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('dejanlavbic'), 'email'=>'dejan.lavbic@fri.uni-lj.si']);
+        Nosilec::create(['id'=>21,'ime'=>'Uroš' ,'priimek'=>'Lotrič', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('uroslotric'), 'email'=>'uros.lotric@fri.uni-lj.si']);
+        Nosilec::create(['id'=>22,'ime'=>'Patricio' ,'priimek'=>'Bulić', 'naziv'=>'izr. prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('patriciobulic'), 'email'=>'patricio.bulic@fri.uni-lj.si']);
+        Nosilec::create(['id'=>23,'ime'=>'Matjaž' ,'priimek'=>'Branko Jurič', 'naziv'=>'prof. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('matjazbrankojuric'), 'email'=>'matjaz.brankojuric@fri.uni-lj.si']);
+        Nosilec::create(['id'=>24,'ime'=>'Matija' ,'priimek'=>'Marolt', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('matijamarolt'), 'email'=>'matija.marolt@fri.uni-lj.si']);
+        Nosilec::create(['id'=>25,'ime'=>'Luka' ,'priimek'=>'Šajn', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('lukasajn'), 'email'=>'luka.sajn@fri.uni-lj.si']);
+        Nosilec::create(['id'=>26,'ime'=>'Narvika' ,'priimek'=>'Bovcon', 'naziv'=>'doc. dr.' , 'vloga'=>'' , 'geslo'=>Hash::make('narvikabovcon'), 'email'=>'narvika.bovcon@fri.uni-lj.si']);
+
+        //++++++++++++++++++++++P R E D M E T+++++++++++++++++++++++
+        DB::table('predmet')->truncate();
+        Predmet::create(['sifra'=>'63277','naziv'=>'Programiranje 1','opis'=>'Cilj predmeta je študentom predstaviti osnovne koncepte objektno usmerjenega programiranja v enem izmed splošno namenskih programskih jezikov 3. generacije in jih usposobiti za samostojen razvoj enostavnih računalniških programov.','id_nosilca'=>1,'KT'=>6]);
+        Predmet::create(['sifra'=>'63202','naziv'=>'Osnove matematične analize','opis'=>'Matematična analiza je področje matematike, ki se ukvarja s funkcijami. Funkcija je formalen opis dejstva, da sta dve količini odvisni, in odvisnosti med njima.',
+            'id_nosilca'=>2,'KT'=>6,'tip'=>'obvezni']);
+        Predmet::create(['sifra'=>'63203','naziv'=>'Diskretne strukture','opis'=>'Z matematiko je križ. Diskretne strukture so matematika. Zato so z Diskretnimi strukturami tudi same sitnosti. Ah, šalo na stran. Predstavimo raje, kaj bi zamudili, če bi se Diskretnim strukturam izognili. Če vemo, da je 1+1=2 in 2+2=5, potem bi morali verjeti tudi, da je 3+3=7, mar ne? Sešteli bi lahko obe "enačbi", na primer. Toda v tem primeru moramo verjeti tudi, da so vse krave iste barve. Tega pa si najbrž ne bi mislili.','id_nosilca'=>3,'KT'=>6]);
+        Predmet::create(['sifra'=>'63204','naziv'=>'Osnove digitalnih vezij','opis'=>'','id_nosilca'=>10,'KT'=>6]);
+        Predmet::create(['sifra'=>'63205','naziv'=>'Fizika','opis'=>'','id_nosilca'=>11,'KT'=>6]);
+        Predmet::create(['sifra'=>'63278','naziv'=>'Programiranje 2','opis'=>'','id_nosilca'=>12,'KT'=>6]);
+        Predmet::create(['sifra'=>'63207','naziv'=>'Linearna algebra','opis'=>'','id_nosilca'=>13,'KT'=>6]);
+        Predmet::create(['sifra'=>'63208','naziv'=>'Osnove podatkovnih baz','opis'=>'','id_nosilca'=>14,'KT'=>6]);
+        Predmet::create(['sifra'=>'63209','naziv'=>'Računalniške komunikacije','opis'=>'','id_nosilca'=>15,'KT'=>6]);
+        Predmet::create(['sifra'=>'63210','naziv'=>'Komunikacija človek računalnik','opis'=>'','id_nosilca'=>16,'KT'=>6]);
+
+        Predmet::create(['sifra'=>'63279','naziv'=>'Algoritmi in podatkovne strukture 1','opis'=>'','id_nosilca'=>17,'KT'=>6]);
+        Predmet::create(['sifra'=>'63212','naziv'=>'Arhitektura računalniških sistemov','opis'=>'','id_nosilca'=>18,'KT'=>6]);
+        Predmet::create(['sifra'=>'63213','naziv'=>'Verjetnost in statistika', 'opis'=>'Cilj predmeta je študentom računalništva in informatike predstaviti osnovne verjetnosti in statistike.', 'id_nosilca'=>8, 'KT'=>6]);
+        Predmet::create(['sifra'=>'63280','naziv'=>'Algoritmi in podatkovne strukture 2','opis'=>'','id_nosilca'=>19,'KT'=>6]);
+        Predmet::create(['sifra'=>'63215','naziv'=>'Osnove informacijskih sistemov','opis'=>'','id_nosilca'=>20,'KT'=>6]);
+        Predmet::create(['sifra'=>'63216','naziv'=>'Teorija informacij in sistemov','opis'=>'','id_nosilca'=>21,'KT'=>6]);
+        Predmet::create(['sifra'=>'63217','naziv'=>'Operacijski sistemi','opis'=>'','id_nosilca'=>19,'KT'=>6]);
+        Predmet::create(['sifra'=>'63218','naziv'=>'Organizacija računalniških sistemov','opis'=>'','id_nosilca'=>22,'KT'=>6]);
+        Predmet::create(['sifra'=>'63219','naziv'=>'Matematično modeliranje','opis'=>'Cilj predmeta je nadgraditi osnovno poznavanje in razumevanje pojmov matematične analize in linearne algebre z zahtevnejšimi pojmi, prikazati njihovo uporabo pri matematičnem modeliranju pojavov v računalništvu in drugih znanostih in osnovne metode za računanje dobljenih modelov.','id_nosilca'=>2,'KT'=>6]);
+
+        //3.letnik BUN-RI
+        Predmet::create(['sifra'=>'63246','naziv'=>'Komuniciranje in vodenje projektov','opis'=>'Prvi cilj predmeta je osvežitev in nadgradnja osnovnih komunikacijskih kompetenc (pisno izražanje, govor, komuniciranje po medmrežju), predvsem v povezavi s poročanjem o strokovnih temah in z uporabo sodobnih informacijskih tehnologij. Drugi del predmeta študente seznani z osnovnimi načini organizacije projektnega načina dela.','id_nosilca'=>6,'KT'=>6]);
+        Predmet::create(['sifra'=>'63248','naziv'=>'Ekonomika in podjetništvo','opis'=>'Temeljni namen predmeta je seznanitev študenta s področjem ekonomske znanosti na ravni združb (podjetij, zavodov itn.), zato da bo usposobljen dojemati vsebino tistih strokovnih pogovorov, ki vsebujejo ekonomske pojme, ter dejavno sodelovati v njih.','id_nosilca'=>7,'KT'=>6]);
+        Predmet::create(['sifra'=>'63254','naziv'=>'Postopki razvoja programske opreme','opis'=>'Cilj predmeta je pridobiti znanja o postopkih razvoja programske opreme s posebnim poudarkom na razvoju strežniških (server-side, datacenter, cloud) aplikacij, torej aplikacij, ki se uporabljajo v velikih informacijskih sistemih podjetij ali velikih spletnih aplikacij (npr. Facebook, LinkedIn, spletnih trgovin kot so Amazon, mimovrste, ebay in podobnih).','id_nosilca'=>4,'KT'=>6]);
+        Predmet::create(['sifra'=>'63255','naziv'=>'Spletno programiranje','opis'=>'Pri predmetu Spletno programiranje se bomo posvetili pregledu nad tehnologijami, ki se uporabljajo pri delovanju spleta, spletnih strežnikov, brskalnikov in spletnih aplikacij. Pregledali bomo osnove izdelave in oblikovanja spletnih strani (HTML5, CSS, XML) ter jih nadgradili s pregledom tehnologij na strani klienta (JavaScript) in strežnika (PHP, AJAX, JavaServer, ASP.NET, Ruby/Rails, spletne storitve).','id_nosilca'=>5,'KT'=>6]);
+        Predmet::create(['sifra'=>'63256','naziv'=>'Tehnologije programske opreme','opis'=>'Predstavljajte si razvijalca programske opreme, od katerega naročnik želi, da izdela rešitev, ki mu bo (seveda s pomočjo računalnika) olajšala delo na določenem področju. Razvijalec mora najprej ugotoviti, kakšne so zahteve uporabnikov, na podlagi tega izdelati načrt rešitve, napisati potrebne programe, jih stestirati in predati v uporabo ter nato vzdrževati do konca njihove življenjske dobe.','id_nosilca'=>1,'KT'=>6]);
+
+        Predmet::create(['sifra'=>'63508', 'naziv'=>'Algoritmi','opis'=>'Govorimo o algoritmih in podatkovnih strukturah. To so za računalnikarja orodja, s katerimi realizira svoje, še tako divje ideje.','id_nosilca'=>9,'KT'=>6]);
 
 
+        //++++++++++++++++++++++++S T U D E N T_____P R E D M E T+++++++++++++++++++++++++++
         DB::table('student_predmet')->truncate();
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>10]);
         StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>9]);
         StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>3, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>8]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>4, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2013/2014', 'ocena'=>6]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>5, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>6, 'letnik'=>3, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>9]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>7, 'letnik'=>3, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>9]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>8, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>9, 'letnik'=>3, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>10, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>11, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2015/2016']);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>4, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>6]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>9]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>7, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>9]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>8, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>8]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>9, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>8]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>10, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>8]);
+
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>11, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>12, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>13, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>14, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>15, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>16, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>17, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>18, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>19, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2013/2014', 'ocena'=>10]);
+
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>20, 'letnik'=>3, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>21, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>10]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>22, 'letnik'=>3, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>9]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>23, 'letnik'=>3, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>24, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>7]);
+
 
         StudentPredmet::create(['id_studenta'=>1, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>2, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
@@ -147,27 +214,35 @@ class TableSeeder extends Seeder {
 
 
         DB::table('modul')->truncate();
+        ////1,2,3,4
+        Modul::create(['id_programa'=>1, 'ime'=>'Razvoj programske opreme','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2012/2013']);
         Modul::create(['id_programa'=>1, 'ime'=>'Razvoj programske opreme','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2013/2014']);
         Modul::create(['id_programa'=>1, 'ime'=>'Razvoj programske opreme','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2014/2015']);
         Modul::create(['id_programa'=>1, 'ime'=>'Razvoj programske opreme','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2015/2016']);
+        ////5,6,7,8
+        Modul::create(['id_programa'=>1, 'ime'=>'Informacijski sistemi','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2012/2013']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Informacijski sistemi','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2013/2014']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Informacijski sistemi','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2014/2015']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Informacijski sistemi','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2015/2016']);
+        ////9,10,11,12
+        Modul::create(['id_programa'=>1, 'ime'=>'Medijske tehnologije','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2012/2013']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Medijske tehnologije','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2013/2014']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Medijske tehnologije','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2014/2015']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Medijske tehnologije','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2015/2016']);
+        ////13,14,15,16
+        Modul::create(['id_programa'=>1, 'ime'=>'Računalniška omrežja','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2012/2013']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Računalniška omrežja','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2013/2014']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Računalniška omrežja','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2014/2015']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Računalniška omrežja','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2015/2016']);
+        ////17,18,19,20
+        Modul::create(['id_programa'=>1, 'ime'=>'Umetna inteligenca','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2012/2013']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Umetna inteligenca','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2013/2014']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Umetna inteligenca','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2014/2015']);
+        Modul::create(['id_programa'=>1, 'ime'=>'Umetna inteligenca','opis'=>'', 'letnik'=>3, 'studijsko_leto'=>'2015/2016']);
+        ////
 
 
-        DB::table('predmet')->truncate();
-        Predmet::create(['sifra'=>'63277','naziv'=>'Programiranje 1','opis'=>'Cilj predmeta je študentom predstaviti osnovne koncepte objektno usmerjenega programiranja v enem izmed splošno namenskih programskih jezikov 3. generacije in jih usposobiti za samostojen razvoj enostavnih računalniških programov.','id_nosilca'=>1,'KT'=>6]);
-        Predmet::create(['sifra'=>'63202','naziv'=>'Osnove matematične analize','opis'=>'Matematična analiza je področje matematike, ki se ukvarja s funkcijami. Funkcija je formalen opis dejstva, da sta dve količini odvisni, in odvisnosti med njima (na primer, dolžina dneva je odvisna od letnega časa, račun pri blagajni je odvisen od tega, kaj je v košarici, uspeh na izpitu od časa, vloženega v učenje, primerov je še in še). Pri tem predmetu vas želimo bolje spoznati s funkcijami. Zakaj? No, zato, ker jih boste potrebovali pri drugih, računalniških predmetih in kasneje pri svojem delu v računalništvu in informatiki. Več, ko boste o njih vedeli, bolj si boste lahko z njimi pomagali in možnosti so tu skoraj neizčrpne.',
-            'id_nosilca'=>2,'KT'=>6,'tip'=>'obvezni']);
-        Predmet::create(['sifra'=>'63203','naziv'=>'Diskretne strukture','opis'=>'Z matematiko je križ. Diskretne strukture so matematika. Zato so z Diskretnimi strukturami tudi same sitnosti. Ah, šalo na stran. Predstavimo raje, kaj bi zamudili, če bi se Diskretnim strukturam izognili. Če vemo, da je 1+1=2 in 2+2=5, potem bi morali verjeti tudi, da je 3+3=7, mar ne? Sešteli bi lahko obe "enačbi", na primer. Toda v tem primeru moramo verjeti tudi, da so vse krave iste barve. Tega pa si najbrž ne bi mislili.','id_nosilca'=>3,'KT'=>6]);
 
-        Predmet::create(['sifra'=>'63213','naziv'=>'Verjetnost in statistika', 'opis'=>'Cilj predmeta je študentom računalništva in informatike predstaviti osnovne verjetnosti in statistike.', 'id_nosilca'=>8, 'KT'=>6, 'tip'=>'obvezni']);
-        Predmet::create(['sifra'=>'63219','naziv'=>'Matematično modeliranje','opis'=>'Cilj predmeta je nadgraditi osnovno poznavanje in razumevanje pojmov matematične analize in linearne algebre z zahtevnejšimi pojmi, prikazati njihovo uporabo pri matematičnem modeliranju pojavov v računalništvu in drugih znanostih in osnovne metode za računanje dobljenih modelov.','id_nosilca'=>2,'KT'=>6,'tip'=>'strokovni-izbirni']);
-
-        Predmet::create(['sifra'=>'63254','naziv'=>'Postopki razvoja programske opreme','opis'=>'Cilj predmeta je pridobiti znanja o postopkih razvoja programske opreme s posebnim poudarkom na razvoju strežniških (server-side, datacenter, cloud) aplikacij, torej aplikacij, ki se uporabljajo v velikih informacijskih sistemih podjetij ali velikih spletnih aplikacij (npr. Facebook, LinkedIn, spletnih trgovin kot so Amazon, mimovrste, ebay in podobnih).','id_nosilca'=>4,'KT'=>6]);
-        Predmet::create(['sifra'=>'63255','naziv'=>'Spletno programiranje','opis'=>'Pri predmetu Spletno programiranje se bomo posvetili pregledu nad tehnologijami, ki se uporabljajo pri delovanju spleta, spletnih strežnikov, brskalnikov in spletnih aplikacij. Pregledali bomo osnove izdelave in oblikovanja spletnih strani (HTML5, CSS, XML) ter jih nadgradili s pregledom tehnologij na strani klienta (JavaScript) in strežnika (PHP, AJAX, JavaServer, ASP.NET, Ruby/Rails, spletne storitve).','id_nosilca'=>5,'KT'=>6]);
-        Predmet::create(['sifra'=>'63256','naziv'=>'Tehnologije programske opreme','opis'=>'Predstavljajte si razvijalca programske opreme, od katerega naročnik želi, da izdela rešitev, ki mu bo (seveda s pomočjo računalnika) olajšala delo na določenem področju. Razvijalec mora najprej ugotoviti, kakšne so zahteve uporabnikov, na podlagi tega izdelati načrt rešitve, napisati potrebne programe, jih stestirati in predati v uporabo ter nato vzdrževati do konca njihove življenjske dobe. Pri predmetu Tehnologija programske opreme se boste naučili, kako to narediti z uporabo najnovejših pristopov k razvoju programske opreme.','id_nosilca'=>1,'KT'=>6]);
-        Predmet::create(['sifra'=>'63246','naziv'=>'Komuniciranje in vodenje projektov','opis'=>'Prvi cilj predmeta je osvežitev in nadgradnja osnovnih komunikacijskih kompetenc (pisno izražanje, govor, komuniciranje po medmrežju), predvsem v povezavi s poročanjem o strokovnih temah in z uporabo sodobnih informacijskih tehnologij. Drugi del predmeta študente seznani z osnovnimi načini organizacije projektnega načina dela.','id_nosilca'=>6,'KT'=>6]);
-        Predmet::create(['sifra'=>'63248','naziv'=>'Ekonomika in podjetništvo','opis'=>'Temeljni namen predmeta je seznanitev študenta s področjem ekonomske znanosti na ravni združb (podjetij, zavodov itn.), zato da bo usposobljen dojemati vsebino tistih strokovnih pogovorov, ki vsebujejo ekonomske pojme, ter dejavno sodelovati v njih. Iz tega namena izvedeni cilji so zagotoviti tako poznavanje temeljnih ekonomskih pojmov in njihove medsebojne odvisnosti kot tudi sposobnost vključevanja teh pojmov v razmere praktičnega dela, zlasti v zvezi z ustanavljanjem in delovanjem podjetij v lasti gospodarskih družb, ko se bo kot diplomant soočil s potrebo ovrednotenja določenih stanj, procesov in izidov.','id_nosilca'=>7,'KT'=>6]);
-
-        Predmet::create(['sifra'=>'63508', 'naziv'=>'Algoritmi','opis'=>'Govorimo o algoritmih in podatkovnih strukturah. To so za računalnikarja orodja, s katerimi realizira svoje, še tako divje ideje.','id_nosilca'=>9,'KT'=>6]);
 
         DB::table('program_predmet')->truncate();
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>1,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
