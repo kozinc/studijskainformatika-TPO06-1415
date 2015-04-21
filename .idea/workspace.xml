@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06304d7b-ba65-4c89-be3d-476d003f2ba8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php" />
     </list>
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,10 +37,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DatabaseSeeder.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DatabaseSeeder.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33206108" vertical-offset="1730" max-vertical-offset="5491">
+            <state vertical-scroll-proportion="-5.9454546" vertical-offset="1577" max-vertical-offset="5491">
               <caret line="112" column="321" selection-start-line="112" selection-start-column="314" selection-end-line="112" selection-end-column="321" />
               <folding>
                 <element signature="e#7#38#0#PHP" expanded="true" />
@@ -53,18 +52,18 @@
       <file leaf-file-name="2015_03_25_173841_create_predmet_table.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_173841_create_predmet_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5384617" vertical-offset="51" max-vertical-offset="765">
-              <caret line="14" column="31" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="31" />
+            <state vertical-scroll-proportion="-10.461538" vertical-offset="51" max-vertical-offset="765">
+              <caret line="20" column="39" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database/migrations/2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.769231" vertical-offset="0" max-vertical-offset="714">
-              <caret line="19" column="84" selection-start-line="19" selection-start-column="84" selection-end-line="19" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.54063606" vertical-offset="0" max-vertical-offset="714">
+              <caret line="19" column="36" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -155,8 +154,8 @@
         <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_03_25_173841_create_predmet_table.php" />
         <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/database/migrations/2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_04_21_215832_create_link_predmet_nosilci_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php" />
       </list>
     </option>
   </component>
@@ -1022,14 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_173841_create_predmet_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617" vertical-offset="51" max-vertical-offset="765">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_04_21_215832_create_link_predmet_nosilci_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.769231" vertical-offset="0" max-vertical-offset="697">
@@ -1038,21 +1029,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231" vertical-offset="0" max-vertical-offset="714">
-          <caret line="19" column="84" selection-start-line="19" selection-start-column="84" selection-end-line="19" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33206108" vertical-offset="1730" max-vertical-offset="5491">
+        <state vertical-scroll-proportion="-5.9454546" vertical-offset="1577" max-vertical-offset="5491">
           <caret line="112" column="321" selection-start-line="112" selection-start-column="314" selection-end-line="112" selection-end-column="321" />
           <folding>
             <element signature="e#7#38#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_173841_create_predmet_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538" vertical-offset="51" max-vertical-offset="765">
+          <caret line="20" column="39" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_04_21_222412_change_id_nosilca_to_link_in_predmet_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54063606" vertical-offset="0" max-vertical-offset="714">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>

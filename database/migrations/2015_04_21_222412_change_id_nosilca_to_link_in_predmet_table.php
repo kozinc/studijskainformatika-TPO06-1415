@@ -15,7 +15,7 @@ class ChangeIdNosilcaToLinkInPredmetTable extends Migration {
 		Schema::table('predmet', function(Blueprint $table)
 		{
 			//tukaj sem zbrisal columno id_nosilca
-            $table->dropColumn('votes');
+            $table->dropColumn('id_nosilca');
             // in dodal kolumno za povazovalno tabelo
             $table->foreign('id_link')->references('id')->on('link_predmet_nosilci');
 		});
