@@ -3,7 +3,10 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">Vsa polaganja izpitov</button>
+                <button type="button" class="btn btn-default">Samo zadnje polaganje</button>
+            </div><br><br>
             @foreach($programi->get() as $program)
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -25,8 +28,8 @@
                                 <th>Ime predmeta</th>
                                 <th>Nosilci</th>
                                 <th>Datum polaganja</th>
-                                <th>Število polaganj</th>
-                                <th>Število polaganj v tem študijskem letu</th>
+                                <th>Zaporedno število polaganja</th>
+                                <th>Zaporedno število polaganja v tem študijskem letu</th>
                                 <th>KT</th>
                                 <th>Ocena</th>
                             </tr>

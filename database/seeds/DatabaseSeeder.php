@@ -260,6 +260,10 @@ class TableSeeder extends Seeder {
         IzpitniRok::create(['id_predmeta'=>21, 'izpitni_rok'=>3, 'datum'=>'2015-09-03', 'studijsko_leto'=>'2014/2015']);
         ////
 
+        DB::table('student_izpit')->truncate();
+        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>1, 'ocena'=>5]);
+        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>2, 'ocena'=>8]);
+
 
         DB::table('program_predmet')->truncate();
         //1.letnik BUN-RI 2014/2015
