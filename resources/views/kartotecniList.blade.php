@@ -4,7 +4,6 @@
     <div class="panel panel-default">
         <div class="panel-body">
 
-
             @foreach($programi->get() as $program)
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -60,6 +59,12 @@
                     </div>
                 </div>
             @endforeach
+
+            <form action="{{ action('KartotecniListController@export') }}" method="post">
+                <input class="btn" type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input class="btn" type="submit" name="csv" value="Izvozi CSV">
+                <input class="btn" type="submit" name="pdf" value="Izvozi PDF">
+            </form>
 
         </div>
     </div>
