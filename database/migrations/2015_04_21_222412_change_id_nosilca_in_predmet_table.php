@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLinkPredmetNosilciTable extends Migration {
+class ChangeIdNosilcaInPredmetTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,14 @@ class CreateLinkPredmetNosilciTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('link_predmet_nosilci', function(Blueprint $table)
+		Schema::table('predmet', function(Blueprint $table)
 		{
-			$table->increments('id');
-            $table->foreign('id_predmeta')->references('id')->on('predmet')->unsigned();
-            $table->foreign('id_nosilca1')->references('id')->on('nosilec')->unsigned();
+			//tukaj sem zbrisal columno id_nosilca
+            $table->dropColumn('id_nosilca');
+            // in dodal kolumne za nosilca 1, 2 in 3. Minimalno je 1 nosilec, maximalno 3 nosilci
+            $table->foreign('id_nosilca')->references('id')->on('nosilec')->unsigned();
             $table->foreign('id_nosilca2')->references('id')->on('nosilec')->nullable()->unsigned();
             $table->foreign('id_nosilca2')->references('id')->on('nosilec')->nullable()->unsigned();
-            $table->timestamps();
 		});
 	}
 
@@ -30,7 +30,10 @@ class CreateLinkPredmetNosilciTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('link_predmet_nosilci');
+		Schema::table('predmet', function(Blueprint $table)
+		{
+			//
+		});
 	}
 
 }
