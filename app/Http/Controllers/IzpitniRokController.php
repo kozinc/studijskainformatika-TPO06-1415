@@ -46,7 +46,39 @@ class IzpitniRokController extends Controller {
         return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', $predmet_id)->with('izpitni_roki', $izpitni_roki_list);
     }
 
+    public function obvestiStudente($id_izpita, $sporocilo){
+
+        $student_izpit = \DB::table('student_izpit')->where('id_izpitnega_roka', $id_izpita)->get();
+        $izpit = \App\Models\IzpitniRok::where('id', $id_izpita)->first();
+        $datum_izpita = $izpit->datum;
+        $ime_predmeta = \App\Models\Predmet::where('id', $izpit->id_predmeta)->first();
+        $ime_predmeta = $ime_predmeta->naziv;
+
+        $subject = "Referat FRI - sprememba izpitnega roka";
+
+        if($sporocilo == "Brisanje"){
+            $s = "Pozdravljeni, <br> Obveščamo vas, da je bil izpitni rok predmeta ". $ime_predmeta . " dne " . $datum_izpita . "
+                                        odstranjen. Vaša prijava na izpit je bila samodejno vrnjena. <br>
+                                        Lep pozdrav <br> referat FRI";
+        }
+        else if($sporocilo == "Sprememba"){
+
+        }
+
+        $send_mail = new \App\Helpers\MailHelper;
+
+        foreach ($student_izpit as $izpit) {
+            $student_id = $izpit->id_studenta;
+            $student = \App\Models\Student::where('id', $student_id)->first();
+            $mail = $student->email;
+            //$send_mail->send("veronika.blazic@gmail.com", $mail, "Referat FRI - Sprememba izpitnega roka", $s);
+        }
+
+        //$send_mail->send("veronika.blazic@gmail.com", $mail, "Referat FRI - Sprememba izpitnega roka", $s);
+    }
+
     public function brisiIzpitniRok($id){
+        self::obvestiStudente($id, "Brisanje");
         \App\Models\IzpitniRok::where('id', $id)->delete();
         \DB::table('student_izpit')->where('id_izpitnega_roka', $id)->delete();
         return self::getSpremeniIzpitniRok();
@@ -55,14 +87,9 @@ class IzpitniRokController extends Controller {
     public function dodajIzpitniRok(){
         $predmet_id = \Session::get("izbrani_predmet");
         $izpitni_roki = new \App\Models\IzpitniRok;
-
         $date = \Input::get('date');
-        echo $date;
         $deli_datuma = explode('.', $date);
         $datum = $deli_datuma[2] . "-"  . $deli_datuma[1] . "-" . $deli_datuma[0];
-
-        echo $datum;
-
         if($date != ""){
             $izpitni_roki->datum = $datum;
             $izpitni_roki->id_predmeta = $predmet_id;
@@ -72,7 +99,6 @@ class IzpitniRokController extends Controller {
         else{
            \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - vnesite datum");
         }
-
         return self::getSpremeniIzpitniRok();
     }
 }

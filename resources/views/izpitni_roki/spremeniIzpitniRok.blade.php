@@ -88,16 +88,14 @@
                 @foreach($izpitni_roki as $i)
                     <tr>
                         <td>{{ $i->izpitni_rok }}</td>
-                        <td>{{ $i->datum }}</td>
+                        <td id="datum">{{ $i->datum }}</td>
                         <td>{{ $i->st_prijav }}</td>
-                        <td>{{ $i->ocene }}</td>
                         @if($i->ocene != "Ocene so vnešene")
                             <td>
-                                <a href="#">Uredi</a>
+                                <a id="uredi_button" href="#">Uredi</a> / <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
                             </td>
-                            <td>
-                                <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
-                            </td>
+                        @else
+                            <td>{{ $i->ocene }}</td>
                         @endif
                     </tr>
                 @endforeach
@@ -122,10 +120,12 @@
                 $('#obrazec_izpit').show('slow');
                 return false;
             });
+
+            $('#uredi_button').click(function(){
+
+            });
         });
 
-
     </script>
-
 </body>
 </html>
