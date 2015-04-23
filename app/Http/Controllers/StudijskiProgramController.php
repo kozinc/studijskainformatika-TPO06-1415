@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\ProgramLetnik;
 use App\Models\StudijskiProgram;
 use App\Models\Predmet;
 use App\Models\Modul;
@@ -89,7 +90,8 @@ class StudijskiProgramController extends Controller {
 
     public function showPredmetnik($id){
         $program = StudijskiProgram::find((int)$id);
-        return view('program/programPredmetnik',['program'=>$program] );
+        $predmeti = Predmet::all();
+        return view('program/programPredmetnik',['program'=>$program, 'predmeti'=>$predmeti] );
     }
 
     public function editPredmetnik($id){

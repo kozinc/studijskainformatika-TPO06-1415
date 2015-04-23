@@ -7,18 +7,13 @@ class Predmet extends Model {
 
     use SoftDeletes;
     protected $table = 'predmet';
-    protected $fillable = ['sifra','naziv','opis','id_nosilca','KT','id_modula'];
+    protected $fillable = ['sifra','naziv','opis','id_nosilca','KT'];
     protected $guarded = ['id'];
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     public function studijski_programi()
     {
         return $this->belongsToMany('App\Models\StudijskiProgram', 'program_predmet', 'id_predmeta','id_programa');
-    }
-
-    public function modul()
-    {
-        return $this->belongsTo('App\Models\Modul','id_modula');
     }
 
     public function nosilec()

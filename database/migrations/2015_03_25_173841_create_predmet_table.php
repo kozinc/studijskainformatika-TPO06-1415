@@ -20,7 +20,6 @@ class CreatePredmetTable extends Migration {
             $table->text('opis');
             $table->integer('id_nosilca')->unsigned();
             $table->integer('KT');
-            $table->integer('id_modula')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

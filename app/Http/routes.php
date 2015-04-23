@@ -36,7 +36,8 @@ Route::get('ponastavitev-gesla/{koda}', 'LoginController@passwordResetPotrditev'
 Route::get('vloge', 'VpisniListController@seznamVlog');
 Route::get('vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
 
-Route::get('kartotecniList', 'KartotecniListController@prikazKartotecniList');
+Route::get('kartotecniList/{id}', 'KartotecniListController@prikazKartotecniList');
+Route::post('kartotecniList/export', 'KartotecniListController@export');
 
 
 Route::controllers([
