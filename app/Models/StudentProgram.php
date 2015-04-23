@@ -33,6 +33,7 @@ public $timestamps = false;
      */
     public function potrdi(){
         $this->vloga_potrjena = date('Y-m-d');
+        $this->datum_vpisa = date('Y-m-d');
         $status = $this->save();
         return $status;
     }
