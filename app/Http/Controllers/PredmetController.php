@@ -139,6 +139,8 @@ class PredmetController extends Controller {
         $predmet->opis = $request['opis'];
         $predmet->KT = (int)$request['kt'];
         $predmet->id_nosilca = (int)$request['id_nosilca'];
+        $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
+        $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
         $predmet->tip = $request['tip'];
         if($predmet->tip == 'modulski'){
             $predmet->id_modula = (int)$request['id_modula'];
