@@ -182,17 +182,13 @@ class TableSeeder extends Seeder {
         StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>26, 'letnik'=>3, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>10]);
         StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>27, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>7]);
 
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>28, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2015/2016']);
+       /* StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>28, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2015/2016']);
         StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>29, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2015/2016']);
         StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>30, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2015/2016']);
-        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>31, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2015/2016']);
+        StudentPredmet::create(['id_studenta'=>4, 'id_predmeta'=>31, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2015/2016']);*/
         ////////////////////////////////////////
 
-        StudentPredmet::create(['id_studenta'=>1, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
-        StudentPredmet::create(['id_studenta'=>2, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
-        StudentPredmet::create(['id_studenta'=>1, 'id_predmeta'=>7, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
 
-        StudentPredmet::create(['id_studenta'=>1, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>5, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>6, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
 
@@ -200,7 +196,7 @@ class TableSeeder extends Seeder {
         StudentPredmet::create(['id_studenta'=>6, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>7, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
 
-        StudentPredmet::create(['id_studenta'=>7, 'id_predmeta'=>3, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
+       /* StudentPredmet::create(['id_studenta'=>7, 'id_predmeta'=>3, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create([ 'id_studenta'=>8, 'id_predmeta'=>3, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>9, 'id_predmeta'=>3, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>10, 'id_predmeta'=>3, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
@@ -209,7 +205,7 @@ class TableSeeder extends Seeder {
         StudentPredmet::create(['id_studenta'=>8, 'id_predmeta'=>4, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>9, 'id_predmeta'=>4, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>10, 'id_predmeta'=>4, 'letnik'=>2, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
-        StudentPredmet::create(['id_studenta'=>11, 'id_predmeta'=>4, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
+        StudentPredmet::create(['id_studenta'=>11, 'id_predmeta'=>4, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);*/
 
         StudentPredmet::create(['id_studenta'=>11, 'id_predmeta'=>5, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>12, 'id_predmeta'=>5, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>8]);
@@ -264,16 +260,39 @@ class TableSeeder extends Seeder {
         IzpitniRok::create(['id_predmeta'=>21, 'izpitni_rok'=>3, 'datum'=>'2015-09-03', 'studijsko_leto'=>'2014/2015']);
         ////
 
+        DB::table('student_izpit')->truncate();
+        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>1, 'ocena'=>5]);
+        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>2, 'ocena'=>8]);
+
 
         DB::table('program_predmet')->truncate();
+        //1.letnik BUN-RI 2014/2015
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>1,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>2,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>3,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>4,'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni', 'studijsko_leto'=>'2014/2015']);
+
+        //2.letnik BUN-RI 2014/2015
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>11,'letnik'=>2, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>12,'letnik'=>2, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>13,'letnik'=>2, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>14,'letnik'=>2, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>15,'letnik'=>2, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>16,'letnik'=>2, 'semester'=>2,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>17,'letnik'=>2, 'semester'=>2,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>18,'letnik'=>2, 'semester'=>2,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>19,'letnik'=>2, 'semester'=>2,'tip'=>'strokovni-izbirni', 'studijsko_leto'=>'2014/2015']);
+
+        //3.letnik BUN-RI 2014/15
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>6,'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>2, 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>7,'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>2, 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>8,'letnik'=>3, 'semester'=>2,'tip'=>'modulski', 'id_modula'=>2, 'studijsko_leto'=>'2014/2015']);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>9,'letnik'=>3, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2014/2015']);
+
+        //1.letnik BMAG 2015/2016
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>28,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>29,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>30,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>31,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
 
 
         DB::table('student_program')->truncate();
@@ -282,13 +301,10 @@ class TableSeeder extends Seeder {
         DB::table('student_program')->insert(['id_studenta'=>4, 'id_programa'=>1, 'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2012-09-20', 'vloga_potrjena'=>'2012-09-26', 'datum_vpisa'=>'2012-09-26', 'studijsko_leto'=>'2012/2013', 'letnik'=>1]);
         DB::table('student_program')->insert(['id_studenta'=>4, 'id_programa'=>1, 'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2013-09-20', 'vloga_potrjena'=>'2013-09-26', 'datum_vpisa'=>'2013-09-26', 'studijsko_leto'=>'2013/2014', 'letnik'=>2]);
         DB::table('student_program')->insert(['id_studenta'=>4, 'id_programa'=>1, 'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-26', 'datum_vpisa'=>'2014-09-26', 'studijsko_leto'=>'2014/2015', 'letnik'=>3]);
-        DB::table('student_program')->insert(['id_studenta'=>4, 'id_programa'=>3, 'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2015-09-20', 'vloga_potrjena'=>'2015-09-26', 'datum_vpisa'=>'2015-09-26', 'studijsko_leto'=>'2015/2016', 'letnik'=>1]);
+        DB::table('student_program')->insert(['id_studenta'=>4, 'id_programa'=>3, 'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>null, 'vloga_potrjena'=>null, 'datum_vpisa'=>null, 'studijsko_leto'=>'2015/2016', 'letnik'=>1]);
 
         DB::table('student_program')->insert(['id_studenta'=>3, 'id_programa'=>3, 'vrsta_vpisa'=>2, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-26', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>1]);
-        DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2013-09-20', 'vloga_potrjena'=>'2013-09-25', 'datum_vpisa'=>'2014-09-25', 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);
-        DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-25', 'datum_vpisa'=>null, 'studijsko_leto'=>'2015/2016', 'letnik'=>3 ]);
-        DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2013-09-20', 'vloga_potrjena'=>'2014-09-25', 'datum_vpisa'=>'2014-09-25', 'studijsko_leto'=>'2013/2014', 'letnik'=>2 ]);
-        DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>3 ]);
+        DB::table('student_program')->insert(['id_studenta'=>1, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>null, 'vloga_potrjena'=>null, 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>2 ]);
         DB::table('student_program')->insert(['id_studenta'=>2, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2015-04-01', 'vloga_potrjena'=>null, 'datum_vpisa'=>null, 'studijsko_leto'=>'2015/2016', 'letnik'=>1 ]);
 
         DB::table('student_program')->insert(['id_studenta'=>6, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-24', 'datum_vpisa'=>null, 'studijsko_leto'=>'2014/2015', 'letnik'=>1 ]);
@@ -321,17 +337,23 @@ class TableSeeder extends Seeder {
         DB::table('vrsta_vpisa')->insert(['sifra'=>98, 'ime'=>'Vpis za zaključek', 'mozni_letniki'=>'Zadnji letnik. Namenjeno samo strokovnim delavcem v študentskem referatu.']);
 
         DB::table('sklep')->truncate();
-        Sklep::create(['id_studenta'=>1, 'datum'=>'2014-10-01', 'vsebina'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non urna a neque sollicitudin tristique id quis diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut arcu velit, rhoncus quis felis sit amet, molestie congue felis. Donec rhoncus pellentesque nunc, congue congue mauris malesuada eu. Phasellus in turpis at nisl auctor blandit. Vivamus consectetur est eget sapien bibendum porttitor. Aliquam rhoncus commodo nisi pharetra tempor. Praesent vel magna vitae est interdum iaculis at sit amet felis.']);
-        Sklep::create(['id_studenta'=>2, 'datum'=>'2015-04-17', 'vsebina'=>'Vestibulum placerat tortor mi, a sollicitudin justo maximus nec. Integer et commodo elit. Etiam sodales varius vestibulum. Sed justo libero, mattis non sapien eu, euismod sagittis erat. Integer efficitur consequat diam, sed ornare felis dictum nec. Fusce auctor lobortis molestie. Mauris nec pulvinar mi.']);
-        Sklep::create(['id_studenta'=>1, 'datum'=>'2014-10-05', 'vsebina'=>'Nullam hendrerit nulla id orci pretium, ut fermentum mi facilisis. Proin aliquam feugiat ante ut pulvinar. Etiam vitae ultrices erat. Aenean lobortis lacus dapibus, aliquet tortor in, consectetur arcu. Morbi at lectus in sem blandit dapibus eget sed metus. Nulla a leo quis elit tincidunt venenatis id ut ex. Praesent ac semper tellus. Nullam at metus metus. Nulla vel arcu tincidunt, ullamcorper purus vel, faucibus mi. Proin et purus a diam laoreet imperdiet non sed diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.']);
-        Sklep::create(['id_studenta'=>2, 'datum'=>'2014-11-19', 'vsebina'=>'Nullam hendrerit nulla id orci pretium, ut fermentum mi facilisis. Proin aliquam feugiat ante ut pulvinar. Etiam vitae ultrices erat. Aenean lobortis lacus dapibus, aliquet tortor in, consectetur arcu. Morbi at lectus in sem blandit dapibus eget sed metus. Nulla a leo quis elit tincidunt venenatis id ut ex. Praesent ac semper tellus. Nullam at metus metus. Nulla vel arcu tincidunt, ullamcorper purus vel, faucibus mi. Proin et purus a diam laoreet imperdiet non sed diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.']);
-        Sklep::create(['id_studenta'=>3, 'datum'=>'2014-11-22', 'vsebina'=>'Donec eget urna eget urna tincidunt lacinia sed sed ipsum. Mauris non pretium diam. Maecenas ut sodales magna, at consequat risus. Ut sed pretium ligula, eget porttitor nulla. Quisque aliquam metus vitae diam ultricies, venenatis ultrices mauris viverra. Aenean diam ipsum, pulvinar ac pellentesque at, euismod rutrum nibh. Pellentesque metus elit, auctor vel eros id, consectetur laoreet arcu.']);
-        Sklep::create(['id_studenta'=>3, 'datum'=>'2015-02-14', 'vsebina'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non urna a neque sollicitudin tristique id quis diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut arcu velit, rhoncus quis felis sit amet, molestie congue felis. Donec rhoncus pellentesque nunc, congue congue mauris malesuada eu. Phasellus in turpis at nisl auctor blandit. Vivamus consectetur est eget sapien bibendum porttitor. Aliquam rhoncus commodo nisi pharetra tempor. Praesent vel magna vitae est interdum iaculis at sit amet felis.']);
-        Sklep::create(['id_studenta'=>4, 'datum'=>'2014-12-20', 'vsebina'=>'Donec eget urna eget urna tincidunt lacinia sed sed ipsum. Mauris non pretium diam. Maecenas ut sodales magna, at consequat risus. Ut sed pretium ligula, eget porttitor nulla. Quisque aliquam metus vitae diam ultricies, venenatis ultrices mauris viverra. Aenean diam ipsum, pulvinar ac pellentesque at, euismod rutrum nibh. Pellentesque metus elit, auctor vel eros id, consectetur laoreet arcu.']);
-        Sklep::create(['id_studenta'=>5, 'datum'=>'2014-12-20', 'vsebina'=>'Donec eget urna eget urna tincidunt lacinia sed sed ipsum. Mauris non pretium diam. Maecenas ut sodales magna, at consequat risus. Ut sed pretium ligula, eget porttitor nulla. Quisque aliquam metus vitae diam ultricies, venenatis ultrices mauris viverra. Aenean diam ipsum, pulvinar ac pellentesque at, euismod rutrum nibh. Pellentesque metus elit, auctor vel eros id, consectetur laoreet arcu.']);
-        Sklep::create(['id_studenta'=>4, 'datum'=>'2015-03-20', 'vsebina'=>'Vestibulum placerat tortor mi, a sollicitudin justo maximus nec. Integer et commodo elit. Etiam sodales varius vestibulum. Sed justo libero, mattis non sapien eu, euismod sagittis erat. Integer efficitur consequat diam, sed ornare felis dictum nec. Fusce auctor lobortis molestie. Mauris nec pulvinar mi.']);
-        Sklep::create(['id_studenta'=>5, 'datum'=>'2015-04-01', 'vsebina'=>'Vestibulum placerat tortor mi, a sollicitudin justo maximus nec. Integer et commodo elit. Etiam sodales varius vestibulum. Sed justo libero, mattis non sapien eu, euismod sagittis erat. Integer efficitur consequat diam, sed ornare felis dictum nec. Fusce auctor lobortis molestie. Mauris nec pulvinar mi.']);
+        Sklep::create(['id_studenta'=>1, 'datum'=>'2014-10-01', 'id_organa'=>1, 'vsebina'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non urna a neque sollicitudin tristique id quis diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut arcu velit, rhoncus quis felis sit amet, molestie congue felis. Donec rhoncus pellentesque nunc, congue congue mauris malesuada eu. Phasellus in turpis at nisl auctor blandit. Vivamus consectetur est eget sapien bibendum porttitor. Aliquam rhoncus commodo nisi pharetra tempor. Praesent vel magna vitae est interdum iaculis at sit amet felis.']);
+        Sklep::create(['id_studenta'=>2, 'datum'=>'2015-04-17', 'id_organa'=>2, 'vsebina'=>'Vestibulum placerat tortor mi, a sollicitudin justo maximus nec. Integer et commodo elit. Etiam sodales varius vestibulum. Sed justo libero, mattis non sapien eu, euismod sagittis erat. Integer efficitur consequat diam, sed ornare felis dictum nec. Fusce auctor lobortis molestie. Mauris nec pulvinar mi.']);
+        Sklep::create(['id_studenta'=>1, 'datum'=>'2014-10-05', 'id_organa'=>2,' vsebina'=>'Nullam hendrerit nulla id orci pretium, ut fermentum mi facilisis. Proin aliquam feugiat ante ut pulvinar. Etiam vitae ultrices erat. Aenean lobortis lacus dapibus, aliquet tortor in, consectetur arcu. Morbi at lectus in sem blandit dapibus eget sed metus. Nulla a leo quis elit tincidunt venenatis id ut ex. Praesent ac semper tellus. Nullam at metus metus. Nulla vel arcu tincidunt, ullamcorper purus vel, faucibus mi. Proin et purus a diam laoreet imperdiet non sed diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.']);
+        Sklep::create(['id_studenta'=>2, 'datum'=>'2014-11-19', 'id_organa'=>4, 'vsebina'=>'Nullam hendrerit nulla id orci pretium, ut fermentum mi facilisis. Proin aliquam feugiat ante ut pulvinar. Etiam vitae ultrices erat. Aenean lobortis lacus dapibus, aliquet tortor in, consectetur arcu. Morbi at lectus in sem blandit dapibus eget sed metus. Nulla a leo quis elit tincidunt venenatis id ut ex. Praesent ac semper tellus. Nullam at metus metus. Nulla vel arcu tincidunt, ullamcorper purus vel, faucibus mi. Proin et purus a diam laoreet imperdiet non sed diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.']);
+        Sklep::create(['id_studenta'=>3, 'datum'=>'2014-11-22', 'id_organa'=>2, 'vsebina'=>'Donec eget urna eget urna tincidunt lacinia sed sed ipsum. Mauris non pretium diam. Maecenas ut sodales magna, at consequat risus. Ut sed pretium ligula, eget porttitor nulla. Quisque aliquam metus vitae diam ultricies, venenatis ultrices mauris viverra. Aenean diam ipsum, pulvinar ac pellentesque at, euismod rutrum nibh. Pellentesque metus elit, auctor vel eros id, consectetur laoreet arcu.']);
+        Sklep::create(['id_studenta'=>3, 'datum'=>'2015-02-14', 'id_organa'=>2, 'vsebina'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non urna a neque sollicitudin tristique id quis diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut arcu velit, rhoncus quis felis sit amet, molestie congue felis. Donec rhoncus pellentesque nunc, congue congue mauris malesuada eu. Phasellus in turpis at nisl auctor blandit. Vivamus consectetur est eget sapien bibendum porttitor. Aliquam rhoncus commodo nisi pharetra tempor. Praesent vel magna vitae est interdum iaculis at sit amet felis.']);
+        Sklep::create(['id_studenta'=>4, 'datum'=>'2014-12-20', 'id_organa'=>1, 'vsebina'=>'Donec eget urna eget urna tincidunt lacinia sed sed ipsum. Mauris non pretium diam. Maecenas ut sodales magna, at consequat risus. Ut sed pretium ligula, eget porttitor nulla. Quisque aliquam metus vitae diam ultricies, venenatis ultrices mauris viverra. Aenean diam ipsum, pulvinar ac pellentesque at, euismod rutrum nibh. Pellentesque metus elit, auctor vel eros id, consectetur laoreet arcu.']);
+        Sklep::create(['id_studenta'=>5, 'datum'=>'2014-12-20', 'id_organa'=>4, 'vsebina'=>'Donec eget urna eget urna tincidunt lacinia sed sed ipsum. Mauris non pretium diam. Maecenas ut sodales magna, at consequat risus. Ut sed pretium ligula, eget porttitor nulla. Quisque aliquam metus vitae diam ultricies, venenatis ultrices mauris viverra. Aenean diam ipsum, pulvinar ac pellentesque at, euismod rutrum nibh. Pellentesque metus elit, auctor vel eros id, consectetur laoreet arcu.']);
+        Sklep::create(['id_studenta'=>4, 'datum'=>'2015-03-20', 'id_organa'=>5, 'vsebina'=>'Vestibulum placerat tortor mi, a sollicitudin justo maximus nec. Integer et commodo elit. Etiam sodales varius vestibulum. Sed justo libero, mattis non sapien eu, euismod sagittis erat. Integer efficitur consequat diam, sed ornare felis dictum nec. Fusce auctor lobortis molestie. Mauris nec pulvinar mi.']);
+        Sklep::create(['id_studenta'=>5, 'datum'=>'2015-04-01', 'id_organa'=>4, 'vsebina'=>'Vestibulum placerat tortor mi, a sollicitudin justo maximus nec. Integer et commodo elit. Etiam sodales varius vestibulum. Sed justo libero, mattis non sapien eu, euismod sagittis erat. Integer efficitur consequat diam, sed ornare felis dictum nec. Fusce auctor lobortis molestie. Mauris nec pulvinar mi.']);
 
+        DB::table('organ')->truncate();
+        DB::table('organ')->insert(['ime'=> 'Dekan']);
+        DB::table('organ')->insert(['ime'=> 'Senat']);
+        DB::table('organ')->insert(['ime'=> 'Akademski zbor']);
+        DB::table('organ')->insert(['ime'=> 'Upravni odbor']);
+        DB::table('organ')->insert(['ime'=> 'Študentski svet']);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 

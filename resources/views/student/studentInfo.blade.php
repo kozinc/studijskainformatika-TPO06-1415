@@ -62,6 +62,7 @@
         <tr>
             <th>Id</th>
             <th>Datum</th>
+            <th>Organ</th>
             <th>Vsebina</th>
             <th>Uredi</th>
         </tr>
@@ -69,6 +70,7 @@
             <tr>
                 <td>{{ $sklep->id }}</td>
                 <td>{{ date('d.m.Y',strtotime($sklep->datum)) }}</td>
+                <td>{{ $sklep->organ->ime }}</td>
                 <td>{{ $sklep->vsebina }}</td>
                 <td><a href="{{ action('SklepController@edit', ['idStudenta'=>$student->id, 'idSklepa'=>$sklep->id]) }}">Uredi sklep</a></td>
             </tr>

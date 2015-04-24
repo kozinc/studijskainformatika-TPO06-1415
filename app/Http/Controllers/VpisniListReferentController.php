@@ -4,6 +4,7 @@ use App\Models\Student;
 use App\Models\StudijskiProgram;
 use App\Models\Referent;
 use App\Models\StudentProgram;
+use App\Models\StudentPredmet;
 use App\Models\VrstaVpisa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -155,7 +156,7 @@ class VpisniListReferentController extends Controller {
         $student = Student::find($request['id_studenta']);
 
         //validacija imena inj priimka
-        if (ctype_alpha ($request['ime']) && ctype_alpha($request['priimek']))
+        if (preg_match('/^[a-žA-Ž]+$/', ($request['ime']))  && preg_match('/^[a-žA-Ž]+$/', ($request['ime'])))
         {
             $student->ime = $request['ime'];
             $student->priimek = $request['priimek'];
@@ -298,6 +299,13 @@ class VpisniListReferentController extends Controller {
         $programStudenta->vloga_potrjena = date('Y-m-d');
         $programStudenta->datum_vpisa = date('Y-m-d');
         $programStudenta->save();
+        //+++++++++++shrani se OBVEZNI predmetnik študenta za to študijsko leto++++++++++++++
+        $program = StudijskiProgram::find($programStudenta->id_programa);
+        $predmeti = $program->predmeti()->where('studijsko_leto','=',$programStudenta->studijsko_leto)->where('letnik','=', $programStudenta->letnik)->where('tip','=','obvezni');
+        foreach($predmeti->get() as $predmet)
+        {
+            StudentPredmet::create(['id_studenta'=>$programStudenta->id_studenta, 'id_predmeta'=>$predmet->id, 'letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto]);
+        }
         $sporocilo = "Vloga uspešno oddana in potrjena.";
 
         return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0,'sporocilo'=> $sporocilo]);

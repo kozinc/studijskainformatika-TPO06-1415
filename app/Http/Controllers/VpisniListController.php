@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\StudentPredmet;
 use App\Models\StudijskiProgram;
 use App\Models\VrstaVpisa;
 use App\Models\StudentProgram;
@@ -87,6 +88,7 @@ class VpisniListController extends Controller {
                     $prviVpis = $programStudenta->where('id_programa','=',$program->id)->where('id_studenta','=', $student->id)->first();
                     $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
 
+
                     return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
                 }
@@ -109,8 +111,8 @@ class VpisniListController extends Controller {
         //shranimo oz. posodobimo podatke o studentu
         $student = Student::find($request['id_studenta']);
 
-        //validacija imena inj priimka
-        if (ctype_alpha ($request['ime']) && ctype_alpha($request['priimek']))
+        //validacija imena in priimka
+        if (preg_match('/^[a-žA-Ž]+$/', ($request['ime']))  && preg_match('/^[a-žA-Ž]+$/', ($request['ime'])))
         {
             $student->ime = $request['ime'];
             $student->priimek = $request['priimek'];
@@ -152,7 +154,7 @@ class VpisniListController extends Controller {
                 {
                     if (substr($request['emso'], 7, 3) != "505")
                     {
-                        return Redirect::back()->withErrors(['EMSO se ne ujema s spolom.']);
+                        return Redirect::back()->withErrors(['EMŠO se ne ujema s spolom.']);
                     }
                     else
                     {
@@ -163,7 +165,7 @@ class VpisniListController extends Controller {
                 {
                     if (substr($request['emso'], 7, 3) != "500")
                     {
-                        return Redirect::back()->withErrors(['EMSO se ne ujema s spolom.']);
+                        return Redirect::back()->withErrors(['EMŠO se ne ujema s spolom.']);
                     }
                     else
                     {
@@ -174,13 +176,13 @@ class VpisniListController extends Controller {
             }
             else
             {
-                return Redirect::back()->withErrors(['EMSO se ne ujema z datumom rojstva.']);
+                return Redirect::back()->withErrors(['EMŠO se ne ujema z datumom rojstva.']);
             }
 
         }
         else
         {
-            return Redirect::back()->withErrors(['EMSO mora biti sestavljen iz 13 številk.']);
+            return Redirect::back()->withErrors(['EMŠO mora biti sestavljen iz 13 številk.']);
         }
 
         //Validacija drzave rojstva in skladnosti drzave in obcine rojstva
@@ -261,12 +263,20 @@ class VpisniListController extends Controller {
     public function potrdiVlogo($id){
         $vloga = StudentProgram::find((int)$id);
         $studentProgrami = StudentProgram::nepotrjeneVloge();
+        $program = StudijskiProgram::find($vloga->id_programa);
         if(!is_null($vloga)){
             $status = $vloga->potrdi();
             if($status){
                 $msg = 'Vloga potrjena';
-                //return Redirect::back()->with('odgovor','Vloga potrjena');
+                //+++++++++++shrani se OBVEZNI predmetnik študenta za to študijsko leto++++++++++++++
+                $predmeti = $program->predmeti()->where('studijsko_leto','=',$vloga->studijsko_leto)->where('letnik','=', $vloga->letnik)->where('tip','=','obvezni');
+                foreach($predmeti->get() as $predmet)
+                {
+                    StudentPredmet::create(['id_studenta'=>$vloga->id_studenta, 'id_predmeta'=>$predmet->id, 'letnik'=>$vloga->letnik, 'studijsko_leto'=>$vloga->studijsko_leto]);
+                }
+
                 return redirect('vloge')->with('odgovor','Vloga potrjena');
+
             }
         }
 

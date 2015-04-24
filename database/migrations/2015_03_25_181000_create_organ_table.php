@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSklepTable extends Migration {
+class CreateOrganTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,14 +12,10 @@ class CreateSklepTable extends Migration {
      */
     public function up()
     {
-        Schema::create('sklep', function(Blueprint $table)
+        Schema::create('organ', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('id_studenta');
-            $table->integer('id_organa');
-            $table->date('datum');
-            $table->text('vsebina');
-            $table->softDeletes();
+            $table->text('ime');
         });
     }
 
@@ -30,7 +26,7 @@ class CreateSklepTable extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('sklep');
+        Schema::dropIfExists('organ');
     }
 
 }
