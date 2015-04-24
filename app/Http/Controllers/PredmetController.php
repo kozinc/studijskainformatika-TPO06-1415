@@ -25,7 +25,7 @@ class PredmetController extends Controller {
 
 	}
 
-    public function export(Request $request){
+    public function export(Request $request){// TODO: FIX EXPORT ZA NOSILCA 2 in 3, ce se pojavita
         $content = [];
         $title = '';
         if($request['target'] == 'predmeti') {
