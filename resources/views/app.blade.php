@@ -68,7 +68,7 @@
                     <a class="navbar-brand" href="{{ action('VpisniListController@obrazecVpisniList')  }}">Vpisni list</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('KartotecniListController@prikazKartotecniList')  }}">Kartotečni list</a>
+                    <a class="navbar-brand" href="{{ action('KartotecniListController@prikazKartotecniList', ['id'=>\Session::get('id')])  }}">Kartotečni list</a>
                 </div>
             @elseif (\Session::get('vloga') == "ucitelj" )
                 <div class="navbar-header">

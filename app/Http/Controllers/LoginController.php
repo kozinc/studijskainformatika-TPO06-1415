@@ -91,6 +91,7 @@ class LoginController extends Controller {
         else if(is_null($referent) && is_null($nosilec)){
             $vloga = "student";
             \Session::set("imepriimek", $user->ime.' '.$user->priimek);
+            \Session::set("id", $user->id);
             if(!\Hash::check($this_password, $user->geslo)){
                 \Session::flash("error", "Geslo se ne ujema z uporabniškim imenom!");
                 $this->add_to_session();
@@ -116,7 +117,7 @@ class LoginController extends Controller {
         }
         else if (\Session::get("vloga") == "student")
         {
-            return Redirect(action('KartotecniListController@prikazKartotecniList'));
+            return Redirect(action('KartotecniListController@prikazKartotecniList', ['id'=>$user->id]));
         }
         else if (\Session::get("vloga") == "ucitelj")
         {

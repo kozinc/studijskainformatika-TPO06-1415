@@ -53,17 +53,31 @@
         {!! Form::close() !!}
         <br/>
 
-        @if($izpitni_roki != '' || Session::get('izpitni_roki_sporocilo') != "")
-            <button id="izpit_button"  class="btn btn-default">Dodaj izpitni rok</button>
+        @if($izpitni_roki != '')
+            <button id="izpit_button1"  class="btn btn-default">Dodaj izpitni rok</button>
+            <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
             <br/>
 
             <div  id="obrazec_izpit" style="background-color: #FAFAFA">
-                <div class="form-group" id="obrazec_izpit" style="width:200px; margin-left: 10px">
+                <div class="form-group" id="obrazec_izpit1" style="width:200px; margin-left: 10px">
                     <br>
                     {!! Form::open(array('action' => 'IzpitniRokController@dodajIzpitniRok')) !!}
+                        <label>Izpitni rok: &nbsp;&nbsp;</label> {!! Form::select('zaporedni_rok', array('1' => '1', '2' => '2', '3' => '3', '4' => '4'), '1', array('class' => 'btn btn-default dropdown-toggle')) !!}
+                        <br/><br/>
                         {!! Form::text('date', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker')) !!}
-                    <br/>
+                        <br/>
                         {!! Form::submit('Dodaj', array('class' => 'btn btn-danger')) !!}<br/><br/>
+                    {!! Form::close() !!}
+                    <br>
+                </div>
+                <div class="form-group" id="obrazec_izpit2" style="width:200px; margin-left: 10px">
+                    <br><br>
+                    {!! Form::open(array('action' => 'IzpitniRokController@spremeniIzpitniRok')) !!}
+                    {!! Form::select('star_rok', $datumi_izpitov, 1, array('class' => 'btn btn-default dropdown-toggle')) !!}
+                    <br/><br/>
+                    {!! Form::text('date1', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Novi datum izpita', 'id' => 'datepicker1')) !!}
+                    <br/>
+                    {!! Form::submit('Shrani spremembe', array('class' => 'btn btn-danger')) !!}<br/><br/>
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -88,16 +102,14 @@
                 @foreach($izpitni_roki as $i)
                     <tr>
                         <td>{{ $i->izpitni_rok }}</td>
-                        <td>{{ $i->datum }}</td>
+                        <td id="datum">{{ $i->datum }}</td>
                         <td>{{ $i->st_prijav }}</td>
-                        <td>{{ $i->ocene }}</td>
                         @if($i->ocene != "Ocene so vnešene")
-                            <td>
-                                <a href="#">Uredi</a>
-                            </td>
                             <td>
                                 <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
                             </td>
+                        @else
+                            <td>{{ $i->ocene }}</td>
                         @endif
                     </tr>
                 @endforeach
@@ -111,21 +123,33 @@
                 minDate: 1,
                 dateFormat: 'dd.mm.yy'
             });
+
+            $("#datepicker1").datepicker({
+                minDate: 1,
+                dateFormat: 'dd.mm.yy'
+            });
         });
 
         $(document).ready(function() {
-            $('#obrazec_izpit').hide();
-            $('#izpit_button').show();
+            $('#obrazec_izpit1').hide();
+            $('#izpit_button1').show();
 
-            $('#izpit_button').click(function() {
-                $('#izpit_button').hide();
-                $('#obrazec_izpit').show('slow');
+            $('#obrazec_izpit2').hide();
+            $('#izpit_button2').show();
+
+            $('#izpit_button1').click(function() {
+                $('#izpit_button1').hide();
+                $('#obrazec_izpit1').show('slow');
+                return false;
+            });
+
+            $('#izpit_button2').click(function() {
+                $('#izpit_button2').hide();
+                $('#obrazec_izpit2').show('slow');
                 return false;
             });
         });
 
-
     </script>
-
 </body>
 </html>

@@ -36,7 +36,8 @@ Route::get('ponastavitev-gesla/{koda}', 'LoginController@passwordResetPotrditev'
 Route::get('vloge', 'VpisniListController@seznamVlog');
 Route::get('vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
 
-Route::get('kartotecniList', 'KartotecniListController@prikazKartotecniList');
+Route::get('kartotecniList/{id}', 'KartotecniListController@prikazKartotecniList');
+Route::post('kartotecniList/export', 'KartotecniListController@export');
 
 
 Route::controllers([
@@ -82,7 +83,8 @@ Route::post('studenti/{idStudenta}/nov-sklep', 'SklepController@store');
 Route::get('izpitni_roki/nov_izpitni_rok', 'IzpitniRokController@getNovIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok', 'IzpitniRokController@getSpremeniIzpitniRok');
 Route::post('izpitni_roki/uredi_izpitni_rok', 'IzpitniRokController@getPredmetRoki');
-Route::post('izpitni_roki/uredi_izpitni_rok2', 'IzpitniRokController@dodajIzpitniRok');
+Route::post('izpitni_roki/uredi_izpitni_roka', 'IzpitniRokController@dodajIzpitniRok');
+Route::post('izpitni_roki/uredi_izpitni_rokb', 'IzpitniRokController@spremeniIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}', 'IzpitniRokController@brisiIzpitniRok');
 
 
