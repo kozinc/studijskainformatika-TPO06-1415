@@ -7,7 +7,7 @@ class Predmet extends Model {
 
     use SoftDeletes;
     protected $table = 'predmet';
-    protected $fillable = ['sifra','naziv','opis','id_nosilca','KT'];
+    protected $fillable = ['sifra','naziv','opis','id_nosilca','id_nosilca2', 'id_nosilca3','KT'];
     protected $guarded = ['id'];
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
@@ -19,6 +19,15 @@ class Predmet extends Model {
     public function nosilec()
     {
         return $this->belongsTo('App\Models\Nosilec','id_nosilca');
+    }
+
+    public function nosilec2()
+    {
+        return $this->belongsTo('App\Models\Nosilec','id_nosilca2');
+    }
+    public function nosilec3()
+    {
+        return $this->belongsTo('App\Models\Nosilec','id_nosilca3');
     }
 
     public function izpitni_roki()

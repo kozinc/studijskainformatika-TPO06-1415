@@ -14,7 +14,22 @@
             <tr>
                 <td>{{ $predmet->id }}</td>
                 <td><a href="{{ action('PredmetController@show',['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
-                <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
+                <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}
+
+                    <?php
+                        if ($predmet->id_nosilca2 > 0) {
+                            $ime2 = $predmet->nosilec2->ime;
+                            $priimek2 = $predmet->nosilec2->priimek;
+                            echo ", $ime2 $priimek2";
+                        }
+                        if ($predmet->id_nosilca3 > 0) {
+                            $ime3 = $predmet->nosilec3->ime;
+                            $priimek3 = $predmet->nosilec3->priimek;
+                            echo ", $ime3 $priimek3";
+                        }
+                    ?>
+
+                </td>
                 <td>{{ $predmet->KT }}</td>
             </tr>
         @endforeach
