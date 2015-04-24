@@ -259,7 +259,7 @@ class TableSeeder extends Seeder {
 
         //+++++++++++++++++++++++++I Z P I T N I     R O K I ++++++++++++++++++++++++++++
         DB::table('izpitni_rok')->truncate();
-        IzpitniRok::create(['id_predmeta'=>21, 'izpitni_rok'=>1, 'datum'=>'2015-06-10', 'studijsko_leto'=>'2014/2015']);
+        IzpitniRok::create(['id_predmeta'=>21, 'izpitni_rok'=>1, 'datum'=>'2015-06-10', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:40:00', 'predavalnice'=>'P1, P22']);
         IzpitniRok::create(['id_predmeta'=>21, 'izpitni_rok'=>2, 'datum'=>'2015-06-20', 'studijsko_leto'=>'2014/2015']);
         IzpitniRok::create(['id_predmeta'=>21, 'izpitni_rok'=>3, 'datum'=>'2015-09-03', 'studijsko_leto'=>'2014/2015']);
         ////

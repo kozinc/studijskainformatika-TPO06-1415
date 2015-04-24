@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class IzpitniRok extends Model {
 
     protected $table = 'izpitni_rok';
-    protected $fillable = ['izpitni_rok', 'datum', 'studijsko_leto'];
+    protected $fillable = ['izpitni_rok', 'datum', 'studijsko_leto', 'ura_izpita', 'predavalnice'];
     protected $guarded = ['id_predmeta'];
     public $timestamps = false;
 

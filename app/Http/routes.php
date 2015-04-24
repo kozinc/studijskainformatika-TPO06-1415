@@ -68,6 +68,7 @@ Route::get('studenti', 'StudentController@searchForm');
 Route::post('studenti', 'StudentController@search');
 Route::post('potrdilo/1', 'ListStudentsController@potrdilo_pdf');
 Route::get('potrdilo/{id}', 'ListStudentsController@getPotrdilo');
+Route::get('potrdilo/{id}/vpisniList', 'ListStudentsController@natisniVpisniList');
 Route::get('potrdilo', 'ListStudentsController@getPotrdila');
 Route::get('studenti', 'ListStudentsController@returnBack');
 Route::get('studenti/{id}', 'StudentController@show');
@@ -86,6 +87,7 @@ Route::post('izpitni_roki/uredi_izpitni_rok', 'IzpitniRokController@getPredmetRo
 Route::post('izpitni_roki/uredi_izpitni_roka', 'IzpitniRokController@dodajIzpitniRok');
 Route::post('izpitni_roki/uredi_izpitni_rokb', 'IzpitniRokController@spremeniIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}', 'IzpitniRokController@brisiIzpitniRok');
+Route::get('izpitni_roki/uredi_izpitni_rok/{id}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
 
 
 
