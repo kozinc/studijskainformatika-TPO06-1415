@@ -3,7 +3,6 @@
 @section('content')
 
     <table class="table exportable">
-        <caption>Predmetnik</caption>
         <tr>
             <th>Šifra</th>
             <th>Ime</th>
@@ -12,7 +11,7 @@
         </tr>
         @foreach($predmeti as $predmet)
             <tr>
-                <td>{{ $predmet->id }}</td>
+                <td>{{ $predmet->sifra }}</td>
                 <td><a href="{{ action('PredmetController@show',['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                 <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}
 

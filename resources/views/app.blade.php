@@ -27,7 +27,6 @@
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-
             @if (\Session::get('vloga') == "referent" )
                 <div class="navbar-header">
                     <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
@@ -36,25 +35,23 @@
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('StudijskiProgramController@index') }}">Programi</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('ListStudentsController@getStudents') }}">Seznam vpisanih študentov v predmet</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
+                </div>
+                <div class="nav navbar-nav navbar-right dropdown">
+                    <a class="navbar-brand" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Študenti</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a></li>
+                        <li><a href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a></li>
+                        <li><a href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a></li>
+                        <li><a href="{{ action('ListStudentsController@getStudents') }}">Seznam študentov po predmetih</a></li>
+
+                    </ul>
                 </div>
 
             @elseif (\Session::get('vloga') == "student" )
