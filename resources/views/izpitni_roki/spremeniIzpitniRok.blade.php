@@ -54,41 +54,44 @@
         <br/>
 
         @if($izpitni_roki != '' || Session::get('izpitni_roki_sporocilo') == "Za predmet ni razpisanih izpitnih rokov")
-            <button id="izpit_button1"  class="btn btn-default">Dodaj izpitni rok</button>
-            @if($izpitni_roki != '')
-                <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
-                <br/>
-            @endif
 
-
-            <div  id="obrazec_izpit" style="background-color: #FAFAFA">
-                <div class="form-group" id="obrazec_izpit1" style="width:200px; margin-left: 10px">
-                    <br>
-                    {!! Form::open(array('action' => 'IzpitniRokController@dodajIzpitniRok')) !!}
-                    {!! Form::text('date', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker')) !!}
-                    {!! Form::text('ura', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => '12:00:00')) !!}
-                    {!! Form::text('prostor', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'P1, P22')) !!}
-                    <br/>
-                    {!! Form::submit('Dodaj', array('class' => 'btn btn-danger')) !!}<br/><br/>
-                    {!! Form::close() !!}
-                    <br>
-                </div>
-
+            @if(Session::get('nosilec') == $nosilec_id || Session::get('nosilec') == '')
+                <button id="izpit_button1"  class="btn btn-default">Dodaj izpitni rok</button>
                 @if($izpitni_roki != '')
-                <div class="form-group" id="obrazec_izpit2" style="width:200px; margin-left: 10px">
-                    <br><br>
-                    {!! Form::open(array('action' => 'IzpitniRokController@spremeniIzpitniRok')) !!}
-                    {!! Form::select('star_rok', $datumi_izpitov, 1, array('class' => 'btn btn-default dropdown-toggle')) !!}
-                    <br/><br/>
-                    {!! Form::text('date1', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker1')) !!}
-                    {!! Form::text('ura1', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => '12:00:00')) !!}
-                    {!! Form::text('prostor1', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'P1, P22')) !!}
+                    <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
                     <br/>
-                    {!! Form::submit('Shrani spremembe', array('class' => 'btn btn-danger')) !!}<br/><br/>
-                    {!! Form::close() !!}
-                </div>
                 @endif
-            </div>
+
+
+                <div  id="obrazec_izpit" style="background-color: #FAFAFA">
+                    <div class="form-group" id="obrazec_izpit1" style="width:200px; margin-left: 10px">
+                        <br>
+                        {!! Form::open(array('action' => 'IzpitniRokController@dodajIzpitniRok')) !!}
+                        {!! Form::text('date', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker')) !!}
+                        {!! Form::text('ura', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => '12:00:00')) !!}
+                        {!! Form::text('prostor', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'P1, P22')) !!}
+                        <br/>
+                        {!! Form::submit('Dodaj', array('class' => 'btn btn-danger')) !!}<br/><br/>
+                        {!! Form::close() !!}
+                        <br>
+                    </div>
+
+                    @if($izpitni_roki != '')
+                    <div class="form-group" id="obrazec_izpit2" style="width:200px; margin-left: 10px">
+                        <br><br>
+                        {!! Form::open(array('action' => 'IzpitniRokController@spremeniIzpitniRok')) !!}
+                        {!! Form::select('star_rok', $datumi_izpitov, 1, array('class' => 'btn btn-default dropdown-toggle')) !!}
+                        <br/><br/>
+                        {!! Form::text('date1', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker1')) !!}
+                        {!! Form::text('ura1', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => '12:00:00')) !!}
+                        {!! Form::text('prostor1', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'P1, P22')) !!}
+                        <br/>
+                        {!! Form::submit('Shrani spremembe', array('class' => 'btn btn-danger')) !!}<br/><br/>
+                        {!! Form::close() !!}
+                    </div>
+                    @endif
+                </div>
+            @endif
 <br><br>
 @endif
 

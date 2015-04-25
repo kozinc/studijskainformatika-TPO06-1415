@@ -11,6 +11,13 @@ class IzpitniRokController extends Controller {
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         $datumi_izpitov = "";
 
+        if(\Session::get("vloga") == "ucitelj"){
+            $prof_email = \Session::get('session_id');
+            $ucitelj = \App\Models\Nosilec::where('email', $prof_email)->first();
+            \Session::set('nosilec', $ucitelj->id);
+        }
+        else \Session::set('nosilec', '');
+
         $predmet_id = \Session::get("izbrani_predmet");
         return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', 1)->with('izpitni_roki', '');
     }
@@ -67,7 +74,7 @@ class IzpitniRokController extends Controller {
             \Session::set("izpitni_roki_sporocilo", "");
         }
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
-        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', $predmet_id)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov);
+        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', $predmet_id)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov)->with('nosilec_id', $nosilec->id);
     }
 
 
