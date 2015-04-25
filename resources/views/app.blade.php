@@ -30,7 +30,7 @@
 
             @if (\Session::get('vloga') == "referent" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
@@ -59,7 +59,7 @@
 
             @elseif (\Session::get('vloga') == "student" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
@@ -72,7 +72,7 @@
                 </div>
             @elseif (\Session::get('vloga') == "ucitelj" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
