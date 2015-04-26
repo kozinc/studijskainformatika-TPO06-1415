@@ -11,29 +11,43 @@ class IzpitniRokController extends Controller {
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         $datumi_izpitov = "";
 
+        if(\Session::get("vloga") == "ucitelj"){
+            $prof_email = \Session::get('session_id');
+            $ucitelj = \App\Models\Nosilec::where('email', $prof_email)->first();
+            \Session::set('nosilec', $ucitelj->id);
+        }
+        else \Session::set('nosilec', '');
+
         $predmet_id = \Session::get("izbrani_predmet");
         return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', 1)->with('izpitni_roki', '');
     }
 
     // za izbrani predmet izpise izpitne roke
     public function getPredmetRoki(){
+
         $predmet_id = \Input::get('predmeti');
+        $predmet = \App\Models\Predmet::where('id', $predmet_id)->first();
         \Session::set("izbrani_predmet", $predmet_id);
-        $izpitni_roki = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->get();
+
+        $nosilec = \App\Models\Nosilec::where('id', $predmet->id_nosilca)->first();
+
+        $izpitni_roki = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'ASC')->get();
         $izpitni_roki_list = array();
         $datumi_izpitov = array();
 
-        $dat = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->lists('datum');
-        $ids = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->lists('id');
-
+        $dat = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'ASC')->lists('datum');
+        $ids = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'ASC')->lists('id');
         $no = count($dat);
-
+        //datumi za spreminjat izpitne roke
         for($j = 0; $j < $no; $j++){
             $a = date("d.m.Y", strtotime($dat[$j]));
             $datumi_izpitov[$ids[$j]] = $a;
         }
 
+        //za filat tabelo izpitnih rokov
         foreach ($izpitni_roki as $i) {
+            $i['nosilec'] = $nosilec->ime . " " . $nosilec->priimek;
+            $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
             $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
             $today = date("Y-m-d");
             if($today < $i->datum){
@@ -51,6 +65,7 @@ class IzpitniRokController extends Controller {
             $i->datum = $datum;
             array_push($izpitni_roki_list, $i);
         }
+
         if(sizeof($izpitni_roki_list) == 0){
             $izpitni_roki_list = '';
             \Session::set("izpitni_roki_sporocilo", "Za predmet ni razpisanih izpitnih rokov");
@@ -59,7 +74,7 @@ class IzpitniRokController extends Controller {
             \Session::set("izpitni_roki_sporocilo", "");
         }
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
-        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', $predmet_id)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov);
+        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti)->with('predmet_id', $predmet_id)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov)->with('nosilec_id', $nosilec->id);
     }
 
 
@@ -103,6 +118,7 @@ class IzpitniRokController extends Controller {
         self::obvestiStudente($id, '', "Brisanje");
         \DB::table('student_izpit')->where('id_izpitnega_roka', $id)->delete();
         \App\Models\IzpitniRok::where('id', $id)->delete();
+        \Session::set("izpitni_roki_sporocilo", "Izpitni rok je bil izbrisan");
         return self::getSpremeniIzpitniRok();
     }
 
@@ -112,9 +128,8 @@ class IzpitniRokController extends Controller {
         $st_izpitnih_rokov = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->count();
         $izpitni_rok = new \App\Models\IzpitniRok;
         $date = \Input::get('date');
-        $izpitni_rok_st = \Input::get('zaporedni_rok');
-
-        $rok = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->where('izpitni_rok', $izpitni_rok_st)->first();
+        $ura = \Input::get('ura');
+        $predavalnice = \Input::get('prostor');
 
         if($date != ''){
             $deli_datuma = explode('.', $date);
@@ -124,27 +139,46 @@ class IzpitniRokController extends Controller {
         if($date == ""){
             \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - vnesite datum");
         }
-        else if(!is_null($rok)){
-            \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - za izbrani izpitni rok je že razpisan rok");
-        }
-        else if($st_izpitnih_rokov >= 4){
-            \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - za vsak predmet je mogoče razpisati največ 4 izpitne roke");
-        }
         else{
             $izpitni_rok->datum = $datum;
-            $izpitni_rok->izpitni_rok = $izpitni_rok_st;
             $izpitni_rok->id_predmeta = $predmet_id;
             $izpitni_rok->studijsko_leto = "2014/15";
+            $izpitni_rok->ura_izpita = $ura;
+            $izpitni_rok->predavalnice = $predavalnice;
             $izpitni_rok->save();
             \Session::set("izpitni_roki_sporocilo", "Izpitni rok je bil uspešno shranjen");
         }
         return self::getSpremeniIzpitniRok();
     }
 
+    public function izpisiSeznam($id){
+        $student_izpit = \DB::table('student_izpit')->where('id_izpitnega_roka', $id)->get();
+        $izpit =  \App\Models\IzpitniRok::where('id', $id)->first();
+        $predmet = \App\Models\Predmet::where('id', $id)->first();
+        $studentje = array();
+
+        $counter = 0;
+        foreach ($student_izpit as $s) {
+            $student = \App\Models\Student::where('id', $s->id_studenta)->first();
+            $counter = $counter + 1;
+            $student["zaporedna_st"] = $counter;
+            array_push($studentje, $student);
+        }
+
+        $datum = date("d.m.Y", strtotime($izpit->datum));
+
+        $pdf = \App::make('dompdf');
+        $pdf->loadHTML(\View::make('pdf/seznam_studentov')->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet));
+        return $pdf->download('my.pdf');
+
+    }
+
     public function spremeniIzpitniRok(){
         $predmet_id = \Session::get("izbrani_predmet");
         $star_izpitni_rok_id = \Input::get('star_rok');
         $nov_izpitni_rok = \Input::get('date1');
+        $nova_ura = \Input::get('ura1');
+        $nov_prostor = \Input::get('prostor1');
 
         if($nov_izpitni_rok != ""){
             self::obvestiStudente($star_izpitni_rok_id, $nov_izpitni_rok, "Sprememba");
@@ -154,6 +188,8 @@ class IzpitniRokController extends Controller {
 
             $spremeni_datum = \App\Models\IzpitniRok::where('id', $star_izpitni_rok_id)->first();
             $spremeni_datum->datum = $nov_izpitni_rok;
+            if($nova_ura != "") $spremeni_datum->ura_izpita = $nova_ura;
+            if($nov_prostor != "") $spremeni_datum->predavalnice = $nov_prostor;
             $spremeni_datum->save();
 
             \Session::set("izpitni_roki_sporocilo", "Izpitni rok je bil uspešno shranjen");
@@ -164,5 +200,4 @@ class IzpitniRokController extends Controller {
 
         return self::getSpremeniIzpitniRok();
     }
-
 }

@@ -18,6 +18,7 @@
             <th>Telefonska številka</th>
             <th>Kartotečni list</th>
             <th></th>
+            <th></th>
         </tr>
         @if(isset($studenti))
             @foreach($studenti as $student)
@@ -29,6 +30,7 @@
                     <td>{{ $student->telefon }}</td>
                     <td><a href="{{ action('KartotecniListController@prikazKartotecniList',['id'=>$student->id]) }}">Klikni za ogled</a></td>
                     <td><a href="{{ action('ListStudentsController@getPotrdilo',['id'=>$student->id]) }}">Natisni potrdilo o vpisu</a></td>
+                    <td><a href="{{ action('ListStudentsController@natisniVpisniList',['id'=>$student->id]) }}">Natisni vpisni list</a></td>
                 </tr>
             @endforeach
         @endif
