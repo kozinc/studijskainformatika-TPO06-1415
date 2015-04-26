@@ -31,4 +31,18 @@ class StudijskiProgram extends Model
         return $this->hasMany('App\Models\ProgramLetnik', 'id_programa')->orderBy('letnik','asc');
     }
 
+    public function studijska_leta()
+    {
+        $results = \DB::table('program_predmet')->select('studijsko_leto')->where('id_programa','=',$this->id)->distinct()->get();
+        $leta = [];
+        if(!empty($results))
+        {
+            foreach($results as $row){
+                $leto = substr($row->studijsko_leto,0,4).'-'.substr($row->studijsko_leto,7);
+                array_push($leta,$leto);
+            }
+        }
+        return $leta;
+    }
+
 }
