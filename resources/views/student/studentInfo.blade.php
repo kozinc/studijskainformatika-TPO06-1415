@@ -64,7 +64,9 @@
             <th>Datum</th>
             <th>Organ</th>
             <th>Vsebina</th>
-            <th>Uredi</th>
+            @if (\Session::get('vloga') == "referent" )
+                <th>Uredi</th>
+            @endif
         </tr>
         @foreach($student->sklepi as $sklep)
             <tr>
@@ -72,9 +74,13 @@
                 <td>{{ date('d.m.Y',strtotime($sklep->datum)) }}</td>
                 <td>{{ $sklep->organ->ime }}</td>
                 <td>{{ $sklep->vsebina }}</td>
-                <td><a href="{{ action('SklepController@edit', ['idStudenta'=>$student->id, 'idSklepa'=>$sklep->id]) }}">Uredi sklep</a></td>
+                @if (\Session::get('vloga') == "referent" )
+                    <td><a href="{{ action('SklepController@edit', ['idStudenta'=>$student->id, 'idSklepa'=>$sklep->id]) }}">Uredi sklep</a></td>
+                @endif
             </tr>
         @endforeach
     </table>
-    <a href="{{ action('SklepController@create',['idStudenta'=>$student->id]) }}" class="btn btn-danger">Nov sklep</a>
+    @if (\Session::get('vloga') == "referent" )
+        <a href="{{ action('SklepController@create',['idStudenta'=>$student->id]) }}" class="btn btn-danger">Nov sklep</a>
+    @endif
 @endsection

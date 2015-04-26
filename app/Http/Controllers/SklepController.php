@@ -48,7 +48,8 @@ class SklepController extends Controller {
     public function create($idStudenta)
     {
         $student = Student::find($idStudenta);
-        return view('sklep/sklep', ['student'=>$student]);
+        $organi = Organ::all();
+        return view('sklep/sklep', ['student'=>$student, 'organi'=>$organi]);
     }
 
     public function store($idStudenta, Request $request)
@@ -59,6 +60,9 @@ class SklepController extends Controller {
         $sklep->vsebina = $request['vsebina'];
         $sklep->id_studenta = $student->id;
         $sklep->id_organa = $request['organ'];
+        if($sklep->id_organa == 0){
+            return Redirect::back()->withErrors('Neveljaven organ fakultete.');
+        }
         $sklep->save();
         return redirect('studenti/'.$student->id)->with('odgovor','Sklep ustvarjen.');
     }
