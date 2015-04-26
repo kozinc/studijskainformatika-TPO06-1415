@@ -57,7 +57,7 @@ Route::get('programi', 'StudijskiProgramController@index');
 Route::get('programi/create', 'StudijskiProgramController@create');
 Route::post('programi/create', 'StudijskiProgramController@store');
 Route::get('programi/{id}', 'StudijskiProgramController@show');
-Route::get('programi/{id}/edit', 'StudijskiProgramController@edit');
+Route::put('programi/{id}', 'StudijskiProgramController@update');
 Route::post('programi/{id}/strukutura', 'StudijskiProgramController@spremeni_strukturo');
 Route::get('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@showPredmetnik');
 Route::post('programi/{id}/predmetnik', 'StudijskiProgramController@editPredmetnik');
