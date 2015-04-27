@@ -66,7 +66,7 @@ class VpisniListController extends Controller {
                     $leto = (date('Y'));
                     $leto = substr ($leto, 2);
                     $novaVpisna =  '63'.$leto;
-                    $letosnjiStudentZadnji = Student::where('vpisna', 'LIKE', $novaVpisna.'%')->orderBy('vpisna','desc')->first();
+                    $letosnjiStudentZadnji = Student::where('vpisna', 'LIKE', $novaVpisna.'%')->orderBy('vpisna')->first();
                     $student->vpisna = $novaVpisna.substr($letosnjiStudentZadnji->vpisna, 4) + 1;
                     $student->save();
                     $program = StudijskiProgram::find($programStudenta->id_programa);

@@ -71,5 +71,15 @@ $(document).ready(function(){
        $('#struktura').toggle();
     });
 
+    $('#vsaPolaganja').click(function(){
+       $('.vsaPolaganjaT').show();
+        $('.zadnjePolaganjeT').hide();
+    });
+
+    $('#zadnjePolaganje').click(function(){
+        $('.zadnjePolaganjeT').show();
+        $('.vsaPolaganjaT').hide();
+    });
+
 });
 

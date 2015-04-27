@@ -21,6 +21,11 @@ class Student extends Model {
         return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_predmeta', 'id_studenta')->withPivot('');
     }
 
+    public function polaganja()
+    {
+        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit', 'id_studenta', 'id_izpitnega_roka' )->withPivot('ocena');
+    }
+
     public function sklepi()
     {
         return $this->hasMany('App\Models\Sklep', 'id_studenta');

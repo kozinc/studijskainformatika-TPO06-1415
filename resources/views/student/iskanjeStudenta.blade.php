@@ -6,7 +6,7 @@
         <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 
         <input type="text"  name="iskalnik_studentov" id="iskalnik_studentov" placeholder="Vpiši vpisno ali ime...">
-        <input type="submit" value="Poisci">
+        <input type="submit" value="Poišči" >
     </form>
     <br>
     <table class="table table-hover">
