@@ -67,5 +67,9 @@ $(document).ready(function(){
         }
     });
 
+    $('#struktura-open').click(function(){
+       $('#struktura').toggle();
+    });
+
 });
 

@@ -29,7 +29,7 @@
                     <td colspan="6">Obvezni predmeti</td>
                 </tr>
                 @foreach($program->predmeti as $predmet)
-                    @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->tip=='obvezni')
+                    @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='obvezni')
                     <tr>
                         <td>{{ $predmet->id }}</td>
                         <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
@@ -46,7 +46,7 @@
                     <td colspan="6">Strokovni izbirni predmeti</td>
                 </tr>
                 @foreach($program->predmeti as $predmet)
-                    @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->tip=='strokovni-izbirni')
+                    @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='strokovni-izbirni')
                         <tr>
                             <td>{{ $predmet->id }}</td>
                             <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
@@ -72,7 +72,7 @@
                     <th>Kreditne točke</th>
                 </tr>
                 @foreach($program->moduli as $modul)
-                    @if($modul->letnik == $letnik->letnik && $modul->studijsko_leto=='2014/2015')
+                    @if($modul->letnik == $letnik->letnik && $modul->studijsko_leto==$studijsko_leto)
                         <tr>
                             <td colspan="6">{{ $modul->ime }}</td>
                         </tr>
@@ -107,7 +107,7 @@
                     <th>Kreditne točke</th>
                 </tr>
                 @foreach($program->predmeti as $predmet)
-                    @if($predmet->pivot->tip=='prosto-izbirni')
+                    @if($predmet->pivot->tip=='prosto-izbirni' && $predmet->pivot->studijsko_leto == $studijsko_leto)
                         <tr>
                             <td>{{ $predmet->id }}</td>
                             <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
@@ -152,7 +152,7 @@
                             <option value="0">Izberi modul...</option>
                             <option value="new">Ustvari nov modul</option>
                             @foreach($program->moduli as $modul)
-                                @if($modul->studijsko_leto=='2014/2015')
+                                @if($modul->studijsko_leto==$studijsko_leto)
                                     <option value="{{ $modul->id }}">{{ $modul->ime }}</option>
                                 @endif
                             @endforeach
