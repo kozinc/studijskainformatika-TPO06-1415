@@ -104,17 +104,20 @@ class StudijskiProgramController extends Controller {
         $vsota_KT = $vsota_obveznih = $vsota_strokovnih = $vsota_prostih = $vsota_modulov = 0;
         for($i=1; $i <= 5; $i++){
             $letnik = $letniki->filter(function($item) use($i){
-                return $item->id == $i;
+                return $item->letnik == $i;
             })->first();
-            if($request['status_'.$i] == "delete" && !is_null($letnik)){
-                $letnik->destroy();
-            }elseif($request['status_'.$i] == "create"){
+            if($request['status-'.$i] == "delete" && !is_null($letnik)){
+                $letnik->destroy($letnik->id);
+            }elseif($request['status-'.$i] == "create"){
                 $trajanje = $i;
+
                 if(is_null($letnik)){
                    $letnik = new ProgramLetnik();
                    $letnik->id_programa = $id;
+                   $letnik->letnik = $i;
                 }
                 $letnik->KT = $request['KT_'.$i];
+
                 $letnik->stevilo_obveznih_predmetov = $request['obvezni_predmeti_'.$i];
                 $letnik->stevilo_strokovnih_predmetov = $request['strokovni_predmeti_'.$i];
                 $letnik->stevilo_prostih_predmetov = $request['prosti_predmeti_'.$i];
@@ -127,6 +130,7 @@ class StudijskiProgramController extends Controller {
                 $vsota_prostih += $letnik->stevilo_prostih_predmetov;
                 $vsota_modulov += $letnik->stevilo_modulov;
             }
+
         }
         $program->trajanje_leta = $trajanje;
         $program->KT = $vsota_KT;
@@ -160,13 +164,39 @@ class StudijskiProgramController extends Controller {
         return view('program/programPredmetnik',['program'=>$program, 'predmeti'=>$predmeti, 'studijsko_leto'=>$stud_leto] );
     }
 
-    public function editPredmetnik($id, Request $request){
+    public function editPredmetnik($id, $studijsko_leto, Request $request){
         $program = StudijskiProgram::find((int)$id);
-        $predmeti = $program->studijska_leta;
-        $moduli = Modul::all();
+        $leto = substr($studijsko_leto,0,4);
+        $sl = $leto.'/'.((int)$leto+1);
+        $predmet = Predmet::find($request['predmet']);
+        if($request['modul'] == 'new'){
+            $modul = new Modul();
+            if(strlen($request['ime_modula']) < 4){
+                return Redirect::back()->withErrors('Ime modula je prekratko!');
+            }
+            $modul->ime = $request['ime_modula'];
+            $modul->opis = $request['opis_modula'];
+            $modul->letnik = $request['letnik'];
+            $modul->studijsko_leto = $sl;
+            $modul->id_programa = $id;
+            $modul->save();
+            return Redirect::back()->with('odgovor', 'Modul uspešno dodan.');
+        }
+        if($request['tip']=='modulski'){
+            if(intval($request['modul']) > 0){
+                $id_modula = (int)$request['modul'];
+            }else{
+                return Redirect::back()->withErrors('Neveljaven modul!');
+            }
+        }
+        $existingPredmet = $program->predmeti()->where('predmet.id','=',$request['predmet'])->wherePivot('studijsko_leto','LIKE', $leto.'%')->first();
+        if(is_null($existingPredmet)){
+            $program->predmeti()->attach($predmet->id, ['studijsko_leto'=>$sl, 'letnik'=>$request['letnik'], 'tip'=>$request['tip'], 'semester'=>$request['semester']]);
+        }else{
+            $program->predmeti()->updateExistingPivot($existingPredmet->id, ['studijsko_leto'=>$sl, 'letnik'=>$request['letnik'], 'tip'=>$request['tip'], 'semester'=>$request['semester']]);
+        }
 
-
-        return view('program/programPredmetnikEdit', ['program'=>$program, 'predmeti'=>$predmeti, 'moduli'=>$moduli]);
+        return Redirect::back()->with('odgovor', 'Predmetnik posodobljen.');
     }
 
 }

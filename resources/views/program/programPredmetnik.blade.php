@@ -2,6 +2,10 @@
 @extends('app')
 
 @section('content')
+    <div class="program-info">
+        <h3>{{ $program->ime }}</h3>
+        <h3>Študijsko leto {{ str_replace('/20','-',$studijsko_leto) }}</h3>
+    </div>
     <ul class="nav nav-pills">
     @foreach($program->letniki as $letnik)
         <li role="presentation" data-letnik="{{ $letnik->letnik }}" class="letnik-tab @if($letnik->letnik == 1){{ 'active' }}@endif">
@@ -12,10 +16,36 @@
             <a href="#">Prosto izbirni predmeti</a>
         </li>
     </ul>
-    <h3>Predmetnik</h3>
-    <div>
+
+
+    <div class="panel">
+        <div class="panel-body panel-default">
+
     @foreach($program->letniki as $letnik)
         <div id="letnik-{{ $letnik->letnik }}" @if($letnik->letnik!=1)style="display:none"@endif>
+            <div class="letnik-info">
+                <p>Kreditne točke: {{ $letnik->KT }}</p>
+                <p>Število obveznih predmetov: {{ $letnik->stevilo_obveznih_predmetov }}</p>
+                <p>Število strokovno izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
+                <p>Število prosto izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
+                <p>Število modulov: {{ $letnik->stevilo_modulov }}</p>
+                @if($letnik->stevilo_obveznih_predmetov != $program->obvezni_predmeti($studijsko_leto,$letnik->letnik )->count())
+                    <div class="alert alert-warning" role="alert">
+                        Število obveznih predmetov se ne ujema!
+                    </div>
+                @endif
+                @if($letnik->stevilo_modulov > $program->moduli($studijsko_leto,$letnik->letnik)->count())
+                    <div class="alert alert-warning" role="alert">
+                        Povečajte število modulov!
+                    </div>
+                @endif
+                @if($letnik->stevilo_strokovnih_predmetov > $program->strokovni_predmeti($studijsko_leto,$letnik->letnik)->count())
+                    <div class="alert alert-warning" role="alert">
+                        Povečajte število strokovnih predmetov!
+                    </div>
+                @endif
+            </div>
+            <h3>Predmetnik</h3>
             <table class="table" class="predmeti">
                 <tr>
                     <th>Šifra</th>
@@ -36,7 +66,7 @@
                         <td>{{ $predmet->pivot->tip }}</td>
                         <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
                         <td>
-                            @if($predmet->semester==0){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
+                            @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                         </td>
                         <td>{{ $predmet->KT }}</td>
                     </tr>
@@ -53,7 +83,7 @@
                             <td>{{ $predmet->pivot->tip }}</td>
                             <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
                             <td>
-                                @if($predmet->semester==0){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
+                                @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
                         </tr>
@@ -83,7 +113,7 @@
                             <td>{{ $predmet->pivot->tip }}</td>
                             <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
                             <td>
-                                @if($predmet->semester==0){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
+                                @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
                         </tr>
@@ -114,7 +144,7 @@
                             <td>{{ $predmet->pivot->tip }}</td>
                             <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
                             <td>
-                                @if($predmet->semester==0){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
+                                @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
                         </tr>
@@ -124,7 +154,7 @@
         </div>
         <div class="dodaj-predmet">
             <a class="btn btn-success odpri-predmetnik-form">Dodaj predmet</a>
-            <form action="" method="post" class="predmetnik-form" style="width:40%;display:none;">
+            <form action="{{ action('StudijskiProgramController@editPredmetnik', ['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}" method="post" class="predmetnik-form" style="width:40%;display:none;">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="letnik" value="{{ $letnik->letnik }}">
                 <h3>Dodaj nov predmet</h3>
@@ -184,13 +214,13 @@
                 <div class="form-group">
                     <label for="semester">Semester</label>
                     <select name="semester" id="semester" class="form-control">
-                        <option value="zimski">Zimski</option>
-                        <option value="poletni">Poletni</option>
+                        <option value="1">Zimski</option>
+                        <option value="2">Poletni</option>
                     </select>
                 </div>
                 <input type="submit" class="btn btn-success" value="Shrani">
             </form>
         </div>
-
+        </div>
     </div>
 @endsection

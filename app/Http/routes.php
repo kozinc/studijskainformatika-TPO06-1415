@@ -60,7 +60,7 @@ Route::get('programi/{id}', 'StudijskiProgramController@show');
 Route::put('programi/{id}', 'StudijskiProgramController@update');
 Route::post('programi/{id}/strukutura', 'StudijskiProgramController@spremeni_strukturo');
 Route::get('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@showPredmetnik');
-Route::post('programi/{id}/predmetnik', 'StudijskiProgramController@editPredmetnik');
+Route::post('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@editPredmetnik');
 Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@create_predmetnik');
 Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@store_predmetnik');
 
