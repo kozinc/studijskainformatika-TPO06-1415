@@ -121,5 +121,15 @@ $(document).ready(function(){
         $('#dodaj_letnik').data('letnik',letnik).html('Dodaj letnik').show();
     });
 
+    $('#vsaPolaganja').click(function(){
+       $('.vsaPolaganjaT').show();
+        $('.zadnjePolaganjeT').hide();
+    });
+
+    $('#zadnjePolaganje').click(function(){
+        $('.zadnjePolaganjeT').show();
+        $('.vsaPolaganjaT').hide();
+    });
+
 });
 
