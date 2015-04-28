@@ -2,12 +2,12 @@
 
 @section('content')
 
-    @if(isset($odgovor))
     <div class="panel panel-default">
         <div class="panel-body">
+    @if(isset($odgovor))
+
             {{ $odgovor }}
-        </div>
-    </div>
+
     @endif
     <div class="form-group">
         <h3>Urejanje predmeta</h3>
@@ -15,15 +15,19 @@
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="id" value="{{ $predmet->id }}" >
         <div>
-            {{ $predmet->id }}
+            <!-- ID Predmeta {{ $predmet->id }} -->
+        </div>
+        <div class="form-group">
+            <label for ="sifra">Šifra predmeta</label>
+            <input type="text" name="sifra" id="sifra" class="form-control" value="{{ $predmet->sifra }}" >
         </div>
         <div class="form-group">
             <label for ="naziv">Naziv</label>
-            <input type="text" name="naziv" id="naziv" value="{{ $predmet->naziv }}" >
+            <input type="text" name="naziv" id="naziv" class="form-control" value="{{ $predmet->naziv }}" >
         </div>
         <div class="form-group">
             <label for="nosilec">Nosilec</label>
-            <select name="id_nosilca" id="nosilec">
+            <select name="id_nosilca" id="nosilec" class="form-control" >
                 @foreach($nosilci as $nosilec)
                     <option value="{{ $nosilec->id }}" <?php if($predmet->nosilec->id == $nosilec->id) echo "selected";?> >{{ $nosilec->ime }} {{ $nosilec->priimek }}</option>
                 @endforeach
@@ -32,7 +36,7 @@
 
         <div class="form-group">
             <label for="nosilec">Sekundarni nosilec</label>
-            <select name="id_nosilca2" id="nosilec">
+            <select name="id_nosilca2" id="nosilec"  class="form-control" >
                 <option value="0" <?php if($predmet->id_nosilca2 == 0) echo "selected";?> > </option>
                 @foreach($nosilci as $nosilec2)
                     <option value="{{ $nosilec2->id }}"
@@ -45,30 +49,31 @@
 
         <div class="form-group">
             <label for="nosilec">Terciarni nosilec</label>
-            <select name="id_nosilca3" id="nosilec">
+            <select name="id_nosilca3" id="nosilec" class="form-control" >
                 <option value="0" <?php if($predmet->id_nosilca3 == 0) echo "selected";?> > </option>
                 @foreach($nosilci as $nosilec3)
                     <option value="{{ $nosilec3->id }}"
-                    <?php
+                        <?php
                             if($predmet->id_nosilca3 > 0) { if($predmet->nosilec3->id == $nosilec3->id) echo "selected"; }
-                            ?> >{{ $nosilec3->ime }} {{ $nosilec3->priimek }}</option>
+                        ?> >{{ $nosilec3->ime }} {{ $nosilec3->priimek }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
             <label for="kt">Kreditne točke</label>
-            <input id="kt" name="kt" value="{{ $predmet->KT }}">
+            <input id="kt" name="kt" value="{{ $predmet->KT }}"  class="form-control" >
         </div>
         <div class="form-group">
             <label for="tip">Tip predmeta</label>
-            <select name="tip" id="tip">
+            <select name="tip" id="tip" class="form-control" >
                 <option value="obvezni" @if($predmet->tip=='obvezni') {{ "selected" }} @endif>Obvezni</option>
                 <option value="modulski"@if($predmet->tip=='modulski') {{ "selected" }} @endif>Modulski</option>
                 <option value="strokovni-izbirni"@if($predmet->tip=='strokovni-izbirni') {{ "selected" }} @endif>Strokovni izbirni</option>
                 <option value="prosto-izbirini"@if($predmet->tip=='prosto-izbirni') {{ "selected" }} @endif>Prosto izbirni</option>
             </select>
         </div>
+        <!--
         <div class="form-group">
             <label for="modul">Modul</label>
             <select name="id_modula" id="modul">
@@ -78,8 +83,11 @@
                 @endforeach
             </select>
         </div>
+        -->
             <input type="submit" value="Shrani" >
         </form>
+    </div>
+        </div>
     </div>
 
 
