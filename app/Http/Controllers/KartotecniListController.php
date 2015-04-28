@@ -42,9 +42,10 @@ class KartotecniListController extends Controller
         else
         {
 
-            $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena');
+            $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena')->get();
+            $programiStudenta = $programiStudenta->sortBy('vloga_potrjena');
             $predmeti = StudentPredmet::where('id_studenta','=',$student->id);
-            return view('kartotecniList', ['programi'=>$programiStudenta, 'predmeti'=>$predmeti]);
+            return view('kartotecniList', ['student'=>$student, 'programi'=>$programiStudenta, 'predmeti'=>$predmeti]);
         }
 
     }

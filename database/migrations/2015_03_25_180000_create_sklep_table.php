@@ -16,6 +16,7 @@ class CreateSklepTable extends Migration {
         {
             $table->increments('id');
             $table->integer('id_studenta');
+            $table->integer('id_organa');
             $table->date('datum');
             $table->text('vsebina');
             $table->softDeletes();

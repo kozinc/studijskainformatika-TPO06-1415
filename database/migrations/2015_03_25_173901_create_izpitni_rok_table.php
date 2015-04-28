@@ -19,6 +19,8 @@ class CreateIzpitniRokTable extends Migration {
             $table->integer('izpitni_rok');
             $table->date('datum');
             $table->string('studijsko_leto');
+            $table->string('predavalnice');
+            $table->time('ura_izpita');
         });
 
 
