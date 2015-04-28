@@ -3,18 +3,40 @@
 @section('content')
 
     <div class="form-group">
-        <h3>Urejanje predmeta</h3>
+        <h3>Ustvarjanje predmeta</h3>
         <form action="" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div>
         </div>
         <div class="form-group">
             <label for ="naziv">Naziv</label>
-            <input type="text" name="naziv" id="naziv" value="" >
+            <input type="text" name="naziv" id="naziv" value="" class="form-control" >
+        </div>
+        <div class="form-group">
+            <label for ="sifra">Šifra predmeta</label>
+            <input type="text" name="sifra" id="sifra" class="form-control" value="" >
         </div>
         <div class="form-group">
             <label for="nosilec">Nosilec</label>
-            <select name="id_nosilca" id="nosilec">
+            <select name="id_nosilca" id="nosilec" class="form-control" >
+                @foreach($nosilci as $nosilec)
+                    <option value="{{ $nosilec->id }}">{{ $nosilec->ime }} {{ $nosilec->priimek }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nosilec">Sekundarni nosilec</label>
+            <select name="id_nosilca2" id="nosilec" class="form-control" >
+                <option value="0"> </option>
+                @foreach($nosilci as $nosilec)
+                    <option value="{{ $nosilec->id }}">{{ $nosilec->ime }} {{ $nosilec->priimek }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nosilec">Terciarni nosilec</label>
+            <select name="id_nosilca3" id="nosilec" class="form-control" class="form-control" >
+                <option value="0"> </option>
                 @foreach($nosilci as $nosilec)
                     <option value="{{ $nosilec->id }}">{{ $nosilec->ime }} {{ $nosilec->priimek }}</option>
                 @endforeach
@@ -22,7 +44,7 @@
         </div>
         <div class="form-group">
             <label for="KT">Kreditne točke</label>
-            <input id="KT" name="KT" value="">
+            <input id="KT" name="KT" value="" class="form-control" >
         </div>
         <div class="form-group">
             <label for="tip">Tip predmeta</label>
@@ -45,7 +67,7 @@
         <div class="form-group">
             <label for="opis">Opis predmeta</label>
             <div class="editor-wapper">
-                <textarea id="opis" name="opis"></textarea>
+                <textarea id="opis" name="opis" class="form-control" ></textarea>
             </div>
         </div>
             <input type="submit" value="Shrani" >

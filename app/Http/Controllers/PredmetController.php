@@ -78,10 +78,14 @@ class PredmetController extends Controller {
 	public function store(Request $request)
 	{
 		$predmet = new Predmet();
+        $predmet->sifra = $request['sifra'];
         $predmet->id_nosilca = (int)$request['id_nosilca'];
+        $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
+        $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
         $predmet->tip = $request['tip'];
         $predmet->KT = (int)$request['KT'];
         $predmet->naziv = $request['naziv'];
+
         if($predmet->tip == 'modulski'){
             $predmet->id_modula = (int)$request['id_modula'];
         }else{

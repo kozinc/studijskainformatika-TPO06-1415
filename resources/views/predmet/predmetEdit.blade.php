@@ -83,12 +83,18 @@
                 @endforeach
             </select>
         </div>
-        -->
+
+        <div class="form-group">
+            <label for="opis">Opis predmeta</label>
+            <div class="editor-wapper">
+                <textarea id="opis" name="opis" class="form-control" >{{ $predmet->opis }}</textarea>
+            </div>
+        </div>
+        s-->
             <input type="submit" value="Shrani" >
         </form>
     </div>
-        </div>
-    </div>
+
 
 
 @endsection
