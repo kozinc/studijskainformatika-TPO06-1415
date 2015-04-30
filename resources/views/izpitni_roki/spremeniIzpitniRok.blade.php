@@ -48,6 +48,7 @@
                     <li><a href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a></li>
                     <li><a href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a></li>
                     <li><a href="{{ action('ListStudentsController@getStudents') }}">Seznam študentov po predmetih</a></li>
+                    <li><a href="{{ action('VpisniListReferentController@obrazecVpisniList') }}">Vpiši študenta</a></li>
                 </ul>
             </div>
 
