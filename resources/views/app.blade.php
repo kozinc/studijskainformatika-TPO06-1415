@@ -9,17 +9,11 @@
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<!-- [endif]-->
-    <!-- Scripts -->
+
     <script src="{{ asset('js/jquery-2.1.3.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="{{ asset('bootstrap-3.3.4-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery-te-1.4.0.min.js') }}"></script>
     <script src="{{ asset('js/functions.js') }}"></script>
 
@@ -27,28 +21,15 @@
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-
             @if (\Session::get('vloga') == "referent" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('StudijskiProgramController@index') }}">Programi</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
-                </div>
-                <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('ListStudentsController@getStudents') }}">Seznam vpisanih študentov v predmet</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
@@ -56,10 +37,20 @@
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
                 </div>
+                <div class="nav navbar-nav navbar-right dropdown">
+                    <a class="navbar-brand" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Študenti</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a></li>
+                        <li><a href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a></li>
+                        <li><a href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a></li>
+                        <li><a href="{{ action('ListStudentsController@getStudents') }}">Seznam študentov po predmetih</a></li>
+
+                    </ul>
+                </div>
 
             @elseif (\Session::get('vloga') == "student" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
@@ -72,7 +63,7 @@
                 </div>
             @elseif (\Session::get('vloga') == "ucitelj" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}}</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
@@ -86,5 +77,6 @@
     </nav>
 
 	@yield('content')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 </body>
 </html>

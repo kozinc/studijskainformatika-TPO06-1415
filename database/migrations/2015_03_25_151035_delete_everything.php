@@ -29,6 +29,7 @@ class DeleteEverything extends Migration {
         Schema::dropIfExists('vrsta_vpisa');
         Schema::dropIfExists('zaklenjeni_ip');
         Schema::dropIfExists('sklep');
+        Schema::dropIfExists('organ');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
     }
@@ -58,6 +59,7 @@ class DeleteEverything extends Migration {
         Schema::dropIfExists('vrsta_vpisa');
         Schema::dropIfExists('zaklenjeni_ip');
         Schema::dropIfExists('sklep');
+        Schema::dropIfExists('organ');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
     }

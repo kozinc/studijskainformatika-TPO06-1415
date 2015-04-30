@@ -48,12 +48,16 @@ $(document).ready(function(){
 
     $('#tip-select').change(function(){
         var tip = $(this).val();
-        $('.letnik').show();
+
         if(tip=='modulski'){
             $('.modul').show();
+            $('.letnik').show();
         }else if(tip == 'prosto-izbirni'){
             $('.modul').hide();
             $('.letnik').hide();
+        }else{
+            $('.modul').hide();
+            $('.letnik').show();
         }
 
     });
@@ -65,6 +69,98 @@ $(document).ready(function(){
         }else{
             $('.nov-modul').hide();
         }
+    });
+
+    $('#struktura-open').click(function(){
+       $('#struktura').hide();
+    });
+
+    $('.program-tab').click(function(){
+        var data = $(this).data('tab');
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+
+        if(data == 'info'){
+            $('#program-info').show();
+            $('#struktura').hide();
+            $('#program-predmetniki').hide();
+        }else if(data == 'struktura'){
+            $('#program-info').hide();
+            $('#program-predmetniki').hide();
+            $('#struktura').show();
+        }else{
+            $('#program-predmetniki').show();
+            $('#struktura').hide();
+            $('#program-info').hide();
+        }
+
+    });
+
+    $('#dodaj_letnik').click(function(){
+        var letnik = $(this).data('letnik');
+        $('#letnik-'+letnik).show();
+        $('#status-'+letnik).val('create');
+        if(letnik < 5){
+            $(this).data('letnik',letnik+1);
+        }else{
+            $(this).hide();
+        }
+        $('#odstrani_letnik').data('letnik',letnik).html('Odstrani '+letnik+'. letnik').show();
+
+    });
+
+    $('#odstrani_letnik').click(function(){
+        var letnik = $(this).data('letnik');
+        $('#letnik-'+letnik).hide();
+        $('#status-'+letnik).val('delete');
+        if(letnik > 1){
+            $(this).data('letnik',letnik-1).html('Odstrani '+(letnik-1)+'. letnik');
+        }else{
+            $(this).hide();
+        }
+        $('#dodaj_letnik').data('letnik',letnik).html('Dodaj letnik').show();
+    });
+
+    $('#vsaPolaganja').click(function(){
+       $('.vsaPolaganjaT').show();
+        $('.zadnjePolaganjeT').hide();
+    });
+
+    $('#zadnjePolaganje').click(function(){
+        $('.zadnjePolaganjeT').show();
+        $('.vsaPolaganjaT').hide();
+    });
+
+    $(function() {
+        $("#datepicker").datepicker({
+            minDate: 1,
+            dateFormat: 'dd.mm.yy'
+        });
+
+        $("#datepicker1").datepicker({
+            minDate: 1,
+            dateFormat: 'dd.mm.yy'
+        });
+    });
+
+    $(function() {
+        $('#obrazec_izpit1').hide();
+        $('#izpit_button1').show();
+
+        $('#obrazec_izpit2').hide();
+        $('#izpit_button2').show();
+
+        $('#izpit_button1').click(function() {
+            $('#izpit_button1').hide();
+            $('#obrazec_izpit1').show('slow');
+            return false;
+        });
+
+        $('#izpit_button2').click(function() {
+            $('#izpit_button2').hide();
+            $('#obrazec_izpit2').show('slow');
+            return false;
+        });
     });
 
 });
