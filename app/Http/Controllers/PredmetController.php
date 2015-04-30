@@ -78,10 +78,14 @@ class PredmetController extends Controller {
 	public function store(Request $request)
 	{
 		$predmet = new Predmet();
+        $predmet->sifra = $request['sifra'];
         $predmet->id_nosilca = (int)$request['id_nosilca'];
+        $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
+        $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
         $predmet->tip = $request['tip'];
         $predmet->KT = (int)$request['KT'];
         $predmet->naziv = $request['naziv'];
+
         if($predmet->tip == 'modulski'){
             $predmet->id_modula = (int)$request['id_modula'];
         }else{
@@ -135,18 +139,29 @@ class PredmetController extends Controller {
 	public function update($id, Request $request)
 	{
 		$predmet = Predmet::find((int)$id);
+        $predmet->sifra = $request['sifra'];
         $predmet->naziv = $request['naziv'];
         $predmet->opis = $request['opis'];
         $predmet->KT = (int)$request['kt'];
         $predmet->id_nosilca = (int)$request['id_nosilca'];
         $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
         $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
+
+        if( $predmet->id_nosilca2 == 0 && $predmet->id_nosilca3 != 0 ) {
+            $predmet->id_nosilca2 = $predmet->id_nosilca3;
+            $predmet->id_nosilca3 = 0;
+        }
+        /*
         $predmet->tip = $request['tip'];
-        if($predmet->tip == 'modulski'){
+
+         * id_modula trenutno ne uporabljamo : rabimo foreign key?
+         *
+         if($predmet->tip == 'modulski'){
             $predmet->id_modula = (int)$request['id_modula'];
         }else{
             $predmet->id_modula = NULL;
         }
+        */
         $check = $predmet->save();
 
         return redirect('predmeti/'.$predmet->id);

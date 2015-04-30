@@ -49,10 +49,18 @@
                                             {{($predmet->predmet->nosilec3==null)?'':' '.($predmet->predmet->nosilec3->priimek).' ['.$predmet->predmet->id_nosilca3.']'}}
                                         </td>
                                         <td>{{$predmet->predmet->KT}}</td>
-                                        <div style="display:none">{{$datum=$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum}}</div>
+                                        <div style="display:none">
+                                            {{$stevec = 0}}
+                                            {{$trenutniDatum=$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum}}
+                                            @foreach ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum') as $datumIzpita)
+                                                @if ($datumIzpita <= $trenutniDatum)
+                                                    {{$stevec++}}
+                                                @endif
+                                            @endforeach
+                                        </div>
                                         <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':date('d.m.Y',strtotime($student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum))}}</td>
-                                        <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->count()}}</td>
-                                        <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->where('datum' ,'<',$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum)->get()->sortByDesc('datum')->count()}}</td>
+                                        <td>{{$stevec}}</td>
+                                        <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->count()}}</td>
                                         @if ($predmet->ocena>5)
                                             <div style="display:none">{{$kt=$kt+$predmet->predmet->KT}}{{$ktSkupaj=$ktSkupaj+$predmet->predmet->KT}}</div>
                                             <div style="display:none">{{$ocena=$ocena+$predmet->ocena}}{{$ocenaSkupaj=$ocenaSkupaj+$predmet->ocena}}{{$stevilo++}}{{$steviloSkupaj++}}</div>
@@ -88,11 +96,17 @@
                                             {{($predmet->predmet->nosilec3==null)?'':' '.($predmet->predmet->nosilec3->priimek).' ['.$predmet->predmet->id_nosilca3.']'}}
                                         </td>
                                         <td>{{$predmet->predmet->KT}}</td>
-                                        <div style="display:none">{{$datum=$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum}}</div>
+                                        <div style="display:none">
+                                            {{$stevec = 0}}
+                                            {{$trenutniDatum=$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum}}
+                                            @foreach ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum') as $datumIzpita)
+                                                @if ($datumIzpita <= $trenutniDatum)
+                                                    {{$stevec++}}
+                                                @endif
+                                            @endforeach
+                                        </div>
                                         <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':date('d.m.Y',strtotime($student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum))}}</td>
-
-
-                                        <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('datum','<=',$datum)->first()) == null)?'':$student->polaganja()->where('datum','<=',$datum)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->count()}}</td>
+                                        <td>{{$stevec}}</td>
                                         <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->count()}}</td>
 
                                         @if ($predmet->ocena>5)
