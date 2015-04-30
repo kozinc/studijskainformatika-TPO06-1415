@@ -188,26 +188,16 @@ class ListStudentsController extends Controller {
 
     public function natisniVpisniList($id){
         $student = \App\Models\Student::find($id);
+        $student_program = $student->studentProgram()->first();
+        $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
+        $obvezni_predmeti =  $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$student_program->letnik);
 
-        if (!is_null($student)) {
-            //preverimo ce obstaja zeton
-            $programStudenta = $student->studentProgram()->where('vloga_oddana' != null)->first();
+        ini_set('max_execution_time', 300);
+        $pdf = \App::make('dompdf');
+        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti));
+        return $pdf->download('vpisni_list.pdf');
 
-            if(!is_null($programStudenta)) {
-                $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();
-                $program = StudijskiProgram::find($programStudenta->id_programa);
-                $vrste_vpisa = VrstaVpisa::all();
-                $prviVpis = $programStudenta->where('id_programa','=',$program->id)->where('id_studenta','=', $student->id)->first();
-                $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
-                $pdf = \App::make('dompdf');
-                $pdf->loadHTML(\View::make('/pdf/vpisni_list_pdf'),['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta, 'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
-                return $pdf->stream('my.pdf',array('Attachment'=>0));
-                //return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta, 'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa, 'predmetiObvezni' => $predmetiObvezni]);
-            }
-        }
-        else {
-            return Redirect::back()->withErrors(['Napačen email.']);
-        }
+        //return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti);
     }
 
     public function returnBack(){

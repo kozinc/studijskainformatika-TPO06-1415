@@ -110,7 +110,7 @@ class IzpitniRokController extends Controller {
             //$send_mail->send("veronika.blazic@gmail.com", $mail, "Referat FRI - Sprememba izpitnega roka", $s);
         }
 
-        $send_mail->send("veronika.blazic@gmail.com", "veronika.blazic@gmail.com", "Referat FRI - Sprememba izpitnega roka", $s);
+        //$send_mail->send("veronika.blazic@gmail.com", "veronika.blazic@gmail.com", "Referat FRI - Sprememba izpitnega roka", $s);
     }
 
     // brise izpitni rok, odjavi studente
@@ -125,7 +125,6 @@ class IzpitniRokController extends Controller {
     //doda izpitni rok
     public function dodajIzpitniRok(){
         $predmet_id = \Session::get("izbrani_predmet");
-        $st_izpitnih_rokov = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->count();
         $izpitni_rok = new \App\Models\IzpitniRok;
         $date = \Input::get('date');
         $ura = \Input::get('ura');
@@ -136,8 +135,13 @@ class IzpitniRokController extends Controller {
             $datum = $deli_datuma[2] . "-"  . $deli_datuma[1] . "-" . $deli_datuma[0];
         }
 
+        $double = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->where('datum', $datum) -> first();
+
         if($date == ""){
             \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - vnesite datum");
+        }
+        else if($double != null){
+            \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - za izbrani datum že obstaja izpitni rok");
         }
         else{
             $izpitni_rok->datum = $datum;
@@ -160,12 +164,18 @@ class IzpitniRokController extends Controller {
         $counter = 0;
         foreach ($student_izpit as $s) {
             $student = \App\Models\Student::where('id', $s->id_studenta)->first();
-            $counter = $counter + 1;
-            $student["zaporedna_st"] = $counter;
             array_push($studentje, $student);
         }
 
         $datum = date("d.m.Y", strtotime($izpit->datum));
+
+        $list = new \App\Http\Controllers\ListStudentsController;
+        usort($studentje, array($list, "cmp"));
+
+        foreach ($studentje as $s){
+            $counter = $counter + 1;
+            $s["zaporedna_st"] = $counter;
+        }
 
         $pdf = \App::make('dompdf');
         $pdf->loadHTML(\View::make('pdf/seznam_studentov')->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet));

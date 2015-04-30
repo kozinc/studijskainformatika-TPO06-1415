@@ -166,46 +166,14 @@
 </div>
 
 <script>
-$(function() {
-$("#datepicker").datepicker({
-    minDate: 1,
-    dateFormat: 'dd.mm.yy'
-});
-
-$("#datepicker1").datepicker({
-    minDate: 1,
-    dateFormat: 'dd.mm.yy'
-});
-});
-
-$(document).ready(function() {
-$('#obrazec_izpit1').hide();
-$('#izpit_button1').show();
-
-$('#obrazec_izpit2').hide();
-$('#izpit_button2').show();
-
-$('#izpit_button1').click(function() {
-    $('#izpit_button1').hide();
-    $('#obrazec_izpit1').show('slow');
-    return false;
-});
-
-$('#izpit_button2').click(function() {
-    $('#izpit_button2').hide();
-    $('#obrazec_izpit2').show('slow');
-    return false;
-});
-});
-
-var tables = document.getElementsByTagName('table');
-var table = tables[tables.length - 1];
-var rows = table.rows;
-for(var i = 1, td; i < rows.length; i++){
-td = document.createElement('td');
-td.appendChild(document.createTextNode(i));
-rows[i].insertBefore(td, rows[i].firstChild);
-}
+    var tables = document.getElementsByTagName('table');
+    var table = tables[tables.length - 1];
+    var rows = table.rows;
+    for(var i = 1, td; i < rows.length; i++){
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(i));
+        rows[i].insertBefore(td, rows[i].firstChild);
+    }
 </script>
 </body>
 </html>

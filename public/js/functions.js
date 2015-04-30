@@ -131,5 +131,37 @@ $(document).ready(function(){
         $('.vsaPolaganjaT').hide();
     });
 
+    $(function() {
+        $("#datepicker").datepicker({
+            minDate: 1,
+            dateFormat: 'dd.mm.yy'
+        });
+
+        $("#datepicker1").datepicker({
+            minDate: 1,
+            dateFormat: 'dd.mm.yy'
+        });
+    });
+
+    $(function() {
+        $('#obrazec_izpit1').hide();
+        $('#izpit_button1').show();
+
+        $('#obrazec_izpit2').hide();
+        $('#izpit_button2').show();
+
+        $('#izpit_button1').click(function() {
+            $('#izpit_button1').hide();
+            $('#obrazec_izpit1').show('slow');
+            return false;
+        });
+
+        $('#izpit_button2').click(function() {
+            $('#izpit_button2').hide();
+            $('#obrazec_izpit2').show('slow');
+            return false;
+        });
+    });
+
 });
 
