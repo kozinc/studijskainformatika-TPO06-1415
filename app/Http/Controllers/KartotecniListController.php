@@ -54,15 +54,23 @@ class KartotecniListController extends Controller
     {
         //tu ne sme biti iz seje
         $student = Student::where ('email', '=', (\Session::get('session_id')))->first();
-        $content = [];
+        $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena')->get();
+        $programiStudenta = $programiStudenta->sortBy('vloga_potrjena');
+        $predmeti = StudentPredmet::where('id_studenta','=',$student->id);
+      /*  $content = [];
         $title = 'Kartotečni list študenta '.$student->ime.' '.$student->priimek;
         $content[] = ['Šifra predmeta', 'Ime predmeta', 'Nosilci', 'KT', 'Ocena'];
         if(isset($request['csv'])){
             return ExportHelper::make_csv($content, $title, '');
         }elseif(isset($request['pdf'])){
             return ExportHelper::make_pdf($content, $title, '');
+        }*/
+        if(isset($request['pdf'])) {
+            $pdf = \App::make('dompdf');
+            ini_set('max_execution_time', 300);
+            $pdf->loadHTML(\View::make('kartotecniList')->with('student', $student)->with('programi', $programiStudenta)->with('predmeti', $predmeti));
+            return $pdf->download('my.pdf');
         }
-
         return Redirect::back();
 
     }
