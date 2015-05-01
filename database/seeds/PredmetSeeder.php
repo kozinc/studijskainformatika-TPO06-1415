@@ -55,6 +55,16 @@ class PredmetSeeder extends Seeder
         Predmet::create(['sifra'=>'63507','naziv'=>'Programiranje','opis'=>'','id_nosilca'=>15,'KT'=>6]);
         Predmet::create(['sifra'=>'63509','naziv'=>'Računalniški sistemi','opis'=>'','id_nosilca'=>18,'KT'=>6]);
 
+        //prosto izbirni
+        Predmet::create(['sifra'=>'63745', 'naziv'=>'Angleški jezik nivo A','opis'=>'izbirni','id_nosilca'=>29,'KT'=>3]);
+        Predmet::create(['sifra'=>'63746','naziv'=>'Angleški jezik nivo B','opis'=>'izbirni','id_nosilca'=>29,'KT'=>3]);
+        Predmet::create(['sifra'=>'63747','naziv'=>'Angleški jezik nivo C','opis'=>'izbirni','id_nosilca'=>29,'KT'=>3]);
+        Predmet::create(['sifra'=>'63750','naziv'=>'Športna vzgoja','opis'=>'izbirni','id_nosilca'=>30,'KT'=>3]);
+        Predmet::create(['sifra'=>'63751','naziv'=>'Ekonomika in organizacija informatike','opis'=>'izbirni','id_nosilca'=>6,'KT'=>6]);
+        Predmet::create(['sifra'=>'63752','naziv'=>'Izbrana poglavja iz računalništva in informatike (Houdini fx:osnove proceduralnega modeliranja)','opis'=>'izbirni','id_nosilca'=>31,'KT'=>6]);
+        Predmet::create(['sifra'=>'63749','naziv'=>'Izbrana poglavja iz računalništva in informatike (Upravljanje tehnoloških podjetij)','opis'=>'izbirni','id_nosilca'=>32,'KT'=>6]);
+        Predmet::create(['sifra'=>'63764','naziv'=>'Računalniška orodja, jeziki in okolja - TP B (Gradnja Oblakov z ogrodjem OpenStack)','opis'=>'izbirni','id_nosilca'=>33,'KT'=>3]);
+
     }
 
 }

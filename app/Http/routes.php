@@ -89,6 +89,9 @@ Route::post('izpitni_roki/uredi_izpitni_rokb', 'IzpitniRokController@spremeniIzp
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}', 'IzpitniRokController@brisiIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
 
+Route::get('izbirni_predmeti/referent', 'IzbirniPredmetController@getIzbirniPredmetRef');
+Route::post('izbirni_predmeti/referent', 'IzbirniPredmetController@spremeniIzbirnePredmete');
+
 
 
 
