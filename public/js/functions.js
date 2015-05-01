@@ -132,18 +132,6 @@ $(document).ready(function(){
     });
 
     $(function() {
-        $("#datepicker").datepicker({
-            minDate: 1,
-            dateFormat: 'dd.mm.yy'
-        });
-
-        $("#datepicker1").datepicker({
-            minDate: 1,
-            dateFormat: 'dd.mm.yy'
-        });
-    });
-
-    $(function() {
         $('#obrazec_izpit1').hide();
         $('#izpit_button1').show();
 

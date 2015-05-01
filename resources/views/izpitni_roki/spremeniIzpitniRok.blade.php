@@ -166,6 +166,18 @@
 </div>
 
 <script>
+    $(function() {
+        $("#datepicker").datepicker({
+            minDate: 1,
+            dateFormat: 'dd.mm.yy'
+        });
+
+        $("#datepicker1").datepicker({
+            minDate: 1,
+            dateFormat: 'dd.mm.yy'
+        });
+    });
+
     var tables = document.getElementsByTagName('table');
     var table = tables[tables.length - 1];
     var rows = table.rows;
