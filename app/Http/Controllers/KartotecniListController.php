@@ -53,7 +53,7 @@ class KartotecniListController extends Controller
     public function export(Request $request)
     {
         //tu ne sme biti iz seje
-        $student = Student::where ('email', '=', (\Session::get('session_id')))->first();
+        $student = Student::find($request['id_studenta']);
         $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena')->get();
         $programiStudenta = $programiStudenta->sortBy('vloga_potrjena');
         $predmeti = StudentPredmet::where('id_studenta','=',$student->id);
