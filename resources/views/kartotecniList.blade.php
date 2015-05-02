@@ -165,6 +165,7 @@
             <br>
             <form action="{{ action('KartotecniListController@export') }}" method="post">
                 <input class="btn" type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input class="btn" id="vsa_polaganja" type="hidden" name="vsa_polaganja" value="0">
                 <input class="btn" type="submit" name="csv" value="Izvozi CSV">
                 <input class="btn" type="submit" name="pdf" value="Izvozi PDF">
             </form>

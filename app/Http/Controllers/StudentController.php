@@ -23,8 +23,10 @@ class StudentController extends Controller {
 		//
 	}
 
-    public function searchForm(){
-        return view('student/iskanjeStudenta');
+    public function searchForm()
+    {
+
+        return view('student/iskanjeStudenta',['vnosOcene'=>0]);
     }
 
     public function search(Request $request){
@@ -34,7 +36,7 @@ class StudentController extends Controller {
         if($request['return_type']=='json'){
             return response($studenti->toJson,200,['Content-Type'=>'application/json']);
         }
-        return view('student/iskanjeStudenta', ['studenti'=>$studenti]);
+        return view('student/iskanjeStudenta', ['studenti'=>$studenti, 'vnosOcene'=>0]);
 
     }
 

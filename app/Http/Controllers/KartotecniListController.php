@@ -57,19 +57,21 @@ class KartotecniListController extends Controller
         $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena')->get();
         $programiStudenta = $programiStudenta->sortBy('vloga_potrjena');
         $predmeti = StudentPredmet::where('id_studenta','=',$student->id);
-      /*  $content = [];
-        $title = 'Kartotečni list študenta '.$student->ime.' '.$student->priimek;
-        $content[] = ['Šifra predmeta', 'Ime predmeta', 'Nosilci', 'KT', 'Ocena'];
-        if(isset($request['csv'])){
-            return ExportHelper::make_csv($content, $title, '');
-        }elseif(isset($request['pdf'])){
-            return ExportHelper::make_pdf($content, $title, '');
-        }*/
+
         if(isset($request['pdf'])) {
             $pdf = \App::make('dompdf');
             ini_set('max_execution_time', 300);
-            $pdf->loadHTML(\View::make('kartotecniList')->with('student', $student)->with('programi', $programiStudenta)->with('predmeti', $predmeti));
-            return $pdf->download('my.pdf');
+            if ($request['vsa_polaganja'] == 0)
+            {
+                $pdf->loadHTML(\View::make('pdf/kartotecniList_pdf')->with('student', $student)->with('programi', $programiStudenta)->with('predmeti', $predmeti));
+
+            }
+            else
+            {
+                $pdf->loadHTML(\View::make('pdf/kartotecniList_pdf2')->with('student', $student)->with('programi', $programiStudenta)->with('predmeti', $predmeti));
+
+            }
+            return $pdf->download('kartotecniList.pdf');
         }
         return Redirect::back();
 
