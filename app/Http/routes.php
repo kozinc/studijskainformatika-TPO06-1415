@@ -64,8 +64,8 @@ Route::put('programi/{id}', 'StudijskiProgramController@update');
 Route::post('programi/{id}/strukutura', 'StudijskiProgramController@spremeni_strukturo');
 Route::get('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@showPredmetnik');
 Route::post('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@editPredmetnik');
-Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@create_predmetnik');
-Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@store_predmetnik');
+Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@createPredmetnik');
+Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@storePredmetnik');
 
 Route::get('studenti', 'StudentController@searchForm');
 Route::post('studenti', 'StudentController@search');
@@ -90,6 +90,9 @@ Route::post('izpitni_roki/uredi_izpitni_roka', 'IzpitniRokController@dodajIzpitn
 Route::post('izpitni_roki/uredi_izpitni_rokb', 'IzpitniRokController@spremeniIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}', 'IzpitniRokController@brisiIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
+
+Route::get('izbirni_predmeti/referent', 'IzbirniPredmetController@getIzbirniPredmetRef');
+Route::post('izbirni_predmeti/referent', 'IzbirniPredmetController@spremeniIzbirnePredmete');
 
 
 

@@ -44,5 +44,11 @@ class NosilecSeeder extends Seeder
         Nosilec::create(['id' => 26, 'ime' => 'Narvika', 'priimek' => 'Bovcon', 'naziv' => 'doc. dr.', 'vloga' => '', 'geslo' => Hash::make('narvikabovcon'), 'email' => 'narvika.bovcon@fri.uni-lj.si']);
         Nosilec::create(['id' => 27, 'ime' => 'Polona', 'priimek' => 'Oblak', 'naziv' => 'izr. prof. dr.', 'vloga' => '', 'geslo' => Hash::make('polonaoblak'), 'email' => 'polona.oblak@fri.uni-lj.si']);
         Nosilec::create(['id' => 28, 'ime' => 'Jaka', 'priimek' => 'Lindič', 'naziv' => 'doc. dr.', 'geslo' => Hash::make('jakalindic'), 'email' => 'jaka.lindic@fri.uni-lj.si']);
+        Nosilec::create(['id' => 29, 'ime' => 'Marina', 'priimek' => 'Štros Bračko', 'naziv' => 'viš. pred.', 'geslo' => Hash::make('marinabracko'), 'email' => 'marina.bracko@fri.uni-lj.si']);
+        Nosilec::create(['id' => 30, 'ime' => 'Iztok', 'priimek' => 'Mihevc', 'naziv' => 'pred. spec.', 'geslo' => Hash::make('iztokmihevc'), 'email' => 'iztok.mihevc@fri.uni-lj.si']);
+        Nosilec::create(['id' => 31, 'ime' => 'Zoran', 'priimek' => 'Arizanović', 'naziv' => 'doc. mag.', 'geslo' => Hash::make('zoranarizanovic'), 'email' => 'zoran.arizanovic@fri.uni-lj.si']);
+        Nosilec::create(['id' => 32, 'ime' => 'Aleš', 'priimek' => 'Špetič', 'naziv' => '', 'geslo' => Hash::make('alesspetic'), 'email' => 'ales.spetic@fri.uni-lj.si']);
+        Nosilec::create(['id' => 33, 'ime' => 'Mojca', 'priimek' => 'Ciglarič', 'naziv' => 'doc. dr.', 'geslo' => Hash::make('mojcaciglaric'), 'email' => 'mojca.ciglaric@fri.uni-lj.si']);
+
     }
 }

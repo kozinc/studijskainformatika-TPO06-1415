@@ -158,7 +158,7 @@ class StudijskiProgramController extends Controller {
 
     public function showPredmetnik($id, $studijsko_leto){
         $leto = substr($studijsko_leto,0,4);
-        $stud_leto = $leto.'/'.date('Y',strtotime($leto));
+        $stud_leto = $leto.'/'.((int)$leto + 1);
         $program = StudijskiProgram::find((int)$id);
         $predmeti = Predmet::all();
         return view('program/programPredmetnik',['program'=>$program, 'predmeti'=>$predmeti, 'studijsko_leto'=>$stud_leto] );
@@ -169,7 +169,8 @@ class StudijskiProgramController extends Controller {
         $leto = substr($studijsko_leto,0,4);
         $sl = $leto.'/'.((int)$leto+1);
         $predmet = Predmet::find($request['predmet']);
-        if($request['modul'] == 'new'){
+        $id_modula = null;
+        if($request['modul'] == 'new' && !isset($request['delete'])){
             $modul = new Modul();
             if(strlen($request['ime_modula']) < 4){
                 return Redirect::back()->withErrors('Ime modula je prekratko!');
@@ -185,15 +186,31 @@ class StudijskiProgramController extends Controller {
         if($request['tip']=='modulski'){
             if(intval($request['modul']) > 0){
                 $id_modula = (int)$request['modul'];
+                if(isset($request['delete'])){
+                    $modul = Modul::find($id_modula);
+                    $modul->delete();
+                    Modul::deleting(function($mod)
+                    {
+                        $mod->predmeti()->detach();
+                    });
+                }
             }else{
                 return Redirect::back()->withErrors('Neveljaven modul!');
             }
         }
         $existingPredmet = $program->predmeti()->where('predmet.id','=',$request['predmet'])->wherePivot('studijsko_leto','LIKE', $leto.'%')->first();
         if(is_null($existingPredmet)){
-            $program->predmeti()->attach($predmet->id, ['studijsko_leto'=>$sl, 'letnik'=>$request['letnik'], 'tip'=>$request['tip'], 'semester'=>$request['semester']]);
+            if(isset($request['delete'])){
+                $program->predmeti()->where('studijsko_leto' ,'=', $sl)->detach($predmet->id);
+            }else{
+                $program->predmeti()->attach($predmet->id, ['studijsko_leto'=>$sl, 'letnik'=>$request['letnik'], 'tip'=>$request['tip'], 'id_modula'=>$id_modula, 'semester'=>$request['semester']]);
+            }
         }else{
-            $program->predmeti()->updateExistingPivot($existingPredmet->id, ['studijsko_leto'=>$sl, 'letnik'=>$request['letnik'], 'tip'=>$request['tip'], 'semester'=>$request['semester']]);
+            if(isset($request['delete'])){
+                $program->predmeti()->where('studijsko_leto' ,'=', $sl)->detach($predmet->id);
+            }else {
+                $program->predmeti()->updateExistingPivot($existingPredmet->id, ['studijsko_leto' => $sl, 'letnik' => $request['letnik'], 'id_modula' => $id_modula, 'tip' => $request['tip'], 'semester' => $request['semester']]);
+            }
         }
 
         return Redirect::back()->with('odgovor', 'Predmetnik posodobljen.');

@@ -12,6 +12,7 @@ class ListStudentsController extends Controller {
     public function get_all_students(){
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
+        $leta = array_values($leta);
         return \View::make('seznam')->with('predmeti', $predmeti)->with('leta', $leta)->with('student_list', '')->with('predmet_id', 1)->with('leto_id', 0);
     }
 
@@ -131,8 +132,11 @@ class ListStudentsController extends Controller {
         $predmet_id = \Input::get('predmeti');
         $leto_id = \Input::get('leta');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
+        $leta = array_values($leta);
 
-        $student_predmet_list = \App\Models\StudentPredmet::where('id_predmeta', $predmet_id)->where('studijsko_leto', $leto)->get();
+        $l = $leta[$leto_id];
+
+        $student_predmet_list = \App\Models\StudentPredmet::where('id_predmeta', $predmet_id)->where('studijsko_leto', $l)->get();
         $student_list = array();
 
         foreach ($student_predmet_list as $s) {
@@ -151,6 +155,7 @@ class ListStudentsController extends Controller {
 
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
+        $leta = array_values($leta);
         $vrsteVpisa = VrstaVpisa::all()->keyBy('sifra');
 
         $csv = \Input::get('csv');
