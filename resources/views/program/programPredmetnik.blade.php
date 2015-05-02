@@ -2,8 +2,9 @@
 @extends('app')
 
 @section('content')
+    @extends('response')
     <div class="program-info">
-        <h3>{{ $program->ime }}</h3>
+        <h3><a href="{{ action('StudijskiProgramController@show',['id'=>$program->id]) }}">{{ $program->ime }}</a></h3>
         <h3>Študijsko leto {{ str_replace('/20','-',$studijsko_leto) }}</h3>
     </div>
     <ul class="nav nav-pills">
@@ -44,6 +45,21 @@
                         Povečajte število strokovnih predmetov!
                     </div>
                 @endif
+                @if($letnik->stevilo_prostih_predmetov > $program->prosti_predmeti($studijsko_leto)->count())
+                    <div class="alert alert-warning" role="alert">
+                        Povečajte število prsto izbirnih predmetov predmetov!
+                    </div>
+                @endif
+                @foreach($program->moduli as $modul)
+                    @if($modul->letnik == $letnik->letnik && $modul->studijsko_leto==$studijsko_leto)
+                        @if(count($modul->predmeti) == 0)
+                            <div class="alert alert-warning" role="alert">
+                                Modul {{ $modul->ime }} nima dodanega nobenega predmeta.
+                            </div>
+                        @endif
+                    @endif
+
+                @endforeach
             </div>
             <h3>Predmetnik</h3>
             <table class="table" class="predmeti">
@@ -61,7 +77,7 @@
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='obvezni')
                     <tr>
-                        <td>{{ $predmet->id }}</td>
+                        <td>{{ $predmet->sifra }}</td>
                         <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                         <td>{{ $predmet->pivot->tip }}</td>
                         <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
@@ -78,7 +94,7 @@
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='strokovni-izbirni')
                         <tr>
-                            <td>{{ $predmet->id }}</td>
+                            <td>{{ $predmet->sifra }}</td>
                             <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                             <td>{{ $predmet->pivot->tip }}</td>
                             <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
@@ -108,7 +124,7 @@
                         </tr>
                         @foreach($modul->predmeti as $predmet)
                         <tr>
-                            <td>{{ $predmet->id }}</td>
+                            <td>{{ $predmet->sifra }}</td>
                             <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                             <td>{{ $predmet->pivot->tip }}</td>
                             <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
@@ -139,7 +155,7 @@
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->tip=='prosto-izbirni' && $predmet->pivot->studijsko_leto == $studijsko_leto)
                         <tr>
-                            <td>{{ $predmet->id }}</td>
+                            <td>{{ $predmet->sifra }}</td>
                             <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                             <td>{{ $predmet->pivot->tip }}</td>
                             <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}</td>
@@ -152,17 +168,18 @@
             @endforeach
             </table>
         </div>
+        <hr>
         <div class="dodaj-predmet">
             <a class="btn btn-success odpri-predmetnik-form">Dodaj predmet</a>
             <form action="{{ action('StudijskiProgramController@editPredmetnik', ['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}" method="post" class="predmetnik-form" style="width:40%;display:none;">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="letnik" value="{{ $letnik->letnik }}">
-                <h3>Dodaj nov predmet</h3>
+                <h3>Dodaj predmet v predmetnik</h3>
                 <div class="form-group">
                     <label for="predmet">Predmet</label>
                     <select name="predmet" id="predmet" class="form-control">
-                        @foreach($predmeti as $predmet)
-                            <option value="{{ $predmet->id }}">{{ $predmet->naziv }}</option>
+                        @foreach($predmeti->sortBy('sifra') as $predmet)
+                            <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -219,6 +236,7 @@
                     </select>
                 </div>
                 <input type="submit" class="btn btn-success" value="Shrani">
+                <input type="submit" name="delete" class="btn btn-danger" value="Odstrani">
             </form>
         </div>
         </div>

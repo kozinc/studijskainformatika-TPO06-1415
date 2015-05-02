@@ -121,6 +121,12 @@ $(document).ready(function(){
         $('#dodaj_letnik').data('letnik',letnik).html('Dodaj letnik').show();
     });
 
+    $('#dodaj_predmetnik').click(function(){
+        var studijsko_leto = $('#predmetnik_leto_select').val();
+        var link = $(this).data('href');
+        window.location.href = link+studijsko_leto;
+    });
+
     $('#vsaPolaganja').click(function(){
        $('.vsaPolaganjaT').show();
         $('.zadnjePolaganjeT').hide();
