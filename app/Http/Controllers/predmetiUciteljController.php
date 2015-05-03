@@ -24,6 +24,7 @@ class PredmetiUciteljController extends Controller
 
     public function vrniPredmete()
     {
+        $studijsko_leto = '2014/2015';
         $vloga = (\Session::get('vloga'));
 
         if ($vloga != 'ucitelj')
@@ -36,7 +37,7 @@ class PredmetiUciteljController extends Controller
             $ucitelj = Nosilec::where('email','=',(\Session::get('session_id')))->first();
             $predmeti = Predmet::where('id_nosilca','=',$ucitelj->id)->orWhere('id_nosilca2','=',$ucitelj->id)->orWhere('id_nosilca3','=',$ucitelj->id);
 
-            return view('predmetiUcitelj', ['ucitelj'=>$ucitelj, 'predmeti'=>$predmeti]);
+            return view('predmetiUcitelj', ['ucitelj'=>$ucitelj, 'predmeti'=>$predmeti,'studijsko_leto'=>$studijsko_leto]);
         }
     }
 

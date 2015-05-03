@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading"><h3 style="color: #005580">Predmeti nosilca {{$ucitelj->ime}} {{$ucitelj->priimek}} ({{$ucitelj->id}})</h3></div>
+        <div class="panel-heading">
+            <h3 style="color: #005580">Predmeti nosilca {{$ucitelj->ime}} {{$ucitelj->priimek}} ({{$ucitelj->id}})</h3>
+            <h3>Študijsko leto: {{$studijsko_leto}}</h3>
+        </div>
         <div class="panel-body">
 
         <table class="table">

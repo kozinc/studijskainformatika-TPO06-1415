@@ -4,11 +4,13 @@ use App\Helpers\DateHelper;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\StudentPredmet;
 use App\Models\StudentProgram;
 use App\Models\StudijskiProgram;
 use App\Models\VrstaVpisa;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Nosilec;
 use Illuminate\Support\Facades\Redirect;
 
 class StudentController extends Controller {
@@ -116,9 +118,22 @@ class StudentController extends Controller {
 	{
 		$student = Student::find($id);
         $studentProgrami= $student->studentProgram;
-        //dd($studentProgrami);
         $vrsteVpisa = VrstaVpisa::all();
-        return view('student/studentInfo', ['student'=>$student, 'studentProgrami'=>$studentProgrami, 'vrsteVpisa'=>$vrsteVpisa]);
+        $predmeti = null;
+
+        if (\Session::get('vloga') == "ucitelj" )
+        {
+            $ucitelj = Nosilec::where('email','=',\Session::get('session_id'))->first();
+            $studentPredmeti = StudentPredmet::with('predmet')->where('id_studenta','=',$student->id)->get();
+
+            $predmeti = $studentPredmeti->filter(function($sp) use ($ucitelj)
+            {
+                return $sp->predmet->id_nosilca == $ucitelj->id;
+
+            })->values();
+
+        }
+        return view('student/studentInfo', ['student'=>$student, 'studentProgrami'=>$studentProgrami, 'vrsteVpisa'=>$vrsteVpisa, 'predmeti'=>$predmeti,'ucitelj'=>$ucitelj]);
 	}
 
 	/**

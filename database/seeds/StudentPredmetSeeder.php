@@ -71,6 +71,11 @@ class StudentPredmetSeeder extends Seeder
 
         ////////////////////////////////OSTALI
 
+        StudentPredmet::create(['id_studenta'=>5, 'id_predmeta'=>24, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>9, 'tocke_izpita'=>87]);
+        StudentPredmet::create(['id_studenta'=>6, 'id_predmeta'=>24, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>5, 'tocke_izpita'=>45]);
+        StudentPredmet::create(['id_studenta'=>7, 'id_predmeta'=>24, 'letnik'=>3, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'tocke_izpita'=>59]);
+
+
         StudentPredmet::create(['id_studenta'=>5, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>6, 'tocke_izpita'=>55]);
         StudentPredmet::create(['id_studenta'=>6, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>8, 'tocke_izpita'=>72]);
 
