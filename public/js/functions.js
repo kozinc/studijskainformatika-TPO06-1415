@@ -130,11 +130,13 @@ $(document).ready(function(){
     $('#vsaPolaganja').click(function(){
        $('.vsaPolaganjaT').show();
         $('.zadnjePolaganjeT').hide();
+        $('#vsa_polaganja').val(1);
     });
 
     $('#zadnjePolaganje').click(function(){
         $('.zadnjePolaganjeT').show();
         $('.vsaPolaganjaT').hide();
+        $('#vsa_polaganja').val(0);
     });
 
     $('.multi-select').multiSelect({

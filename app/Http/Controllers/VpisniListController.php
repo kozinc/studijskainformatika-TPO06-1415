@@ -70,7 +70,7 @@ class VpisniListController extends Controller {
                     $student->vpisna = $novaVpisna.substr($letosnjiStudentZadnji->vpisna, 4) + 1;
                     $student->save();
                     $program = StudijskiProgram::find($programStudenta->id_programa);
-                    // return ( $program->ime);
+                    // TU SE NE OMEJIM NA STUDIJSKO LETO!
                     $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',1);
                     $programStudenta->vrsta_vpisa = 1;
                     $vrsta_vpisa = VrstaVpisa::where('sifra', '=', $programStudenta->vrsta_vpisa)->first();

@@ -21,7 +21,7 @@
         <div class="container-fluid">
             @if (\Session::get('vloga') == "referent" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} (referent)</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
@@ -48,7 +48,7 @@
 
             @elseif (\Session::get('vloga') == "student" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} (študent)</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
@@ -61,10 +61,13 @@
                 </div>
             @elseif (\Session::get('vloga') == "ucitelj" )
                 <div class="navbar-header">
-                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
+                    <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} (učitelj)</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('PredmetiUciteljController@vrniPredmete') }}">Moji predmeti</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
