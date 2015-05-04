@@ -7,14 +7,12 @@
 	<title>E-študij FRI</title>
 
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Fonts -->
-
-
+    <link rel="stylesheet" href="{{ asset('multi-select/css/multi-select.css') }}">
 
     <script src="{{ asset('js/jquery-2.1.3.min.js') }}"></script>
     <script src="{{ asset('bootstrap-3.3.4-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery-te-1.4.0.min.js') }}"></script>
+    <script src="{{ asset('multi-select/js/jquery.multi-select.js') }}"></script>
     <script src="{{ asset('js/functions.js') }}"></script>
 
 </head>
