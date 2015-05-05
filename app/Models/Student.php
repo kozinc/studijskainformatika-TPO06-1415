@@ -23,9 +23,7 @@ class Student extends Model {
 
     public function predmetiVProgramu(StudijskiProgram $program, $letnik=0)
     {
-        $predmeti = \DB::table('program_predmet')->where('id_programa','=',$program->id)->where('letnik','=',$letnik)->lists('id');
-        $studentovi_predmeti = $this->Predmeti()->whereIn('predmet.id',$predmeti)->get();
-        dd($predmeti, $studentovi_predmeti);
+        $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->lists('id_predmeta');
         return $predmeti;
     }
 

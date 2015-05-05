@@ -5,6 +5,7 @@ use App\Models\StudijskiProgram;
 use App\Models\Referent;
 use App\Models\StudentProgram;
 use App\Models\StudentPredmet;
+use App\Models\ProgramLetnik;
 use App\Models\VrstaVpisa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -141,11 +142,10 @@ class VpisniListReferentController extends Controller {
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
                     $izbraniPredmeti = $student->predmetiVPRogramu($program,$programStudenta->letnik);
-                    dd($izbraniPredmeti);
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,
-                        'predmetiProsti'=>$predmetiProsti, 'programLetnik'=>$programLetnik]);
+                        'predmetiProsti'=>$predmetiProsti, 'programLetnik'=>$programLetnik, 'izbraniPredmeti'=>$izbraniPredmeti]);
                 }
             }
             else
@@ -300,6 +300,8 @@ class VpisniListReferentController extends Controller {
                 return Redirect::back()->withErrors(['Naslov za pošiljanje neveljaven.']);
             }
         }
+
+
         $student->telefon = $request['telefon'];
         $student->naslov = $request['naslov'];
         $student->davcna = $request['davcna'];
@@ -322,8 +324,61 @@ class VpisniListReferentController extends Controller {
             StudentPredmet::create(['id_studenta'=>$programStudenta->id_studenta, 'id_predmeta'=>$predmet->id, 'letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto]);
         }
         $sporocilo = "Vloga uspešno oddana in potrjena.";
-
         return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0,'sporocilo'=> $sporocilo]);
+        /*
+         *         //PREDMETNIIK
+        $program = $programStudenta->studijski_program;
+        $programLetnik = ProgramLetnik::where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik)->first();
+        $povprecnaOcena = $program->povprecnaOcena($student);
+        DB::beginTransaction();
+        if($programLetnik->stevilo_modulov > 0)
+        {
+            $min_kt = $programLetnik->stevilo_modulov * 3 * 6;
+            $modulski = $request['modulski-predmeti'];
+            if(is_array($modulski)){
+                $modul_check = [];
+                $izbrani_kt = 0;
+                foreach($modulski as $predmet_id)
+                {
+                    $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                    $izbrani_kt += $predmet->KT;
+                    if(isset($modul_check[$predmet->pivot->id_modula])){
+                        $modul_check[$predmet->pivot->id_modula]++;
+                    }else{
+                        $modul_check[$predmet->pivot->id_modula] = 1;
+                    }
+                    $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
+                    $studentPredmet->save();
+                }
+            }
+        }
+        if($programLetnik->stevilo_strokovnih_predmetov > 0)
+        {
+            $strokovni = $request['strokovni-predmeti'];
+            if(is_array($strokovni)){
+                foreach($strokovni as $predmet_id)
+                {
+                    $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                    $izbrani_kt += $predmet->KT;
+                    $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
+                    $studentPredmet->save();
+                }
+            }
+        }
+        if($programLetnik->stevilo_prostih_predmetov > 0)
+        {
+            $prosti = $request['prosti-predmeti'];
+            if(is_array($prosti)){
+                foreach($prosti as $predmet_id)
+                {
+                    $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                    $izbrani_kt += $predmet->KT;
+                    $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
+                    $studentPredmet->save();
+                }
+            }
+        }
+         */
     }
 
 }
