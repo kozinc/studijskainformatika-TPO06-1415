@@ -24,6 +24,7 @@ public $timestamps = false;
         return $this->belongsTo('App\Models\VrstaVpisa', 'vrsta_vpisa', 'sifra');
     }
 
+
     public function moduli($studijsko_leto, $studentProgram)
     {
         $studentPredmeti = StudentPredmet::where('id_studenta','=',$this->id_studenta)->where('studijsko_leto','=',$studijsko_leto)->get();
