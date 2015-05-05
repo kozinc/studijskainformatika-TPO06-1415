@@ -21,7 +21,15 @@
                                 Letnik: {{ $program->letnik }}.  <br><br>
                                 Vrsta vpisa: {{ $program->vrstaVpisa->ime }}  <br><br>
                                 Način študija: {{ $program->nacin_studija }}
-                                Moduli: {{ count($program->moduli('2014/2015',$program)->get()) }}
+                                <?php $i=1; ?>
+                                @if(count($program->moduli($program->studijsko_leto,$program)->get()) == 0 && $program->letnik==3)
+                                    <br><br>Modul 1: prosta izbira <br><br>
+                                    Modul 2: prosta izbira
+                                @endif
+                                @foreach($program->moduli($program->studijsko_leto,$program)->get()as $modul)
+                                    <br><br>{{ 'Modul '.$i.': '.$modul->ime }}
+                                    <?php $i++;?>
+                                @endforeach
                             </div>
                         </div>
 

@@ -90,7 +90,7 @@ class ProgramPredmetSeeder extends Seeder
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>29,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>30,'letnik'=>1, 'semester'=>1,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>31,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
-        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>40,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>43,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
 
 
     }
