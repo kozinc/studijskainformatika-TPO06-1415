@@ -27,6 +27,7 @@ class Student extends Model {
             ->join('predmet','student_predmet.id_predmeta','=','predmet.id')
             ->join('program_predmet','predmet.id','=','program_predmet.id_predmeta')
             ->where('program_predmet.id_programa','=',$program->id)
+            ->where('program_predmet.letnik','=',$letnik)
             ->where('student_predmet.id_studenta','=',$this->id)->get();
         return $predmeti;
     }
