@@ -245,7 +245,7 @@
                             <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_strokovnih_predmetov*6 }}</p>
                             <select multiple="multiple" class="multi-select count_kt" id="strokovni-predmeti-select" name="strokovni-predmeti-select[]">
                                 @foreach($predmetiStrokovni as $predmet)
-                                    <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                 @endforeach
                             </select>
                         @endif
@@ -256,7 +256,7 @@
                                 @foreach($moduli as $modul)
                                     <optgroup label="{{ $modul->ime }}">
                                         @foreach($modul->predmeti as $predmet)
-                                            <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                            <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach
@@ -267,13 +267,13 @@
                             <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_prostih_predmetov*6 }}</p>
                             <select multiple="multiple" class="multi-select count_kt" id="prosti-predmeti-select" name="prosti-predmeti[]">
                                 @foreach($predmetiProsti as $predmet)
-                                    <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                 @endforeach
                             </select>
                         @endif
                         <br>
                         <div>
-                            <p>Število kreditnih točk: <span data-obvezni="{{ $kt }}" id="kt_skupno">{{ $kt }}</span>/60</p>
+                            <p>Število kreditnih točk: <span data-obvezni="{{ $kt }}" id="kt_skupno">60</span>/60</p>
                         </div>
                     </div>
                 </div>
@@ -281,7 +281,8 @@
                 @if (Session::has('error'))
                     <div class="alert alert-info">{{ Session::get('error') }}</div>
                 @endif
-                {!! Form::submit('Pošlji vpisni list.', array('class' => 'btn btn-success')) !!}
+            <input type="submit" name="poslji" class="btn btn-success" value="Pošlji vpisni list">
+            <input type="submit" name="potrdi" class="btn btn-success" value="Potrdi">
                 {!! Form::close() !!}
 
             @else
