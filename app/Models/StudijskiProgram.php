@@ -14,9 +14,9 @@ class StudijskiProgram extends Model
     public function predmeti($studijsko_leto=false)
     {
         if($studijsko_leto){
-            return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
+            return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester', 'id_modula')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
         }
-        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->orderBy('letnik', 'semester', 'asc');
+        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester', 'id_modula')->orderBy('letnik', 'semester', 'asc');
     }
 
     public function obvezni_predmeti($studijsko_leto,$letnik=0)

@@ -10,6 +10,20 @@
                 <p>Priimek: {{ $student->priimek }}</p>
                 <p>Telefon: {{ $student->telefon }}</p>
                 <p>Email: {{ $student->email }}</p>
+                @if (\Session::get('vloga') == "referent" )
+                    <p>Spol: {{$student->spol}}</p>
+                    <p>EMŠO: {{$student->emso}}</p>
+                    <p>Davčna številka: {{$student->davcna}}</p>
+                    <p>Datum rojstva: {{date('d.m.Y',strtotime($student->datum_rojstva))}}</p>
+                    <p>Občina in država rojstva: {{$student->obcina_rojstva.', '.$student->drzava_rojstva}}</p>
+                    <p>Naslov za pošiljanje pošte:
+                    @if ($student->posiljanje != 0)
+                        {{$student->naslovZacasni.', '.$student->postaZacasni.' '.$student->obcinaZacasni.', '.$student->drzavaZacasni}}
+                    @else
+                        {{$student->naslov.', '.$student->posta.' '.$student->obcina.', '.$student->drzava}}
+                    @endif </p>
+                    <p>Državljanstvo: {{$student->drzavljanstvo}}</p>
+                @endif
                 <p>Kartotečni list: <a href="{{ action('KartotecniListController@prikazKartotecniList',['id'=>$student->id]) }}">Klikni za ogled</a></p>
             </div>
 
@@ -57,6 +71,7 @@
                             <th>Naziv programa</th>
                             <th>Letnik</th>
                             <th>Način študija</th>
+                            <th>Vrsta vpisa</th>
                             <th>Stanje</th>
                             <th>Urejanje</th>
                             <th>Elektronski indeks</th>
@@ -68,6 +83,7 @@
                             <td>{{ $sp->studijski_program->ime }}</td>
                             <td>{{ $sp->letnik }}</td>
                             <td>{{ $sp->nacin_studija }}</td>
+                            <td>{{ $sp->vrstaVpisa->ime }}</td>
                             <td>
                                 @if(is_null($sp->vloga_oddana))
                                     Vloga še ni oddana.
