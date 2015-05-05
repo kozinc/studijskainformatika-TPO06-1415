@@ -137,7 +137,7 @@
 
                                             @endif
                                         @endif
-                                        <td>{{(($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->first()) == null)?'':$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->pivot->ocena}}</td>
+                                        <td>{{(($student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->first()) == null)?'':$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->pivot->ocena}}</td>
                                     </tr>
 
                                     <div style="display:none">{{$i=$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->count()}}</div>
@@ -157,6 +157,7 @@
                                                     @if($trenutniDatum!=null)
                                                         {{$trenutniDatum=$trenutniDatum->datum}}
                                                     @endif
+
                                                     @foreach ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get() as $datumIzpita)
                                                         @if ($datumIzpita->datum <= $trenutniDatum && $polaganje->datum >= $datumIzpita->datum)
                                                             {{$stevec++}}
