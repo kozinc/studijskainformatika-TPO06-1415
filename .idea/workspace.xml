@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06304d7b-ba65-4c89-be3d-476d003f2ba8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudentProgram.php" afterPath="$PROJECT_DIR$/app/Models/StudentProgram.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" afterPath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/referent/novVpisniList.blade.php" afterPath="$PROJECT_DIR$/resources/views/referent/novVpisniList.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/referent/vpisnilistReferent.blade.php" afterPath="$PROJECT_DIR$/resources/views/referent/vpisnilistReferent.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/functions.js" afterPath="$PROJECT_DIR$/public/js/functions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vpisniList.blade.php" afterPath="$PROJECT_DIR$/resources/views/vpisniList.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="studijskainformatika.iws" />
@@ -58,35 +61,18 @@
       <file leaf-file-name="vpisnilistReferent.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/referent/vpisnilistReferent.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.145454" vertical-offset="3207" max-vertical-offset="4692">
+            <state vertical-scroll-proportion="-45.01818" vertical-offset="1179" max-vertical-offset="4692">
               <caret line="215" column="124" selection-start-line="215" selection-start-column="124" selection-end-line="215" selection-end-column="124" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VpisniListController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php">
+      <file leaf-file-name="vpisniList.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/vpisniList.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693" vertical-offset="4777" max-vertical-offset="6171">
-              <caret line="296" column="63" selection-start-line="296" selection-start-column="63" selection-end-line="296" selection-end-column="63" />
-              <folding>
-                <element signature="e#39#68#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="studijska_informatika.student_predmet" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/9f09dd03/b12db074-0291-4e97-83cd-2aa3d0463f7b/studijska_informatika..student_predmet">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-14.923077" vertical-offset="3335" max-vertical-offset="4658">
+              <caret line="219" column="109" selection-start-line="219" selection-start-column="109" selection-end-line="219" selection-end-column="109" />
               <folding />
             </state>
           </provider>
@@ -102,11 +88,53 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="StudijskiProgram.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-16.576923" vertical-offset="351" max-vertical-offset="1632">
+              <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VpisniListController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.807693" vertical-offset="4573" max-vertical-offset="6460">
+              <caret line="284" column="13" selection-start-line="284" selection-start-column="13" selection-end-line="284" selection-end-column="13" />
+              <folding>
+                <element signature="e#39#68#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PredmetSeeder.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/seeds/PredmetSeeder.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.961538" vertical-offset="671" max-vertical-offset="1360">
+              <caret line="77" column="310" selection-start-line="77" selection-start-column="310" selection-end-line="77" selection-end-column="310" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NosilecSeeder.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/seeds/NosilecSeeder.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.653847" vertical-offset="297" max-vertical-offset="952">
+              <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ProgramPredmetSeeder.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.449827" vertical-offset="811" max-vertical-offset="1632">
-              <caret line="69" column="81" selection-start-line="69" selection-start-column="81" selection-end-line="69" selection-end-column="81" />
+            <state vertical-scroll-proportion="0.88235295" vertical-offset="1020" max-vertical-offset="1700">
+              <caret line="96" column="128" selection-start-line="96" selection-start-column="128" selection-end-line="96" selection-end-column="128" />
               <folding />
             </state>
           </provider>
@@ -159,23 +187,23 @@
         <option value="$PROJECT_DIR$/public/multi-select/css/multi-select.css" />
         <option value="$PROJECT_DIR$/app/Models/Modul.php" />
         <option value="$PROJECT_DIR$/database/seeds/StudentProgramSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/ModulSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/StudentSeeder.php" />
-        <option value="$PROJECT_DIR$/public/js/functions.js" />
         <option value="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" />
         <option value="$PROJECT_DIR$/storage/framework/views/0bbd28d0a9c001f381a8914ee01187c7" />
         <option value="$PROJECT_DIR$/storage/framework/views/25cc723c3d590cbb23706db55d3d3977" />
-        <option value="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" />
-        <option value="$PROJECT_DIR$/resources/views/vpisniList.blade.php" />
-        <option value="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
         <option value="$PROJECT_DIR$/resources/views/kartotecniList.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/referent/novVpisniList.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/referent/vpisnilistReferent.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/StudentProgram.php" />
+        <option value="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
+        <option value="$PROJECT_DIR$/public/js/functions.js" />
+        <option value="$PROJECT_DIR$/resources/views/vpisniList.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php" />
+        <option value="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" />
       </list>
     </option>
   </component>
@@ -323,7 +351,7 @@
     <property name="options.lastSelected" value="reference.webide.settings.project.settings.php" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="programpre&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php&#10;studen&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudentProgram.php&#10;vpisni&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/vpisniList.blade.php&#10;studentpro&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudentProgram.php&#10;kart&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/kartotecniList.blade.php&#10;kartot&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/kartotecniList.blade.php&#10;create_&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/migrations/2015_03_25_161257_create_student_predmet_table.php&#10;studentpre&#9;null&#9;null&#10;program&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/ProgramLetnik.php&#10;programpr&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php&#10;stu&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;vpi&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/vpisniList.blade.php&#10;studij&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;programp&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php&#10;predmetse&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/PredmetSeeder.php&#10;student&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/StudentSeeder.php&#10;moduls&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ModulSeeder.php&#10;predme&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/PredmetSeeder.php&#10;progra&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/StudentProgramSeeder.php&#10;modulse&#9;null&#9;null&#10;nosilecse&#9;null&#9;null&#10;predmetsee&#9;null&#9;null&#10;students&#9;null&#9;null&#10;fun&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/public/js/functions.js&#10;route&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/routes.php&#10;pro&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/ProgramLetnik.php&#10;programl&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/ProgramLetnik.php&#10;studijski&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;stud&#9;FILE&#9;dbDummy://dbtable:/9f09dd03/b12db074-0291-4e97-83cd-2aa3d0463f7b/studijska_informatika..program_predmet&#10;mod&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/Modul.php&#10;app.&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/app.blade.php&#10;modul&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/Modul.php&#10;studi&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;rout&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/routes.php&#10;functio&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/public/js/functions.js&#10;logi&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/login.blade.php&#10;appl&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/appLogin.blade.php&#10;composer.lo&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/composer.lock&#10;app&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/app.blade.php&#10;predmet&#9;null&#9;null&#10;modu&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/Modul.php&#10;app.bl&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/app.blade.php" />
+    <property name="SearchEverywhereHistoryKey" value="programpre&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php&#10;nosile&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/NosilecSeeder.php&#10;predmetsee&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/PredmetSeeder.php&#10;functions&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/public/js/functions.js&#10;vpis&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/vpisniList.blade.php&#10;studijskipro&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;studen&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudentProgram.php&#10;vpisni&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/vpisniList.blade.php&#10;studentpro&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudentProgram.php&#10;kart&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/kartotecniList.blade.php&#10;kartot&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/kartotecniList.blade.php&#10;create_&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/migrations/2015_03_25_161257_create_student_predmet_table.php&#10;studentpre&#9;null&#9;null&#10;program&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/ProgramLetnik.php&#10;programpr&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php&#10;stu&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;vpi&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/vpisniList.blade.php&#10;studij&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;programp&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php&#10;predmetse&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/PredmetSeeder.php&#10;student&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/StudentSeeder.php&#10;moduls&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ModulSeeder.php&#10;predme&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/PredmetSeeder.php&#10;progra&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/StudentProgramSeeder.php&#10;modulse&#9;null&#9;null&#10;nosilecse&#9;null&#9;null&#10;students&#9;null&#9;null&#10;fun&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/public/js/functions.js&#10;route&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/routes.php&#10;pro&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/ProgramLetnik.php&#10;programl&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/ProgramLetnik.php&#10;studijski&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;stud&#9;FILE&#9;dbDummy://dbtable:/9f09dd03/b12db074-0291-4e97-83cd-2aa3d0463f7b/studijska_informatika..program_predmet&#10;mod&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/Modul.php&#10;app.&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/app.blade.php&#10;modul&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/Modul.php&#10;studi&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/StudijskiProgram.php&#10;rout&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/routes.php&#10;functio&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/public/js/functions.js&#10;logi&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/login.blade.php&#10;appl&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/appLogin.blade.php&#10;composer.lo&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/composer.lock&#10;app&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/app.blade.php&#10;predmet&#9;null&#9;null&#10;modu&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/app/Models/Modul.php&#10;app.bl&#9;FILE&#9;file://C:/wamp/www/studijskainformatika/resources/views/app.blade.php" />
     <property name="recentsLimit" value="5" />
   </component>
   <component name="RecentsManager">
@@ -436,7 +464,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261745" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48062015" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32868218" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16504854" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2815534" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21925566" sideWeight="0.503876" order="3" side_tool="true" content_ui="tabs" />
@@ -508,13 +536,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/seznam.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.610586" vertical-offset="17" max-vertical-offset="884">
-          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/izpitni_roki/spremeniIzpitniRok.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.692307" vertical-offset="1397" max-vertical-offset="3349">
@@ -694,14 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/NosilecSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7647059" vertical-offset="306" max-vertical-offset="901">
-          <caret line="51" column="155" selection-start-line="51" selection-start-column="155" selection-end-line="51" selection-end-column="155" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Modul.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5449827" vertical-offset="76" max-vertical-offset="782">
@@ -758,14 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/PredmetSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.581818" vertical-offset="658" max-vertical-offset="1207">
-          <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9411765" vertical-offset="3383" max-vertical-offset="4233">
@@ -778,14 +783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2249135" vertical-offset="1094" max-vertical-offset="1785">
           <caret line="72" column="67" selection-start-line="72" selection-start-column="67" selection-end-line="72" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/functions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="817" max-vertical-offset="2941">
-          <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -834,14 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.923077" vertical-offset="351" max-vertical-offset="1632">
-          <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/ProgramLetnik.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.153847" vertical-offset="20" max-vertical-offset="646">
@@ -879,14 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/vpisniList.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.316609" vertical-offset="3880" max-vertical-offset="4539">
-          <caret line="239" column="121" selection-start-line="239" selection-start-column="121" selection-end-line="239" selection-end-column="121" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/referent/novVpisniList.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9411765" vertical-offset="2159" max-vertical-offset="3111">
@@ -897,10 +878,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/StudentProgram.php">
+    <entry file="file://$PROJECT_DIR$/app/Models/StudijskiProgram.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="1292">
-          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+        <state vertical-scroll-proportion="-16.576923" vertical-offset="351" max-vertical-offset="1632">
+          <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/9f09dd03/b12db074-0291-4e97-83cd-2aa3d0463f7b/studijska_informatika..organ">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -918,28 +912,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63047004" vertical-offset="1923" max-vertical-offset="3111">
+          <caret line="136" column="47" selection-start-line="136" selection-start-column="47" selection-end-line="136" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/referent/vpisnilistReferent.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.145454" vertical-offset="3207" max-vertical-offset="4692">
+        <state vertical-scroll-proportion="-45.01818" vertical-offset="1179" max-vertical-offset="4692">
           <caret line="215" column="124" selection-start-line="215" selection-start-column="124" selection-end-line="215" selection-end-column="124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/StudentProgram.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="1292">
+          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/vpisniList.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.923077" vertical-offset="3335" max-vertical-offset="4658">
+          <caret line="219" column="109" selection-start-line="219" selection-start-column="109" selection-end-line="219" selection-end-column="109" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693" vertical-offset="4777" max-vertical-offset="6171">
-          <caret line="296" column="63" selection-start-line="296" selection-start-column="63" selection-end-line="296" selection-end-column="63" />
+        <state vertical-scroll-proportion="-9.807693" vertical-offset="4573" max-vertical-offset="6460">
+          <caret line="284" column="13" selection-start-line="284" selection-start-column="13" selection-end-line="284" selection-end-column="13" />
           <folding>
             <element signature="e#39#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/NosilecSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.653847" vertical-offset="297" max-vertical-offset="952">
+          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/PredmetSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.961538" vertical-offset="671" max-vertical-offset="1360">
+          <caret line="77" column="310" selection-start-line="77" selection-start-column="310" selection-end-line="77" selection-end-column="310" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.449827" vertical-offset="811" max-vertical-offset="1632">
-          <caret line="69" column="81" selection-start-line="69" selection-start-column="81" selection-end-line="69" selection-end-column="81" />
+        <state vertical-scroll-proportion="0.88235295" vertical-offset="1020" max-vertical-offset="1700">
+          <caret line="96" column="128" selection-start-line="96" selection-start-column="128" selection-end-line="96" selection-end-column="128" />
           <folding />
         </state>
       </provider>

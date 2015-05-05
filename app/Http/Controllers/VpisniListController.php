@@ -254,45 +254,58 @@ class VpisniListController extends Controller {
         DB::beginTransaction();
         if($programLetnik->stevilo_strokovnih_predmetov > 0)
         {
+            $min_kt = $programLetnik->stevilo_strokovnih_predmetov * 6;
             $strokovni = $request['strokovni-predmeti'];
-            if(count($strokovni) != $programLetnik->stevilo_strokovnih_predmetov){
-                DB::rollBack();
-                return Redirect::back()->withErrors('Število izbranih strokovnih predmetov se ne ujema s predpisanim.');
-            }
+            if(!is_array($strokovni))return Redirect::back()->withErrors('Število kreditnih točk izbranih strokovnih predmetov se ne ujema s predpisanim.');
+            $izbrani_kt = 0;
             foreach($strokovni as $predmet_id)
             {
                 $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                $izbrani_kt += $predmet->KT;
                 $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
                 $studentPredmet->save();
+            }
+            if($izbrani_kt != $min_kt){
+                DB::rollBack();
+                return Redirect::back()->withErrors('Število kreditnih točk izbranih prosto izbirnih predmetov se ne ujema s predpisanim.');
             }
         }
         if($programLetnik->stevilo_prostih_predmetov > 0)
         {
+            $min_kt = $programLetnik->stevilo_prostih_predmetov * 6;
             $prosti = $request['prosti-predmeti'];
-            if(count($prosti) != $programLetnik->stevilo_prostih_predmetov){
-                DB::rollBack();
-                return Redirect::back()->withErrors('Število izbranih prosto izbirnih predmetov se ne ujema s predpisanim.');
-            }
+            if(!is_array($prosti))return Redirect::back()->withErrors('Število kreditnih točk izbranih prosto izbirnih predmetov se ne ujema s predpisanim.');
+            $izbrani_kt = 0;
             foreach($prosti as $predmet_id)
             {
                 $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                $izbrani_kt += $predmet->KT;
                 $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
                 $studentPredmet->save();
+            }
+            if($izbrani_kt != $min_kt){
+                DB::rollBack();
+                return Redirect::back()->withErrors('Število kreditnih točk izbranih prosto izbirnih predmetov se ne ujema s predpisanim.');
             }
         }
         if($programLetnik->stevilo_modulov > 0)
         {
+            $min_kt = $programLetnik->stevilo_modulov * 2 * 6;
             $predhodniLetnik = StudentProgram::where('id_studenta', '=', $student->id)->where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik - 1)->get();
             $modulski = $request['modulski-predmeti'];
-            $povprecnaOcena = 7.0; //$predhodniLetnik->povprecnaOcena();
+            if(!is_array($modulski))return Redirect::back()->withErrors('Število kreditnih točk izbranih modulskih predmetov se ne ujema s predpisanim.');
+            $povprecnaOcena = $predhodniLetnik->povprecnaOcena();
+            dd($povprecnaOcena);
             if(count($modulski) != $programLetnik->stevilo_modulov * 3){
                 DB::rollBack();
                 return Redirect::back()->withErrors('Število izbranih modulskih predmetov se ne ujema s predpisanim.');
             }
             $modul_check = [];
+            $izbrani_kt = 0;
             foreach($modulski as $predmet_id)
             {
                 $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                $izbrani_kt += $predmet->KT;
                 if(isset($modul_check[$predmet->pivot->id_modula])){
                     $modul_check[$predmet->pivot->id_modula]++;
                 }else{
@@ -302,6 +315,7 @@ class VpisniListController extends Controller {
                 $studentPredmet->save();
             }
             if($povprecnaOcena < 8){
+
                 foreach($modul_check as $mc)
                 {
                     if($mc != 3){
@@ -309,6 +323,10 @@ class VpisniListController extends Controller {
                         return Redirect::back()->withErrors('Nimate dovolj visokega povprečja za prosto izbiro modulskih predmetov.');
                     }
                 }
+            }
+            if($izbrani_kt != $min_kt){
+                DB::rollBack();
+                return Redirect::back()->withErrors('Število kreditnih točk izbranih modulskih predmetov se ne ujema s predpisanim.');
             }
         }
 
@@ -322,7 +340,6 @@ class VpisniListController extends Controller {
         $programStudenta->vloga_oddana = date('Y-m-d');
         $programStudenta->save();
         DB::commit();
-
         return view ('vpisniList', ['empty'=>0]);
     }
 

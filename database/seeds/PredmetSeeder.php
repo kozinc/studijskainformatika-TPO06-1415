@@ -72,6 +72,11 @@ class PredmetSeeder extends Seeder
         Predmet::create(['id'=>42,'sifra'=>'63262', 'naziv'=>'Zanesljivost in zmogljivost računalniških sistemov','opis'=>'Cilj predmeta je študentom računalništva in informatike predstaviti osnovne metode in pristope na področjih računalniške zanesljivosti in zmogljivosti. Obe sta ključni za uspešnost delovanja kakršnegakoli računalniškega sistema. Predmet naj bi študentom podal tako teoretične osnove in metode obeh področij, kot tudi skušal čimbolje predstaviti uporabo teoretičnih osnov in metod na konkretnih problemih načrtovanja in vzdževanja računalniških sistemov.','id_nosilca'=>34,'KT'=>6]);
         Predmet::create(['id'=>43,'sifra'=>'63515', 'naziv'=>'Sodobne metode razvoja programske opreme', 'opis'=>'', 'id_nosilca'=>1, 'KT'=>6]);
 
+        //DIPLOMA
+        Predmet::create(['id'=>44,'sifra'=>'11111', 'naziv'=>'Diplomsko delo', 'opis'=>'Za vse študente so pogoji za dokončanje študija opravljene vse obveznosti pri vpisanih predmetih v skupnem obsegu vsaj 174 kreditnih točk, v skladu s pravili pripravljeno in oddano diplomsko delo, ki je ocenjeno s 6 KT ter uspešno opravljen javni zagovor diplomskega dela.', 'id_nosilca'=>35, 'KT'=>6]);
+        //Magisterij
+        Predmet::create(['id'=>45,'sifra'=>'22222', 'naziv'=>'Magistrsko delo', 'opis'=>'Magistrsko delo je sestavni del celega drugega letnika vašega študija, ovrednoteno je s 24 kreditnimi točkami. To pomeni, da morate pripravam in izdelavi naloge nameniti približno 720 ur dela.', 'id_nosilca'=>35, 'KT'=>24]);
+
     }
 
 }

@@ -207,28 +207,31 @@
                         <tr>
                             <th>Obvezni predmeti</th>
                         </tr>
+                        <?php $kt=0; ?>
                         @foreach($predmetiObvezni->get() as $predmet)
+                            <?php $kt = $kt + $predmet->KT; ?>
                             <tr>
-                                <td>{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</td>
+                                <td>{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</td>
                             </tr>
                         @endforeach
                     </table>
                     @if($programLetnik->stevilo_strokovnih_predmetov > 0)
                         <h3>Strokovni izbirni predmeti</h3>
-                        <select multiple="multiple" class="multi-select" id="strokovni-predmeti-select" name="strokovni-predmeti-select[]">
+                        <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_strokovnih_predmetov*6 }}</p>
+                        <select multiple="multiple" class="multi-select count_kt" id="strokovni-predmeti-select" name="strokovni-predmeti-select[]">
                             @foreach($predmetiStrokovni as $predmet)
-                                <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
+                                <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                             @endforeach
                         </select>
                     @endif
                     @if($programLetnik->stevilo_modulov > 0)
                         <h3>Modulski predmeti</h3>
-                        <p>Število modulov, ki si jih morate izbrati: {{ $programLetnik->stevilo_modulov }}</p>
-                        <select multiple="multiple" class="multi-select" id="modulski-predmeti-select" name="modulski-predmeti[]">
+                        <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_modulov*3*6 }}</p>
+                        <select multiple="multiple" class="multi-select count_kt" id="modulski-predmeti-select" name="modulski-predmeti[]">
                             @foreach($moduli as $modul)
                                 <optgroup label="{{ $modul->ime }}">
                                     @foreach($modul->predmeti as $predmet)
-                                        <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
+                                        <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                     @endforeach
                                 </optgroup>
                             @endforeach
@@ -236,13 +239,17 @@
                     @endif
                     @if($programLetnik->stevilo_prostih_predmetov > 0)
                         <h3>Prosto izbirni predmeti</h3>
-                        <p>Število prosto izbirnih predmetov, ki si jih morate izbrati: {{ $programLetnik->stevilo_prostih_predmetov }}</p>
-                        <select multiple="multiple"class="multi-select" id="prosti-predmeti-select" name="prosti-predmeti[]">
+                        <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_prostih_predmetov*6 }}</p>
+                        <select multiple="multiple" class="multi-select count_kt" id="prosti-predmeti-select" name="prosti-predmeti[]">
                             @foreach($predmetiProsti as $predmet)
-                                <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
+                                <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                             @endforeach
                         </select>
                     @endif
+                    <br>
+                    <div>
+                        <p>Število kreditnih točk: <span data-obvezni="{{ $kt }}" id="kt_skupno">{{ $kt }}</span>/60</p>
+                    </div>
                 </div>
             </div>
 

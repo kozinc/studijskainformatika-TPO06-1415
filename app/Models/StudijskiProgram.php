@@ -45,7 +45,7 @@ class StudijskiProgram extends Model
 
     public function predmet($id_predmeta, $studijsko_leto)
     {
-        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('id_predmeta','=',$id_predmeta)->wherePivot('studijsko_leto','=',$studijsko_leto)->first();
+        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester','id_modula')->wherePivot('id_predmeta','=',$id_predmeta)->wherePivot('studijsko_leto','=',$studijsko_leto)->first();
     }
 
     public function moduli($studijsko_leto=false, $letnik=0)
