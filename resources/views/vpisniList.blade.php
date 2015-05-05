@@ -237,7 +237,7 @@
                     @if($programLetnik->stevilo_prostih_predmetov > 0)
                         <h3>Prosto izbirni predmeti</h3>
                         <p>Število prosto izbirnih predmetov, ki si jih morate izbrati: {{ $programLetnik->stevilo_prostih_predmetov }}</p>
-                        <select multiple="multiple"class="multi-select" id="prosti-predmeti-select" name="posti-predmeti-select[]">
+                        <select multiple="multiple"class="multi-select" id="prosti-predmeti-select" name="prosti-predmeti[]">
                             @foreach($predmetiProsti as $predmet)
                                 <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
                             @endforeach

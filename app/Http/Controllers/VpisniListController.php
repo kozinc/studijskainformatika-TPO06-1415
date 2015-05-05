@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\ProgramLetnik;
 use App\Models\Student;
 use App\Models\StudentPredmet;
 use App\Models\StudijskiProgram;
@@ -248,11 +249,51 @@ class VpisniListController extends Controller {
 
         //PREDMETNIIK
         $program = $programStudenta->studijski_program;
-        dd($program);
-        $predmetiStrokovni = $program->strokovni_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->with('predmeti')->get();
-        $predmetiProsti = $program->prosti_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->with('predmeti')->get();
-        $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->with('predmeti')->get();
-        $programLetnik = $program->letnik($programStudenta->letnik);
+        $programLetnik = ProgramLetnik::where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik)->first();
+        DB::beginTransaction();
+        if($programLetnik->stevilo_strokovnih_predmetov > 0)
+        {
+            $strokovni = $request['strokovni-predmeti'];
+            if(count($strokovni) != $programLetnik->stevilo_strokovnih_predmetov){
+                DB::rollBack();
+                return Redirect::back()->withErrors('Število izbranih strokovnih predmetov se ne ujema s predpisanim.');
+            }
+            foreach($strokovni as $predmet_id)
+            {
+                $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
+                $studentPredmet->save();
+            }
+        }
+        if($programLetnik->stevilo_prostih_predmetov > 0)
+        {
+            $prosti = $request['prosti-predmeti'];
+            if(count($prosti) != $programLetnik->stevilo_prostih_predmetov){
+                DB::rollBack();
+                return Redirect::back()->withErrors('Število izbranih prosto izbirnih predmetov se ne ujema s predpisanim.');
+            }
+            foreach($prosti as $predmet_id)
+            {
+                $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
+                $studentPredmet->save();
+            }
+        }
+        if($programLetnik->stevilo_modulov > 0)
+        {
+            $modulski = $request['modulski-predmeti'];
+            if(count($modulski) != $programLetnik->stevilo_modulov * 3){
+                DB::rollBack();
+                return Redirect::back()->withErrors('Število izbranih modulskih predmetov se ne ujema s predpisanim.');
+            }
+            foreach($modulski as $predmet_id)
+            {
+                $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
+                $studentPredmet->save();
+            }
+        }
+
         //STROKOVNI IZBIRNI
 
         //MODULSKI PREDMETI
@@ -268,6 +309,7 @@ class VpisniListController extends Controller {
         //oznacimo, da je zeton izkoriscen
         $programStudenta->vloga_oddana = date('Y-m-d');
         $programStudenta->save();
+        DB::commit();
 
         return view ('vpisniList', ['empty'=>0]);
     }
