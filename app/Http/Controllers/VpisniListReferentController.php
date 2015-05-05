@@ -120,7 +120,7 @@ class VpisniListReferentController extends Controller {
                     $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
                     $predmetiStrokovni = $program->strokovni_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $predmetiProsti = $program->prosti_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
-                    $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->with('predmeti')->get();
+                    $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
 
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty'=>1, 'programStudenta'=>$programStudenta,
@@ -138,7 +138,7 @@ class VpisniListReferentController extends Controller {
                     $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
                     $predmetiStrokovni = $program->strokovni_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $predmetiProsti = $program->prosti_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
-                    $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->with('predmeti')->get();
+                    $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
                     $izbraniPredmeti = $student->predmetiVPRogramu($program,$programStudenta->letnik);
                     //dd($izbraniPredmeti);
