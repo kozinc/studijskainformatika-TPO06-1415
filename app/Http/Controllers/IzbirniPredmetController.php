@@ -97,12 +97,14 @@ class IzbirniPredmetController extends Controller {
 
         $input = \Input::all();
 
-        $predmeti = \App\Models\StudentPredmet::where('id_studenta', $id_studenta)->where('studijsko_leto', $studijsko_leto)->lists('id_predmeta');
-
+        //vsi predmeti studenta v tem letu
+        $predmeti = \DB::table('student_predmet')->where('id_studenta', $id_studenta)->where('studijsko_leto', $studijsko_leto)->lists('id_predmeta');
+        //zbrisi vse obstojece izbirne predmete, da lahko dolocis nove
         foreach($predmeti as $predmet_id){
-            $p = \App\Models\Predmet::find($predmet_id);
-            if($p->tip == 'strokovni-izbirni' || $p->tip == 'splošno-izbirni' || $p->tip == 'modulski'){
-                \App\Models\StudentPredmet::where('id_studenta', $id_studenta)->where('studijsko_leto', $studijsko_leto)->where('id_predmeta', $predmet_id)->delete();
+            $p = \DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('id_predmeta', $predmet_id)->where('studijsko_leto', $studijsko_leto)->first();
+            if(($p->tip == 'strokovni-izbirni') || ($p->tip == 'splošno-izbirni') || ($p->tip == 'modulski')){
+                echo "bla ";
+                \DB::table('student_predmet')->where('id_studenta', $id_studenta)->where('studijsko_leto', $studijsko_leto)->where('id_predmeta', $predmet_id)->delete();
             }
         }
 
@@ -115,6 +117,7 @@ class IzbirniPredmetController extends Controller {
         $mode = 0;
         $first = true;
 
+        //analiziraj form, shrani izbrane predmete
         foreach($input as $i){
 
             if($first != true){
@@ -132,7 +135,6 @@ class IzbirniPredmetController extends Controller {
                         $mode = 2;
                     }
                     $predmet_naziv = $strokovnoizbirniPredmeti[$i];
-                    echo $predmet_naziv;
                 }
                 else if($counter <= $no_prosto * 2 && $mode == 2){
                     $predmet_naziv = $prostoizbirniPredmeti[$i];
