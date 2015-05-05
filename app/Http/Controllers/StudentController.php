@@ -120,6 +120,7 @@ class StudentController extends Controller {
         $studentProgrami= $student->studentProgram;
         $vrsteVpisa = VrstaVpisa::all();
         $predmeti = null;
+        $ucitelj = null;
 
         if (\Session::get('vloga') == "ucitelj" )
         {

@@ -24,6 +24,21 @@ public $timestamps = false;
         return $this->belongsTo('App\Models\VrstaVpisa', 'vrsta_vpisa', 'sifra');
     }
 
+    public function moduli($studijsko_leto, $studentProgram)
+    {
+        $studentPredmeti = StudentPredmet::where('id_studenta','=',$this->id_studenta)->where('studijsko_leto','=',$studijsko_leto)->get();
+        $program = $studentProgram->studijski_program;
+        $moduli = [];
+        $predmeti = [];
+        foreach($studentPredmeti as $sp)
+        {
+            $predmeti[] = $sp->id_predmeta;
+        }
+        $programPredmeti = $program->predmeti()->whereIn('predmet.id',$predmeti)->get();
+        dd($programPredmeti);
+        return Modul::whereIn('id', $moduli);
+    }
+
     public static function nepotrjeneVloge(){
         return StudentProgram::whereNotNull('vloga_oddana')->whereNull('vloga_potrjena')->get();
     }
