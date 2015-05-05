@@ -15,6 +15,8 @@ class PredmetSeeder extends Seeder
 
     public function run()
     {
+
+        //Predmete dodajaj na konec, drugače se podrejo podatki v povezovalnih tabelah!!!!!!!!!!!
         DB::table('predmet')->truncate();
 
         Predmet::create(['sifra'=>'63277','naziv'=>'Programiranje 1','opis'=>'Cilj predmeta je študentom predstaviti osnovne koncepte objektno usmerjenega programiranja v enem izmed splošno namenskih programskih jezikov 3. generacije in jih usposobiti za samostojen razvoj enostavnih računalniških programov.','id_nosilca'=>1,'KT'=>6]);
@@ -64,6 +66,9 @@ class PredmetSeeder extends Seeder
         Predmet::create(['sifra'=>'63752','naziv'=>'Izbrana poglavja iz računalništva in informatike (Houdini fx:osnove proceduralnega modeliranja)','opis'=>'izbirni','id_nosilca'=>31,'KT'=>6]);
         Predmet::create(['sifra'=>'63749','naziv'=>'Izbrana poglavja iz računalništva in informatike (Upravljanje tehnoloških podjetij)','opis'=>'izbirni','id_nosilca'=>32,'KT'=>6]);
         Predmet::create(['sifra'=>'63764','naziv'=>'Računalniška orodja, jeziki in okolja - TP B (Gradnja Oblakov z ogrodjem OpenStack)','opis'=>'izbirni','id_nosilca'=>33,'KT'=>3]);
+
+        //strokovni
+        Predmet::create(['sifra'=>'63515', 'naziv'=>'Sodobne metode razvoja programske opreme', 'opis'=>'', 'id_nosilca'=>1, 'KT'=>6]);
 
     }
 

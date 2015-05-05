@@ -100,17 +100,23 @@
                         @if (!$predmeti->isEmpty())
                             @foreach($predmeti as $predmet)
                                 <h4>Naziv predmeta: {{$predmet->predmet->naziv}}</h4>
+                                <h4>Študijski program:
+                                    @foreach($studentProgrami as $sp)
+                                        @if ($sp->studijsko_leto == $predmet->studijsko_leto)
+                                            {{$sp->studijski_program->ime}}</h4>
+                                        @endif
+                                    @endforeach
+                                <h4>Študijsko leto: {{$predmet->studijsko_leto}}</h4>
                                 <table class="table">
                                     <tr>
-                                        <th>Datum</th>
-                                        <th>Polaganje</th>
-                                        <th>Število točk izpita</th>
-                                        <th>Ocena</th>
+                                        <th width='200px'>Datum </th>
+                                        <th width='200px'>Polaganje</th>
+                                        <th width='200px'>Število točk izpita</th>
+                                        <th width='200px'>Ocena</th>
+                                        <th width='200px'>Vnos ocene</th>
                                     </tr>
 
-                                    <div style="display:none">
-                                        {{$stevec=1}}
-                                    </div>
+                                    <?php $stevec=1; ?>
 
                                     @if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortBy('datum')->isEmpty())
                                         <tr>
@@ -123,11 +129,17 @@
                                                 <td>{{$stevec++}}</td>
                                                 <td>{{$polaganje->pivot->tocke_izpita}}</td>
                                                 <td>{{$polaganje->pivot->ocena}}</td>
+                                                @if ($polaganje->datum > date('Y-m-d',strtotime('-30 days')))
+                                                    <td><a href="{{ action('PredmetiUciteljController@vnesiOceno',['id'=>$predmet->id_predmeta, 'id_studenta'=>$student->id]) }}">Vnos ocene</a></td>
+                                                @else
+                                                    <td>Vnos ocene ni mogoč.</td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     @endif
-                                </table>
+                                </table><hr>
                             @endforeach
+                            <p>Opozorilo: Ocene po pretečenih 30 dni od izpita ne morete več spreminjati.</p>
                         @else
                             <p>Študent pri tem profesorju še ni opravljal predmetov.</p>
                         @endif

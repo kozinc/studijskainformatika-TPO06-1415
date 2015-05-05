@@ -56,6 +56,16 @@ class PredmetiUciteljController extends Controller
 
     public function vnesiOceno($id_predmeta, $id_studenta)
     {
-        return view('vnosOceneUcitelj', ['predmet'=>Predmet::find($id_predmeta), 'student'=>Student::find($id_studenta)]);
+        $pisaniIzpitniRoki = Student::find($id_studenta)->polaganja()->where('id_predmeta','=', $id_predmeta);
+        $datumi = [];
+        foreach ($pisaniIzpitniRoki->get() as $ir)
+        {
+            if ($ir->datum > date('Y-m-d',strtotime('-30 days')) && ($ir->datum <= date('Y-m-d')))
+            {
+                $datumi[] = $ir->datum;
+            }
+
+        }
+        return view('vnosOceneUcitelj', ['predmet'=>Predmet::find($id_predmeta), 'student'=>Student::find($id_studenta), 'datumi'=>$datumi]);
     }
 }
