@@ -78,9 +78,15 @@ class VpisniListController extends Controller {
                     $programStudenta->nacin_studija = "redni";
                     $programStudenta->letnik = 1;
                     $programStudenta->save();
-                    return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
-                        'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('d.m.Y'), 'predmetiObvezni' => $predmetiObvezni]);
+                    $predmetiStrokovni = $program->strokovni_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
+                    $predmetiProsti = $program->prosti_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
+                    $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->with('predmeti')->get();
+                    $programLetnik = $program->letnik($programStudenta->letnik);
 
+                    return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
+                        'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('d.m.Y'), 'predmetiObvezni' => $predmetiObvezni,
+                        'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,
+                        'predmetiProsti'=>$predmetiProsti, 'programLetnik'=>$programLetnik]);
                 }
                 else
                 {
@@ -92,7 +98,7 @@ class VpisniListController extends Controller {
                     $predmetiProsti = $program->prosti_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->with('predmeti')->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
-
+                    $izbraniPredmeti = $programStudenta->predmeti();
                     return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,
@@ -254,7 +260,7 @@ class VpisniListController extends Controller {
         DB::beginTransaction();
         if($programLetnik->stevilo_modulov > 0)
         {
-            $min_kt = $programLetnik->stevilo_modulov * 2 * 6;
+            $min_kt = $programLetnik->stevilo_modulov * 3 * 6;
             $modulski = $request['modulski-predmeti'];
             if(!is_array($modulski))return Redirect::back()->withErrors('Število kreditnih točk izbranih modulskih predmetov se ne ujema s predpisanim.');
             if(count($modulski) != $programLetnik->stevilo_modulov * 3){
