@@ -1,68 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="06304d7b-ba65-4c89-be3d-476d003f2ba8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/img/switch.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/LICENSE.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/MIT.LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/README.markdown" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/spec/SpecHelper.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/SpecRunner.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/jasmine-html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/jasmine.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/jasmine.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/src/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/js/jquery.multi-select.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/pdf/kartotecniList_pdf.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/pdf/kartotecniList_pdf2.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/css/multi-select.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/multi-select.jquery.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/spec/multiSelectSpec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/predmetiUcitelj.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/predmetiUciteljController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/vnosOceneUcitelj.blade.php" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\tpo\studijskainformatika\resources\views\pdf\kartotecni_list_pdf.blade.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_161257_create_student_predmet_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_161257_create_student_predmet_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_173911_create_student_izpit_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_173911_create_student_izpit_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/IzbirniPredmetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/IzbirniPredmetController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/IzpitniRokSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/IzpitniRokSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/KartotecniListController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/KartotecniListController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Modul.php" afterPath="$PROJECT_DIR$/app/Models/Modul.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/ModulSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/ModulSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Student.php" afterPath="$PROJECT_DIR$/app/Models/Student.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentIzpitSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentIzpitSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudentPredmet.php" afterPath="$PROJECT_DIR$/app/Models/StudentPredmet.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentPredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentPredmetSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudentProgram.php" afterPath="$PROJECT_DIR$/app/Models/StudentProgram.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentProgramSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentProgramSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" afterPath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/app.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/functions.js" afterPath="$PROJECT_DIR$/public/js/functions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php" afterPath="$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php" afterPath="$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/kartotecniList.blade.php" afterPath="$PROJECT_DIR$/resources/views/kartotecniList.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/potrdiloVpis.blade.php" afterPath="$PROJECT_DIR$/resources/views/potrdiloVpis.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/program.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/program.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/student/studentInfo.blade.php" afterPath="$PROJECT_DIR$/resources/views/student/studentInfo.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vpisniList.blade.php" afterPath="$PROJECT_DIR$/resources/views/vpisniList.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="06304d7b-ba65-4c89-be3d-476d003f2ba8" name="Default" comment="" />
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -698,11 +637,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22300771" sideWeight="0.50190115" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261745" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22446236" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22446236" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32751676" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16323908" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
