@@ -60,6 +60,23 @@ class StudijskiProgram extends Model
         return $query->orderBy('letnik', 'asc');
     }
 
+    public function povprecnaOcena(Student $student)
+    {
+        $ocene = \DB::table('student_predmet')
+            ->join('predmet','student_predmet.id_predmeta','=','predmet.id')
+            ->join('program_predmet','predmet.id','=','program_predmet.id_predmeta')
+            ->where('program_predmet.id_programa','=',$this->id)
+            ->where('student_predmet.id_studenta','=',$student->id)
+            ->lists('ocena');
+        if(count($ocene) >0 ){
+            $povprecnaOcena = array_sum($ocene)/count($ocene);
+            return $povprecnaOcena;
+        }else{
+            return 0;
+        }
+
+    }
+
     public function studenti()
     {
         return $this->belongsToMany('App\Models\Student', 'student_program', 'id_studenta', 'id_programa');

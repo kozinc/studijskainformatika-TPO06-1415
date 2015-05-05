@@ -24,12 +24,6 @@ public $timestamps = false;
         return $this->belongsTo('App\Models\VrstaVpisa', 'vrsta_vpisa', 'sifra');
     }
 
-    public function povprecnaOcena()
-    {
-        $ocene = \DB::table('student_predmet')->where('id_programa','=',$this->id_programa)->where('id_studenta','=',$this->id_studenta)->where('letnik','=',$this->letnik)->pluck('ocena');
-        dd($ocene);
-        $povprecnaOcena = array_sum($ocene)/count($ocene);
-    }
     public function moduli($studijsko_leto, $studentProgram)
     {
         $studentPredmeti = StudentPredmet::where('id_studenta','=',$this->id_studenta)->where('studijsko_leto','=',$studijsko_leto)->get();
