@@ -74,6 +74,8 @@ class ProgramPredmetSeeder extends Seeder
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>40,'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>24, 'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>41,'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>24, 'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>42,'letnik'=>3, 'semester'=>2,'tip'=>'modulski', 'id_modula'=>24, 'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>20, 'letnik'=>3, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>21,'letnik'=>3, 'semester'=>2,'tip'=>'obvezni', 'studijsko_leto'=>'2015/2016']);
 
 
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>32,'letnik'=>3, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2015/2016']);
