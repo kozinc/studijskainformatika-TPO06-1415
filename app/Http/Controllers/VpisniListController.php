@@ -98,7 +98,6 @@ class VpisniListController extends Controller {
                     $predmetiProsti = $program->prosti_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
-                    $izbraniPredmeti = $programStudenta->predmeti();
                     return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,

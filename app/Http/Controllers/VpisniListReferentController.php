@@ -141,7 +141,7 @@ class VpisniListReferentController extends Controller {
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
                     $izbraniPredmeti = $student->predmetiVPRogramu($program,$programStudenta->letnik);
-                    //dd($izbraniPredmeti);
+                    dd($izbraniPredmeti);
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,
