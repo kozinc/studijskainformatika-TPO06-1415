@@ -14,12 +14,12 @@
     <table class="table">
         <tr>
             <th>Id</th>
-            <th>Student</th>
+            <th>Študent</th>
             <th>Program</th>
             <th>Letnik</th>
             <th>Vrsta vpisa</th>
-            <th>Nacin studija</th>
-            <th>Studijsko leto</th>
+            <th>Način študija</th>
+            <th>Študijsko leto</th>
             <th>Vloga oddana</th>
             <th>Vloga potrjena</th>
             <th>Stanje</th>
@@ -38,8 +38,8 @@
                 </td>
                 <td>{{ $vloga->nacin_studija }}</td>
                 <td>{{ $vloga->studijsko_leto }}</td>
-                <td>{{ $vloga->vloga_oddana }}</td>
-                <td>{{ $vloga->vloga_potrjena }}</td>
+                <td>{{ ($vloga->vloga_oddana == null)?'':date('d.m.Y',strtotime($vloga->vloga_oddana)) }}</td>
+                <td>{{ ($vloga->vloga_potrjena == null)?'':date('d.m.Y',strtotime($vloga->vloga_potrjena)) }}</td>
                 <td>
                     @if(!is_null($vloga->vloga_oddana) && is_null($vloga->vloga_potrjena))
                         <a href="{{ action('VpisniListController@potrdiVlogo', ['id'=>$vloga->id]) }}">Potrdi</a>
