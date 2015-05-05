@@ -102,9 +102,12 @@
                 <div class="panel-body">
                     <h2>Podatki o vpisu</h2>
                     <label for="studijsko_leto">Študijsko leto</label>
-                    <input type="text" id="studijsko_leto" name="studijsko_leto" placeholder="yyyy/yyyy">
-                    <label for="studijski_program_ajax">Študijski program</label>
-                        <select name="studijski_program" id="studijski_program_ajax">
+                    <div class="form-group" style="width:20%;">
+                        <input type="text" id="studijsko_leto" name="studijsko_leto" class="form-control" placeholder="yyyy/yyyy">
+                    </div>
+                    <div class="form-group" style="width:50%;">
+                        <label for="studijski_program_ajax">Študijski program</label>
+                        <select name="studijski_program" id="studijski_program_ajax" class="form-control">
                             <option value="0" data-oznaka="" data-stopnja="" data-kraj_izvajanja="" data-trajanje_leta="" >---izberi študijski program---</option>
                             @foreach($programi as $pr)
                                 <option value="{{ $pr->id }}" data-oznaka="{{ $pr->oznaka }}" data-stopnja="{{ $pr->stopnja }}" data-trajanje_leta="{{ $pr->trajanje_leta }}" data-kraj_izvajanja="{{ $pr->kraj_izvajanja }}">
@@ -112,6 +115,7 @@
                                 </option>
                             @endforeach
                         </select>
+                    </div>
                     <div class="form-group">
                         <div class="col-lg-3">
                             <label>Oznaka:</label>
@@ -128,10 +132,12 @@
                             <span id="kraj_izvajanja"></span>
                         </div>
                     </div>
+                    <?php /*
                     <div class="form-group">
                        <label>Prosta izbira predmetov</label>
                         <input type="checkbox" name="prosta_izbira">
                     </div>
+                    */ ?>
                     <div class="form-group">
                         <div class="col-lg-2">
                             {!! Form::label('vrsta_vpisa', 'Vrsta vpisa:') !!}

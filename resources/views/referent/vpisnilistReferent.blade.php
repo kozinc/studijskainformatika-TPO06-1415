@@ -214,7 +214,6 @@
                             <div class="col-lg-3">
                                 {!! Form::label('letnik', 'Letnik:') !!}
                                 <input type="text" name="letnik" value="{{ $programStudenta->letnik}}" class="form-control">
-
                             </div>
                         </div>
                         <div class="form-group">

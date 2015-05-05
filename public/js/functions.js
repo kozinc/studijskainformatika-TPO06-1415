@@ -127,6 +127,16 @@ $(document).ready(function(){
         window.location.href = link+studijsko_leto;
     });
 
+    $('.count_kt').change(function(){
+        var selected_options = $('.count_kt option:selected');
+        var kt = 0;
+        selected_options.each(function(){
+            kt = kt + $(this).data('kt');
+        });
+        var skupno = $('#kt_skupno');
+        skupno.html(skupno.data('obvezni')+kt);
+    });
+
     $('#vsaPolaganja').click(function(){
        $('.vsaPolaganjaT').show();
         $('.zadnjePolaganjeT').hide();
