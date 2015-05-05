@@ -143,6 +143,8 @@ class ListStudentsController extends Controller {
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
         $leta = array_values($leta);
 
+        echo "bla";
+
         $l = $leta[$leto_id];
 
         $student_predmet_list = \App\Models\StudentPredmet::where('id_predmeta', $predmet_id)->where('studijsko_leto', $l)->get();
@@ -165,6 +167,8 @@ class ListStudentsController extends Controller {
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
         $leta = array_values($leta);
+
+        //dobi vse vrste vpisa
         $vrsteVpisa = VrstaVpisa::all()->keyBy('sifra');
 
         $csv = \Input::get('csv');
@@ -187,6 +191,8 @@ class ListStudentsController extends Controller {
             $p = $p . ' (' . $pr->sifra . ')';
             array_push($predmeti2, $p);
         }
+
+        echo "skor na koncu";
 
         return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti2)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
     }
