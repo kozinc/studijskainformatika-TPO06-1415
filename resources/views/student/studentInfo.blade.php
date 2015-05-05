@@ -144,7 +144,7 @@
                                                 <td>{{$stevec++}}</td>
                                                 <td>{{$polaganje->pivot->tocke_izpita}}</td>
                                                 <td>{{$polaganje->pivot->ocena}}</td>
-                                                @if ($polaganje->datum > date('Y-m-d',strtotime('-30 days')))
+                                                @if (($polaganje->datum > date('Y-m-d',strtotime('-30 days'))) &&(($polaganje->datum <= date('Y-m-d'))))
                                                     <td><a href="{{ action('PredmetiUciteljController@vnesiOceno',['id'=>$predmet->id_predmeta, 'id_studenta'=>$student->id]) }}">Vnos ocene</a></td>
                                                 @else
                                                     <td>Vnos ocene ni mogoč.</td>
@@ -154,7 +154,7 @@
                                     @endif
                                 </table><hr>
                             @endforeach
-                            <p>Opozorilo: Ocene po pretečenih 30 dni od izpita ne morete več spreminjati.</p>
+                            <p>Opozorilo: Ocene po pretečenih 30 dni od izpita ne morete več spreminjati. Prav tako ne morete vpisovati ocen za datume, večje od današnjega.</p>
                         @else
                             <p>Študent pri tem profesorju še ni opravljal predmetov.</p>
                         @endif

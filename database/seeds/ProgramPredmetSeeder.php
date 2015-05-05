@@ -95,7 +95,19 @@ class ProgramPredmetSeeder extends Seeder
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>31,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>43,'letnik'=>1, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>45,'letnik'=>2, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>45,'letnik'=>2, 'semester'=>2,'tip'=>'obvezni',  'studijsko_leto'=>'2015/2016']);
 
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>46,'letnik'=>1, 'semester'=>1,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>47,'letnik'=>1, 'semester'=>1,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>48,'letnik'=>1, 'semester'=>1,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>49,'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>50,'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>51,'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>52,'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
 
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>36,'letnik'=>1, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>37,'letnik'=>1, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>38,'letnik'=>1, 'semester'=>1,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>39,'letnik'=>1, 'semester'=>1,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2015/2016']);
     }
 }
