@@ -20,7 +20,7 @@ $(document).ready(function(){
         var letnik = $(this).data('letnik');
         var div_predmetnik;
         if(letnik==0){
-            div_predmetnik = $('#prosto-izbirni');
+            div_predmetnik = $('#splošno-izbirni');
         }else{
             div_predmetnik = $('#letnik-'+letnik);
         }
@@ -52,7 +52,7 @@ $(document).ready(function(){
         if(tip=='modulski'){
             $('.modul').show();
             $('.letnik').show();
-        }else if(tip == 'prosto-izbirni'){
+        }else if(tip == 'splošno-izbirni'){
             $('.modul').hide();
             $('.letnik').hide();
         }else{
@@ -121,14 +121,26 @@ $(document).ready(function(){
         $('#dodaj_letnik').data('letnik',letnik).html('Dodaj letnik').show();
     });
 
+    $('#dodaj_predmetnik').click(function(){
+        var studijsko_leto = $('#predmetnik_leto_select').val();
+        var link = $(this).data('href');
+        window.location.href = link+studijsko_leto;
+    });
+
     $('#vsaPolaganja').click(function(){
        $('.vsaPolaganjaT').show();
         $('.zadnjePolaganjeT').hide();
+        $('#vsa_polaganja').val(1);
     });
 
     $('#zadnjePolaganje').click(function(){
         $('.zadnjePolaganjeT').show();
         $('.vsaPolaganjaT').hide();
+        $('#vsa_polaganja').val(0);
+    });
+
+    $('.multi-select').multiSelect({
+        selectableOptgroup: true
     });
 
     $(function() {

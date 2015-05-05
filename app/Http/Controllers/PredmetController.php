@@ -82,15 +82,23 @@ class PredmetController extends Controller {
         $predmet->id_nosilca = (int)$request['id_nosilca'];
         $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
         $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
-        $predmet->tip = $request['tip'];
+
+        if( $predmet->id_nosilca2 == 0 && $predmet->id_nosilca3 != 0 ) {
+            $predmet->id_nosilca2 = $predmet->id_nosilca3;
+            $predmet->id_nosilca3 = 0;
+        }
+
         $predmet->KT = (int)$request['KT'];
         $predmet->naziv = $request['naziv'];
-
+        /*
+         * id_modula trenutno ne uporabljamo : rabimo foreign key?
+         *
         if($predmet->tip == 'modulski'){
             $predmet->id_modula = (int)$request['id_modula'];
         }else{
             $predmet->id_modula = NULL;
         }
+        */
         $predmet->save();
 
         $nosilci = Nosilec::all();

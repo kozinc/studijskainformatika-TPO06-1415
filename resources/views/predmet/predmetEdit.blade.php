@@ -70,7 +70,7 @@
                 <option value="obvezni" @if($predmet->tip=='obvezni') {{ "selected" }} @endif>Obvezni</option>
                 <option value="modulski"@if($predmet->tip=='modulski') {{ "selected" }} @endif>Modulski</option>
                 <option value="strokovni-izbirni"@if($predmet->tip=='strokovni-izbirni') {{ "selected" }} @endif>Strokovni izbirni</option>
-                <option value="prosto-izbirini"@if($predmet->tip=='prosto-izbirni') {{ "selected" }} @endif>Prosto izbirni</option>
+                <option value="prosto-izbirini"@if($predmet->tip=='splošno-izbirni') {{ "selected" }} @endif>Prosto izbirni</option>
             </select>
         </div>
         <!--

@@ -2,8 +2,65 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06304d7b-ba65-4c89-be3d-476d003f2ba8" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/img/switch.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/LICENSE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/MIT.LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/README.markdown" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/spec/SpecHelper.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/SpecRunner.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/bower.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/jasmine-html.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/jasmine.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/lib/jasmine-1.2.0/jasmine.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/src/jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/js/jquery.multi-select.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/pdf/kartotecniList_pdf.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/pdf/kartotecniList_pdf2.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/css/multi-select.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/multi-select.jquery.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/multi-select/test/spec/multiSelectSpec.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/predmetiUcitelj.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/predmetiUciteljController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/vnosOceneUcitelj.blade.php" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\tpo\studijskainformatika\resources\views\pdf\kartotecni_list_pdf.blade.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_161257_create_student_predmet_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_161257_create_student_predmet_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_173911_create_student_izpit_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_173911_create_student_izpit_table.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/IzbirniPredmetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/IzbirniPredmetController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/IzpitniRokSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/IzpitniRokSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/KartotecniListController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/KartotecniListController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Modul.php" afterPath="$PROJECT_DIR$/app/Models/Modul.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/ModulSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/ModulSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Student.php" afterPath="$PROJECT_DIR$/app/Models/Student.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentIzpitSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentIzpitSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudentPredmet.php" afterPath="$PROJECT_DIR$/app/Models/StudentPredmet.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentPredmetSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentPredmetSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudentProgram.php" afterPath="$PROJECT_DIR$/app/Models/StudentProgram.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentProgramSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentProgramSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/StudentSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/StudentSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" afterPath="$PROJECT_DIR$/app/Models/StudijskiProgram.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudijskiProgramController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/VpisniListController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/app.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/functions.js" afterPath="$PROJECT_DIR$/public/js/functions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php" afterPath="$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php" afterPath="$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/kartotecniList.blade.php" afterPath="$PROJECT_DIR$/resources/views/kartotecniList.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/potrdiloVpis.blade.php" afterPath="$PROJECT_DIR$/resources/views/potrdiloVpis.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/program.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/program.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/student/studentInfo.blade.php" afterPath="$PROJECT_DIR$/resources/views/student/studentInfo.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vpisniList.blade.php" afterPath="$PROJECT_DIR$/resources/views/vpisniList.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="studijskainformatika.iws" />
@@ -48,18 +105,28 @@
       <file leaf-file-name="izbirni_predmet_ref.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1173">
-              <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+            <state vertical-scroll-proportion="15.192307" vertical-offset="735" max-vertical-offset="1258">
+              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IzbirniPredmetController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/IzbirniPredmetController.php">
+      <file leaf-file-name="vpisniList.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/vpisniList.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.9878788" vertical-offset="491" max-vertical-offset="2771">
-              <caret line="145" column="39" selection-start-line="145" selection-start-column="39" selection-end-line="145" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.76666665" vertical-offset="4046" max-vertical-offset="4556">
+              <caret line="261" column="10" selection-start-line="261" selection-start-column="10" selection-end-line="261" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="iskanjeStudenta.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.8461537" vertical-offset="663" max-vertical-offset="1224">
+              <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="152" />
               <folding />
             </state>
           </provider>
@@ -74,7 +141,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/vpisniList.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AddStudentsController.php" />
         <option value="$PROJECT_DIR$/vendor/dompdf/dompdf/dompdf_config.inc.php" />
         <option value="$PROJECT_DIR$/resources/views/vloge.blade.php" />
@@ -109,7 +175,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" />
         <option value="$PROJECT_DIR$/app/Models/IzpitniRok.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/IzpitniRokController.php" />
-        <option value="$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/kartotecni_list_pdf.blade.php" />
         <option value="$PROJECT_DIR$/public/js/functions.js" />
         <option value="$PROJECT_DIR$/resources/views/izpitni_roki/spremeniIzpitniRok.blade.php" />
@@ -121,9 +186,11 @@
         <option value="$PROJECT_DIR$/database/seeds/NosilecSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/PredmetSeeder.php" />
         <option value="$PROJECT_DIR$/resources/views/seznam.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php" />
         <option value="$PROJECT_DIR$/database/seeds/ProgramPredmetSeeder.php" />
+        <option value="$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/IzbirniPredmetController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/vpisniList.blade.php" />
       </list>
     </option>
   </component>
@@ -208,8 +275,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="800" />
-    <option name="height" value="860" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -281,6 +350,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="studijskainformatika" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="studijskainformatika" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="student" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="studijskainformatika" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="studijskainformatika" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pdf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -375,38 +488,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="studijskainformatika" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="studijskainformatika" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="studijskainformatika" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="studijskainformatika" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seeds" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -616,18 +697,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="800" height="860" extended-state="0" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22300771" sideWeight="0.50190115" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261745" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22908093" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22446236" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32751676" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16323908" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24324325" sideWeight="0.4971537" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18766066" sideWeight="0.4971537" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22043702" sideWeight="0.50190115" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3340494" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -688,27 +769,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_173850_create_nosilec_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3392226" vertical-offset="165" max-vertical-offset="731">
-          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.08127209" vertical-offset="46" max-vertical-offset="612">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_151035_delete_everything.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13780919" vertical-offset="177" max-vertical-offset="1173">
@@ -849,13 +909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.2133815" vertical-offset="1700" max-vertical-offset="3842">
-          <caret line="28" column="14" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pdf/seznam_studentov.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3303887" vertical-offset="0" max-vertical-offset="986">
@@ -884,13 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pdf/kartotecni_list_pdf.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8375185" vertical-offset="1737" max-vertical-offset="2414">
-          <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/kartotecniList.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39660493" vertical-offset="1562" max-vertical-offset="2244">
@@ -916,13 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24637681" vertical-offset="0" max-vertical-offset="690">
           <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/login.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56666666" vertical-offset="0" max-vertical-offset="690">
-          <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -968,13 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/izpitni_roki/spremeniIzpitniRok.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.692307" vertical-offset="1397" max-vertical-offset="3349">
-          <caret line="97" column="70" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/IzpitniRokController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47843137" vertical-offset="2323" max-vertical-offset="3706">
@@ -1003,25 +1035,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1173">
-          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudentController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.4359465" vertical-offset="1563" max-vertical-offset="2890">
           <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AddStudentsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4053538" vertical-offset="735" max-vertical-offset="1972">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1039,10 +1056,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6500956" vertical-offset="0" max-vertical-offset="544">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AddStudentsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48183557" vertical-offset="1448" max-vertical-offset="1972">
+          <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/izpitni_roki/spremeniIzpitniRok.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1870" max-vertical-offset="3349">
+          <caret line="129" column="0" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.3977056" vertical-offset="72" max-vertical-offset="1513">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/vpisni_list_pdf.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.733333" vertical-offset="0" max-vertical-offset="3842">
+          <caret line="202" column="29" selection-start-line="202" selection-start-column="29" selection-end-line="202" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/IzbirniPredmetController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.9878788" vertical-offset="491" max-vertical-offset="2771">
-          <caret line="145" column="39" selection-start-line="145" selection-start-column="39" selection-end-line="145" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.6" vertical-offset="2618" max-vertical-offset="3944">
+          <caret line="172" column="64" selection-start-line="172" selection-start-column="64" selection-end-line="172" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/izbirni_predmeti/izbirni_predmet_ref.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="15.192307" vertical-offset="735" max-vertical-offset="1258">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/vloge.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-37.923077" vertical-offset="0" max-vertical-offset="1122">
+          <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/student/iskanjeStudenta.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537" vertical-offset="663" max-vertical-offset="1224">
+          <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="152" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/vpisniList.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76666665" vertical-offset="4046" max-vertical-offset="4556">
+          <caret line="261" column="10" selection-start-line="261" selection-start-column="10" selection-end-line="261" selection-end-column="10" />
           <folding />
         </state>
       </provider>

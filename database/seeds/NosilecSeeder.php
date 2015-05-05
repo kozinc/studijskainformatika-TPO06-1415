@@ -49,6 +49,7 @@ class NosilecSeeder extends Seeder
         Nosilec::create(['id' => 31, 'ime' => 'Zoran', 'priimek' => 'Arizanović', 'naziv' => 'doc. mag.', 'geslo' => Hash::make('zoranarizanovic'), 'email' => 'zoran.arizanovic@fri.uni-lj.si']);
         Nosilec::create(['id' => 32, 'ime' => 'Aleš', 'priimek' => 'Špetič', 'naziv' => '', 'geslo' => Hash::make('alesspetic'), 'email' => 'ales.spetic@fri.uni-lj.si']);
         Nosilec::create(['id' => 33, 'ime' => 'Mojca', 'priimek' => 'Ciglarič', 'naziv' => 'doc. dr.', 'geslo' => Hash::make('mojcaciglaric'), 'email' => 'mojca.ciglaric@fri.uni-lj.si']);
+        Nosilec::create(['id' => 34, 'ime' => 'Miha', 'priimek' => 'Mraz', 'naziv' => 'prof. dr.', 'geslo' => Hash::make('mihamraz'), 'email' => 'miha.mraz@fri.uni-lj.si']);
 
     }
 }

@@ -23,7 +23,7 @@ class Student extends Model {
 
     public function polaganja()
     {
-        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit', 'id_studenta', 'id_izpitnega_roka' )->withPivot('ocena');
+        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit', 'id_studenta', 'id_izpitnega_roka' )->withPivot('ocena', 'tocke_izpita');
     }
 
     public function sklepi()

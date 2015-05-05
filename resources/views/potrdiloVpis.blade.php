@@ -28,7 +28,7 @@
     <div class="form-group" style="width: 800px; margin: auto; margin-top: 370px">
 
         <!--<a class="hidden-print" href="{{ action('ListStudentsController@potrdilo_pdf') }}">Pretvori v pdf</a><br>
-        <a class="hidden-print" href="{{ action('ListStudentsController@returnBack') }}">Nazaj na seznam študentov</a>-->
+        <a class="hidden-print" href="{{ action('ListStudentsController@searchForm') }}">Nazaj na seznam študentov</a>-->
         <br>
         <h3 style="font-size: 18pt">Potrdilo o vpisu</h3>
         <br><br><br><br><br><br>

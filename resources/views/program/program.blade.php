@@ -149,12 +149,21 @@
             </div>
             <br>
             <div class="btn-group-vertical" id="program-predmetniki">
+                <h3>Študijsko leto</h3>
             @foreach($studijska_leta as $leto)
-                    <a class="btn btn-default" href="{{ $program->id }}/predmetnik-{{ $leto }}">Predmetnik {{ $leto }}</a>
-                @endforeach
-                @if(!in_array(date('Y').'-'.date('y',strtotime('+1 year')),$studijska_leta))
-                    <a class="btn btn-default" href="{{ $program->id }}/predmetnik-{{ date('Y').'-'.date('y',strtotime('+1 year')) }}">Predmetnik {{ date('Y').'-'.date('y',strtotime('+1 year')) }}</a>
-                @endif
+                <a class="" href="{{ $program->id }}/predmetnik-{{ $leto }}">{{ $leto }}</a>
+                <br>
+            @endforeach
+            </div>
+            <div class="input-block-level">
+                <select name="studijsko_leto" id="predmetnik_leto_select">
+                    @for($i = date('Y',strtotime('-1 year')); $i < date('Y',strtotime('+4 years')); $i++)
+                        @if(!in_array($i.'-'.substr((string)($i+1),2,2),$studijska_leta))
+                            <option value="{{ $i.'-'.substr((string)($i+1),2,2) }}">{{ $i.'-'.substr((string)($i+1),2,2) }}</option>
+                        @endif
+                    @endfor
+                </select>
+                <input type="button" class="btn btn-success" data-href="{{ $program->id }}/predmetnik-" id="dodaj_predmetnik" value="Dodaj predmetnik">
             </div>
         </div>
     </div>

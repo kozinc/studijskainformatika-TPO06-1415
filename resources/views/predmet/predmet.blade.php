@@ -12,7 +12,7 @@
             <th>Kreditne točke</th>
         </tr>
             <tr>
-                <td>{{ $predmet->id }}</td>
+                <td>{{ $predmet->sifra }}</td>
                 <td>{{ $predmet->naziv }}</td>
                 <td>{{ $predmet->tip }}</td>
                 <td>{{ $predmet->nosilec->ime }} {{$predmet->nosilec->priimek}}

@@ -44,6 +44,9 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::get('predmetiUcitelj', 'PredmetiUciteljController@vrniPredmete');
+Route::get('predmetiUcitelj/{id}/vnosOceneUcitelj/{id_studenta}', 'PredmetiUciteljController@vnesiOceno');
+Route::get('predmetiUcitelj/{id}', 'PredmetiUciteljController@vrniStudente');
 
 Route::post('predmeti/export', 'PredmetController@export');
 Route::get('predmeti', 'PredmetController@index');
@@ -61,8 +64,8 @@ Route::put('programi/{id}', 'StudijskiProgramController@update');
 Route::post('programi/{id}/strukutura', 'StudijskiProgramController@spremeni_strukturo');
 Route::get('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@showPredmetnik');
 Route::post('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@editPredmetnik');
-Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@create_predmetnik');
-Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@store_predmetnik');
+Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@createPredmetnik');
+Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@storePredmetnik');
 
 Route::get('studenti', 'StudentController@searchForm');
 Route::post('studenti', 'StudentController@search');
@@ -70,7 +73,6 @@ Route::post('potrdilo/1', 'ListStudentsController@potrdilo_pdf');
 Route::get('potrdilo/{id}', 'ListStudentsController@getPotrdilo');
 Route::get('potrdilo/{id}/vpisniList', 'ListStudentsController@natisniVpisniList');
 Route::get('potrdilo', 'ListStudentsController@getPotrdila');
-Route::get('studenti', 'ListStudentsController@returnBack');
 Route::get('studenti/{id}', 'StudentController@show');
 Route::get('studenti/{id}/nov-zeton', 'StudentController@novZeton');
 Route::post('studenti/{id}/nov-zeton', 'StudentController@ustvariNovZeton');
