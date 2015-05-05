@@ -250,6 +250,7 @@ class VpisniListController extends Controller {
         //PREDMETNIIK
         $program = $programStudenta->studijski_program;
         $programLetnik = ProgramLetnik::where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik)->first();
+
         DB::beginTransaction();
         if($programLetnik->stevilo_strokovnih_predmetov > 0)
         {
@@ -281,24 +282,35 @@ class VpisniListController extends Controller {
         }
         if($programLetnik->stevilo_modulov > 0)
         {
+            $predhodniLetnik = StudentProgram::where('id_studenta', '=', $student->id)->where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik - 1)->get();
             $modulski = $request['modulski-predmeti'];
+            $povprecnaOcena = 7.0; //$predhodniLetnik->povprecnaOcena();
             if(count($modulski) != $programLetnik->stevilo_modulov * 3){
                 DB::rollBack();
                 return Redirect::back()->withErrors('Število izbranih modulskih predmetov se ne ujema s predpisanim.');
             }
+            $modul_check = [];
             foreach($modulski as $predmet_id)
             {
                 $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                if(isset($modul_check[$predmet->pivot->id_modula])){
+                    $modul_check[$predmet->pivot->id_modula]++;
+                }else{
+                    $modul_check[$predmet->pivot->id_modula] = 1;
+                }
                 $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
                 $studentPredmet->save();
             }
+            if($povprecnaOcena < 8){
+                foreach($modul_check as $mc)
+                {
+                    if($mc != 3){
+                        DB::rollBack();
+                        return Redirect::back()->withErrors('Nimate dovolj visokega povprečja za prosto izbiro modulskih predmetov.');
+                    }
+                }
+            }
         }
-
-        //STROKOVNI IZBIRNI
-
-        //MODULSKI PREDMETI
-
-        //PROSTO IZBIRNI PREDMETI
 
         $student->telefon = $request['telefon'];
         $student->naslov = $request['naslov'];
