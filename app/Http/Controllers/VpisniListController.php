@@ -96,13 +96,14 @@ class VpisniListController extends Controller {
                     $predmetiObvezni = $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$programStudenta->letnik);
                     $predmetiStrokovni = $program->strokovni_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $predmetiProsti = $program->prosti_predmeti($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
+                    $predmetiDodatniProsti = $program->dodatni_prosti_predmeti($student, $programStudenta->studijsko_leto, $programStudenta->letnik)->get();
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
 
                     return view('vpisniList',['student'=>$student , 'empty'=>1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,
-                        'predmetiProsti'=>$predmetiProsti, 'programLetnik'=>$programLetnik]);
+                        'predmetiProsti'=>$predmetiProsti,'predmetiDodatniProsti'=>$predmetiDodatniProsti, 'programLetnik'=>$programLetnik]);
                 }
 
             }
@@ -343,7 +344,7 @@ class VpisniListController extends Controller {
         $programStudenta->vloga_oddana = date('Y-m-d');
         $programStudenta->save();
         DB::commit();
-        return view ('vpisniList', ['empty'=>0]);
+        return view ('vpisniList', ['empty'=>0, 'student'=>$student]);
     }
 
     public function seznamVlog(){

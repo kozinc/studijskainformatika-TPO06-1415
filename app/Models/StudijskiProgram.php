@@ -43,6 +43,20 @@ class StudijskiProgram extends Model
         return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','splošno-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
     }
 
+    public function dodatni_prosti_predmeti(Student $student, $studijsko_leto,$letnik)
+    {
+        $izbrani_predmeti = $student->predmetiVProgramu();
+        $letnik = $letnik - 1;
+        $dodatni = $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')
+            ->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')
+            ->wherePivot('letnik','=',$letnik)
+            ->wherePivot('tip','=','strokovni-izbirni')
+            ->wherePivot('studijsko_leto','=',$studijsko_leto)
+            ->whereNotIn('predmet.id',$izbrani_predmeti)
+            ->orderBy('letnik', 'semester', 'asc');
+        return $dodatni;
+    }
+
     public function predmet($id_predmeta, $studijsko_leto)
     {
         return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester','id_modula')->wherePivot('id_predmeta','=',$id_predmeta)->wherePivot('studijsko_leto','=',$studijsko_leto)->first();

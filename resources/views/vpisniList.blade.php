@@ -244,6 +244,9 @@
                             @foreach($predmetiProsti as $predmet)
                                 <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                             @endforeach
+                            @foreach($predmetiDodatniProsti as $predmet)
+                                    <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                            @endforeach
                         </select>
                     @endif
                     <br>
