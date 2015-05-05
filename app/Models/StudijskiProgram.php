@@ -30,14 +30,17 @@ class StudijskiProgram extends Model
     public function strokovni_predmeti($studijsko_leto,$letnik=0)
     {
         if($letnik > 0){
-            return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('letnik','=',$letnik)->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','strokovni-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
+            return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('letnik','=',$letnik)->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','splošno-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
         }
-        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','strokovni-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
+        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','splošno-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
     }
 
-    public function prosti_predmeti($studijsko_leto)
+    public function prosti_predmeti($studijsko_leto,$letnik=0)
     {
-        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','prosto-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('semester', 'asc');
+        if($letnik > 0){
+            return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('letnik','=',$letnik)->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','splošno-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
+        }
+        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','splošno-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
     }
 
     public function moduli($studijsko_leto=false, $letnik=0)
@@ -60,6 +63,11 @@ class StudijskiProgram extends Model
     public function letniki()
     {
         return $this->hasMany('App\Models\ProgramLetnik', 'id_programa')->orderBy('letnik','asc');
+    }
+
+    public function letnik($letnik)
+    {
+        return $this->hasMany('App\Models\ProgramLetnik', 'id_programa')->where('letnik','=',$letnik)->first();
     }
 
     public function studijska_leta()

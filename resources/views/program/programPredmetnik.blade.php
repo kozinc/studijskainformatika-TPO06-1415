@@ -141,7 +141,7 @@
 
 
     @endforeach
-        <div id="prosto-izbirni">
+        <div id="splošno-izbirni">
             <h3>Prosto izbirni predmeti</h3>
             <table class="table" class="predmeti">
                 <tr>
@@ -153,7 +153,7 @@
                     <th>Kreditne točke</th>
                 </tr>
                 @foreach($program->predmeti as $predmet)
-                    @if($predmet->pivot->tip=='prosto-izbirni' && $predmet->pivot->studijsko_leto == $studijsko_leto)
+                    @if($predmet->pivot->tip=='splošno-izbirni' && $predmet->pivot->studijsko_leto == $studijsko_leto)
                         <tr>
                             <td>{{ $predmet->sifra }}</td>
                             <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
@@ -189,7 +189,7 @@
                         <option value="obvezni">Obvezni</option>
                         <option value="strokovni-izbirni">Strokovni izbirni</option>
                         <option value="modulski">Modulski</option>
-                        <option value="prosto-izbirni">Prosto izbirni</option>
+                        <option value="splošno-izbirni">Prosto izbirni</option>
                     </select>
                 </div>
                 <div class="modul" style="display:none">

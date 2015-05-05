@@ -42,5 +42,9 @@ class ModulSeeder extends Seeder
         Modul::create(['id_programa' => 1, 'ime' => 'Umetna inteligenca', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2014/2015']);
         Modul::create(['id_programa' => 1, 'ime' => 'Umetna inteligenca', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2015/2016']);
 
+        Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2012/2013']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2013/2014']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2014/2015']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2015/2016']);
     }
 }
