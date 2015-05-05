@@ -143,7 +143,7 @@
                                                 <td>{{date('d.m.Y',strtotime($polaganje->datum))}}</td>
                                                 <td>{{$stevec++}}</td>
                                                 <td>{{$polaganje->pivot->tocke_izpita}}</td>
-                                                <td>{{$polaganje->pivot->ocena}}</td>
+                                                <td>{{($polaganje->pivot->ocena == 0)?'':$polaganje->pivot->ocena}}</td>
                                                 @if (($polaganje->datum > date('Y-m-d',strtotime('-30 days'))) &&(($polaganje->datum <= date('Y-m-d'))))
                                                     <td><a href="{{ action('PredmetiUciteljController@vnesiOceno',['id'=>$predmet->id_predmeta, 'id_studenta'=>$student->id]) }}">Vnos ocene</a></td>
                                                 @else
