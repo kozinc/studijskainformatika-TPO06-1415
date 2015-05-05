@@ -84,7 +84,41 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>127, 'ocena'=>9, 'tocke_izpita'=>83]);
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>137, 'ocena'=>9, 'tocke_izpita'=>85]);
 
+        //Ivanka Uhan v 1.letniku
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>2, 'ocena'=>8, 'tocke_izpita'=>73]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>6, 'ocena'=>10, 'tocke_izpita'=>90]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>7, 'ocena'=>9, 'tocke_izpita'=>89]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>10, 'ocena'=>8, 'tocke_izpita'=>73]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>13, 'ocena'=>9, 'tocke_izpita'=>86]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>17, 'ocena'=>8, 'tocke_izpita'=>75]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>19, 'ocena'=>9, 'tocke_izpita'=>89]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>22, 'ocena'=>8, 'tocke_izpita'=>73]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>25, 'ocena'=>10, 'tocke_izpita'=>96]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>29, 'ocena'=>5, 'tocke_izpita'=>33]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>30, 'ocena'=>8, 'tocke_izpita'=>79]);
 
+        //Ivanka Uhan v 2.letniku
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>31, 'ocena'=>10, 'tocke_izpita'=>93]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>34, 'ocena'=>9, 'tocke_izpita'=>83]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>37, 'ocena'=>9, 'tocke_izpita'=>85]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>42, 'ocena'=>9, 'tocke_izpita'=>80]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>43, 'ocena'=>9, 'tocke_izpita'=>88]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>46, 'ocena'=>10, 'tocke_izpita'=>92]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>49, 'ocena'=>10, 'tocke_izpita'=>97]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>52, 'ocena'=>10, 'tocke_izpita'=>96]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>55, 'ocena'=>10, 'tocke_izpita'=>94]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>142, 'ocena'=>10, 'tocke_izpita'=>94]);
+
+        //Ivanka Uhan v 3.letniku
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>60, 'ocena'=>10, 'tocke_izpita'=>96]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>61, 'ocena'=>10, 'tocke_izpita'=>99]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>64, 'ocena'=>9, 'tocke_izpita'=>85]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>68, 'ocena'=>8, 'tocke_izpita'=>78]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>76, 'ocena'=>10, 'tocke_izpita'=>96]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>79, 'ocena'=>7, 'tocke_izpita'=>67]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>145, 'ocena'=>10, 'tocke_izpita'=>98]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>148, 'ocena'=>7, 'tocke_izpita'=>66]);
+        DB::table('student_izpit')->insert(['id_studenta'=>9, 'id_izpitnega_roka'=>151, 'ocena'=>9, 'tocke_izpita'=>87]);
     }
 
 }

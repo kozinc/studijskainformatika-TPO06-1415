@@ -51,5 +51,8 @@ class NosilecSeeder extends Seeder
         Nosilec::create(['id' => 33, 'ime' => 'Mojca', 'priimek' => 'Ciglarič', 'naziv' => 'doc. dr.', 'geslo' => Hash::make('mojcaciglaric'), 'email' => 'mojca.ciglaric@fri.uni-lj.si']);
         Nosilec::create(['id' => 34, 'ime' => 'Miha', 'priimek' => 'Mraz', 'naziv' => 'prof. dr.', 'geslo' => Hash::make('mihamraz'), 'email' => 'miha.mraz@fri.uni-lj.si']);
 
+        //Prazen nosilec za diplomsko delo, Ne brisat.
+        Nosilec::create(['id' => 35, 'ime' => '', 'priimek' => '', 'naziv' => '', 'geslo' => '', 'email' => '']);
+
     }
 }

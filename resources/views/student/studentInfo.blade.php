@@ -23,6 +23,7 @@
                         {{$student->naslov.', '.$student->posta.' '.$student->obcina.', '.$student->drzava}}
                     @endif </p>
                     <p>Državljanstvo: {{$student->drzavljanstvo}}</p>
+                    <p>Elektronski indeks: <a href="{{ action('StudentController@elektronskiIndeks', ['idStudenta'=>$student->id]) }}">Klikni za ogled</a></p>
                 @endif
                 <p>Kartotečni list: <a href="{{ action('KartotecniListController@prikazKartotecniList',['id'=>$student->id]) }}">Klikni za ogled</a></p>
             </div>
@@ -74,7 +75,6 @@
                             <th>Vrsta vpisa</th>
                             <th>Stanje</th>
                             <th>Urejanje</th>
-                            <th>Elektronski indeks</th>
                         </tr>
                     @endif
                     @foreach($studentProgrami as $sp)
@@ -98,7 +98,6 @@
                                     <a href="{{ action('VpisniListReferentController@prikaziStudenta',['id'=>$sp->id_studenta]) }}">Uredi žeton</a>
                                 @endif
                             </td>
-                            <td><a href="{{ action('StudentController@elektronskiIndeks', ['idStudenta'=>$sp->id_studenta, 'idStudentPredmet'=>$sp->id]) }}">Elektronski indeks</a></td>
                         </tr>
 
                     @endforeach

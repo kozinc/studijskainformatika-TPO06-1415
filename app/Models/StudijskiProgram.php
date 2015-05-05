@@ -43,6 +43,11 @@ class StudijskiProgram extends Model
         return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')->wherePivot('tip','=','splošno-izbirni')->wherePivot('studijsko_leto','=',$studijsko_leto)->orderBy('letnik', 'semester', 'asc');
     }
 
+    public function predmet($id_predmeta, $studijsko_leto)
+    {
+        return $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')->withPivot('letnik', 'studijsko_leto', 'tip', 'semester','id_modula')->wherePivot('id_predmeta','=',$id_predmeta)->wherePivot('studijsko_leto','=',$studijsko_leto)->first();
+    }
+
     public function moduli($studijsko_leto=false, $letnik=0)
     {
         $query = $this->hasMany('App\Models\Modul', 'id_programa');

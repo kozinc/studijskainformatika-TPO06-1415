@@ -13,7 +13,16 @@ class ListStudentsController extends Controller {
         $predmeti = \App\Models\Predmet::lists('naziv', 'id');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
         $leta = array_values($leta);
-        return \View::make('seznam')->with('predmeti', $predmeti)->with('leta', $leta)->with('student_list', '')->with('predmet_id', 1)->with('leto_id', 0);
+        $predmeti2 = array();
+        foreach($predmeti as $p){
+            $pr = \App\Models\Predmet::where('naziv', $p)->first();
+            $p = $p . ' (' . $pr->sifra . ')';
+           array_push($predmeti2, $p);
+        }
+
+
+
+        return \View::make('seznam')->with('predmeti', $predmeti2)->with('leta', $leta)->with('student_list', '')->with('predmet_id', 1)->with('leto_id', 0);
     }
 
     function cmp($a, $b){
@@ -172,7 +181,14 @@ class ListStudentsController extends Controller {
             }
         }
 
-        return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
+        $predmeti2 = array();
+        foreach($predmeti as $p){
+            $pr = \App\Models\Predmet::where('naziv', $p)->first();
+            $p = $p . ' (' . $pr->sifra . ')';
+            array_push($predmeti2, $p);
+        }
+
+        return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti2)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
     }
 
     public function getPotrdilo($id){
