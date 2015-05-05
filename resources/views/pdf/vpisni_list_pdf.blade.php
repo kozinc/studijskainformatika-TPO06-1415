@@ -195,7 +195,7 @@
             </tr>
             <tr>
                 <td class="levo">Datum prvega vpisa v ta program:</td>
-                <td class="desno">{{  ($program_student->datum_vpisa=="0000-00-00")?'':date('d.m.Y',strtotime($program_student->datum_vpisa)) }}</td>
+                <td class="desno">{{ ($program_student->datum_vpisa == null)?'':date('d.m.Y',strtotime($program_student->datum_vpisa)) }}</td>
             </tr>
         </table>
         <br>

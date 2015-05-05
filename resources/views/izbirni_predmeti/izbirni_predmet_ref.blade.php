@@ -4,6 +4,11 @@
 
     <div class="form-group"  style="width:725px; margin: auto; margin-top: 100px">
 
+        @if (Session::get('izbirni_predmet_info') != "")
+        <div class="alert alert-info">{{ Session::get('izbirni_predmet_info') }}</div>
+        <br/>
+        @endif
+
         <h4 style="color:#9d9d9d">{{ $opis }}</h4>
         <br><br>
 
