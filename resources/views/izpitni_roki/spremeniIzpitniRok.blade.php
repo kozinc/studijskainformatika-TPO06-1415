@@ -18,7 +18,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/jquery-te-1.4.0.min.js') }}"></script>
-    <script src="{{ asset('js/functions.js') }}"></script>
 
 </head>
 
@@ -176,6 +175,26 @@
         $("#datepicker1").datepicker({
             minDate: 1,
             dateFormat: 'dd.mm.yy'
+        });
+    });
+
+    $(function() {
+        $('#obrazec_izpit1').hide();
+        $('#izpit_button1').show();
+
+        $('#obrazec_izpit2').hide();
+        $('#izpit_button2').show();
+
+        $('#izpit_button1').click(function() {
+            $('#izpit_button1').hide();
+            $('#obrazec_izpit1').show('slow');
+            return false;
+        });
+
+        $('#izpit_button2').click(function() {
+            $('#izpit_button2').hide();
+            $('#obrazec_izpit2').show('slow');
+            return false;
         });
     });
 

@@ -110,7 +110,7 @@ class IzpitniRokController extends Controller {
             //$send_mail->send("veronika.blazic@gmail.com", $mail, "Referat FRI - Sprememba izpitnega roka", $s);
         }
 
-        //$send_mail->send("veronika.blazic@gmail.com", "veronika.blazic@gmail.com", "Referat FRI - Sprememba izpitnega roka", $s);
+        $send_mail->send("veronika.blazic@gmail.com", "veronika.blazic@gmail.com", "Referat FRI - Sprememba izpitnega roka", $s);
     }
 
     // brise izpitni rok, odjavi studente

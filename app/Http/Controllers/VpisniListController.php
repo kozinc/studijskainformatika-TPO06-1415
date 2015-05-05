@@ -310,6 +310,7 @@ class VpisniListController extends Controller {
                 $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
                 $studentPredmet->save();
             }
+
             if($izbrani_kt != $min_kt){
                 DB::rollBack();
                 return Redirect::back()->withErrors('Število kreditnih točk izbranih prosto izbirnih predmetov se ne ujema s predpisanim.');
