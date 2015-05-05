@@ -3,21 +3,21 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-include 'database\seeds\StudentSeeder.php';
-include 'database\seeds\IzpitniRokSeeder.php';
-include 'database\seeds\NosilecSeeder.php';
-include 'database\seeds\OrganSeeder.php';
-include 'database\seeds\PredmetSeeder.php';
-include 'database\seeds\ProgramLetnikSeeder.php';
-include 'database\seeds\ReferentSeeder.php';
-include 'database\seeds\ProgramPredmetSeeder.php';
-include 'database\seeds\SklepSeeder.php';
-include 'database\seeds\StudentIzpitSeeder.php';
-include 'database\seeds\StudentPredmetSeeder.php';
-include 'database\seeds\StudentProgramSeeder.php';
-include 'database\seeds\StudijskiProgramSeeder.php';
-include 'database\seeds\VrstaVpisaSeeder.php';
-include 'database\seeds\ModulSeeder.php';
+include __DIR__.'\StudentSeeder.php';
+include __DIR__.'\IzpitniRokSeeder.php';
+include __DIR__.'\NosilecSeeder.php';
+include __DIR__.'\OrganSeeder.php';
+include __DIR__.'\PredmetSeeder.php';
+include __DIR__.'\ProgramLetnikSeeder.php';
+include __DIR__.'\ReferentSeeder.php';
+include __DIR__.'\ProgramPredmetSeeder.php';
+include __DIR__.'\SklepSeeder.php';
+include __DIR__.'\StudentIzpitSeeder.php';
+include __DIR__.'\StudentPredmetSeeder.php';
+include __DIR__.'\StudentProgramSeeder.php';
+include __DIR__.'\StudijskiProgramSeeder.php';
+include __DIR__.'\VrstaVpisaSeeder.php';
+include __DIR__.'\ModulSeeder.php';
 
 
 class DatabaseSeeder extends Seeder {
