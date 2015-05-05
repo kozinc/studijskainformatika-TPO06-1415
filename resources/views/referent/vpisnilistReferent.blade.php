@@ -233,7 +233,7 @@
                                 <th>Obvezni predmeti</th>
                             </tr>
                             <?php $kt=0; ?>
-                            @foreach($predmetiObvezni->get() as $predmet)
+                            @foreach($predmetiObvezni as $predmet)
                                 <?php $kt = $kt + $predmet->KT; ?>
                                 <tr>
                                     <td>{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</td>

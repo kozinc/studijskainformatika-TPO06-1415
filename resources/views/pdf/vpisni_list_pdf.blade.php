@@ -28,7 +28,7 @@
             {!! HTML::image('http://www.culture.si/images/thumb/6/6c/Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg/576px-Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg.png', 'Logo - ni povezave', array( 'width' => 250, 'height' => 150 )) !!}
         </div>
         <br><br>
-        <h2>VPISNI LIST 2014/15</h2>
+        <h2>VPISNI LIST {{ $studijsko_leto }}</h2>
         <br>
         <table>
             <tr>

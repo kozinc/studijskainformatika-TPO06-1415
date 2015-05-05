@@ -216,12 +216,13 @@ class ListStudentsController extends Controller {
     public function natisniVpisniList($id){
         $student = \App\Models\Student::find($id);
         $student_program = $student->studentProgram()->first();
+        $studijsko_leto = $student_program->studijsko_leto;
         $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
         $obvezni_predmeti =  $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$student_program->letnik);
 
         ini_set('max_execution_time', 300);
         $pdf = \App::make('dompdf');
-        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti));
+        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('studijsko_leto',$studijsko_leto)->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti));
         return $pdf->download('vpisni_list.pdf');
 
         //return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti);
