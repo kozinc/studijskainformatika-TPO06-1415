@@ -263,6 +263,7 @@
             {!! Form::close() !!}
         @else
             Vloga je oddana.
+            <td><a href="{{ action('ListStudentsController@natisniVpisniList',['id'=>$student->id]) }}">Natisni vpisni list</a></td>
         @endif
 
     </div>
