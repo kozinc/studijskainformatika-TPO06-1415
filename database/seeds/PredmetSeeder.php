@@ -77,6 +77,14 @@ class PredmetSeeder extends Seeder
         //Magisterij
         Predmet::create(['id'=>45,'sifra'=>'22222', 'naziv'=>'Magistrsko delo', 'opis'=>'Magistrsko delo je sestavni del celega drugega letnika vašega študija, ovrednoteno je s 24 kreditnimi točkami. To pomeni, da morate pripravam in izdelavi naloge nameniti približno 720 ur dela.', 'id_nosilca'=>35, 'KT'=>24]);
 
+        Predmet::create(['id'=>46,'sifra'=>'63511', 'naziv'=>'Brezžična senzorska omrežja', 'opis'=>'', 'id_nosilca'=>10, 'KT'=>6]);
+        Predmet::create(['id'=>47,'sifra'=>'63528', 'naziv'=>'Kriptografija in računalniška varnost', 'opis'=>'', 'id_nosilca'=>8, 'KT'=>6]);
+        Predmet::create(['id'=>48,'sifra'=>'63532', 'naziv'=>'Diskretna matematika', 'opis'=>'', 'id_nosilca'=>3, 'KT'=>6]);
+        Predmet::create(['id'=>49,'sifra'=>'63522', 'naziv'=>'Numerična matematika', 'opis'=>'', 'id_nosilca'=>13, 'KT'=>6]);
+        Predmet::create(['id'=>50,'sifra'=>'63541', 'naziv'=>'Računalniške storitve v oblaku', 'opis'=>'', 'id_nosilca'=>4, 'KT'=>6]);
+        Predmet::create(['id'=>51,'sifra'=>'63527', 'naziv'=>'Interaktivnost in oblikovanje informacij', 'opis'=>'', 'id_nosilca'=>6, 'KT'=>6]);
+        Predmet::create(['id'=>52,'sifra'=>'63519', 'naziv'=>'Strojno učenje', 'opis'=>'', 'id_nosilca'=>17, 'KT'=>6]);
+
     }
 
 }

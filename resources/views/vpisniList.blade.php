@@ -218,7 +218,7 @@
                     @if($programLetnik->stevilo_strokovnih_predmetov > 0)
                         <h3>Strokovni izbirni predmeti</h3>
                         <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_strokovnih_predmetov*6 }}</p>
-                        <select multiple="multiple" class="multi-select count_kt" id="strokovni-predmeti-select" name="strokovni-predmeti-select[]">
+                        <select multiple="multiple" class="multi-select count_kt" id="strokovni-predmeti-select" name="strokovni-predmeti[]">
                             @foreach($predmetiStrokovni as $predmet)
                                 <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                             @endforeach
