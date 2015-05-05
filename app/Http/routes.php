@@ -67,6 +67,7 @@ Route::post('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramContro
 Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@createPredmetnik');
 Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@storePredmetnik');
 
+
 Route::get('studenti', 'StudentController@searchForm');
 Route::post('studenti', 'StudentController@search');
 Route::post('potrdilo/1', 'ListStudentsController@potrdilo_pdf');
@@ -76,7 +77,7 @@ Route::get('potrdilo', 'ListStudentsController@getPotrdila');
 Route::get('studenti/{id}', 'StudentController@show');
 Route::get('studenti/{id}/nov-zeton', 'StudentController@novZeton');
 Route::post('studenti/{id}/nov-zeton', 'StudentController@ustvariNovZeton');
-Route::get('studenti/{idStudenta}/indeks/{idStudentProgram}', 'StudentController@elektronskiIndeks');
+Route::get('studenti/{idStudenta}/indeks/', 'StudentController@elektronskiIndeks');
 Route::get('studenti/{idStudenta}/sklepi/{idSklepa}', 'SklepController@edit');
 Route::post('studenti/{idStudenta}/sklepi/{idSklepa}', 'SklepController@update');
 Route::get('studenti/{idStudenta}/nov-sklep', 'SklepController@create');

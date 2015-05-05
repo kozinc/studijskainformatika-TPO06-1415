@@ -171,7 +171,7 @@ class StudentController extends Controller {
                 $vrsta_vpisa = null;
             }
 
-            return view('studentPredmetnik', ['student'=>$student, 'predmeti'=>$predmeti, 'program'=>$program, 'vrsta_vpisa'=>$vrsta_vpisa]);
+            return view('/student/elektronskiIndeks', ['student'=>$student]);
         }
         return \Redirect::back();
 
