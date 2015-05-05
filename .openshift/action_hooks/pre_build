@@ -9,18 +9,3 @@ if [[ "$OPENSHIFT_PHP_VERSION" == "5.3" ]]; then
   echo "ERROR: Please use the php-5.4 application type."
   exit 1
 fi
-mysql -u adminQ4rVfjn -p gpEAIIzlWxtx
-
-<?php
-$con = mysqli_connect("localhost","adminQ4rVfjn","gpEAIIzlWxtx","studijskainformatika");
-
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-mysql_select_db( 'DROP TABLE migrations' );
-$retval = mysql_query( $sql, $conn );
-echo "Migrations deleted.";
-?>
-
