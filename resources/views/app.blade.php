@@ -70,6 +70,9 @@
                     <a class="navbar-brand" href="{{ action('PredmetiUciteljController@vrniPredmete') }}">Moji predmeti</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
                 </div>
             @endif

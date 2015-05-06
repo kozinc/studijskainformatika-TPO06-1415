@@ -195,7 +195,7 @@
             </tr>
             <tr>
                 <td class="levo">Datum prvega vpisa v ta program:</td>
-                <td class="desno">{{ ($program_student->datum_vpisa == null)?'':date('d.m.Y',strtotime($program_student->datum_vpisa)) }}</td>
+                <td class="desno">{{ ($prvi_vpis == null)?'':date('d.m.Y',strtotime($prvi_vpis)) }}</td>
             </tr>
         </table>
         <br>
@@ -212,8 +212,13 @@
         </table>
         <table class="table">
             <tr>
-                <th>Izbirni predmeti</th>
+                <td><b>Izbirni predmeti</b></td>
             </tr>
+            @foreach($izbirni as $predmet)
+                <tr>
+                    <td>{{ $predmet }}</td>
+                </tr>
+            @endforeach
         </table>
     </div>
 </div>

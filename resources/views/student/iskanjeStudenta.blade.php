@@ -47,7 +47,7 @@
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->telefon }}</td>
                             <td><a href="{{ action('KartotecniListController@prikazKartotecniList',['id'=>$student->id]) }}">Klikni za ogled</a></td>
-                            @if((\Session::get('vloga')  == 'referent'))
+                            @if((\Session::get('vloga')  == 'referent' ))
                                 <td><a href="{{ action('ListStudentsController@getPotrdilo',['id'=>$student->id]) }}">Natisni potrdilo o vpisu</a></td>
                                 <td><a href="{{ action('ListStudentsController@natisniVpisniList',['id'=>$student->id]) }}">Natisni vpisni list</a></td>
                             @elseif($vnosOcene == 1)

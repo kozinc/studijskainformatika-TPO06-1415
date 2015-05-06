@@ -78,7 +78,7 @@
     </div>
 </nav>
 
-    <div class="form-group" style="width:1000px; margin: auto; margin-top: 200px">
+    <div class="form-group" style="width:1200px; margin: auto; margin-top: 200px">
 
         {!! Form::open(array('action' => 'IzpitniRokController@getPredmetRoki')) !!}
             {!! Form::select('predmeti', $predmeti, $predmet_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
@@ -87,10 +87,12 @@
         <br/>
 
         @if($izpitni_roki != '' || Session::get('izpitni_roki_sporocilo') == "Za predmet ni razpisanih izpitnih rokov")
-            <button id="izpit_button1"  class="btn btn-default">Dodaj izpitni rok</button>
-            @if($izpitni_roki != '')
-                <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
-                <br/>
+            @if(Session::get('nosilec') == $nosilci[0] || Session::get('nosilec') == $nosilci[1] || Session::get('nosilec') == $nosilci[2] || Session::get('nosilec') == '')
+                <button id="izpit_button1" class="btn btn-default">Dodaj izpitni rok</button>
+                @if($izpitni_roki != '')
+                    <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
+                    <br/>
+                @endif
             @endif
 
 
@@ -154,7 +156,9 @@
             <td>{{ $i->st_prijav }} @if($i->st_prijav > 0) / <a href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$i->id]) }}">Seznam študentov</a> @endif</td>
             @if($i->ocene != "Ocene so vnešene")
                 <td>
-                    <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
+                    @if(Session::get('nosilec') == $nosilci[0] || Session::get('nosilec') == $nosilci[1] || Session::get('nosilec') == $nosilci[2] || Session::get('nosilec') == '')
+                        <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
+                    @endif
                 </td>
             @else
                 <td>{{ $i->ocene }}</td>
