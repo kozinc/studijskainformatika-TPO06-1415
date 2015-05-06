@@ -3,21 +3,21 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-include 'database\seeds\StudentSeeder.php';
-include 'database\seeds\IzpitniRokSeeder.php';
-include 'database\seeds\NosilecSeeder.php';
-include 'database\seeds\OrganSeeder.php';
-include 'database\seeds\PredmetSeeder.php';
-include 'database\seeds\ProgramLetnikSeeder.php';
-include 'database\seeds\ReferentSeeder.php';
-include 'database\seeds\ProgramPredmetSeeder.php';
-include 'database\seeds\SklepSeeder.php';
-include 'database\seeds\StudentIzpitSeeder.php';
-include 'database\seeds\StudentPredmetSeeder.php';
-include 'database\seeds\StudentProgramSeeder.php';
-include 'database\seeds\StudijskiProgramSeeder.php';
-include 'database\seeds\VrstaVpisaSeeder.php';
-include 'database\seeds\ModulSeeder.php';
+include 'StudentSeeder.php';
+include 'IzpitniRokSeeder.php';
+include 'NosilecSeeder.php';
+include 'OrganSeeder.php';
+include 'PredmetSeeder.php';
+include 'ProgramLetnikSeeder.php';
+include 'ReferentSeeder.php';
+include 'ProgramPredmetSeeder.php';
+include 'SklepSeeder.php';
+include 'StudentIzpitSeeder.php';
+include 'StudentPredmetSeeder.php';
+include 'StudentProgramSeeder.php';
+include 'StudijskiProgramSeeder.php';
+include 'VrstaVpisaSeeder.php';
+include 'ModulSeeder.php';
 
 
 class DatabaseSeeder extends Seeder {

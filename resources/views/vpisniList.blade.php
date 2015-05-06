@@ -208,7 +208,7 @@
                             <th>Obvezni predmeti</th>
                         </tr>
                         <?php $kt=0; ?>
-                        @foreach($predmetiObvezni->get() as $predmet)
+                        @foreach($predmetiObvezni as $predmet)
                             <?php $kt = $kt + $predmet->KT; ?>
                             <tr>
                                 <td>{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</td>
@@ -243,6 +243,9 @@
                         <select multiple="multiple" class="multi-select count_kt" id="prosti-predmeti-select" name="prosti-predmeti[]">
                             @foreach($predmetiProsti as $predmet)
                                 <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                            @endforeach
+                            @foreach($predmetiDodatniProsti as $predmet)
+                                    <option data-kt="{{ $predmet->KT }}" value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                             @endforeach
                         </select>
                     @endif

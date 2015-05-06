@@ -15,7 +15,6 @@ class StudentSeeder extends Seeder
 
     public function run()
     {
-
         DB::table('student')->truncate();
 
         Student::create(['vpisna' => '63120340', 'ime' => 'Neža', 'priimek' => 'Belej', 'email' => 'nezabelej@gmail.com', 'geslo' => \Hash::make('nezabelej'), 'emso' => '0812992505123', 'davcna' => '12345678', 'spol' => 'ženski', 'naslovPosta' => 'Brstnik 4', 'obcinaPosta' => 'Laško', 'postaPosta' => '3270', 'drzavaPosta' => 'Slovenija', 'naslov' => 'Brstnik 4', 'obcina' => 'Laško', 'posta' => '3270', 'drzava' => 'Slovenija', 'datum_rojstva' => '1992-12-08', 'obcina_rojstva' => 'Trbovlje', 'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'telefon' => '031683852']);
@@ -36,7 +35,8 @@ class StudentSeeder extends Seeder
         Student::create(['vpisna' => '63130008', 'ime' => 'Evelyn', 'priimek' => 'Borin', 'email' => 'evelynborin@gmail.com', 'geslo' => \Hash::make('evelynborin'), 'emso' => '1902993505935', 'posta' => '1000', 'datum_rojstva' => '1992-02-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041967333']);
 
         Student::create(['vpisna' => '63130009', 'ime' => 'Miha', 'priimek' => 'Dlan', 'email' => 'mihadlan@gmail.com', 'geslo' => \Hash::make('mihadlan'), 'emso' => '1903992500098', 'posta' => '1000', 'davcna' => '42849293', 'spol' => 'moški', 'naslov' => 'Jadranska 10', 'obcina' => 'Ljubljana',  'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'drzava' => 'Slovenija', 'datum_rojstva' => '1992-03-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '040222777']);
-        Student::create(['vpisna' => '63130010', 'ime' => 'Rok', 'priimek' => 'Pogorelec', 'email' => 'rokpogorelec@gmail.com', 'geslo' => \Hash::make('rokpogorelec'), 'emso' => '1904993500935', 'posta' => '1000', 'datum_rojstva' => '1992-04-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '031243875']);
+        Student::create(['vpisna' => '63130010', 'ime' => 'Rok', 'priimek' => 'Pogorelec', 'email' => 'rokpogorelec@gmail.com', 'geslo' => \Hash::make('rokpogorelec'), 'emso' => '1005992500935', 'posta' => '1000', 'davcna' => '41839243', 'datum_rojstva' => '1992-05-10', 'obcina' => 'Ljubljana', 'spol' => 'moški', 'naslov' => 'Hajdrihova 20','drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'drzava'=> 'Slovenija', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '031243875']);
         Student::create(['vpisna' => '63120012', 'ime' => 'Štefan', 'priimek' => 'Zimic', 'email' => 'stefanzimic@gmail.com', 'geslo' => \Hash::make('stefanzimic'), 'emso' => '190599150935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041888777']);
+
     }
 }

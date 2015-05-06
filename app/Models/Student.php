@@ -21,9 +21,14 @@ class Student extends Model {
         return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_studenta','id_predmeta')->withPivot('ocena','semester','letnik','studijsko_leto');
     }
 
-    public function predmetiVProgramu(StudijskiProgram $program, $letnik=0)
+    public function predmetiVProgramu()
     {
         $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->lists('id_predmeta');
+        return $predmeti;
+    }
+    public function predmetiVLetniku($letnik)
+    {
+        $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->where('letnik','=',$letnik)->lists('id_predmeta');
         return $predmeti;
     }
 
