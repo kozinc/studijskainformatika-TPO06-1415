@@ -267,7 +267,10 @@
                             <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_prostih_predmetov*6 }}</p>
                             <select multiple="multiple" class="multi-select count_kt" id="prosti-predmeti-select" name="prosti-predmeti[]">
                                 @foreach($predmetiProsti as $predmet)
-                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                @endforeach
+                                @foreach($predmetiDodatniProsti as $predmet)
+                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                 @endforeach
                             </select>
                         @endif
