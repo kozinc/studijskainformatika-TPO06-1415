@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06304d7b-ba65-4c89-be3d-476d003f2ba8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_25_180000_create_sklep_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_25_180000_create_sklep_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Sklep.php" afterPath="$PROJECT_DIR$/app/Models/Sklep.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SklepController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SklepController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/SklepSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/SklepSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sklep/sklep.blade.php" afterPath="$PROJECT_DIR$/resources/views/sklep/sklep.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/student/studentInfo.blade.php" afterPath="$PROJECT_DIR$/resources/views/student/studentInfo.blade.php" />
     </list>
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,10 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sklep.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sklep.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/sklep/sklep.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51758796" vertical-offset="117" max-vertical-offset="850">
+            <state vertical-scroll-proportion="-7.923077" vertical-offset="117" max-vertical-offset="850">
               <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
               <folding>
                 <element signature="e#1414#1432#0#HTML" expanded="true" />
@@ -78,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SklepSeeder.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SklepSeeder.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database/seeds/SklepSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9761906" vertical-offset="6" max-vertical-offset="527">
-              <caret line="27" column="97" selection-start-line="27" selection-start-column="97" selection-end-line="27" selection-end-column="97" />
+            <state vertical-scroll-proportion="0.29705882" vertical-offset="120" max-vertical-offset="527">
+              <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -179,9 +174,9 @@
         <option value="$PROJECT_DIR$/app/Models/Sklep.php" />
         <option value="$PROJECT_DIR$/resources/views/student/studentInfo.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SklepController.php" />
-        <option value="$PROJECT_DIR$/database/seeds/SklepSeeder.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_03_25_180000_create_sklep_table.php" />
         <option value="$PROJECT_DIR$/resources/views/sklep/sklep.blade.php" />
+        <option value="$PROJECT_DIR$/database/seeds/SklepSeeder.php" />
       </list>
     </option>
   </component>
@@ -1003,14 +998,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/SklepSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9761906" vertical-offset="6" max-vertical-offset="527">
-          <caret line="27" column="97" selection-start-line="27" selection-start-column="97" selection-end-line="27" selection-end-column="97" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_25_180000_create_sklep_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-21.461538" vertical-offset="54" max-vertical-offset="714">
@@ -1029,11 +1016,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/sklep/sklep.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51758796" vertical-offset="117" max-vertical-offset="850">
+        <state vertical-scroll-proportion="-7.923077" vertical-offset="117" max-vertical-offset="850">
           <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
           <folding>
             <element signature="e#1414#1432#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/SklepSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29705882" vertical-offset="120" max-vertical-offset="527">
+          <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
