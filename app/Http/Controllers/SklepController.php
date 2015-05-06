@@ -30,7 +30,8 @@ class SklepController extends Controller {
                 Sklep::destroy($idSklepa);
                 return redirect('studenti/'.$idStudenta)->with('odgovor','Sklep izbirsan.');
             }else{
-                $sklep->datum = date('Y-m-d',strtotime($request['datum']));
+                $sklep->datum_izdaje = date('Y-m-d',strtotime($request['datum_izdaje']));
+                $sklep->datum_veljavnosti = date('Y-m-d',strtotime($request['datum_veljavnosti']));
                 $sklep->id_organa = $request['organ'];
                 if($sklep->id_organa == 0){
                     return Redirect::back()->withErrors('Neveljaven organ fakultete.');
@@ -56,7 +57,8 @@ class SklepController extends Controller {
     {
         $student = Student::find($idStudenta);
         $sklep = new Sklep;
-        $sklep->datum = date('Y-m-d',strtotime($request['datum']));
+        $sklep->datum_izdaje = date('Y-m-d',strtotime($request['datum_izdaje']));
+        $sklep->datum_veljavnosti = date('Y-m-d',strtotime($request['datum_veljavnosti']));
         $sklep->vsebina = $request['vsebina'];
         $sklep->id_studenta = $student->id;
         $sklep->id_organa = $request['organ'];

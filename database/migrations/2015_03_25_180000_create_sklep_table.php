@@ -17,7 +17,8 @@ class CreateSklepTable extends Migration {
             $table->increments('id');
             $table->integer('id_studenta');
             $table->integer('id_organa');
-            $table->date('datum');
+            $table->date('datum_izdaje');
+            $table->date('datum_veljavnosti')->nullable()->default(null);
             $table->text('vsebina');
             $table->softDeletes();
         });

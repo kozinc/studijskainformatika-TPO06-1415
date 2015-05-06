@@ -34,7 +34,8 @@
                 <h4>Sklepi</h4>
                 <tr>
                     <th>Id</th>
-                    <th>Datum</th>
+                    <th>Datum izdaje</th>
+                    <th>Datum veljavnosti</th>
                     <th>Organ</th>
                     <th>Vsebina</th>
                     @if (\Session::get('vloga') == "referent" )
@@ -44,7 +45,8 @@
                 @foreach($student->sklepi as $sklep)
                     <tr>
                         <td>{{ $sklep->id }}</td>
-                        <td>{{ date('d.m.Y',strtotime($sklep->datum)) }}</td>
+                        <td>{{ date('d.m.Y',strtotime($sklep->datum_izdaje)) }}</td>
+                        <td>{{ date('d.m.Y',strtotime($sklep->datum_veljavnosti)) }}</td>
                         <td>{{ $sklep->organ->ime }}</td>
                         <td>{{ $sklep->vsebina }}</td>
                         @if (\Session::get('vloga') == "referent" )
