@@ -126,7 +126,7 @@
                     @endif</td>
             </tr>
         </table>
-        <br>
+        <br><br><br>
         <h4>OSEBNI PODATKI</h4>
         <table>
             <tr>
@@ -198,7 +198,7 @@
                 <td class="desno">{{ ($prvi_vpis == null)?'':date('d.m.Y',strtotime($prvi_vpis)) }}</td>
             </tr>
         </table>
-        <br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <h4>PREDMETI</h4>
         <table class="table">
             <tr>
@@ -210,6 +210,7 @@
                 </tr>
             @endforeach
         </table>
+        <br>
         <table class="table">
             <tr>
                 <td><b>Izbirni predmeti</b></td>

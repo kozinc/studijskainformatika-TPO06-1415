@@ -1,7 +1,10 @@
 @extends('app')
 
 @section('content')
-    <div class="form-group" style="width:700px; margin: auto; margin-top: 200px">
+    <div class="form-group" style="width:700px; margin: auto; margin-top: 150px">
+
+        <p style="font-size: 20px">Seznam vpisanih v predmet</p>
+        <br><br>
         {!! Form::open(array('action' => 'ListStudentsController@getStudents')) !!}
             {!! Form::select('predmeti', $predmeti, $predmet_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
@@ -17,17 +20,15 @@
         @if($student_list != '')
         <table class="table table-hover">
             <tr>
-                <th>Šifra</th>
+                <th>Zaporedna številka</th>
                 <th>Vpisna številka</th>
-                <th>Ime</th>
-                <th>Ocena</th>
+                <th>Priimek in ime</th>
                 <th>Vrsta vpisa</th>
             </tr>
             @foreach($student_list as $s)
                 <tr>
                     <td>{{ $s->vpisna }}</td>
-                    <td>{{ $s->ime }} {{ $s->priimek }}</td>
-                    <td>{{ $s->ocena }}</td>
+                    <td>{{ $s->priimek }} {{ $s->ime }} </td>
                     <td>{{ $vrsteVpisa->get($s->vrstavpisa)->ime }}</td>
                 </tr>
             @endforeach
