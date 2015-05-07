@@ -70,6 +70,7 @@ Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@stor
 
 Route::get('studenti', 'StudentController@searchForm');
 Route::post('studenti', 'StudentController@search');
+Route::get('studenti/{id}/potrdila/{id_programa}', 'ListStudentsController@getPotrdilo');
 Route::post('potrdilo/1', 'ListStudentsController@potrdilo_pdf');
 Route::get('potrdilo/{id}', 'ListStudentsController@getPotrdilo');
 Route::get('potrdilo/{id}/vpisniList', 'ListStudentsController@natisniVpisniList');

@@ -194,12 +194,12 @@ class ListStudentsController extends Controller {
         return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti2)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
     }
 
-    public function getPotrdilo($id){
+    public function getPotrdilo($id,$id_programa){
 
         $student =  \App\Models\Student::find($id);
-        $student_program = \App\Models\StudentProgram::where('id_studenta', $id)->first();
+        $student_program = \App\Models\StudentProgram::find($id_programa);
         $id_programa = $student_program->id_programa;
-        $program = \App\Models\StudijskiProgram::where('id', $id_programa)->first();
+        $program = \App\Models\StudijskiProgram::find($id_programa);
 
         $danes = date('d.m.Y');
         $datum_rojstva = $student->datum_rojstva;

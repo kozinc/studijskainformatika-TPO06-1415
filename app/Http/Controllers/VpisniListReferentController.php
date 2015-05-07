@@ -88,18 +88,19 @@ class VpisniListReferentController extends Controller {
     }
 
 
-    public function prikaziStudenta($id)
+    public function prikaziStudenta($id,$odgovor='')
     {
         $student = Student::find($id);
+        $samoZaPotrditev = false;
 
         if (!is_null($student))
         {
 
             //preverimo ce obstaja zeton
-            $programStudenta = $student->studentProgram()->where('vloga_oddana', '=', null)->first();
-
+            $programStudenta = $student->studentProgram()->where('vloga_potrjena','=',null)->whereNotNull('vloga_oddana')->first();
             if(!is_null($programStudenta))
             {
+                $samoZaPotrditev = true;
                 //preverimo za 1.vpis
                 if ($student->vpisna == 0)
                 {
@@ -129,7 +130,8 @@ class VpisniListReferentController extends Controller {
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty'=>1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => date('Y-m-d'), 'predmetiObvezni' => $predmetiObvezni,
                         'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli, 'predmetiPrejsnjiLetnik'=>$predmetiPrejsnjiLetnik,
-                        'predmetiProsti'=>$predmetiProsti,'predmetiDodatniProsti'=>$predmetiDodatniProsti, 'programLetnik'=>$programLetnik]);
+                        'predmetiProsti'=>$predmetiProsti,'predmetiDodatniProsti'=>$predmetiDodatniProsti, 'programLetnik'=>$programLetnik,
+                        'potrditev'=>true]);
 
                 }
                 else
@@ -149,7 +151,8 @@ class VpisniListReferentController extends Controller {
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,'predmetiPrejsnjiLetnik'=>$predmetiPrejsnjiLetnik,
-                        'predmetiProsti'=>$predmetiProsti,'predmetiDodatniProsti'=>$predmetiDodatniProsti, 'programLetnik'=>$programLetnik, 'izbraniPredmeti'=>$izbraniPredmeti]);
+                        'predmetiProsti'=>$predmetiProsti,'predmetiDodatniProsti'=>$predmetiDodatniProsti, 'programLetnik'=>$programLetnik, 'izbraniPredmeti'=>$izbraniPredmeti,
+                        'potrditev'=>true]);
                 }
             }
             else
@@ -170,7 +173,23 @@ class VpisniListReferentController extends Controller {
     {
         $id_programa = $request['id'];
         $programStudenta = StudentProgram::find($id_programa);
-
+        if(isset($request['vrni'])){
+            $programStudenta->vloga_oddana =null;
+            $studentPredmeti = StudentPredmet::where('id_studenta','=',$programStudenta->id_studenta)
+                ->where('studijsko_leto','=',$programStudenta->studijsko_leto)
+                ->get();
+            foreach($studentPredmeti as $sp)
+            {
+                $sp->destroy($sp->id);
+            }
+            $programStudenta->save();
+            return Redirect('studenti/'.$programStudenta->id_studenta);
+        }
+        if(isset($request['potrdi'])){
+            $programStudenta->vloga_potrjena = date('Y-m-d');
+            $programStudenta->save();
+            return Redirect('studenti/'.$programStudenta->id_studenta);
+        }
         //shranimo oz. posodobimo podatke o studentu
         $student = Student::find($request['id_studenta']);
 
@@ -328,7 +347,7 @@ class VpisniListReferentController extends Controller {
             StudentPredmet::create(['id_studenta'=>$programStudenta->id_studenta, 'id_predmeta'=>$predmet->id, 'letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto]);
         }
         $sporocilo = "Vloga uspešno oddana in potrjena.";
-        return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0,'sporocilo'=> $sporocilo]);
+        return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0,'sporocilo'=> $sporocilo, 'odgovor'=>$sporocilo, 'potrditev'=>false]);
         /*
          *         //PREDMETNIIK
         $program = $programStudenta->studijski_program;

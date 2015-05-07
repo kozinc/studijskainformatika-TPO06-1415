@@ -77,6 +77,7 @@
                             <th>Vrsta vpisa</th>
                             <th>Stanje</th>
                             <th>Urejanje</th>
+                            <th>Tisk</th>
                         </tr>
                     @endif
                     @foreach($studentProgrami as $sp)
@@ -98,6 +99,11 @@
                             <td>
                                 @if($sp->studijsko_leto > date('Y',strtotime('-1 year')))
                                     <a href="{{ action('VpisniListReferentController@prikaziStudenta',['id'=>$sp->id_studenta]) }}">Uredi žeton</a>
+                                @endif
+                            </td>
+                            <td>
+                                @if($sp->vloga_potrjena != null)
+                                    <a href="{{$sp->id_studenta}}/potrdila/{{$sp->id}}">Natisni potrdila</a>
                                 @endif
                             </td>
                         </tr>
