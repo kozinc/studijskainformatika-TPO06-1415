@@ -83,6 +83,16 @@ class PredmetController extends Controller {
         $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
         $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
 
+        if( $predmet->id_nosilca == $predmet->id_nosilca2 ) {
+            $predmet->id_nosilca2 = 0;
+        }
+        if( $predmet->id_nosilca == $predmet->id_nosilca3 ) {
+            $predmet->id_nosilca3 = 0;
+        }
+        if( $predmet->id_nosilca2 == $predmet->id_nosilca3 ) {
+            $predmet->id_nosilca3 = 0;
+        }
+
         if( $predmet->id_nosilca2 == 0 && $predmet->id_nosilca3 != 0 ) {
             $predmet->id_nosilca2 = $predmet->id_nosilca3;
             $predmet->id_nosilca3 = 0;
@@ -154,6 +164,16 @@ class PredmetController extends Controller {
         $predmet->id_nosilca = (int)$request['id_nosilca'];
         $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
         $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
+
+        if( $predmet->id_nosilca == $predmet->id_nosilca2 ) {
+            $predmet->id_nosilca2 = 0;
+        }
+        if( $predmet->id_nosilca == $predmet->id_nosilca3 ) {
+            $predmet->id_nosilca3 = 0;
+        }
+        if( $predmet->id_nosilca2 == $predmet->id_nosilca3 ) {
+            $predmet->id_nosilca3 = 0;
+        }
 
         if( $predmet->id_nosilca2 == 0 && $predmet->id_nosilca3 != 0 ) {
             $predmet->id_nosilca2 = $predmet->id_nosilca3;
