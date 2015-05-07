@@ -191,9 +191,6 @@ class ListStudentsController extends Controller {
             $p = $p . ' (' . $pr->sifra . ')';
             array_push($predmeti2, $p);
         }
-
-        echo "skor na koncu";
-
         return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti2)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
     }
 
@@ -207,25 +204,49 @@ class ListStudentsController extends Controller {
         $danes = date('d.m.Y');
         $datum_rojstva = $student->datum_rojstva;
         $datum_rojstva = date("d.m.Y", strtotime($datum_rojstva));
-
         $pdf = \App::make('dompdf');
-        $pdf->loadHTML(\View::make('potrdiloVpis')->with('date', $danes)->with('ime', $student->ime)->with('priimek', $student->priimek)->with('vpisna', $student->vpisna)->with('datum_rojstva', $datum_rojstva)->with('kraj_rojstva', $student->obcina_rojstva)->with('letnik', $student_program->letnik)->with('studijsko_leto', $student_program->studijsko_leto)->with('vrsta_vpisa', $student_program->nacin_studija)->with('program', $program->ime));
-        return $pdf->download('my.pdf');
+        $stevilo = 6;
+        $view = \View::make('potrdiloVpis')
+            ->with('date', $danes)
+            ->with('stevilo', $stevilo)
+            ->with('ime', $student->ime)
+            ->with('priimek', $student->priimek)
+            ->with('vpisna', $student->vpisna)
+            ->with('datum_rojstva', $datum_rojstva)
+            ->with('kraj_rojstva', $student->obcina_rojstva)
+            ->with('letnik', $student_program->letnik)
+            ->with('studijsko_leto', $student_program->studijsko_leto)
+            ->with('vrsta_vpisa', $student_program->nacin_studija)
+            ->with('program', $program->ime);
+        $pdf->loadHTML($view);
+        return $pdf->download('Potrdila o vpisu.pdf');
     }
 
-    public function natisniVpisniList($id){
+    public function cmp2($a, $b){
+        return strcmp($a, $b);
+    }
+
+    public function natisniVpisniList($id)
+    {
+
         $student = \App\Models\Student::find($id);
         $student_program = $student->studentProgram()->first();
+        $studijsko_leto = $student_program->studijsko_leto;
         $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
         $obvezni_predmeti =  $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$student_program->letnik);
-
         ini_set('max_execution_time', 300);
         $pdf = \App::make('dompdf');
-        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti));
+        $stevilo = 6;
+        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')
+            ->with('stevilo',$stevilo)
+            ->with('studijsko_leto',$studijsko_leto)
+            ->with('student', $student)
+            ->with('program', $program)
+            ->with('program_student', $student_program)
+            ->with('obvezni_predmeti', $obvezni_predmeti));
         return $pdf->download('vpisni_list.pdf');
-
-        //return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti);
     }
+
 
     public function returnBack(){
         return view('student/iskanjeStudenta');

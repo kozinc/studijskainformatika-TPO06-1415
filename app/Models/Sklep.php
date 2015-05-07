@@ -7,7 +7,7 @@ class Sklep extends Model {
 
     use SoftDeletes;
     protected $table = 'sklep';
-    protected $fillable = ['id', 'id_studenta', 'id_organa', 'datum', 'vsebina'];
+    protected $fillable = ['id', 'id_studenta', 'id_organa', 'datum_izdaje','datum_veljavnosti', 'vsebina'];
     protected $dates = ['deleted_at', 'updated_at'];
     public $timestamps = false;
 

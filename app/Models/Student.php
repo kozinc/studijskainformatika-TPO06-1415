@@ -26,6 +26,11 @@ class Student extends Model {
         $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->lists('id_predmeta');
         return $predmeti;
     }
+    public function predmetiVLetniku($letnik)
+    {
+        $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->where('letnik','=',$letnik)->lists('id_predmeta');
+        return $predmeti;
+    }
 
     public function polaganja()
     {

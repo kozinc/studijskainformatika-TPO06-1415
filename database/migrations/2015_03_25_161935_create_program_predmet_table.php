@@ -16,6 +16,9 @@ class CreateProgramPredmetTable extends Migration {
         {
             $table->increments('id');
             $table->integer('id_programa')->unsigned();
+            $table->integer('id_nosilca1')->unsigned();;
+            $table->integer('id_nosilca2')->unsigned();;
+            $table->integer('id_nosilca3')->unsigned();;
             $table->string('studijsko_leto');
             $table->integer('id_predmeta')->unsigned();
             $table->integer('letnik');

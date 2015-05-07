@@ -28,7 +28,7 @@
             {!! HTML::image('http://www.culture.si/images/thumb/6/6c/Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg/576px-Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg.png', 'Logo - ni povezave', array( 'width' => 250, 'height' => 150 )) !!}
         </div>
         <br><br>
-        <h2>VPISNI LIST 2014/15</h2>
+        <h2>VPISNI LIST {{ $studijsko_leto }}</h2>
         <br>
         <table>
             <tr>
@@ -195,7 +195,7 @@
             </tr>
             <tr>
                 <td class="levo">Datum prvega vpisa v ta program:</td>
-                <td class="desno">{{ ($program_student->datum_vpisa == null)?'':date('d.m.Y',strtotime($program_student->datum_vpisa)) }}</td>
+                <td class="desno">{{ ($prvi_vpis == null)?'':date('d.m.Y',strtotime($prvi_vpis)) }}</td>
             </tr>
         </table>
         <br>
@@ -212,8 +212,13 @@
         </table>
         <table class="table">
             <tr>
-                <th>Izbirni predmeti</th>
+                <td><b>Izbirni predmeti</b></td>
             </tr>
+            @foreach($izbirni as $predmet)
+                <tr>
+                    <td>{{ $predmet }}</td>
+                </tr>
+            @endforeach
         </table>
     </div>
 </div>

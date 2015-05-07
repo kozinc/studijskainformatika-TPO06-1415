@@ -10,11 +10,15 @@
             <form class="form" action="@if(isset($sklep)){{ action('SklepController@update', ['idSklepa'=>$sklep->id, 'idStudenta'=>$student->id]) }}@else {{ action('SklepController@store', ['idStudenta'=>$student->id]) }}@endif" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
-                    <label for="datum">Datum</label>
+                    <label for="datum_izdaje">Datum izdaje</label>
                     <br>
-                    <input type="text" id="datum" name="datum" value="{{ date('d.m.Y') }}">
+                    <input type="text" id="datum_izdaje" name="datum_izdaje" value="{{ date('d.m.Y') }}">
                 </div>
-
+                <div class="form-group">
+                    <label for="datum_veljavnosti">Datum veljavnosti</label>
+                    <br>
+                    <input type="text" id="datum_veljavnosti" name="datum_veljavnosti" value="@if(isset($sklep) && !is_null($sklep->datum_veljavnosti)){{ date('d.m.Y',strtotime($sklep->datum_veljavnosti)) }}@endif" placeholder="dd.mm.LLLL">
+                </div>
                 <div class="form-group">
                     <label for="organ">Organ</label>
                     <select id="organ" name="organ" class="form-control" style="width:20%;">
