@@ -46,6 +46,7 @@ class ProgramPredmetSeeder extends Seeder
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>37, 'id_nosilca1'=>31, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'letnik'=>2, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>38, 'id_nosilca1'=>32, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'letnik'=>2, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>39, 'id_nosilca1'=>33, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>2, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
+<<<<<<< HEAD
 
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>11, 'id_nosilca1'=>29, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'letnik'=>2, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>12, 'id_nosilca1'=>29, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'letnik'=>2, 'semester'=>1,'tip'=>'obvezni', 'studijsko_leto'=>'2014/2015']);
@@ -67,6 +68,8 @@ class ProgramPredmetSeeder extends Seeder
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>37,'letnik'=>2, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>38,'letnik'=>2, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>39,'letnik'=>2, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
+=======
+>>>>>>> 44dee54c918ddd3addfcf282cadde8f3163cddf9
 
         //3.letnik BUN-RI 2014/15
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>22, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>3, 'studijsko_leto'=>'2014/2015']);

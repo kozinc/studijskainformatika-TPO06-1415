@@ -239,6 +239,7 @@ class ListStudentsController extends Controller {
     {
 
         $student = \App\Models\Student::find($id);
+<<<<<<< HEAD
         $student_program = $student->studentProgram()->where('studijsko_leto', '2014/2015')->first();
 
         if($student_program == null) return redirect()->back();
@@ -267,6 +268,23 @@ class ListStudentsController extends Controller {
         return $pdf->download('vpisni_list.pdf');
 
         //return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('studijsko_leto', '2014/2015')->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni);
+=======
+        $student_program = $student->studentProgram()->first();
+        $studijsko_leto = $student_program->studijsko_leto;
+        $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
+        $obvezni_predmeti =  $program->predmeti()->where('tip','=','obvezni')->where('letnik','=',$student_program->letnik);
+        ini_set('max_execution_time', 300);
+        $pdf = \App::make('dompdf');
+        $stevilo = 6;
+        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')
+            ->with('stevilo',$stevilo)
+            ->with('studijsko_leto',$studijsko_leto)
+            ->with('student', $student)
+            ->with('program', $program)
+            ->with('program_student', $student_program)
+            ->with('obvezni_predmeti', $obvezni_predmeti));
+        return $pdf->download('vpisni_list.pdf');
+>>>>>>> 44dee54c918ddd3addfcf282cadde8f3163cddf9
     }
 
 
