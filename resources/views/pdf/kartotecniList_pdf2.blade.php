@@ -75,8 +75,10 @@
                                             {{$trenutniDatum=$trenutniDatum->datum}}
                                         @endif
                                         @foreach ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum') as $datumIzpita)
-                                            @if ($datumIzpita->datum <= $trenutniDatum)
-                                                {{$stevec++}}
+                                            @if ($trenutniDatum != null)
+                                                @if ($datumIzpita->datum <= $trenutniDatum)
+                                                    {{$stevec++}}
+                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
