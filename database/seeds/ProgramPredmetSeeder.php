@@ -50,7 +50,7 @@ class ProgramPredmetSeeder extends Seeder
         //3.letnik BUN-RI 2014/15
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>22, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>3, 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>23, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>3, 'studijsko_leto'=>'2014/2015']);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>24, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>2,'tip'=>'modulski', 'id_modula'=>3, 'studijsko_leto'=>'2014/2015']);
+        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>24, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>2,'tip'=>'modulski', 'id_modula'=>3, 'studijsko_leto'=>'2014/2015','konec_predavanj'=>'2015-04-25']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>25, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>11, 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>26, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>1,'tip'=>'modulski', 'id_modula'=>11, 'studijsko_leto'=>'2014/2015']);
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>27, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>3, 'semester'=>2,'tip'=>'modulski', 'id_modula'=>11, 'studijsko_leto'=>'2014/2015']);
@@ -123,7 +123,7 @@ class ProgramPredmetSeeder extends Seeder
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>48, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>1, 'semester'=>1,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>49, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>50, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
-        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>51, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
+        DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>51, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016', 'konec_predavanj'=>'2016-06-11']);
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>52, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>1, 'semester'=>2,'tip'=>'strokovni-izbirni',  'studijsko_leto'=>'2015/2016']);
 
         DB::table('program_predmet')->insert(['id_programa'=>3, 'id_predmeta'=>36, 'id_nosilca1'=>1, 'id_nosilca2'=>2, 'id_nosilca3'=>3, 'letnik'=>1, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2015/2016']);

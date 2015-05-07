@@ -29,8 +29,9 @@
                     <div class="col-lg-3">
                         <label for="predmet">Datum izpitnega roka </label>
                         <select class="form-control" id="sel1">
+                            <option>Vnos brez polaganja.</option>
                             @foreach($datumi as $datum)
-                                <option role="presentation">{{$datum}}</option>
+                                <option role="presentation">{{date('d.m.Y',strtotime($datum))}}</option>
                             @endforeach
                         </select>
                     </div>
