@@ -16,6 +16,7 @@ class CreateIzpitniRokTable extends Migration {
         {
             $table->increments('id');
             $table->integer('id_predmeta')->unsigned();
+            $table->integer('id_nosilca')->unsigned();
             $table->integer('izpitni_rok');
             $table->date('datum');
             $table->string('studijsko_leto');

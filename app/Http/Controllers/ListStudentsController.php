@@ -10,7 +10,7 @@ class ListStudentsController extends Controller {
     }
 
     public function get_all_students(){
-        $predmeti = \App\Models\Predmet::lists('naziv', 'id');
+        $predmeti = \App\Models\Predmet::orderBy('naziv', 'asc')->lists('naziv', 'id');
         $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
         $leta = array_values($leta);
         $predmeti2 = array();
@@ -19,13 +19,79 @@ class ListStudentsController extends Controller {
             $p = $p . ' (' . $pr->sifra . ')';
            array_push($predmeti2, $p);
         }
-
-
-
         return \View::make('seznam')->with('predmeti', $predmeti2)->with('leta', $leta)->with('student_list', '')->with('predmet_id', 1)->with('leto_id', 0);
     }
 
-    function cmp($a, $b){
+    public function getStudents(){
+        //dobi predmetid
+        $predmeti = \App\Models\Predmet::orderBy('naziv', 'asc')->lists('id');
+        $p_id2 = \Input::get('predmeti');
+        $predmet_id = $predmeti[$p_id2];
+        //echo $predmet_id;
+
+        //dobi string leto
+        $leto_id = \Input::get('leta');
+        $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
+        $leta = array_values($leta);
+        $l = $leta[$leto_id];
+
+        //studentje
+        $student_predmet_list = \App\Models\StudentPredmet::where('id_predmeta', $predmet_id)->where('studijsko_leto', $l)->lists('id_studenta');
+        $student_list = array();
+
+        $c = 1;
+        foreach ($student_predmet_list as $s) {
+            $student = \App\Models\Student::find($s);
+            $student['zaporedna'] = $c;
+            $student['vrstavpisa'] = \App\Models\StudentProgram::where('id_studenta', $s)->pluck('vrsta_vpisa');
+            array_push($student_list, $student);
+            $c++;
+        }
+
+        usort($student_list, array($this, "cmp"));
+
+        if(count($student_predmet_list) == 0){
+            $student_list = '';
+        }
+
+        //
+        $predmeti = \App\Models\Predmet::orderBy('naziv', 'asc')->lists('naziv', 'id');
+        $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
+        $leta = array_values($leta);
+
+        //dobi vse vrste vpisa
+        $vrsteVpisa = VrstaVpisa::all()->keyBy('sifra');
+
+        $predmeti2 = array();
+        foreach($predmeti as $p){
+            $pr = \App\Models\Predmet::where('naziv', $p)->first();
+            $p = $p . ' (' . $pr->sifra . ')';
+            array_push($predmeti2, $p);
+        }
+
+        $csv = \Input::get('csv');
+        $pdf = \Input::get('pdf');
+        if(!is_null($csv) || !is_null($pdf)){
+            $export_content = [['Šifra','Vpisna številka','Ime','Ocena','Vrsta vpisa']];
+            foreach($student_list as $s){
+                $export_content[] = [$s->id, $s->vpisna, $s->ime.' '.$s->priimek, $s->ocena, $vrsteVpisa->get($s->vrstavpisa)->ime];
+            }
+            if(!is_null($pdf)){
+                $predmet = \App\Models\Predmet::find($predmet_id);
+                $pdf = \App::make('dompdf');
+                $pdf->loadHTML(\View::make('pdf/seznam_vpisanih_v_predmet')->with('student_list', $student_list)->with('predmet', $predmet->naziv)->with('leto', $l)->with('vrsteVpisa',$vrsteVpisa));
+                return $pdf->download('seznam.pdf');
+            }else{
+                ExportHelper::make_csv($export_content,'Seznam vpisanih');
+            }
+        }
+
+        return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti2)->with('leta', $leta)->with('predmet_id', $p_id2)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    public function cmp($a, $b){
 
         $a1 = substr($a->priimek, 0, 2);
         if(!($a1 == 'Č' || $a1 == 'Š' || $a1 == 'Ž')){
@@ -137,63 +203,6 @@ class ListStudentsController extends Controller {
         return strcmp($a->priimek, $b->priimek);
     }
 
-    public function getStudents(){
-        $predmet_id = \Input::get('predmeti');
-        $leto_id = \Input::get('leta');
-        $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
-        $leta = array_values($leta);
-
-        echo "bla";
-
-        $l = $leta[$leto_id];
-
-        $student_predmet_list = \App\Models\StudentPredmet::where('id_predmeta', $predmet_id)->where('studijsko_leto', $l)->get();
-        $student_list = array();
-
-        foreach ($student_predmet_list as $s) {
-            $student_id = $s->id_studenta;
-            $student = \App\Models\Student::find($student_id);
-            $student['vrstavpisa'] = \App\Models\StudentProgram::where('id_studenta', $student_id)->pluck('vrsta_vpisa');
-            $student['ocena'] = $s->ocena;
-            array_push($student_list, $student);
-        }
-
-        usort($student_list, array($this, "cmp"));
-
-        if($student_predmet_list -> count() == 0){
-            $student_list = '';
-        }
-
-        $predmeti = \App\Models\Predmet::lists('naziv', 'id');
-        $leta = array_unique(\App\Models\StudentPredmet::lists('studijsko_leto'));
-        $leta = array_values($leta);
-
-        //dobi vse vrste vpisa
-        $vrsteVpisa = VrstaVpisa::all()->keyBy('sifra');
-
-        $csv = \Input::get('csv');
-        $pdf = \Input::get('pdf');
-        if(!is_null($csv) || !is_null($pdf)){
-            $export_content = [['Šifra','Vpisna številka','Ime','Ocena','Vrsta vpisa']];
-            foreach($student_list as $s){
-                $export_content[] = [$s->id, $s->vpisna, $s->ime.' '.$s->priimek, $s->ocena, $vrsteVpisa->get($s->vrstavpisa)->ime];
-            }
-            if(!is_null($pdf)){
-                return ExportHelper::make_pdf($export_content,'Seznam vpisanih');
-            }else{
-                ExportHelper::make_csv($export_content,'Seznam vpisanih');
-            }
-        }
-
-        $predmeti2 = array();
-        foreach($predmeti as $p){
-            $pr = \App\Models\Predmet::where('naziv', $p)->first();
-            $p = $p . ' (' . $pr->sifra . ')';
-            array_push($predmeti2, $p);
-        }
-        return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti2)->with('leta', $leta)->with('predmet_id', $predmet_id)->with('predmet_id', $predmet_id)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
-    }
-
     public function getPotrdilo($id){
 
         $student =  \App\Models\Student::find($id);
@@ -230,6 +239,36 @@ class ListStudentsController extends Controller {
     {
 
         $student = \App\Models\Student::find($id);
+<<<<<<< HEAD
+        $student_program = $student->studentProgram()->where('studijsko_leto', '2014/2015')->first();
+
+        if($student_program == null) return redirect()->back();
+
+        $prvi_vpis = $student->studentProgram()->where('id_programa', $student_program->id_programa)->lists('datum_vpisa');
+        usort($prvi_vpis, array($this, "cmp2"));
+        $prvi_vpis = $prvi_vpis[0];
+        $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
+        $obvezni_predmeti = $program->predmeti()->where('tip', '=', 'obvezni')->where('letnik', '=', $student_program->letnik)->where('studijsko_leto', '2014/2015');
+        $izbirni_predmeti = \App\Models\StudentPredmet::where('id_studenta', $id)->where('studijsko_leto', '2014/2015')->lists('id_predmeta');
+        $izbirni = array();
+
+        foreach ($izbirni_predmeti as $i) {
+            if (\DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', '2014/2015')->exists()) {
+                $bla = \DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', '2014/2015')->first();
+                if ($bla->tip == 'splošno-izbirni' || $bla->tip == 'strokovni-izbirni' || $bla->tip == 'modulski') {
+                    $pred = \App\Models\Predmet::where('id', $i)->first();
+                    array_push($izbirni, $pred->naziv);
+                }
+            }
+        }
+
+        ini_set('max_execution_time', 300);
+        $pdf = \App::make('dompdf');
+        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('studijsko_leto', '2014/2015')->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni));
+        return $pdf->download('vpisni_list.pdf');
+
+        //return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('studijsko_leto', '2014/2015')->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni);
+=======
         $student_program = $student->studentProgram()->first();
         $studijsko_leto = $student_program->studijsko_leto;
         $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
@@ -245,6 +284,7 @@ class ListStudentsController extends Controller {
             ->with('program_student', $student_program)
             ->with('obvezni_predmeti', $obvezni_predmeti));
         return $pdf->download('vpisni_list.pdf');
+>>>>>>> 44dee54c918ddd3addfcf282cadde8f3163cddf9
     }
 
 
