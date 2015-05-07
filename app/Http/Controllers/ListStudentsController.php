@@ -230,35 +230,6 @@ class ListStudentsController extends Controller {
     {
 
         $student = \App\Models\Student::find($id);
-<<<<<<< HEAD
-        $student_program = $student->studentProgram()->where('studijsko_leto', '2014/2015')->first();
-
-        if($student_program == null) return redirect()->back();
-
-        $prvi_vpis = $student->studentProgram()->where('id_programa', $student_program->id_programa)->lists('datum_vpisa');
-        usort($prvi_vpis, array($this, "cmp2"));
-        $prvi_vpis = $prvi_vpis[0];
-        $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
-        $obvezni_predmeti = $program->predmeti()->where('tip', '=', 'obvezni')->where('letnik', '=', $student_program->letnik)->where('studijsko_leto', '2014/2015');
-        $izbirni_predmeti = \App\Models\StudentPredmet::where('id_studenta', $id)->where('studijsko_leto', '2014/2015')->lists('id_predmeta');
-        $izbirni = array();
-
-        foreach ($izbirni_predmeti as $i) {
-            if (\DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', '2014/2015')->exists()) {
-                $bla = \DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', '2014/2015')->first();
-                if ($bla->tip == 'splošno-izbirni' || $bla->tip == 'strokovni-izbirni' || $bla->tip == 'modulski') {
-                    echo $i;
-                    $pred = \App\Models\Predmet::where('id', $i)->first();
-                    array_push($izbirni, $pred->naziv);
-                }
-            }
-        }
-
-        ini_set('max_execution_time', 300);
-        $pdf = \App::make('dompdf');
-        //$pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti)->with('prvi_vpis', $prvi_vpis));
-        //return $pdf->download('vpisni_list.pdf');
-=======
         $student_program = $student->studentProgram()->first();
         $studijsko_leto = $student_program->studijsko_leto;
         $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
@@ -274,9 +245,6 @@ class ListStudentsController extends Controller {
             ->with('program_student', $student_program)
             ->with('obvezni_predmeti', $obvezni_predmeti));
         return $pdf->download('vpisni_list.pdf');
->>>>>>> 20df991469549a312434488d86522adbc88f4e73
-
-        return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('program_student', $student_program)->with('obvezni_predmeti', $obvezni_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni);
     }
 
 
