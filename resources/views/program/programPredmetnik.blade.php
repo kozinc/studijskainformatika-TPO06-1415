@@ -81,23 +81,12 @@
                         <td><a href="{{ action('PredmetController@show', ['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                         <td>{{ $predmet->pivot->tip }}</td>
                         <td>
+                            {{$predmet->predmet->nosilec->ime}} {{$predmet->predmet->nosilec->priimek.' ['.$predmet->predmet->id_nosilca.']'}}
+                            {{($predmet->predmet->nosilec2==null)?'':', '.($predmet->predmet->nosilec2->ime)}}
+                            {{($predmet->predmet->nosilec2==null)?'':' '.($predmet->predmet->nosilec2->priimek).' ['.$predmet->predmet->id_nosilca2.']'}}
+                            {{($predmet->predmet->nosilec3==null)?'':', '.($predmet->predmet->nosilec3->ime)}}
+                            {{($predmet->predmet->nosilec3==null)?'':' '.($predmet->predmet->nosilec3->priimek).' ['.$predmet->predmet->id_nosilca3.']'}}
 
-                            <?php
-                            $ime = $predmet->nosilec->ime;
-                            $priimek = $predmet->nosilec->priimek;
-
-                            echo "$ime $priimek";
-                            if ($predmet->id_nosilca2 > 0) {
-                                $ime2 = $predmet->nosilec2->ime;
-                                $priimek2 = $predmet->nosilec2->priimek;
-                                echo ", $ime2 $priimek2";
-                            }
-                            if ($predmet->id_nosilca3 > 0) {
-                                $ime3 = $predmet->nosilec3->ime;
-                                $priimek3 = $predmet->nosilec3->priimek;
-                                echo ", $ime3 $priimek3";
-                            }
-                            ?>
 
                         </td>
                         <td>
