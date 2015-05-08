@@ -15,7 +15,8 @@
                 <td><a href="{{ action('PredmetController@show',['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                 <td>
                     <?php
-                    if($predmet->id_nosilca2 != null){
+
+                    if($predmet->id_nosilca != null){
                         if ($predmet->id_nosilca > 0) {
                             $ime = $predmet->nosilec->ime;
                             $priimek = $predmet->nosilec->priimek;
