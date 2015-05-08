@@ -123,7 +123,6 @@ class VpisniListController extends Controller {
         $programStudenta = StudentProgram::find($id_programa);
 
         //shranimo oz. posodobimo podatke o studentu
-        $student = Student::find($request['id_studenta']);
 
         //validacija imena in priimka
         if (preg_match('/^[a-žA-Ž]+$/', ($request['ime']))  && preg_match('/^[a-žA-Ž]+$/', ($request['ime'])))

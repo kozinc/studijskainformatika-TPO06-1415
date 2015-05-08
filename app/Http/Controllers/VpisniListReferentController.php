@@ -97,7 +97,7 @@ class VpisniListReferentController extends Controller {
         {
 
             //preverimo ce obstaja zeton
-            $programStudenta = $student->studentProgram()->where('vloga_potrjena','=',null)->whereNotNull('vloga_oddana')->first();
+            $programStudenta = $student->studentProgram()->where('vloga_potrjena','=',null)->first();
             if(!is_null($programStudenta))
             {
                 $samoZaPotrditev = true;
@@ -173,6 +173,9 @@ class VpisniListReferentController extends Controller {
     {
         $id_programa = $request['id'];
         $programStudenta = StudentProgram::find($id_programa);
+        if($programStudenta->vloga_oddana == null){
+            $programStudenta->vloga_oddana = date('Y-m-d');
+        }
         if(isset($request['vrni'])){
             $programStudenta->vloga_oddana =null;
             $studentPredmeti = StudentPredmet::where('id_studenta','=',$programStudenta->id_studenta)

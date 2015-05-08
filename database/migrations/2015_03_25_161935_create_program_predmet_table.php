@@ -23,6 +23,7 @@ class CreateProgramPredmetTable extends Migration {
             $table->integer('id_predmeta')->unsigned();
             $table->integer('letnik');
             $table->integer('semester')->unsigned();
+            $table->date('konec_predavanj')->nullable();
             $table->string('tip');
             $table->integer('id_modula')->unsigned()->nullable();
         });

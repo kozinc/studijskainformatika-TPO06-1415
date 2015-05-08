@@ -8,103 +8,166 @@ class IzpitniRokController extends Controller {
 
     // ustvari enostaven view, bi izbran noben izpit
     public function getSpremeniIzpitniRok(){
-        $predmeti = \App\Models\Predmet::lists('id');
-        $datumi_izpitov = "";
+        $predmeti = \App\Models\Predmet::orderBy('naziv', 'ASC')->lists('id');
         $predmeti2 = array();
 
+        //izloci diplomsko delo in magistersko delo
         foreach($predmeti as $p){
             $pr = \App\Models\Predmet::where('id', $p)->first();
             $ime = $pr->sifra . " - " . $pr->naziv;
-            array_push($predmeti2, $ime);
+            if($pr->sifra != '11111'){
+                if($pr->sifra != '22222') array_push($predmeti2, $ime);
+            }
         }
+        array_unshift($predmeti2, 'Izberi predmet...');
+        //
 
+        // doloci katere predmete lahko ureja
         if(\Session::get("vloga") == "ucitelj"){
             $prof_email = \Session::get('session_id');
             $ucitelj = \App\Models\Nosilec::where('email', $prof_email)->first();
             \Session::set('nosilec', $ucitelj->id);
         }
         else \Session::set('nosilec', '');
+        //
 
-
-        $predmet_id = \Session::get("izbrani_predmet");
         $nosilci = array();
-        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti2)->with('predmet_id', 0)->with('izpitni_roki', '')->with('nosilci', $nosilci);
+        $nosilci[0] = 0;
+        $nosilci[1] = 0;
+        $nosilci[2] = 0;
+        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti2)->with('predmet_id', 0)->with('izpitni_roki', '')->with('nosilci', $nosilci)->with('dd_nosilci', $nosilci);
     }
 
     // za izbrani predmet izpise izpitne roke
     public function getPredmetRoki(){
 
-        $predmet_id = \Input::get('predmeti') + 1;
-        $predmet = \App\Models\Predmet::where('id', $predmet_id)->first();
+        $predmet_id2 = \Input::get('predmeti');
+        if($predmet_id2 == 0) self::getSpremeniIzpitniRok();
+        $predmeti = \App\Models\Predmet::orderBy('naziv', 'ASC')->lists('id');
+        $predmeti2 = array();
+
+        //izloci diplomsko delo in magistersko delo
+        foreach($predmeti as $p){
+            $pr = \App\Models\Predmet::where('id', $p)->first();
+            if($pr->sifra != '11111'){
+                if($pr->sifra != '22222') array_push($predmeti2, $p);
+            }
+        }
+        array_unshift($predmeti2, 0);
+        $predmet_id = $predmeti2[$predmet_id2];
         \Session::set("izbrani_predmet", $predmet_id);
+        $predmet = \App\Models\Predmet::find($predmet_id);
 
         $izpitni_roki_list = array();
         $datumi_izpitov = array();
         $nosilci = array();
+        $nosilci[0] = 0;
+        $nosilci[1] = 0;
+        $nosilci[2] = 0;
+
+        $dd_nosilci = array();
+        $dd_nosilci[0] = 0;
+        $dd_nosilci[1] = 0;
+        $dd_nosilci[2] = 0;
 
         if(\DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', '2014/2015')->exists()){
 
-            $izpitni_roki = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'ASC')->get();
-
-            $dat = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'ASC')->lists('datum');
-            $ids = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'ASC')->lists('id');
-            $no = count($dat);
             //datumi za spreminjat izpitne roke
+            $izpitni_roki = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'DESC')->get();
+            $dat = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'DESC')->lists('datum');
+            $ids = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'DESC')->lists('id');
+            $no = count($dat);
             for($j = 0; $j < $no; $j++){
                 $a = date("d.m.Y", strtotime($dat[$j]));
                 $datumi_izpitov[$ids[$j]] = $a;
             }
 
-            //za filat tabelo izpitnih rokov
-            foreach ($izpitni_roki as $i) {
-                $nosilec = \DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', $i->studijsko_leto)->first();
-                $nosilec1 = \App\Models\Nosilec::find($nosilec->id_nosilca1);
-                $nosilec2 = \App\Models\Nosilec::find($nosilec->id_nosilca2);
-                $nosilec3 = \App\Models\Nosilec::find($nosilec->id_nosilca3);
-                $nosilci[0] = $nosilec1->id;
-                $nosilec1 = $nosilec1->ime . " " . $nosilec1->priimek;
-                if($nosilec->id_nosilca2 != 0) {
-                    $nosilci[1] = $nosilec2->id;
-                    $nosilec2 = ", " . $nosilec2->ime . " " .$nosilec2->priimek;
-                }
-                else {
-                    $nosilec2="";
-                    $nosilci[1]=0;
-                }
-                if($nosilec->id_nosilca3 != 0) {
-                    $nosilci[2] = $nosilec3->id;
-                    $nosilec3 = ", " . $nosilec3->ime . " " .$nosilec3->priimek;
-                }
-                else {
-                    $nosilec3="";
-                    $nosilci[2]=0;
-                }
+            if(\DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', '2014/2015')->count() > 1){
+                $program_predmeti = \DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', '2014/2015')->lists('id');
+                $pp = \DB::table('program_predmet')->where('id', $program_predmeti[0])->first();
+                $nos = \App\Models\Nosilec::find($pp->id_nosilca1);
+                $dd_nosilci[0] = $nos->ime . " " . $nos->priimek;
+                $pp = \DB::table('program_predmet')->where('id', $program_predmeti[1])->first();
+                $nos = \App\Models\Nosilec::find($pp->id_nosilca1);
+                $dd_nosilci[1] = $nos->ime . " " . $nos->priimek;
+                //ce sta 2 za isti predmet jih dobis iz izpitnih rokov
+                foreach ($izpitni_roki as $i) {
+                    $nosilec = $i->id_nosilca;
+                    $nosilec1 = \App\Models\Nosilec::find($nosilec);
+                    $nosilci[0] = $nosilec1->id;
+                    $nosilci[1] = 0;
+                    $nosilci[2] = 0;
+                    $nosilec1 = $nosilec1->ime . " " . $nosilec1->priimek;
+                    $nosilec2 = '';
+                    $nosilec3 = '';
 
-                $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
-                $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
-                $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
-                $today = date("Y-m-d");
-                if($today < $i->datum){
-                    $i['ocene'] = "Spremeni/Briši";
-                }
-                if($i['st_prijav'] > 0){
-                    $bla = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->first();
-                    if($bla->ocena != 0 && $i['ocene'] == null){
-                        $i['ocene'] = "Ocene so vnešene";
+                    $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
+                    $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
+                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
+                    $today = date("Y-m-d");
+                    if($today < $i->datum){
+                        $i['ocene'] = "Spremeni/Briši";
                     }
-                }
+                    if($i['st_prijav'] > 0){
+                        $bla = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->first();
+                        if($bla->ocena != 0 && $i['ocene'] == null){
+                            $i['ocene'] = "Ocene so vnešene";
+                        }
+                    }
 
-                $datum = $i->datum;
-                $datum = date("d.m.Y", strtotime($datum));
-                $i->datum = $datum;
-                array_push($izpitni_roki_list, $i);
+                    $datum = $i->datum;
+                    $datum = date("d.m.Y", strtotime($datum));
+                    $i->datum = $datum;
+                    array_push($izpitni_roki_list, $i);
+                }
+            }
+            else {
+                foreach ($izpitni_roki as $i) {
+                    $nosilec = \DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', $i->studijsko_leto)->first();
+                    $nosilec1 = \App\Models\Nosilec::find($nosilec->id_nosilca1);
+                    $nosilec2 = \App\Models\Nosilec::find($nosilec->id_nosilca2);
+                    $nosilec3 = \App\Models\Nosilec::find($nosilec->id_nosilca3);
+                    $nosilci[0] = $nosilec1->id;
+                    $nosilec1 = $nosilec1->ime . " " . $nosilec1->priimek;
+                    if ($nosilec->id_nosilca2 != 0) {
+                        $nosilci[1] = $nosilec2->id;
+                        $nosilec2 = ", " . $nosilec2->ime . " " . $nosilec2->priimek;
+                    } else {
+                        $nosilec2 = "";
+                        $nosilci[1] = 0;
+                    }
+                    if ($nosilec->id_nosilca3 != 0) {
+                        $nosilci[2] = $nosilec3->id;
+                        $nosilec3 = ", " . $nosilec3->ime . " " . $nosilec3->priimek;
+                    } else {
+                        $nosilec3 = "";
+                        $nosilci[2] = 0;
+                    }
+
+                    $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
+                    $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
+                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
+                    $today = date("Y-m-d");
+                    if($today < $i->datum){
+                        $i['ocene'] = "Spremeni/Briši";
+                    }
+                    if($i['st_prijav'] > 0){
+                        $bla = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->first();
+                        if($bla->ocena != 0 && $i['ocene'] == null){
+                            $i['ocene'] = "Ocene so vnešene";
+                        }
+                    }
+
+                    $datum = $i->datum;
+                    $datum = date("d.m.Y", strtotime($datum));
+                    $i->datum = $datum;
+                    array_push($izpitni_roki_list, $i);
+                }
             }
         }
-        else \Session::set("izpitni_roki_sporocilo", "Predmet se v tekočem šolskem letu ne izvaja");
 
         if(sizeof($izpitni_roki_list) == 0){
             $izpitni_roki_list = '';
-            $nosilec = \App\Models\Nosilec::first();
             \Session::set("izpitni_roki_sporocilo", "Za predmet ni razpisanih izpitnih rokov");
         }
         else{
@@ -112,13 +175,15 @@ class IzpitniRokController extends Controller {
         }
 
         $predmeti2 = array();
-        $predmeti = \App\Models\Predmet::lists('id');
         foreach($predmeti as $p){
             $pr = \App\Models\Predmet::where('id', $p)->first();
             $ime = $pr->sifra . " - " . $pr->naziv;
-            array_push($predmeti2, $ime);
+            if($pr->sifra != '11111'){
+                if($pr->sifra != '22222') array_push($predmeti2, $ime);
+            }
         }
-        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti2)->with('predmet_id', $predmet_id - 1)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov)->with('nosilci', $nosilci);
+        array_unshift($predmeti2, 'Izberi predmet...');
+        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti2)->with('predmet_id', $predmet_id2)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov)->with('nosilci', $nosilci)->with('dd_nosilci', $dd_nosilci);
     }
 
 
@@ -172,26 +237,51 @@ class IzpitniRokController extends Controller {
         $izpitni_rok = new \App\Models\IzpitniRok;
         $date = \Input::get('date');
         $ura = \Input::get('ura');
+        $nosilec = \Input::get('nosilec');
         $predavalnice = \Input::get('prostor');
+        if($nosilec == 0) $id = 17;
+        else $id = 35;
 
         if($date != ''){
             $deli_datuma = explode('.', $date);
             $datum = $deli_datuma[2] . "-"  . $deli_datuma[1] . "-" . $deli_datuma[0];
         }
 
-        $double = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->where('datum', $datum) -> first();
+        $program_predmeti = \DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', '2014/2015')->lists('id');
+        $pp = \DB::table('program_predmet')->where('id', $program_predmeti[0])->first();
+        $nos = \App\Models\Nosilec::find($pp->id_nosilca1);
+        $dd_nosilci[0] = $nos->ime . " " . $nos->priimek;
+        $pp = \DB::table('program_predmet')->where('id', $program_predmeti[1])->first();
+        $nos = \App\Models\Nosilec::find($pp->id_nosilca1);
+        $dd_nosilci[1] = $nos->ime . " " . $nos->priimek;
+
+        $double = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->where('datum', $datum) -> lists('id_nosilca');
+        if($nosilec != ''){
+            $duplo = 0;
+            foreach($double as $d){
+                $nos = \App\Models\Nosilec::find($d);
+                $ime = $nos->ime . " " . $nos->priimek;
+                if($ime == $dd_nosilci[$nosilec]){
+                    $duplo = 1;
+                }
+            }
+
+            $double = null;
+        }
+
         $predmet = \App\Models\Predmet::find($predmet_id);
         $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', '2014/2015')->lists('id_nosilca1');
 
         if($date == ""){
             \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - vnesite datum");
         }
-        else if($double != null){
+        else if($double != null || $duplo == 1){
             \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - za izbrani datum že obstaja izpitni rok");
         }
         else{
             $izpitni_rok->datum = $datum;
             $izpitni_rok->id_predmeta = $predmet_id;
+            $izpitni_rok->id_nosilca = $id;
             $izpitni_rok->studijsko_leto = "2014/2015";
             $izpitni_rok->ura_izpita = $ura;
             $izpitni_rok->predavalnice = $predavalnice;

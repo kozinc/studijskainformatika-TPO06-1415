@@ -7,7 +7,7 @@ class StudentPredmet extends Model {
 
 	use SoftDeletes;
     protected $table = 'student_predmet';
-    protected $fillable = ['letnik','semester','studijsko_leto','ocena','id_studenta', 'id_predmeta', 'tocke_izpita'];
+    protected $fillable = ['letnik','semester','studijsko_leto','ocena','id_studenta', 'id_predmeta', 'tocke_izpita','datum_vnosa_ocene','zakljucek'];
     protected $guarded = ['id','zeton_veljavnost'];
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
     public $timestamps = false;

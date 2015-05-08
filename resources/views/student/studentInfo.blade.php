@@ -102,7 +102,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if($sp->vloga_potrjena != null)
+                                @if($sp->vloga_potrjena != null && $sp->vloga_oddana != null)
                                     <a href="{{$sp->id_studenta}}/potrdila/{{$sp->id}}">Natisni potrdila</a>
                                 @endif
                             </td>
@@ -130,13 +130,41 @@
                                         @endif
                                     @endforeach
                                 <h4>Študijsko leto: {{$predmet->studijsko_leto}}</h4>
+                                <h4>Trenutna ocena: {{ ($predmet->ocena == 0)?'/':($predmet->ocena) }}</h4>
+                                <?php
+                                    $konec = DB::table('program_predmet')->where('studijsko_leto','=',$predmet->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->first();
+                                    if ($konec != null)
+                                    {
+                                        $konec=$konec->konec_predavanj;
+                                    }
+                                   ?>
+
+
+                                <p>Vnos ocene:
+                                @if ($konec != null && $konec > date('Y-m-d') )
+                                    Ocene ni mogoče vnesti, saj konec predavanj nastopi z datumom {{date('d.m.Y',strtotime($konec))}}.
+                                @elseif ($predmet->zakljucek == 0)
+                                    <a href="{{ action('PredmetiUciteljController@vnesiOceno',['id'=>$predmet->id_predmeta, 'id_studenta'=>$student->id]) }}">Klikni za vnos</a>
+                                @else
+                                    Ocene ni mogoče vnesti.
+                                @endif </p>
+
+                                <p>Sprememba ocene:
+                                    @if ($predmet->zakljucek != null && $predmet->zakljucek = 1)
+                                        Ocene ni mogoče spremeniti.
+                                    @elseif ($konec != null && $konec > date('Y-m-d') )
+                                        Ocene ni mogoče spremeniti.
+                                    @elseif ($predmet->datum_vnosa_ocene != null && (date('Y-m-d') < date('Y-m-d',strtotime($predmet->datum_vnosa_ocene.' + 30 days')) ) )
+                                        <a href="{{ action('PredmetiUciteljController@vnesiOceno',['id'=>$predmet->id_predmeta, 'id_studenta'=>$student->id]) }}">Klikni za spremembo</a>
+                                    @else
+                                        Ocene ni mogoče spremeniti po 30 dneh vnosa.
+                                    @endif </p>
                                 <table class="table">
                                     <tr>
                                         <th width='200px'>Datum </th>
                                         <th width='200px'>Polaganje</th>
                                         <th width='200px'>Število točk izpita</th>
                                         <th width='200px'>Ocena</th>
-                                        <th width='200px'>Vnos ocene</th>
                                     </tr>
 
                                     <?php $stevec=1; ?>
@@ -152,17 +180,13 @@
                                                 <td>{{$stevec++}}</td>
                                                 <td>{{$polaganje->pivot->tocke_izpita}}</td>
                                                 <td>{{($polaganje->pivot->ocena == 0)?'':$polaganje->pivot->ocena}}</td>
-                                                @if (($polaganje->datum > date('Y-m-d',strtotime('-30 days'))) &&(($polaganje->datum <= date('Y-m-d'))))
-                                                    <td><a href="{{ action('PredmetiUciteljController@vnesiOceno',['id'=>$predmet->id_predmeta, 'id_studenta'=>$student->id]) }}">Vnos ocene</a></td>
-                                                @else
-                                                    <td>Vnos ocene ni mogoč.</td>
-                                                @endif
+
                                             </tr>
                                         @endforeach
                                     @endif
                                 </table><hr>
                             @endforeach
-                            <p>Opozorilo: Ocene po pretečenih 30 dni od izpita ne morete več spreminjati. Prav tako ne morete vpisovati ocen za datume, večje od današnjega.</p>
+                            <p>Opozorilo: Ocene po 30 dneh vnosa ne morete več spreminjati.</p>
                         @else
                             <p>Študent pri tem profesorju še ni opravljal predmetov.</p>
                         @endif

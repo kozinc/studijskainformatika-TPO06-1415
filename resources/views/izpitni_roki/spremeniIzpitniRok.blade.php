@@ -78,7 +78,10 @@
     </div>
 </nav>
 
-    <div class="form-group" style="width:1200px; margin: auto; margin-top: 200px">
+    <div class="form-group" style="width:1200px; margin: auto; margin-top: 150px">
+
+        <p style="font-size: 20px">Seznam izpitnih rokov</p>
+        <br><br>
 
         {!! Form::open(array('action' => 'IzpitniRokController@getPredmetRoki')) !!}
             {!! Form::select('predmeti', $predmeti, $predmet_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
@@ -88,18 +91,22 @@
 
         @if($izpitni_roki != '' || Session::get('izpitni_roki_sporocilo') == "Za predmet ni razpisanih izpitnih rokov")
             @if(Session::get('nosilec') == $nosilci[0] || Session::get('nosilec') == $nosilci[1] || Session::get('nosilec') == $nosilci[2] || Session::get('nosilec') == '')
-                <button id="izpit_button1" class="btn btn-default">Dodaj izpitni rok</button>
-                @if($izpitni_roki != '')
-                    <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
-                    <br/>
+                @if($predmet_id != 0)
+                    <button id="izpit_button1" class="btn btn-default">Dodaj izpitni rok</button>
+                    @if($izpitni_roki != '')
+                        <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
+                        <br/>
+                    @endif
                 @endif
             @endif
-
 
             <div  id="obrazec_izpit" style="background-color: #FAFAFA">
                 <div class="form-group" id="obrazec_izpit1" style="width:200px; margin-left: 10px">
                     <br>
                     {!! Form::open(array('action' => 'IzpitniRokController@dodajIzpitniRok')) !!}
+                    @if(count($dd_nosilci)>0)
+                        {!! Form::select('nosilec', $dd_nosilci, 0, array('class' => 'btn btn-default dropdown-toggle')) !!}
+                    @endif
                     {!! Form::text('date', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker')) !!}
                     {!! Form::text('ura', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => '12:00:00')) !!}
                     {!! Form::text('prostor', null, array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'P1, P22')) !!}
