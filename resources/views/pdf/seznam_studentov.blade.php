@@ -6,15 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-študij FRI</title>
 
-    <link href="{{ asset('bootstrap-3.3.4-dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <script scr="{{ asset('bootstrap-3.3.4-dist/js/bootstrap.min.js') }}"></script>
-
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    <link href="{{ asset('css/jquery-te-1.4.0.css') }}" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
     <style>
         h1, h2, h3, h4, h5, h6 {
             font-family:  DejaVu Sans;
@@ -22,32 +13,46 @@
         p, div {
             font-family: DejaVu Sans;
         }
+        table {
+            margin:0px;padding:0px;
+            width:100%;
+            border-collapse:collapse;
+        }
+        td {
+            border-bottom: 0.5px solid #cccccc;
+        }
     </style>
 </head>
-<body style="font-family: DejaVu Sans">
+<body>
 
-<h3>Seznam prijavljenih na izpit</h3>
+    <h3>Seznam prijavljenih na izpit</h3>
 
-<p>Predmet: {{$predmet->naziv}}</p>
-<p>Datum: {{$datum}}</p>
-<br/>
+    <p>Predmet: [{{$predmet->sifra}}] {{$predmet->naziv}}</p>
+    <p>Izpraševalci: {{$nosilci}}</p>
+    <p>Datum in ura: {{$datum}} ob {{ $ura  }}h</p>
+    <p>Prostor: {{$prostor}}</p>
 
-<table class="table table-hover">
-    <tr>
-        <th></th>
-        <th></th>
-        <th>Vpisna številka</th>
-        <th>Ime in priimek</th>
-        <th>E-mail</th>
-    </tr>
-    @foreach($studentje as $student)
-        <tr>
-            <td>{{$student->zaporedna_st}}</td>
-            <td>{{$student->vpisna}}</td>
-            <td>{{$student->priimek}} {{$student->ime}}</td>
-            <td>{{$student->email}}</td>
-        </tr>
-    @endforeach
-</table>
+    <br>
+
+    <div class="CSSTableGenerator">
+        <table>
+            <tr style="background-color: #cccccc">
+                <td style="width: 50px"> </td>
+                <td style="width: 150px">Vpisna številka</td>
+                <td style="width: 180px">Priimek in ime</td>
+                <td style="width: 150px">Študijsko leto</td>
+                <td style="width: 80px">Polaganje</td>
+            </tr>
+            @foreach($studentje as $student)
+                <tr>
+                    <td> {{$student->zaporedna_st}} </td>
+                    <td> {{$student->vpisna}} </td>
+                    <td> {{$student->priimek}} {{$student->ime}} </td>
+                    <td> {{$studijsko_leto}} </td>
+                    <td> {{$student->st_polaganj}} </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 </body>
 </html>
