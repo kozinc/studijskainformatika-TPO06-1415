@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/trojka/trojkaCreate.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PredmetNosilecController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PredmetNosilecController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/trojka/trojkaEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/trojka/trojkaEdit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="" />
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -53,75 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PredmetController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PredmetController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36728394" vertical-offset="2295" max-vertical-offset="3893">
-              <caret line="149" column="48" selection-start-line="149" selection-start-column="48" selection-end-line="149" selection-end-column="48" />
-              <folding>
-                <element signature="e#39#61#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/composer.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1636364" vertical-offset="0" max-vertical-offset="884">
-              <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PredmetNosilecController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PredmetNosilecController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.327273" vertical-offset="1462" max-vertical-offset="2788">
-              <caret line="100" column="44" selection-start-line="100" selection-start-column="44" selection-end-line="100" selection-end-column="44" />
-              <folding>
-                <element signature="e#39#61#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="trojkaEdit.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="trojkaEdit.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/trojka/trojkaEdit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-51.0" vertical-offset="0" max-vertical-offset="1564">
+            <state vertical-scroll-proportion="0.68685377" vertical-offset="861" max-vertical-offset="1564">
               <caret line="78" column="0" selection-start-line="43" selection-start-column="24" selection-end-line="78" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="trojkaCreate.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/trojka/trojkaCreate.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.890909" vertical-offset="0" max-vertical-offset="1479">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="predmetEdit.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.2545457" vertical-offset="255" max-vertical-offset="2125">
-              <caret line="32" column="62" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.26923" vertical-offset="409" max-vertical-offset="1768">
-              <caret line="61" column="65" selection-start-line="61" selection-start-column="65" selection-end-line="61" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -1012,14 +940,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/trojka/trojkaEdit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-51.0" vertical-offset="0" max-vertical-offset="1564">
-          <caret line="78" column="0" selection-start-line="43" selection-start-column="24" selection-end-line="78" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/PredmetNosilec.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22173913" vertical-offset="0" max-vertical-offset="714">
@@ -1095,6 +1015,14 @@
           <folding>
             <element signature="e#39#61#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/trojka/trojkaEdit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68685377" vertical-offset="861" max-vertical-offset="1564">
+          <caret line="78" column="0" selection-start-line="43" selection-start-column="24" selection-end-line="78" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
