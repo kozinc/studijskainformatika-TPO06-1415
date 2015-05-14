@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('StudentProgramSeeder');
         $this->call('StudijskiProgramSeeder');
         $this->call('VrstaVpisaSeeder');
+        $this->call('PredmetNosilecSeeder');
+
 		Model::unguard();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 

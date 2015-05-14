@@ -143,9 +143,12 @@ class PredmetController extends Controller {
 	public function edit($id)
 	{
         $predmet = Predmet::find($id);
+
+        $predmetnosilci = PredmetNosilec::find($id);
+
         $nosilci = Nosilec::all();
         $moduli = Modul::all();
-		return view('predmet/predmetEdit',['predmet'=>$predmet, 'nosilci'=>$nosilci, 'moduli'=>$moduli]);
+		return view('predmet/predmetEdit',['predmet'=>$predmet, 'nosilci'=>$nosilci, 'moduli'=>$moduli, 'predmetnosilci'=>$predmetnosilci]);
 	}
 
 	/**
@@ -161,6 +164,12 @@ class PredmetController extends Controller {
         $predmet->naziv = $request['naziv'];
         $predmet->opis = $request['opis'];
         $predmet->KT = (int)$request['kt'];
+
+        /*
+         * tukaj izberes trojko
+         * in to spremenis?
+         * */
+
         $predmet->id_nosilca = (int)$request['id_nosilca'];
         $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
         $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
