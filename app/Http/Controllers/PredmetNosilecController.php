@@ -28,9 +28,15 @@ class PredmetNosilecController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($idp)
 	{
 		//
+        //$trojka = new PredmetNosilec();
+
+        $nosilci = Nosilec::all();
+        $predmeti = Predmet::all();
+
+        return view('trojka/trojkaCreate',['idp'=>$idp, 'nosilci'=>$nosilci, 'predmeti'=>$predmeti]);
 	}
 
 	/**
@@ -38,9 +44,38 @@ class PredmetNosilecController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($idp, Request $request)
 	{
 		//
+        $trojka = new PredmetNosilec();
+        $trojka->id_predmeta = $request['id_predmeta'];
+
+
+        $trojka->studijsko_leto = $request['studijsko_leto'];
+
+        $trojka->id_nosilca = (int)$request['id_nosilca'];
+        $trojka->id_nosilca2 = (int)$request['id_nosilca2'];
+        $trojka->id_nosilca3 = (int)$request['id_nosilca3'];
+
+        if( $trojka->id_nosilca == $trojka->id_nosilca2 ) {
+            $trojka->id_nosilca2 = 0;
+        }
+        if( $trojka->id_nosilca == $trojka->id_nosilca3 ) {
+            $trojka->id_nosilca3 = 0;
+        }
+        if( $trojka->id_nosilca2 == $trojka->id_nosilca3 ) {
+            $trojka->id_nosilca3 = 0;
+        }
+
+        if( $trojka->id_nosilca2 == 0 && $trojka->id_nosilca3 != 0 ) {
+            $trojka->id_nosilca2 = $trojka->id_nosilca3;
+            $trojka->id_nosilca3 = 0;
+        }
+
+        $trojka->save();
+
+        return redirect('predmeti/'.$trojka->id_predmeta.'/edit');
+
 	}
 
 	/**

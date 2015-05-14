@@ -58,7 +58,8 @@ Route::post('predmeti/{id}/edit', 'PredmetController@update');
 
 Route::get('trojka/{id}/edit', 'PredmetNosilecController@edit');
 Route::post('trojka/{id}/edit', 'PredmetNosilecController@update');
-
+Route::get('trojka/{idp}/create', 'PredmetNosilecController@create');
+Route::post('trojka/{id}/create', 'PredmetNosilecController@store');
 
 Route::get('programi', 'StudijskiProgramController@index');
 Route::get('programi/create', 'StudijskiProgramController@create');

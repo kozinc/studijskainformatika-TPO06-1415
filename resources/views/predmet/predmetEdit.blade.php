@@ -30,8 +30,9 @@
             @foreach($predmetnosilci as $predmetnosilec)
                 @if($predmetnosilec->id_predmeta == $predmet->id )
                     <div>
-                        <a href="{{ action('PredmetNosilecController@edit',['id'=>$predmetnosilec->id]) }}">{{ $predmetnosilec->id }}
+                        <a href="{{ action('PredmetNosilecController@edit',['id'=>$predmetnosilec->id]) }}">
                             {{ $predmetnosilec->studijsko_leto or "Manjkajoče leto"  }}
+                            <!-- {{ $predmetnosilec->id }} -->
                             {{ isset($predmetnosilec->nosilec->ime) ? $predmetnosilec->nosilec->ime : "Error Nosilec1" }}
                             {{ isset($predmetnosilec->nosilec->priimek) ? $predmetnosilec->nosilec->priimek : "Error Nosilec1" }}
                             {{ isset($predmetnosilec->nosilec2->ime) ? ', '.$predmetnosilec->nosilec2->ime.' '.$predmetnosilec->nosilec2->priimek : "" }}

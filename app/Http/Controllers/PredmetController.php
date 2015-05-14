@@ -146,6 +146,7 @@ class PredmetController extends Controller {
         $predmet = Predmet::find($id);
 
         //$predmetnosilci =  PredmetNosilec::where('id_predmeta', '=', $id);
+        //$predmetnosilci =  PredmetNosilec::all();
         $predmetnosilci =  PredmetNosilec::all();
 
         $nosilci = Nosilec::all();
