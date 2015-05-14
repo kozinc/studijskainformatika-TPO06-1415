@@ -8,6 +8,7 @@ include 'IzpitniRokSeeder.php';
 include 'NosilecSeeder.php';
 include 'OrganSeeder.php';
 include 'PredmetSeeder.php';
+include 'PredmetNosilecSeeder.php';
 include 'ProgramLetnikSeeder.php';
 include 'ReferentSeeder.php';
 include 'ProgramPredmetSeeder.php';

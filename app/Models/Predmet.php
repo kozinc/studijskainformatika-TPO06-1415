@@ -18,7 +18,7 @@ class Predmet extends Model {
 
     public function predmet_nosilec()
     {
-        return $this->hasMany('App\Models\PredmetNosilec', 'id_predmeta');
+        return $this->hasMany('App\Models\PredmetNosilec', 'id_predmeta', 'id');
     }
 
     public function nosilec()

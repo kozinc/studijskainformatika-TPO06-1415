@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Modul;
+use App\Models\PredmetNosilec;
 use App\Models\Nosilec;
 use App\Models\Predmet;
 use Illuminate\Support\Facades\Redirect;
@@ -144,7 +145,8 @@ class PredmetController extends Controller {
 	{
         $predmet = Predmet::find($id);
 
-        $predmetnosilci = PredmetNosilec::find($id);
+        //$predmetnosilci =  PredmetNosilec::where('id_predmeta', '=', $id);
+        $predmetnosilci =  PredmetNosilec::all();
 
         $nosilci = Nosilec::all();
         $moduli = Modul::all();

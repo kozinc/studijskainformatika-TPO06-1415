@@ -5,10 +5,9 @@
  * Date: 27.4.2015
  * Time: 21:30
  */
-
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Sklep;
+use App\Models\PredmetNosilec;
 
 
 class PredmetNosilecSeeder extends Seeder
@@ -16,7 +15,8 @@ class PredmetNosilecSeeder extends Seeder
 
     public function run()
     {
-        DB::table('sklep')->truncate();
+        DB::table('predmet_nosilec')->truncate();
+
         PredmetNosilec::create(['id_predmeta'=>1, 'studijsko_leto'=>'2012/2013', 'id_nosilca'=>1]);
         PredmetNosilec::create(['id_predmeta'=>1, 'studijsko_leto'=>'2013/2014', 'id_nosilca'=>1]);
         PredmetNosilec::create(['id_predmeta'=>1, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>2]);

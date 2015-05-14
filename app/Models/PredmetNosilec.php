@@ -1,13 +1,21 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PredmetNosilec extends Model {
 
 	//
     protected $table = 'predmet_nosilec';
-    protected $guarded = ['id'];
     protected $fillable = ['id_predmeta','id_nosilca', 'id_nosilca2','id_nosilca3','studijsko_leto' ];
+    protected $guarded = ['id'];
+
+
+    public function predmet()
+    {
+        return $this->belongsTo('App\Models\Predmet');
+    }
+
 
     public function nosilec()
     {
@@ -21,10 +29,7 @@ class PredmetNosilec extends Model {
     {
         return $this->belongsTo('App\Models\Nosilec','id_nosilca3');
     }
-    public function predmet()
-    {
-        return $this->belongsTo('App\Models\Predmet','id_predmeta');
-    }
+
 
 
 

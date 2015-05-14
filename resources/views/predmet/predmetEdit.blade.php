@@ -25,13 +25,22 @@
             <label for ="naziv">Naziv</label>
             <input type="text" name="naziv" id="naziv" class="form-control" value="{{ $predmet->naziv }}" >
         </div>
-        @foreach($predmetnosilci as $trojka)
-            {{ $trojka->id }}
-            {{ $trojka->studijsko_leto or "Manjkajoče leto"  }}
-            {{ $trojka->id_nosilca or "Manjkajoči Nosilec1" }}
-            {{ $trojka->id_nosilca2 or "Manjkajoči Nosilec2" }}
-            {{ $trojka->id_nosilca3 or "Manjkajoči Nosilec3" }}
-        @endforeach
+        <div class="panel panel-default panel-body">
+            Trojke:
+            @foreach($predmetnosilci as $predmetnosilec)
+                @if($predmetnosilec->id_predmeta == $predmet->id )
+                    <div>
+                        <a href="{{ action('PredmetNosilecController@edit',['id'=>$predmetnosilec->id]) }}">{{ $predmetnosilec->id }}
+                            {{ $predmetnosilec->studijsko_leto or "Manjkajoče leto"  }}
+                            {{ isset($predmetnosilec->nosilec->ime) ? $predmetnosilec->nosilec->ime : "Error Nosilec1" }}
+                            {{ isset($predmetnosilec->nosilec->priimek) ? $predmetnosilec->nosilec->priimek : "Error Nosilec1" }}
+                            {{ isset($predmetnosilec->nosilec2->ime) ? ', '.$predmetnosilec->nosilec2->ime.' '.$predmetnosilec->nosilec2->priimek : "" }}
+                            {{ isset($predmetnosilec->nosilec3->ime) ? ', '.$predmetnosilec->nosilec3->ime.' '.$predmetnosilec->nosilec3->priimek : "" }}</a>
+
+                    </div>
+                @endif
+            @endforeach
+        </div>
         <div class="panel panel-default panel-body">
             <div class="form-group">
                 <label for="nosilec">1. Nosilec</label>
