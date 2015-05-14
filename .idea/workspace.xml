@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PredmetNosilecController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PredmetNosilecController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/trojka/trojkaEdit.blade.php" afterPath="$PROJECT_DIR$/resources/views/trojka/trojkaEdit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="" />
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
