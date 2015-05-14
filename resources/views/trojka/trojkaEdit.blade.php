@@ -10,9 +10,14 @@
 
                 @endif
                 <div class="form-group">
-                    <h3>Urejanje predmeta</h3>
+                    <h2>Urejanje predmeta</h2>
+                    <h3>Urejanje trojke</h3>
+
+
+
                     <form action="" method="post">
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                        <input type="hidden" name="id" value="{{ $trojka->id }}" >
                         <div>
                             <!-- ID trojke {{ $trojka->id }} -->
                         </div>
@@ -31,8 +36,8 @@
                         </div>
                         <!-- Študijsko leto -->
                         <div class="form-group">
-                            <label for ="studijsko_leto">Študijsko Leto trojke: </label>
-                            <input type="text" name="studijsko_leto " id="studijsko_leto " class="form-control" value="{{ $trojka->studijsko_leto }}" >
+                            Študijsko Leto trojke:
+                            <input type="text" name="studijsko_leto" id="studijsko_leto" class="form-control" value="{{ $trojka->studijsko_leto }}" >
                         </div>
                         <!-- Nosilci -->
                         <div class="panel panel-default panel-body">

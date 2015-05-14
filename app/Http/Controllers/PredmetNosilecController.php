@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\PredmetNosilec;
 use Illuminate\Http\Request;
 
+
 class PredmetNosilecController extends Controller {
 
 	/**
@@ -79,6 +80,7 @@ class PredmetNosilecController extends Controller {
 	{
 		//
         $trojka = PredmetNosilec::find((int)$id);
+        $input = $request->all();
         $trojka->studijsko_leto = $request['studijsko_leto'];
 
         $trojka->id_nosilca = (int)$request['id_nosilca'];
@@ -103,7 +105,7 @@ class PredmetNosilecController extends Controller {
 
         /*shrani spremembe*/
         $check = $trojka->save();
-
+        $check2= $trojka->push();
         return redirect('predmeti/'.$trojka->id_predmeta.'/edit');
 	}
 
