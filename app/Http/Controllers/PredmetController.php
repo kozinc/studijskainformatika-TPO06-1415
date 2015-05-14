@@ -22,8 +22,8 @@ class PredmetController extends Controller {
 	public function index()
 	{
         $predmeti = Predmet::all();
-        $predmetnosilci =  PredmetNosilec::all();
-        return view('predmet/predmeti',['predmeti'=>$predmeti, 'predmetnosilci'=>$predmetnosilci]);
+        //$predmetnosilci = PredmetNosilec::orderBy('studijsko_leto','asc')->get();
+        return view('predmet/predmeti',['predmeti'=>$predmeti]);
 
 	}
 
@@ -133,7 +133,7 @@ class PredmetController extends Controller {
 	{
 		$predmet = Predmet::find($id);
 
-        $predmetnosilci =  PredmetNosilec::all();
+        $predmetnosilci =  PredmetNosilec::orderBy('studijsko_leto','desc')->get();
 
         return view('predmet/predmet',['predmet'=>$predmet, 'predmetnosilci'=>$predmetnosilci]);
 	}
@@ -150,7 +150,7 @@ class PredmetController extends Controller {
 
         //$predmetnosilci =  PredmetNosilec::where('id_predmeta', '=', $id);
         //$predmetnosilci =  PredmetNosilec::all();
-        $predmetnosilci =  PredmetNosilec::all();
+        $predmetnosilci =  PredmetNosilec::orderBy('studijsko_leto','desc')->get();
 
         $nosilci = Nosilec::all();
         $moduli = Modul::all();
