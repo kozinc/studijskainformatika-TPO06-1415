@@ -22,7 +22,8 @@ class PredmetController extends Controller {
 	public function index()
 	{
         $predmeti = Predmet::all();
-        return view('predmet/predmeti',['predmeti'=>$predmeti]);
+        $predmetnosilci =  PredmetNosilec::all();
+        return view('predmet/predmeti',['predmeti'=>$predmeti, 'predmetnosilci'=>$predmetnosilci]);
 
 	}
 
@@ -132,7 +133,9 @@ class PredmetController extends Controller {
 	{
 		$predmet = Predmet::find($id);
 
-        return view('predmet/predmet',['predmet'=>$predmet]);
+        $predmetnosilci =  PredmetNosilec::all();
+
+        return view('predmet/predmet',['predmet'=>$predmet, 'predmetnosilci'=>$predmetnosilci]);
 	}
 
 	/**

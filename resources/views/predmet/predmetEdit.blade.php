@@ -42,6 +42,8 @@
                 @endif
             @endforeach
         </div>
+
+        <!--
         <div class="panel panel-default panel-body">
             <div class="form-group">
                 <label for="nosilec">1. Nosilec</label>
@@ -78,6 +80,7 @@
                 </select>
             </div>
         </div>
+        -->
 
         <div class="form-group">
             <label for="kt">Kreditne točke</label>
