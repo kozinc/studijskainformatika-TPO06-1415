@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmeti.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmeti.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" />
-    </list>
+    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="" />
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -52,7 +48,7 @@
       <file leaf-file-name="Student.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Student.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="638" max-vertical-offset="1581">
+            <state vertical-scroll-proportion="21.923077" vertical-offset="638" max-vertical-offset="1581">
               <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
               <folding />
             </state>
@@ -69,31 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predmetEdit.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="predmetEdit.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.8461537" vertical-offset="204" max-vertical-offset="1785">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="predmeti.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmeti.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.58181816" vertical-offset="257" max-vertical-offset="986">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="predmet.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmet.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8768116" vertical-offset="126" max-vertical-offset="1088">
-              <caret line="43" column="22" selection-start-line="19" selection-start-column="20" selection-end-line="43" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.46811596" vertical-offset="459" max-vertical-offset="1785">
+              <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -638,7 +614,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="985" max-vertical-offset="1836">
           <caret line="63" column="76" selection-start-line="63" selection-start-column="76" selection-end-line="63" selection-end-column="76" />
           <folding>
-            <element signature="e#7#392#0#PHP" expanded="true" />
+            <element signature="e#7#392#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -892,7 +868,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Student.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="638" max-vertical-offset="1581">
+        <state vertical-scroll-proportion="21.923077" vertical-offset="638" max-vertical-offset="1581">
           <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
           <folding />
         </state>
@@ -927,16 +903,8 @@
         <state vertical-scroll-proportion="-7.8461537" vertical-offset="901" max-vertical-offset="1836">
           <caret line="65" column="76" selection-start-line="65" selection-start-column="76" selection-end-line="65" selection-end-column="76" />
           <folding>
-            <element signature="e#7#392#0#PHP" expanded="true" />
+            <element signature="e#7#392#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.8461537" vertical-offset="204" max-vertical-offset="1785">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -964,18 +932,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3942029" vertical-offset="0" max-vertical-offset="1088">
+          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmeti.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.58181816" vertical-offset="257" max-vertical-offset="986">
+        <state vertical-scroll-proportion="0.048411496" vertical-offset="257" max-vertical-offset="986">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmet.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/predmet/predmetEdit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8768116" vertical-offset="126" max-vertical-offset="1088">
-          <caret line="43" column="22" selection-start-line="19" selection-start-column="20" selection-end-line="43" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.46811596" vertical-offset="459" max-vertical-offset="1785">
+          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
           <folding />
         </state>
       </provider>
