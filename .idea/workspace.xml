@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ListStudentsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ListStudentsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PredmetController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" afterPath="$PROJECT_DIR$/resources/views/predmet/predmet.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" afterPath="$PROJECT_DIR$/resources/views/program/programPredmetnik.blade.php" />
-    </list>
+    <list default="true" id="99c451ad-20e9-468f-b182-e82f4e95d338" name="Default" comment="" />
     <ignored path="studijskainformatika.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -53,8 +48,8 @@
       <file leaf-file-name="ListStudentsController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ListStudentsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6183074" vertical-offset="4453" max-vertical-offset="5032">
-              <caret line="284" column="49" selection-start-line="284" selection-start-column="49" selection-end-line="284" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.30397236" vertical-offset="3887" max-vertical-offset="5032">
+              <caret line="240" column="50" selection-start-line="240" selection-start-column="50" selection-end-line="240" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -412,7 +407,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="804" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="SearchEverywhereHistoryKey" value="st&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/student/studentInfo.blade.php&#10;vpi&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/Controllers/VpisniListReferentController.php&#10;lis&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/Controllers/ListStudentsController.php&#10;studentin&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/student/studentInfo.blade.php&#10;studentpro&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/StudentProgramSeeder.php&#10;studijski&#9;null&#9;null&#10;studen&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/Student.php&#10;stude&#9;null&#9;null&#10;vlog&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/vloge.blade.php&#10;vpisn&#9;null&#9;null&#10;routes&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/routes.php&#10;vpisni&#9;null&#9;null&#10;program&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php" />
+    <property name="SearchEverywhereHistoryKey" value="lists&#9;null&#9;null&#10;st&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/student/studentInfo.blade.php&#10;vpi&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/Controllers/VpisniListReferentController.php&#10;lis&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/Controllers/ListStudentsController.php&#10;studentin&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/student/studentInfo.blade.php&#10;studentpro&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/StudentProgramSeeder.php&#10;studijski&#9;null&#9;null&#10;studen&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Models/Student.php&#10;stude&#9;null&#9;null&#10;vlog&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/resources/views/vloge.blade.php&#10;vpisn&#9;null&#9;null&#10;routes&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/app/Http/routes.php&#10;vpisni&#9;null&#9;null&#10;program&#9;FILE&#9;file://C:/xampp/htdocs/studijskainformatika/database/seeds/ProgramPredmetSeeder.php" />
     <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RunManager">
@@ -465,7 +460,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -859,8 +854,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ListStudentsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6183074" vertical-offset="4453" max-vertical-offset="5032">
-          <caret line="284" column="49" selection-start-line="284" selection-start-column="49" selection-end-line="284" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.30397236" vertical-offset="3887" max-vertical-offset="5032">
+          <caret line="240" column="50" selection-start-line="240" selection-start-column="50" selection-end-line="240" selection-end-column="50" />
           <folding />
         </state>
       </provider>
