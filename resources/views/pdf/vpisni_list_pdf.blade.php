@@ -15,9 +15,15 @@
         p, div {
             font-family: DejaVu Sans;
         }
-
-        td{
-            width: 350px;
+        .crta {
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+        }
+        table{
+            width: 700px;
+            border-collapse:collapse
+        }
+        .fixed_table {
+            table-layout: fixed;
         }
     </style>
 </head>
@@ -28,198 +34,177 @@
             {!! HTML::image('http://www.culture.si/images/thumb/6/6c/Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg/576px-Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg.png', 'Logo - ni povezave', array( 'width' => 250, 'height' => 150 )) !!}
         </div>
         <br><br>
-        <h2>VPISNI LIST {{ $studijsko_leto }}</h2>
-        <br>
-        <table>
+        <label style="font-size: 20px"><b>VPISNI LIST {{ $studijsko_leto }}</b></label><br>
+        <label style="font-size: 16px">za študente</label><br/>
+        <label>Fakulteta za računalništvo in informatiko</label><br/>
+        <br><br>
+        <table class="fixed_table">
             <tr>
-                <td class="levo">Vpisna številka: </td>
-                <td class="desno">{{ $student->vpisna }}</td>
+                <td class="sort" style="font-size: 12px">Vpisna številka</td>
+                <td class="sort" style="font-size: 12px">Priimek in ime</td>
             </tr>
             <tr>
-                <td class="levo">Priimek: </td>
-                <td class="desno"> {{$student->priimek}} </td>
-            </tr>
-            <tr>
-                <td class="levo">Ime: </td>
-                <td class="desno">{{$student->ime}}</td>
-            </tr>
-            <tr>
-                <td class="levo">Emšo: </td>
-                <td class="desno">{{$student->emso}}</td>
-            </tr>
-            <tr>
-                <td class="levo">Davčna številka: </td>
-                <td class="desno">{{$student->davcna}}</td>
+                <td class="sort" style="font-size: 18px"><b>{{ $student->vpisna }} </b></td>
+                <td class="sort" style="font-size: 18px"><b>{{$student->priimek}} {{$student->ime}} </b></td>
             </tr>
         </table>
-        <br>
-        <h4>NASLOV STALNEGA BIVALIŠČA</h4>
-        <table>
+        <table class="fixed_table">
             <tr>
-                <td class="levo">Naslov:</td>
-                <td class="desno">{{$student->naslov}}</td>
+                <td class="sort" style="font-size: 12px">Datum rojstva</td>
+                <td class="sort" style="font-size: 12px">Kraj rojstva</td>
+                <td class="sort" style="font-size: 12px">Država, občina rojstva</td>
+                <td class="sort" style="font-size: 12px">Državljanstvo</td>
             </tr>
             <tr>
-                <td class="levo">Občina:</td>
-                <td class="desno">{{$student->obcina}}</td>
-            </tr>
-            <tr>
-                <td class="levo">Poštna številka:</td>
-                <td class="desno">{{$student->posta}}</td>
-            </tr>
-            <tr>
-                <td class="levo">Država: </td>
-                <td class="desno">{{ $student->drzava }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Naslov za pošiljanje: </td>
-                <td>
-                    @if($student->posiljanje==0)
-                        <input type="checkbox" checked/>
-                    @else
-                        <input type="checkbox"/>
-                    @endif
-                </td>
+                <td class="sort">{{ ($student->datum_rojstva=="0000-00-00")?'':date('d.m.Y',strtotime($student->datum_rojstva)) }}</td>
+                <td class="sort">{{$student->obcina_rojstva}}</td>
+                <td class="sort">{{$student->drzava_rojstva}}, {{$student->obcina_rojstva}}</td>
+                <td class="sort">{{$student->drzavljanstvo}}</td>
             </tr>
         </table>
-        <br>
-        <h4>NASLOV ZAČASNEGA BIVALIŠČA</h4>
-        <table>
+        <table class="fixed_table">
             <tr>
-                <td>Naslov:</td>
-                @if($student->naslovZacasni)
-                    <td>{{$student->naslovZacasni}}</td>
-                @else
-                    <td> &nbsp;</td>
-                @endif
+                <td class="sort" style="font-size: 12px">Spol</td>
+                <td class="sort" style="font-size: 12px">EMŠO</td>
+                <td class="sort" style="font-size: 12px">Davčna številka</td>
+                <td></td>
             </tr>
             <tr>
-                <td>Občina:</td>
-                @if($student->naslovZacasni)
-                    <label class="desno">{{$student->obcinaZacasni}}</label>
-                @else
-                    <label class="desno"> &nbsp;</label>
-                @endif
+                <td class="sort">{{$student->spol}}</td>
+                <td class="sort">{{$student->emso}}</td>
+                <td class="sort">{{$student->davcna}}</td>
+                <td></td>
+            </tr>
+        </table>
+        <table class="fixed_table">
+            <tr>
+                <td class="sort" style="font-size: 12px; width: 360px">e-pošta</td>
+                <td class="sort" style="font-size: 12px">Prenosni telefon</td>
             </tr>
             <tr>
-                <td>Poštna številka:<td>
-                @if($student->naslovZacasni)
-                    <td>{{$student->postaZacasni}}<td>
-                @else
-                    <td> &nbsp;<td>
-                @endif
+                <td class="sort">{{$student->email}}</td>
+                <td class="sort">{{$student->telefon}}</td>
+            </tr>
+        </table>
+        <table class="fixed_table">
+            <tr>
+                <td class="sort" style="font-size: 12px"></td>
+                <td class="sort" style="font-size: 12px">Vročanje</td>
+                <td class="sort" style="font-size: 12px">Naslov</td>
+                <td class="sort" style="font-size: 12px">Država, občina</td>
             </tr>
             <tr>
-                <td>Država: </td>
-                @if($student->naslovZacasni)
-                    <td>{{$student->drzavaZacasni}}</td>
+                <td class="sort" style="font-size: 12px">Stalno bivališče</td>
+                @if($student->posiljanje==0)
+                    <td class="sort"><input type="checkbox" checked/></td>
                 @else
-                    <td> &nbsp;</td>
+                    <td class="sort"><input type="checkbox"/></td>
                 @endif
+                <td class="sort">{{$student->naslov}}, {{$student->postna}} {{$student->obcina}}</td>
+                <td class="sort">{{$student->drzava}}, {{$student->obcina}}</td>
             </tr>
             <tr>
-                <td>Naslov za pošiljanje: </td>
-                <td>@if($student->posiljanje==1)
-                        <input type="checkbox" checked/>
-                    @else
-                        <input type="checkbox"/>
-                    @endif</td>
+                <td class="sort" style="font-size: 12px">Začasno bivališče</td>
+                @if($student->posiljanje==1)
+                    <td class="sort"><input type="checkbox" checked/></td>
+                @else
+                    <td class="sort"><input type="checkbox"/></td>
+                @endif
+                @if($student->naslovZacasni)
+                    <td class="sort">{{$student->naslovZacasni}}, {{$student->postnaZacasni}} {{$student->obcinaZacasni}}</td>
+                    <td class="sort">{{$student->drzavaZacasni}}, {{$student->obcinaZacasni}}</td>
+                @else
+                    <td class="sort">/</td>
+                    <td class="sort">/</td>
+                @endif
             </tr>
         </table>
         <br><br><br>
-        <h4>OSEBNI PODATKI</h4>
-        <table>
+        <div style="background-color: #9d9d9d">
+            <label>PODATKI O VPISU</label>
+        </div>
+        <table class="fixed_table">
             <tr>
-                <td>Spol:</td>
-                <td class="desno">{{$student->spol}}</td>
+                <td class="sort" style="font-size: 12px">Študijski program</td>
             </tr>
             <tr>
-                <td class="levo">Datum rojstva:</td>
-                <td class="desno">{{ ($student->datum_rojstva=="0000-00-00")?'':date('d.m.Y',strtotime($student->datum_rojstva)) }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Občina rojstva:</td>
-                <td class="desno">{{$student->obcina_rojstva}}</td>
-            </tr>
-            <tr>
-                <td class="levo">Država rojstva: </td>
-                <td class="desno">{{ $student->drzava_rojstva }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Državljanstvo: </td>
-                <td class="desno">{{$student->drzavljanstvo}}</td>
+                <td class="sort">{{$program->ime}}</td>
             </tr>
         </table>
-        <br>
-        <h4>KONTAKTNI PODATKI</h4>
-        <table>
+        <table class="fixed_table">
             <tr>
-                <td>Email:</td>
-                <td>{{$student->email}}</td>
+                <td class="sort" style="font-size: 12px">Oznaka</td>
+                <td class="sort" style="font-size: 12px">Stopnja</td>
             </tr>
             <tr>
-                <td>Telefonska številka:</td>
-                <td>{{ $student->telefon }}</td>
+                <td class="sort">{{$program->oznaka}}</td>
+                <td class="sort">{{$program->stopnja}}</td>
             </tr>
         </table>
-        <br>
-        <h4>PODATKI O VPISU</h4>
-        <table>
+        <table class="fixed_table">
             <tr>
-                <td class="levo">Študijski program:</td>
-                <td class="desno">{{$program -> ime}}</td>
+                <td class="sort" style="font-size: 12px">Kraj izvajanja</td>
             </tr>
             <tr>
-                <td class="levo">Oznaka:</td>
-                <td class="desno">{{ $program->oznaka }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Stopnja:</td>
-                <td class="desno">{{ $program->stopnja }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Kraj izvajanja:</td>
-                <td class="desno">{{ $program->kraj_izvajanja }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Vrsta vpisa:</td>
-                <td class="desno">{{ $program_student->vrsta_vpisa }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Način študija:</td>
-                <td class="desno">{{ $program_student->nacin_studija }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Letnik:</td>
-                <td class="desno">{{ $program_student->letnik }}</td>
-            </tr>
-            <tr>
-                <td class="levo">Datum prvega vpisa v ta program:</td>
-                <td class="desno">{{ ($prvi_vpis == null)?'':date('d.m.Y',strtotime($prvi_vpis)) }}</td>
+                <td class="sort">{{$program->kraj_izvajanja}}</td>
             </tr>
         </table>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <h4>PREDMETI</h4>
+        <table class="fixed_table">
+            <tr>
+                <td class="sort" style="font-size: 12px">Vrsta vpisa</td>
+            </tr>
+            <tr>
+                <td class="sort">{{ $program_student->vrsta_vpisa }}</td>
+            </tr>
+        </table>
+        <table class="fixed_table">
+            <tr>
+                <td class="sort" style="font-size: 12px">Način študija</td>
+                <td class="sort" style="font-size: 12px">Letnik</td>
+            </tr>
+            <tr>
+                <td class="sort">{{ $program_student->nacin_studija }}</td>
+                <td class="sort">{{ $program_student->letnik }}</td>
+            </tr>
+        </table>
+        <table class="fixed_table">
+            <tr>
+                <td class="sort" style="font-size: 12px">Datum prvega vpisa v ta program</td>
+            </tr>
+            <tr>
+                <td class="sort">{{ ($prvi_vpis == null)?'':date('d.m.Y',strtotime($prvi_vpis)) }}</td>
+            </tr>
+        </table>
+
+        <br><br><br><br><br><br>
+        <div style="background-color: #9d9d9d">
+            <label>PRILOGA 1: PREDMETNIK</label>
+        </div>
         <table class="table">
             <tr>
-                <td><b>Obvezni predmeti</b></td>
+                <td class="crta" style="width: 170px; font-size: 12px">Učitelj</td>
+                <td class="crta" style="width: 400px; font-size: 12px">Učna enota</td>
+                <td class="crta" style="font-size: 12px">Število KT</td>
             </tr>
-            @foreach($obvezni_predmeti->get() as $predmet)
+            @foreach($obvezni_predmeti as $predmet)
                 <tr>
-                    <td>{{ $predmet->naziv }}</td>
+                    <td class="crta">{{ $predmet->n }}</td>
+                    <td class="crta" style="width: 450px">{{ $predmet->naziv }}</td>
+                    <td class="crta">{{ $predmet->KT }}</td>
                 </tr>
             @endforeach
-        </table>
-        <br>
-        <table class="table">
+            @foreach($izbirni as $p)
+                <tr>
+                    <td class="crta">{{ $p->n }}</td>
+                    <td class="crta" style="width: 360px">{{ $p->naziv }}</td>
+                    <td class="crta">{{ $p->KT }}</td>
+                </tr>
+            @endforeach
             <tr>
-                <td><b>Izbirni predmeti</b></td>
+                <td> </td>
+                <td style="width: 360px"> </td>
+                <td>{{ $skupne_KT }}</td>
             </tr>
-            @foreach($izbirni as $predmet)
-                <tr>
-                    <td>{{ $predmet }}</td>
-                </tr>
-            @endforeach
         </table>
     </div>
 </div>
