@@ -175,7 +175,7 @@ class PredmetController extends Controller {
          * tukaj izberes trojko
          * in to spremenis?
          * */
-
+        /*
         $predmet->id_nosilca = (int)$request['id_nosilca'];
         $predmet->id_nosilca2 = (int)$request['id_nosilca2'];
         $predmet->id_nosilca3 = (int)$request['id_nosilca3'];
@@ -194,6 +194,7 @@ class PredmetController extends Controller {
             $predmet->id_nosilca2 = $predmet->id_nosilca3;
             $predmet->id_nosilca3 = 0;
         }
+        */
         /*
         $predmet->tip = $request['tip'];
 
