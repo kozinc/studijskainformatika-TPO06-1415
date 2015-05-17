@@ -3,6 +3,7 @@
 use App\Helpers\DateHelper;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\IzpitniRok;
 use App\Models\StudentProgram;
 use App\Models\StudijskiProgram;
 use App\Models\VrstaVpisa;
@@ -67,5 +68,55 @@ class PredmetiUciteljController extends Controller
 
         }
         return view('vnosOceneUcitelj', ['predmet'=>Predmet::find($id_predmeta), 'student'=>Student::find($id_studenta), 'datumi'=>$datumi]);
+    }
+
+    //shrani oceno v StudentPredmet (zadnje študijsko leto) in če je vezano na datum, še v StudentIzpit
+    public function obdelajObrazecOcena(Request $request)
+    {
+        $student = Student::where('vpisna','=',$request['vpisna'])->first();
+        $predmet = Predmet::where('sifra','=',$request['sifra'])->first();
+        $ocena = $request['ocena'];
+        if (is_numeric($ocena) && $ocena > 4 && $ocena < 11)
+        {
+            $sp = StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->orderBy('id','desc')->first();
+            $sp->ocena = $ocena;
+            $sp->save();
+            //Če je vezano na kak datum, zapišem še tja:
+            $datum = $request['datum'];
+            if ($datum != "Vnos brez polaganja.")
+            {
+                $datum = date('Y-m-d',strtotime($datum));
+                $izpitni_rok = IzpitniRok::where('id_predmeta','=',$predmet->id)->where('datum','=',$datum)->first();
+                $st_izp = \DB::table('student_izpit')->where('id_studenta','=',$student->id)->where('id_izpitnega_roka','=',$izpitni_rok->id)->update(array('ocena'=>$ocena));
+
+            }
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['Neveljavna ocena.']);
+        }
+        $studentProgrami= $student->studentProgram;
+        $vrsteVpisa = VrstaVpisa::all();
+        $predmeti = null;
+        $ucitelj = null;
+
+        if (\Session::get('vloga') == "ucitelj" )
+        {
+            $ucitelj = Nosilec::where('email','=',\Session::get('session_id'))->first();
+            $studentPredmeti = StudentPredmet::with('predmet')->where('id_studenta','=',$student->id)->get();
+
+            $predmeti = $studentPredmeti->filter(function($sp) use ($ucitelj)
+            {
+                return $sp->predmet->id_nosilca == $ucitelj->id;
+
+            })->values();
+            return view('student/studentInfo', ['student'=>$student, 'studentProgrami'=>$studentProgrami, 'vrsteVpisa'=>$vrsteVpisa, 'predmeti'=>$predmeti,'ucitelj'=>$ucitelj]);
+
+        }
+        else
+        {
+            return Redirect(action('StudentController@searchForm'));
+        }
+
     }
 }

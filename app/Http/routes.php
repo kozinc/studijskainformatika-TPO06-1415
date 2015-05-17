@@ -46,6 +46,7 @@ Route::controllers([
 ]);
 Route::get('predmetiUcitelj', 'PredmetiUciteljController@vrniPredmete');
 Route::get('predmetiUcitelj/{id}/vnosOceneUcitelj/{id_studenta}', 'PredmetiUciteljController@vnesiOceno');
+Route::post('iskanje', 'PredmetiUciteljController@obdelajObrazecOcena');
 Route::get('predmetiUcitelj/{id}', 'PredmetiUciteljController@vrniStudente');
 
 Route::post('predmeti/export', 'PredmetController@export');
