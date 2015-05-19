@@ -3,7 +3,7 @@
 @section('content')
     <div class="form-group" style="width:700px; margin: auto; margin-top: 150px">
 
-        <p style="font-size: 20px">Seznam vpisanih v predmet</p>
+        <p style="font-size: 20px">Seznam vpisanih po različnih kriterijih</p>
         <br><br>
         {!! Form::open(array('action' => 'ListStudentsController@getAdvSeznam')) !!}
             <p/> Leto: {{ $leta[$leto_id] }} <p/>
