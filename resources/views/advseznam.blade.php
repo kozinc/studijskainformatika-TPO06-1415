@@ -6,15 +6,24 @@
         <p style="font-size: 20px">Seznam vpisanih v predmet</p>
         <br><br>
         {!! Form::open(array('action' => 'ListStudentsController@getAdvSeznam')) !!}
-
+            <p/> Leto: {{ $leta[$leto_id] }} <p/>
             {!! Form::select('leta', $leta, $leto_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
+            <p/> Letnik: @if($letnik_id>0)
+                            {{ $letniki[$letnik_id].'.letnik' }}
+                         @else
+                            {{ $letniki[$letnik_id] }}
+                         @endif
+            <p/>
             {!! Form::select('letniki', $letniki, $letnik_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
+            <p/> <!-- Stud_Prog_ID: {{ $id_programa }} --> Študijski program: {{ $studProgrami[$id_programa] }} <p/>
             {!! Form::select('studProgrami', $studProgrami, $id_programa, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
+            <p/> <!-- VrsteVpisa: {{ $vrsteVpisa_id }} --> Vrsta studija: {{ $vrsteVpisa[$vrsteVpisa_id] }} <p/>
             {!! Form::select('vrsteVpisa', $vrsteVpisa, $vrsteVpisa_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
+            <p/> <!-- NaciniStudija_ID: {{ $nacinStudija_id }} --> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
             {!! Form::select('naciniStudija', $naciniStudija, $nacinStudija_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
             {!! Form::submit('Izpiši študente', array('class' => 'btn btn-danger')) !!}
@@ -24,14 +33,6 @@
          @endif
         {!! Form::close() !!}
         <br/><br/>
-
-
-
-        <p/> Leto_ID: {{ $leta[$leto_id] }} <p/>
-        <p/> Letnik: {{ $letniki[$letnik_id] }}. letnik <p/>
-        <p/> <!-- Stud_Prog_ID: {{ $id_programa }} --> Študijski program: {{ $studProgrami[$id_programa] }} <p/>
-        <p/> <!-- VrsteVpisa: {{ $vrsteVpisa_id }} --> Vrsta studija: {{ $vrsteVpisa[$vrsteVpisa_id] }} <p/>
-        <p/> <!-- NaciniStudija_ID: {{ $nacinStudija_id }} --> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
 
         @if($student_list != '')
         <table class="table table-hover">

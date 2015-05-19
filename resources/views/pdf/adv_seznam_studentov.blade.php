@@ -15,16 +15,27 @@
         p, div {
             font-family: DejaVu Sans;
         }
+        table{
+            width: 700px;
+            border-collapse:collapse
+        }
+        .fixed_table {
+            table-layout: fixed;
+        }
     </style>
 </head>
 <body style="font-family: DejaVu Sans">
 
 <div>
-    <p>Seznam vpisanih za </p>
-    <p>dane kriterije:</p>
+    <p>Seznam vpisanih za dane kriterije:</p>
 
-    <p/> Leto_ID: {{ $leta[$leto_id] }} <p/>
-    <p/> Letnik: {{ $letniki[$letnik_id] }}. letnik <p/>
+    <p/> Leto: {{ $leta[$leto_id] }} <p/>
+    <p/> Letnik: @if($letnik_id>0)
+                    {{ $letniki[$letnik_id].'.letnik' }}
+                 @else
+                    {{ $letniki[$letnik_id] }}
+                 @endif
+    <p/>
     <p/> Študijski program: {{ $studProgrami[$id_programa] }} <p/>
     <p/> Vrsta studija: {{ $vrsteVpisa[$vrsteVpisa_id] }} <p/>
     <p/> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
@@ -45,10 +56,10 @@
         </tr>
         @foreach($student_list as $student)
             <tr>
-                <td>{{$student->zaporedna}}</td>
+                <td>{{ $student->zaporedna}}</td>
 
                 <td>{{ $student->vpisna }}</td>
-                <td>{{ $student->priimek }} {{ $s->ime }} </td>
+                <td>{{ $student->priimek }} {{ $student->ime }} </td>
                 <td>{{ $student->studijsko_leto  }}</td>
                 <td>{{ $student->letnik  }}.letnik</td>
                 <td>{{ $studProgrami[$student->id_programa] }}</td>

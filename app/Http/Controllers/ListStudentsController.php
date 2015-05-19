@@ -317,7 +317,7 @@ class ListStudentsController extends Controller {
          * način študija        nacin_studija
         */
         //$predmeti = \App\Models\Predmet::orderBy('naziv', 'asc')->lists('naziv', 'id');
-        $anyOption = array("0" => "ne Glede");
+        $anyOption = array("0" => "Ne glede");
         //dobi string leto      $leto_id            $leta               $leto
         $leto_id = 0;
         $leta2= array_unique(\App\Models\StudentProgram::lists('studijsko_leto'));
@@ -374,7 +374,7 @@ class ListStudentsController extends Controller {
     }
 
     public function getAdvStudents(){
-        $anyOption = array("0" => "ne Glede");
+        $anyOption = array("0" => "Ne glede");
         //dobi string leto      $leto_id            $leta               $leto
         $leto_id = \Input::get('leta');
         $leta2= array_unique(\App\Models\StudentProgram::lists('studijsko_leto'));
@@ -2122,22 +2122,33 @@ class ListStudentsController extends Controller {
             }
             if(!is_null($pdf)){
                 //$predmet = \App\Models\Predmet::find($predmet_id);
+
+                //return $pdf->download('vpisni_list.pdf');
+                /*return view('pdf/adv_seznam_studentov',
+                    [   'student_list'=>$student_list,
+                        'leta'=>$leta,
+                        'leto_id'=>$leto_id,
+                        'letniki'=>$letniki,
+                        'letnik_id'=>$letnik_id,
+                        'studProgrami'=>$studProgrami,
+                        'id_programa'=>$id_programa,
+                        'vrsteVpisa'=>$vrsteVpisa,
+                        'vrsteVpisa_id'=>$vrsteVpisa_id,
+                        'naciniStudija'=>$naciniStudija,
+                        'nacinStudija_id'=>$nacinStudija_id
+                    ]);*/
+
                 $pdf = \App::make('dompdf');
                 $pdf->loadHTML(\View::make('pdf/adv_seznam_studentov')
                     ->with('student_list', $student_list)
-
                     ->with('leta', $leta)
                     ->with('leto_id', $leto_id)
-
                     ->with('letniki', $letniki)
                     ->with('letnik_id', $letnik_id)
-
                     ->with('studProgrami', $studProgrami)
                     ->with('id_programa', $id_programa)
-
                     ->with('vrsteVpisa', $vrsteVpisa)
                     ->with('vrsteVpisa_id', $vrsteVpisa_id)
-
                     ->with('naciniStudija', $naciniStudija)
                     ->with('nacinStudija_id', $nacinStudija_id));
                 return $pdf->download('advseznam.pdf');
@@ -2147,6 +2158,8 @@ class ListStudentsController extends Controller {
         }
         //var_dump($student_list);
         /////////////////////////////
+
+
         return \View::make('advseznam')
             // leto
             ->with('leta', $leta)
