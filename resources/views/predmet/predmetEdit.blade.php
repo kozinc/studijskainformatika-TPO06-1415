@@ -27,21 +27,36 @@
         </div>
         <div class="panel panel-default panel-body">
             Trojke:
+
+            @if (Session::has('trojka_sporocilo'))
+                @if (Session::get('trojka_sporocilo') != "")
+                    <div class="alert alert-info">{{ Session::get('trojka_sporocilo') }}</div>
+                    <br/>
+                    {{ Session::set('trojka_sporocilo','') }}
+                @endif
+            @endif
+
             @foreach($predmetnosilci as $predmetnosilec)
                 @if($predmetnosilec->id_predmeta == $predmet->id )
-                    <div>
+                    <div class="panel panel-default panel-body">
                         <a href="{{ action('PredmetNosilecController@edit',['id'=>$predmetnosilec->id]) }}">
                             {{ $predmetnosilec->studijsko_leto or "Manjkajoče leto"  }}
-                            <!-- {{ $predmetnosilec->id }} -->
+                            [{{ $predmetnosilec->id }}]
                             {{ isset($predmetnosilec->nosilec->ime) ? $predmetnosilec->nosilec->ime : "Error Nosilec1" }}
                             {{ isset($predmetnosilec->nosilec->priimek) ? $predmetnosilec->nosilec->priimek : "Error Nosilec1" }}
                             {{ isset($predmetnosilec->nosilec2->ime) ? ', '.$predmetnosilec->nosilec2->ime.' '.$predmetnosilec->nosilec2->priimek : "" }}
-                            {{ isset($predmetnosilec->nosilec3->ime) ? ', '.$predmetnosilec->nosilec3->ime.' '.$predmetnosilec->nosilec3->priimek : "" }}</a>
-
+                            {{ isset($predmetnosilec->nosilec3->ime) ? ', '.$predmetnosilec->nosilec3->ime.' '.$predmetnosilec->nosilec3->priimek : "" }}
+                        </a>
                     </div>
                 @endif
             @endforeach
+            <div class="panel panel-default panel-body">
+                <a href="{{ action('PredmetNosilecController@create',['id'=>$predmetnosilec->id_predmeta]) }}">Dodaj novo trojko</a>
+            </div>
+
         </div>
+
+        <!--
         <div class="panel panel-default panel-body">
             <div class="form-group">
                 <label for="nosilec">1. Nosilec</label>
@@ -78,6 +93,7 @@
                 </select>
             </div>
         </div>
+        -->
 
         <div class="form-group">
             <label for="kt">Kreditne točke</label>

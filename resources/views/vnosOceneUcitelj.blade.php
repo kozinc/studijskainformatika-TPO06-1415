@@ -2,8 +2,14 @@
 
 @section('content')
     <div class="container jumbotron">
-        {!! Form::open( array('action' => 'PredmetiUciteljController@vrniPredmete', 'method'=>'post', 'class' => 'form-horizontal')) !!}
-        <!--AKCIJA NI VELJAVNA!!!-->
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                {{$errors->first()}}
+            </div>
+        @endif
+
+        {!! Form::open( array('action' => 'PredmetiUciteljController@obdelajObrazecOcena', 'method'=>'post', 'class' => 'form-horizontal')) !!}
+
         <div class="panel panel-heading"><h2 style="color: #005580">Vnos ocene</h2></div>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -27,8 +33,14 @@
                 </div>
                 <div class="form-group">
                     <div class="col-lg-3">
+                        <label for="predmet">Šifra predmeta </label>
+                        <input type="text" id="sifra" name="sifra" value="{{($predmet->sifra)}}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-3">
                         <label for="predmet">Datum izpitnega roka </label>
-                        <select class="form-control" id="sel1">
+                        <select class="form-control" id="sel1" name="datum">
                             <option>Vnos brez polaganja.</option>
                             @foreach($datumi as $datum)
                                 <option role="presentation">{{date('d.m.Y',strtotime($datum))}}</option>

@@ -155,4 +155,21 @@ class PredmetNosilecController extends Controller {
 		//
 	}
 
+    public function delete($id)
+	{
+		//
+
+        $trojka = PredmetNosilec::find((int)$id);
+        $idp = $trojka->id_predmeta;
+        $studleto = $trojka->studijsko_leto ;
+        /*$nosilec1 = Nosilec::find($trojka->id_nosilca);
+        $nosilec2 = Nosilec::find($trojka->id_nosilca2);
+        $nosilec3 = Nosilec::find($trojka->id_nosilca3);*/
+
+        // \DB::table('predmet_nosilec')->where('id', $id)->delete();
+        \App\Models\PredmetNosilec::where('id', $id)->delete();
+        \Session::set("trojka_sporocilo", "Trojka ".$studleto." [".$id."]  je bila izbrisana");
+        return redirect('predmeti/'.$idp.'/edit');
+	}
+
 }

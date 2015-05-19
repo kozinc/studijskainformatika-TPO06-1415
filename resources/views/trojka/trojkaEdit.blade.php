@@ -13,6 +13,9 @@
                     <h2>Urejanje predmeta</h2>
                     <h3>Urejanje trojke</h3>
 
+                    <div class="panel panel-default panel-body">
+                        <a href="{{ action('PredmetNosilecController@delete',['id'=>$trojka->id]) }}">Izbriši trojko</a>
+                    </div>
 
 
                     <form action="" method="post">

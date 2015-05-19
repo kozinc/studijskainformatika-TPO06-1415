@@ -46,6 +46,7 @@ Route::controllers([
 ]);
 Route::get('predmetiUcitelj', 'PredmetiUciteljController@vrniPredmete');
 Route::get('predmetiUcitelj/{id}/vnosOceneUcitelj/{id_studenta}', 'PredmetiUciteljController@vnesiOceno');
+Route::post('iskanje', 'PredmetiUciteljController@obdelajObrazecOcena');
 Route::get('predmetiUcitelj/{id}', 'PredmetiUciteljController@vrniStudente');
 
 Route::post('predmeti/export', 'PredmetController@export');
@@ -60,6 +61,7 @@ Route::get('trojka/{id}/edit', 'PredmetNosilecController@edit');
 Route::post('trojka/{id}/edit', 'PredmetNosilecController@update');
 Route::get('trojka/{idp}/create', 'PredmetNosilecController@create');
 Route::post('trojka/{id}/create', 'PredmetNosilecController@store');
+Route::get('trojka/{idp}/delete', 'PredmetNosilecController@delete');
 
 Route::get('programi', 'StudijskiProgramController@index');
 Route::get('programi/create', 'StudijskiProgramController@create');
