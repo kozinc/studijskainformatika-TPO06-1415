@@ -20,6 +20,9 @@ Route::post('vpisnilist', 'VpisniListController@handlerVpisniList');
 
 Route::get('potrdiloVpis', 'ListStudentsController@getPotrdilo');
 
+Route::get('advseznam', 'ListStudentsController@getAdvSeznam');
+Route::post('advseznam', 'ListStudentsController@getAdvStudents');
+
 Route::get('vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
 Route::post('vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
 Route::get('vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
