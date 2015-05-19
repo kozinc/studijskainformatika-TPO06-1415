@@ -45,5 +45,11 @@ class Predmet extends Model {
         return $this->belongsToMany('App\Models\Student', 'student_predmet', 'id_studenta', 'id_predmeta');
     }
 
+    public function studentovaPolaganja(Student $student)
+    {
+        $polaganja = $student->polaganja()->where('id_predmeta','=', $this->id)->get();
+        return $polaganja;
+    }
+
 
 }

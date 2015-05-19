@@ -45,31 +45,22 @@
                         <div class="col-lg-4">
                             <label for="predmet">Predmet </label>
                             <select class="form-control" id="predmet" name="predmet">
+                                <option value="0">Izberi predmet...</option>
                                 @foreach($predmeti as $p)
-                                    <option role="presentation">{{$p->naziv.' ['.$p->sifra.']'}}</option>
+                                    <option value="{{ $p->id }}">{{$p->naziv.' ['.$p->sifra.']'}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <label for="sel1">Datum izpitnega roka </label>
-                            <select class="form-control" id="sel1" name="datum">
+                            <select class="form-control" id="izpitni_roki" name="datum">
                                 <option>Vnos brez polaganja.</option>
-                                <?php
-                                   /* $pisaniIzpitniRoki = $student->polaganja()->where('id_predmeta','=', $id_predmeta);
-                                    $datumi = [];
-                                    foreach ($pisaniIzpitniRoki->get() as $ir)
-                                    {
-                                        if ($ir->datum > date('Y-m-d',strtotime('-30 days')) && ($ir->datum <= date('Y-m-d')))
-                                        {
-                                            $datumi[] = $ir->datum;
-                                        }
-
-                                    }*/
-                                ?>
-                                @foreach($datumi as $datum)
-                                    <option role="presentation">{{date('d.m.Y',strtotime($datum))}}</option>
+                                @foreach($predmeti as $p)
+                                    @foreach($p->studentovaPolaganja($student) as $polaganje)
+                                        <option class="p{{ $p->id }}" style="display: none">{{ date('d.m.Y',strtotime($polaganje->datum))}}</option>
+                                    @endforeach
                                 @endforeach
                             </select>
                         </div>

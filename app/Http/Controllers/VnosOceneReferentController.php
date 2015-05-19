@@ -29,8 +29,40 @@ class VnosOceneReferentController extends Controller
         return view('vnosOceneReferent', ['student'=>$student]);
     }
 
-    public function obdelajObrazecOcena()
+    public function obdelajObrazecOcena(Request $request)
     {
+        $student = Student::where('vpisna','=',$request['vpisna'])->first();
+        if ($request['predmet'] == 0)
+        {
+            return Redirect::back()->withErrors(['Izberi predmet.']);
+        }
+        else
+        {
+            $predmet = Predmet::find($request['predmet']);
+            $ocena = $request['ocena'];
+            if (is_numeric($ocena) && $ocena > 4 && $ocena < 11)
+            {
+                $sp = StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->orderBy('id','desc')->first();
+                $sp->ocena = $ocena;
+                $sp->save();
+                //Če je vezano na kak datum, zapišem še tja:
+                $datum = $request['datum'];
+                if ($datum != "Vnos brez polaganja.")
+                {
+                    $datum = date('Y-m-d',strtotime($datum));
+                    $izpitni_rok = IzpitniRok::where('id_predmeta','=',$predmet->id)->where('datum','=',$datum)->first();
+                    $st_izp = \DB::table('student_izpit')->where('id_studenta','=',$student->id)->where('id_izpitnega_roka','=',$izpitni_rok->id)->update(array('ocena'=>$ocena));
+
+                }
+            }
+            else
+            {
+                return Redirect::back()->withErrors(['Neveljavna ocena.']);
+            }
+        }
+
+
+
         return Redirect(action('StudentController@searchForm'));
     }
 }
