@@ -19,8 +19,8 @@ class PredmetNosilecSeeder extends Seeder
 
         PredmetNosilec::create(['id_predmeta'=>1, 'studijsko_leto'=>'2012/2013', 'id_nosilca'=>1]);
         PredmetNosilec::create(['id_predmeta'=>1, 'studijsko_leto'=>'2013/2014', 'id_nosilca'=>1]);
-        PredmetNosilec::create(['id_predmeta'=>1, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>2]);
 
+        PredmetNosilec::create(['id_predmeta'=>1, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>1]);
         PredmetNosilec::create(['id_predmeta'=>2, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>2]);
         PredmetNosilec::create(['id_predmeta'=>3, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>3]);
         PredmetNosilec::create(['id_predmeta'=>4, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>10]);
@@ -41,7 +41,7 @@ class PredmetNosilecSeeder extends Seeder
         PredmetNosilec::create(['id_predmeta'=>19, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>2]);
 
         PredmetNosilec::create(['id_predmeta'=>20, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>6]);
-        PredmetNosilec::create(['id_predmeta'=>21, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>7]);
+        PredmetNosilec::create(['id_predmeta'=>21, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>7, 'id_nosilca2' => 28]);
         PredmetNosilec::create(['id_predmeta'=>22, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>4]);
         PredmetNosilec::create(['id_predmeta'=>23, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>5]);
         PredmetNosilec::create(['id_predmeta'=>24, 'studijsko_leto'=>'2014/2015', 'id_nosilca'=>1]);

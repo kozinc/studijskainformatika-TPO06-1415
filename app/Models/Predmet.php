@@ -7,7 +7,7 @@ class Predmet extends Model {
 
     use SoftDeletes;
     protected $table = 'predmet';
-    protected $fillable = ['sifra','naziv','opis','id_nosilca','id_nosilca2', 'id_nosilca3','KT'];
+    protected $fillable = ['sifra','naziv','opis','KT'];
     protected $guarded = ['id'];
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
@@ -43,6 +43,12 @@ class Predmet extends Model {
     public function studenti()
     {
         return $this->belongsToMany('App\Models\Student', 'student_predmet', 'id_studenta', 'id_predmeta');
+    }
+
+    public function studentovaPolaganja(Student $student)
+    {
+        $polaganja = $student->polaganja()->where('id_predmeta','=', $this->id)->get();
+        return $polaganja;
     }
 
 

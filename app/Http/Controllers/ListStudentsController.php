@@ -1,7 +1,15 @@
 <?php namespace App\Http\Controllers;
 
 use App\Helpers\ExportHelper;
+use DB;
 use App\Models\VrstaVpisa;
+use App\Models\Modul;
+use App\Models\PredmetNosilec;
+use App\Models\Nosilec;
+use App\Models\Predmet;
+use App\Models\StudentProgram;
+use App\Models\StudentPredmet;
+use App\Models\Student;
 
 class ListStudentsController extends Controller {
 
@@ -19,7 +27,12 @@ class ListStudentsController extends Controller {
             $p = $p . ' (' . $pr->sifra . ')';
            array_push($predmeti2, $p);
         }
-        return \View::make('seznam')->with('predmeti', $predmeti2)->with('leta', $leta)->with('student_list', '')->with('predmet_id', 1)->with('leto_id', 0);
+        return \View::make('seznam')
+            ->with('predmeti', $predmeti2)
+            ->with('leta', $leta)
+            ->with('student_list', '')
+            ->with('predmet_id', 0)
+            ->with('leto_id', 0);
     }
 
     public function getStudents(){
@@ -43,7 +56,7 @@ class ListStudentsController extends Controller {
         foreach ($student_predmet_list as $s) {
             $student = \App\Models\Student::find($s);
             $student['zaporedna'] = $c;
-            $student['vrstavpisa'] = \App\Models\StudentProgram::where('id_studenta', $s)->pluck('vrsta_vpisa');
+            $student['vrstavpisa'] = \App\Models\StudentProgram::where('id_studenta', $s)->where('studijsko_leto', $l)->pluck('vrsta_vpisa');
             array_push($student_list, $student);
             $c++;
         }
@@ -286,8 +299,1887 @@ class ListStudentsController extends Controller {
 
     }
 
-
     public function returnBack(){
         return view('student/iskanjeStudenta');
     }
+
+    public function getAdvSeznam(){
+        //$predmeti = \App\Models\Predmet::orderBy('naziv', 'asc')->lists('naziv', 'id');
+        //{!! Form::select('predmeti', $predmeti, $predmet_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
+
+        // Iskanje v tabeli student_program
+        /* student          --  id_studenta
+                Po kriterijih:
+         * studijsko leto       studijsko_leto
+         * letnik               letnik
+         * studijski program    id_programa
+         * vrsta vpisa          vrsta_vpisa
+         * način študija        nacin_studija
+        */
+        //$predmeti = \App\Models\Predmet::orderBy('naziv', 'asc')->lists('naziv', 'id');
+        $anyOption = array("0" => "Ne glede");
+        //dobi string leto      $leto_id            $leta               $leto
+        $leto_id = 0;
+        $leta2= array_unique(\App\Models\StudentProgram::lists('studijsko_leto'));
+        $leta = array_merge($anyOption,$leta2);
+        $leta = array_values($leta);
+        $leto = $leta[$leto_id];
+        //var_dump($leto);
+        //letnik               $letnik_id           $letniki            $letnik
+        $letnik_id = 0;
+        $letniki2 = array_unique(\App\Models\StudentProgram::lists('letnik'));
+        $letniki = array_merge($anyOption,$letniki2);
+        $letniki = array_values($letniki);
+        $letnik = $letniki[$letnik_id];
+        //studijski program    $id_programa         $studProgrami       $studProgram
+        $id_programa = 0;
+        $studProgrami2 = array_unique(\App\Models\StudijskiProgram::lists('ime'));
+        $studProgrami = array_merge($anyOption,$studProgrami2);
+        $studProgrami = array_values($studProgrami);
+        $studProgram = $studProgrami[$id_programa];
+        //Vrsta Vpisa        $vrsteVpisa_id         $vrsteVpisa         $vrstaVpisa
+        $vrsteVpisa_id = 0;
+        $vrsteVpisa2= array_unique(\App\Models\VrstaVpisa::lists('ime'));
+        $vrsteVpisa = array_merge($anyOption,$vrsteVpisa2);
+        $vrsteVpisa = array_values($vrsteVpisa);
+        $vrstaVpisa = $vrsteVpisa[$vrsteVpisa_id];
+        //nacin_studija      $nacinStudija_id       $naciniStudija      $nacinStudija
+        $nacinStudija_id = 0;
+        $naciniStudija2= array_unique(\App\Models\StudentProgram::lists('nacin_studija'));
+        $naciniStudija = array_merge($anyOption,$naciniStudija2);
+        $naciniStudija = array_values($naciniStudija);
+        $nacinStudija  = $naciniStudija[$nacinStudija_id];
+
+        //return \View::make('advseznam')                              ->with('leta', $leta)->with('student_list', '')                       ->with('leto_id', 0);
+        //                             ->with('predmeti', $predmeti2)                                               ->with('predmet_id', 1)
+        return \View::make('advseznam')
+            // leto
+            ->with('leta', $leta)
+            ->with('leto_id', 0)
+            // letnik
+            ->with('letniki', $letniki)
+            ->with('letnik_id', 0)
+            // stud program
+            ->with('studProgrami', $studProgrami)
+            ->with('id_programa', 0)
+            // vrsta vpisa
+            ->with('vrsteVpisa', $vrsteVpisa)
+            ->with('vrsteVpisa_id', 0)
+            // nacin studija
+            ->with('naciniStudija', $naciniStudija)
+            ->with('nacinStudija_id', 0)
+
+            ->with('student_list', '');
+
+    }
+
+    public function getAdvStudents(){
+        $anyOption = array("0" => "Ne glede");
+        //dobi string leto      $leto_id            $leta               $leto
+        $leto_id = \Input::get('leta');
+        $leta2= array_unique(\App\Models\StudentProgram::lists('studijsko_leto'));
+        $leta = array_merge($anyOption,$leta2);
+        $leta = array_values($leta);
+        $leto = $leta[$leto_id];
+        //letnik               $letnik_id           $letniki            $letnik
+        $letnik_id = \Input::get('letniki');
+        $letniki2 = array_unique(\App\Models\StudentProgram::lists('letnik'));
+        $letniki = array_merge($anyOption,$letniki2);
+        $letniki = array_values($letniki);
+        $letnik = $letniki[$letnik_id];
+        //studijski program    $id_programa         $studProgrami       $studProgram
+        $id_programa = \Input::get('studProgrami');
+        $studProgrami2 = array_unique(\App\Models\StudijskiProgram::lists('ime'));
+        $studProgrami = array_merge($anyOption,$studProgrami2);
+        $studProgrami = array_values($studProgrami);
+        $studProgram = $studProgrami[$id_programa];
+        //Vrsta Vpisa        $vrsteVpisa_id         $vrsteVpisa         $vrstaVpisa
+        $vrsteVpisa_id = \Input::get('vrsteVpisa');
+        $vrsteVpisa2= array_unique(\App\Models\VrstaVpisa::lists('ime'));
+        $vrsteVpisa = array_merge($anyOption,$vrsteVpisa2);
+        $vrsteVpisa = array_values($vrsteVpisa);
+        $vrstaVpisa = $vrsteVpisa[$vrsteVpisa_id];
+        //nacin_studija      $nacinStudija_id       $naciniStudija      $nacinStudija
+        $nacinStudija_id = \Input::get('naciniStudija');
+        $naciniStudija2= array_unique(\App\Models\StudentProgram::orderBy('nacin_studija', 'asc')->lists('nacin_studija'));
+        $naciniStudija = array_merge($anyOption,$naciniStudija2);
+        $naciniStudija = array_values($naciniStudija);
+        $nacinStudija  = $naciniStudija[$nacinStudija_id];
+        //var_dump($leto);
+        //var_dump($letnik);
+        //var_dump($studProgram); v bazi -> id_programa
+        //var_dump($vrstaVpisa); v bazi -> vrstevpisa_id
+        //var_dump($nacinStudija);
+        $student_list = '';
+        /////////////////////////////
+
+        //$query = StudentProgram::where('id','>',0);
+        /*$query = DB::table('student_program');
+        if($leto != 0 && !is_null($leto) )
+            {$query = $query->where('studijsko_leto', '=',$leto);}
+
+        $student_predmet_list = $query->get();
+*/
+
+
+
+        $query = StudentProgram::query();
+        if ($leto_id>0 )
+            { $query->where('studijsko_leto', $leto); }
+        if ($letnik_id>0 )
+            { $query->where('letnik', $letnik); }
+        if ($id_programa>0 )
+            { $query->where('id_programa', $id_programa); }
+        if ($vrsteVpisa_id>0 )
+            { $query->where('vrsta_vpisa', $vrsteVpisa_id); }
+        if ($nacinStudija_id>0 )
+            { $query->where('nacin_studija', $nacinStudija); }
+
+        $student_predmet_list = $query->lists('id_studenta');
+
+        //var_dump($student_predmet_list);
+        //var_dump(count($student_predmet_list));
+        //var_dump();
+
+
+
+        $student_list = array();
+
+
+/*
+            $student['vrstavpisa']
+                = \App\Models\StudentProgram::where('id_studenta', $s)
+                ->where('studijsko_leto', $l)
+                ->pluck('vrsta_vpisa');
+*/
+
+
+
+        $c = 1;
+        foreach ($student_predmet_list as $s) {
+            $student = \App\Models\Student::find($s);
+            $student['zaporedna'] = $c;
+            $student['vrstavpisa']
+                = \App\Models\StudentProgram::where('id_studenta', $s)
+                ->where('studijsko_leto', $leto)
+                ->pluck('vrsta_vpisa');
+            //var_dump($student['vrstavpisa']);
+            //$leto_id  $letnik_id      $id_programa        $vrsteVpisa_id      $nacinStudija_id
+            if($leto_id > 0){
+                if($letnik_id > 0){
+                    if($id_programa > 0){
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                        ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                    else{
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                }
+                else{
+                    if($id_programa > 0){
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                    else{
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                 * $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    ->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                if($letnik_id > 0){
+                    if($id_programa > 0){
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                    else{
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                 * $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    ->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                }
+                else{
+                    if($id_programa > 0){
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                 * $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                 * $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    ->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                    else{
+                        if($vrsteVpisa_id > 0){
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                 * $vrsteVpisa_id
+                                  $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    ->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                        else{
+                            if($nacinStudija_id > 0){
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                 * $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    ->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                            else{
+                                /*
+                                   $leto_id
+                                   $letnik_id
+                                   $id_programa
+                                   $vrsteVpisa_id
+                                   $nacinStudija_id
+                                 * */
+                                $student['vrstavpisa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('vrsta_vpisa');
+                                $student['nacinstudija']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('nacin_studija');
+                                $student['letnik']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsta_vpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('letnik');
+                                $student['studijsko_leto']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('studijsko_leto');
+                                $student['id_programa']
+                                    = \App\Models\StudentProgram::where('id_studenta', $s)
+                                    //->where('studijsko_leto', $leto)
+                                    //->where('letnik',$letnik_id)
+                                    //->where('id_programa',$id_programa)
+                                    //->where('vrsteVpisa',$vrsteVpisa_id)
+                                    //->where('nacin_studija',$nacinStudija)
+                                    ->pluck('id_programa');
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*$student['vrstavpisa'] = \App\Models\StudentProgram::
+                where('id_studenta', $s->id_studenta)
+                ->where('studijsko_leto', $leto)
+                ->pluck('vrsta_vpisa');*/
+
+
+
+            array_push($student_list, $student);
+            $c++;
+        }
+        //var_dump($student_list);
+
+        usort($student_list, array($this, "cmp"));
+
+        if(count($student_predmet_list) == 0){
+            $student_list = '';
+        }
+
+        /////////////////////////////
+        $csv = \Input::get('csv');
+        $pdf = \Input::get('pdf');
+        if(!is_null($csv) || !is_null($pdf)){
+            $export_content = [['Zaporedna številka','Vpisna številka','Priimek in ime','Študijsko leto','Letnik','Vrsta vpisa','Način vpisa']];
+            foreach($student_list as $s){
+                $export_content[] = [$s->zaporedna, $s->vpisna, $s->priimek.' '.$s->ime, $s->studijsko_leto, $s->letnik, $vrsteVpisa[$s->vrstavpisa],$s->nacinstudija];
+            }
+            if(!is_null($pdf)){
+                //$predmet = \App\Models\Predmet::find($predmet_id);
+
+                //return $pdf->download('vpisni_list.pdf');
+                /*return view('pdf/adv_seznam_studentov',
+                    [   'student_list'=>$student_list,
+                        'leta'=>$leta,
+                        'leto_id'=>$leto_id,
+                        'letniki'=>$letniki,
+                        'letnik_id'=>$letnik_id,
+                        'studProgrami'=>$studProgrami,
+                        'id_programa'=>$id_programa,
+                        'vrsteVpisa'=>$vrsteVpisa,
+                        'vrsteVpisa_id'=>$vrsteVpisa_id,
+                        'naciniStudija'=>$naciniStudija,
+                        'nacinStudija_id'=>$nacinStudija_id
+                    ]);*/
+
+                $pdf = \App::make('dompdf');
+                $pdf->loadHTML(\View::make('pdf/adv_seznam_studentov')
+                    ->with('student_list', $student_list)
+                    ->with('leta', $leta)
+                    ->with('leto_id', $leto_id)
+                    ->with('letniki', $letniki)
+                    ->with('letnik_id', $letnik_id)
+                    ->with('studProgrami', $studProgrami)
+                    ->with('id_programa', $id_programa)
+                    ->with('vrsteVpisa', $vrsteVpisa)
+                    ->with('vrsteVpisa_id', $vrsteVpisa_id)
+                    ->with('naciniStudija', $naciniStudija)
+                    ->with('nacinStudija_id', $nacinStudija_id));
+                return $pdf->download('advseznam.pdf');
+            }else{
+                ExportHelper::make_csv($export_content,'Seznam študentov');
+            }
+        }
+        //var_dump($student_list);
+        /////////////////////////////
+
+
+        return \View::make('advseznam')
+            // leto
+            ->with('leta', $leta)
+            ->with('leto_id', $leto_id)
+            // letnik
+            ->with('letniki', $letniki)
+            ->with('letnik_id', $letnik_id)
+            // stud program
+            ->with('studProgrami', $studProgrami)
+            ->with('id_programa', $id_programa)
+            // vrsta vpisa
+            ->with('vrsteVpisa', $vrsteVpisa)
+            ->with('vrsteVpisa_id', $vrsteVpisa_id)
+            // nacin studija
+            ->with('naciniStudija', $naciniStudija)
+            ->with('nacinStudija_id', $nacinStudija_id)
+
+            ->with('student_list', $student_list);
+
+
+    }
+
 }

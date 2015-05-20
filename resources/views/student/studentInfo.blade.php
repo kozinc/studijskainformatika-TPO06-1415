@@ -23,6 +23,7 @@
                         {{$student->naslov.', '.$student->posta.' '.$student->obcina.', '.$student->drzava}}
                     @endif </p>
                     <p>Državljanstvo: {{$student->drzavljanstvo}}</p>
+                    <p>Vnos ocene: <a href="{{ action('VnosOceneReferentController@vnesiOceno', ['id_studenta'=>$student->id]) }}">Klikni za vnos</a></p>
                     <p>Elektronski indeks: <a href="{{ action('StudentController@elektronskiIndeks', ['idStudenta'=>$student->id]) }}">Klikni za ogled</a></p>
                 @endif
                 <p>Kartotečni list: <a href="{{ action('KartotecniListController@prikazKartotecniList',['id'=>$student->id]) }}">Klikni za ogled</a></p>

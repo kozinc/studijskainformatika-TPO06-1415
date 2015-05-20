@@ -20,6 +20,9 @@ Route::post('vpisnilist', 'VpisniListController@handlerVpisniList');
 
 Route::get('potrdiloVpis', 'ListStudentsController@getPotrdilo');
 
+Route::get('advseznam', 'ListStudentsController@getAdvSeznam');
+Route::post('advseznam', 'ListStudentsController@getAdvStudents');
+
 Route::get('vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
 Route::post('vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
 Route::get('vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
@@ -44,6 +47,8 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::get('vnosOceneReferent/{id_studenta}', 'VnosOceneReferentController@vnesiOceno');
+Route::post('iskanjeReferent', 'VnosOceneReferentController@obdelajObrazecOcena');
 Route::get('predmetiUcitelj', 'PredmetiUciteljController@vrniPredmete');
 Route::get('predmetiUcitelj/{id}/vnosOceneUcitelj/{id_studenta}', 'PredmetiUciteljController@vnesiOceno');
 Route::post('iskanje', 'PredmetiUciteljController@obdelajObrazecOcena');

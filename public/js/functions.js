@@ -161,5 +161,11 @@ $(document).ready(function(){
         $('#prijava_na_izpit').submit();
     });
 
+    $('#predmet').change(function(){
+        var id_predmeta = $(this).val();
+        var izpitni_roki = $('#izpitni_roki');
+        izpitni_roki.children('.p'+id_predmeta).show().siblings(':not(.p'+id_predmeta+')').hide();
+    })
+
 });
 
