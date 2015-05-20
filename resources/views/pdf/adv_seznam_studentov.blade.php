@@ -29,16 +29,25 @@
 <div>
     <p>Seznam vpisanih za dane kriterije:</p>
 
-    <p/> Leto: {{ $leta[$leto_id] }} <p/>
-    <p/> Letnik: @if($letnik_id>0)
+    @if($letnik_id>0)
+        <p/> Leto: {{ $leta[$leto_id] }} <p/>
+    @endif
+    @if($letnik_id>0)
+        <p/> Letnik:
                     {{ $letniki[$letnik_id].'.letnik' }}
-                 @else
-                    {{ $letniki[$letnik_id] }}
-                 @endif
-    <p/>
-    <p/> Študijski program: {{ $studProgrami[$id_programa] }} <p/>
-    <p/> Vrsta studija: {{ $vrsteVpisa[$vrsteVpisa_id] }} <p/>
-    <p/> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
+        <p/>
+    @endif
+    @if($id_programa>0)
+        <p/> Študijski program: {{ $studProgrami[$id_programa] }} <p/>
+    @endif
+    @if($vrsteVpisa_id>0)
+        <p/> Vrsta studija: {{ $vrsteVpisa[$vrsteVpisa_id] }} <p/>
+    @endif
+    @if($nacinStudija_id>0)
+        <p/> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
+    @endif
+
+
 
     <br><br><br><br><br>
 
