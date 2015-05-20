@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
 	<title>E-študij FRI</title>
 
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -52,6 +53,9 @@
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('IzpitController@studentoviRazpisaniRoki')  }}">Izpitni roki</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('VpisniListController@obrazecVpisniList')  }}">Vpisni list</a>

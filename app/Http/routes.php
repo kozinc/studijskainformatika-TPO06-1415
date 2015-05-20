@@ -103,6 +103,9 @@ Route::get('izpitni_roki/uredi_izpitni_rok/{id}/seznam_studentov', 'IzpitniRokCo
 Route::get('izbirni_predmeti/referent', 'IzbirniPredmetController@getIzbirniPredmetRef');
 Route::post('izbirni_predmeti/referent', 'IzbirniPredmetController@spremeniIzbirnePredmete');
 
+Route::get('razpisani_roki','IzpitController@studentoviRazpisaniRoki');
+Route::post('razpisani_roki','IzpitController@prijava');
+
 
 
 
