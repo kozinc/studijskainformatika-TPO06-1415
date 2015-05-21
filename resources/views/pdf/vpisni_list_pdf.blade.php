@@ -193,6 +193,11 @@
                     <td class="crta">{{ $predmet->KT }}</td>
                 </tr>
             @endforeach
+            <tr>
+                <td class="crta"></td>
+                <td class="crta" style="width: 450px"></td>
+                <td class="crta"></td>
+            </tr>
             @foreach($izbirni as $p)
                 <tr>
                     <td class="crta">{{ $p->n }}</td>

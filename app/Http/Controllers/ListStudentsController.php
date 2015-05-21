@@ -267,10 +267,21 @@ class ListStudentsController extends Controller {
         $st_KT = 0;
 
         foreach($obvezni_predmeti->get() as $op){
-            $nosilec_id = $op->id_nosilca;
+
+            $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $op->id)->where('studijsko_leto', '2014/2015')->first();
+            $nosilec_id = $program_predmet->id_nosilca1;
             $nosilec = \App\Models\Nosilec::find($nosilec_id);
-            $n= $nosilec->ime . " " . $nosilec->priimek;
-            $op['n'] = $n;
+            $nosilci = $nosilec->ime . " " . $nosilec->priimek;
+            if($program_predmet->id_nosilca2 > 0){
+                $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca2);
+                $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
+            }
+            if($program_predmet->id_nosilca3 > 0){
+                $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca3);
+                $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
+            }
+
+            $op['n'] = $nosilci;
             $st_KT += $op->KT;
             array_push($o_predmeti, $op);
         }
@@ -280,11 +291,20 @@ class ListStudentsController extends Controller {
                 $bla = \DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', '2014/2015')->first();
                 if ($bla->tip == 'splošno-izbirni' || $bla->tip == 'strokovni-izbirni' || $bla->tip == 'modulski') {
                     $pred = \App\Models\Predmet::where('id', $i)->first();
-                    $nosilec_id = $pred->id_nosilca;
+                    $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $op->id)->where('studijsko_leto', '2014/2015')->first();
+                    $nosilec_id = $program_predmet->id_nosilca1;
                     $nosilec = \App\Models\Nosilec::find($nosilec_id);
-                    $n= $nosilec->ime . " " . $nosilec->priimek;
+                    $nosilci = $nosilec->ime . " " . $nosilec->priimek;
+                    if($program_predmet->id_nosilca2 > 0){
+                        $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca2);
+                        $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
+                    }
+                    if($program_predmet->id_nosilca3 > 0){
+                        $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca3);
+                        $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
+                    }
                     $st_KT += $pred->KT;
-                    $pred['n'] = $n;
+                    $pred['n'] = $nosilci;
                     array_push($izbirni, $pred);
                 }
             }

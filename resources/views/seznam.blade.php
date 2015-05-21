@@ -42,7 +42,7 @@
                     td.appendChild(document.createTextNode(i));
                     rows[i].insertBefore(td, rows[i].firstChild);
                 }
-            </script>
-        @endif
-    </div>
+    </script>
+    @endif
+</div>
 @endsection
