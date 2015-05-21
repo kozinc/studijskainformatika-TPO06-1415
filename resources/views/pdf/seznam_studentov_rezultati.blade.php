@@ -39,17 +39,25 @@
             <tr style="background-color: #cccccc">
                 <td style="width: 50px"> </td>
                 <td style="width: 150px">Vpisna številka</td>
+                @if($imena == 1)
                 <td style="width: 180px">Priimek in ime</td>
-                <td style="width: 150px">Študijsko leto</td>
-                <td style="width: 80px">Polaganje</td>
+                @endif
+                <td style="width: 150px">Število točk</td>
+                <td style="width: 80px">Ocena</td>
             </tr>
             @foreach($studentje as $student)
                 <tr>
                     <td> {{$student->zaporedna_st}} </td>
                     <td> {{$student->vpisna}} </td>
+                    @if($imena == 1)
                     <td> {{$student->priimek}} {{$student->ime}} </td>
-                    <td> {{$student->st_leto}} </td>
-                    <td> {{$student->st_polaganj}} </td>
+                    @endif
+                    <td> {{$student->st_tock}} </td>
+                    @if($student->ocena != 0)
+                        <td> {{$student->ocena}} </td>
+                    @else
+                        <td> \ </td>
+                    @endif
                 </tr>
             @endforeach
         </table>
