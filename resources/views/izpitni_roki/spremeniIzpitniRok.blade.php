@@ -160,7 +160,7 @@
             <td id="datum">{{ $i->datum }}</td>
             <td>{{$i->ura_izpita}}</td>
             <td>{{$i->predavalnice}}</td>
-            <td>{{ $i->st_prijav }} @if($i->st_prijav > 0) / <a href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$i->id]) }}">Seznam študentov</a> @endif</td>
+            <td>{{ $i->st_prijav }} @if($i->st_prijav > 0) / <a href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$i->id, 'izvoz'=>0, 'status'=>0]) }}">Seznam študentov</a> @endif</td>
             @if($i->ocene != "Ocene so vnešene")
                 <td>
                     @if(Session::get('nosilec') == $nosilci[0] || Session::get('nosilec') == $nosilci[1] || Session::get('nosilec') == $nosilci[2] || Session::get('nosilec') == '')

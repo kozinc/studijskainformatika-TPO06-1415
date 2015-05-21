@@ -39,7 +39,7 @@ class Student extends Model {
 
     public function razpisaniRoki($from='',$to='')
     {
-        $predmeti = $this->Predmeti()->wherePivot('studijsko_leto','=',date('Y',strtotime('-1 year')).'/'.date('Y'))->with('izpitni_roki')->get();
+        $predmeti = $this->Predmeti()->wherePivot('studijsko_leto','=',date('Y',strtotime('-1 year')).'/'.date('Y'))->orWherePivot('studijsko_leto','=',date('Y').'/'.date('Y',strtotime('+1 year')))->with('izpitni_roki')->get();
         $izpitni_roki = [];
         foreach($predmeti as $predmet){
             if(!empty($from)){

@@ -41,9 +41,15 @@
                         <td>{{ $rok->ura_izpita }}</td>
                         <td>{{ $rok->predavalnice }}</td>
                         <td>
-                            @if(in_array($rok->id,$neocenjena_polaganja))
-                                <p>Ocena prejšnjega polaganja še ni bila vnesena</p>
-                            @elseif($rok->datum > date('Y-m-d',strtotime('+ 1 day')))
+                            @if(in_array($rok->id_predmeta,$neocenjena_polaganja))
+                                @if(in_array($rok->id,$prijave))
+                                    <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
+                                @else
+                                  <p>Prijava na ta predmet že obstaja.</p>
+                                @endif
+                            @elseif(isset($stevilo_polaganj[$rok->id_predmeta]) && $stevilo_polaganj[$rok->id_predmeta] >= 3 && $stevilo_polaganj[$rok->id_predmeta] < 6)
+                                <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-action="prijava"  data-izpitni_rok_id="{{ $rok->id }}" value="Prijava">
+                            @elseif($rok->datum > date('Y-m-d',strtotime('+1 day')))
                                 @if(in_array($rok->id,$prijave))
                                     <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                 @else
