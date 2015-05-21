@@ -18,17 +18,13 @@ class CreatePredmetTable extends Migration {
             $table->integer('sifra');
             $table->string('naziv');
             $table->text('opis');
-            /*deprecated, to slowly put out of use
             $table->integer('id_nosilca')->unsigned();
             $table->integer('id_nosilca2')->unsigned();
-            $table->integer('id_nosilca3')->unsigned();*/
-            /**/
+            $table->integer('id_nosilca3')->unsigned();
             $table->integer('KT');
             $table->timestamps();
             $table->softDeletes();
         });
-
-
     }
 
     /**
