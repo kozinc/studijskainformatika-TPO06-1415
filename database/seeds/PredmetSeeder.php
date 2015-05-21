@@ -15,7 +15,6 @@ class PredmetSeeder extends Seeder
 
     public function run()
     {
-
         //Predmete dodajaj na konec, drugače se podrejo podatki v povezovalnih tabelah!!!!!!!!!!!
         DB::table('predmet')->truncate();
 
@@ -88,7 +87,7 @@ class PredmetSeeder extends Seeder
         Predmet::create(['id'=>53,'sifra'=>'63220', 'naziv'=>'Principi programskih jezikov', 'opis'=>'Pri tem predmetu bomo spoznali , da lahko programiramo tudi na druge načine, ne samo algoritmično. Na primer tako, da računalniku opišemo le, kaj je problem. Računalnik pa sam poišče postopek, ki privede do rešitve. To omogočajo deklarativni programski jeziki, ki temeljijo na uporabi logike ali omejitev. Programirati je možno celo kar s primeri. Računalniku na primer pokažemo nekaj primerov sortiranih seznamov, računalnik pa sam sestavi program za sortiranje. Obstajajo še druge paradigme programiranja, ki vodijo do korenito drugačnih načinov razmišljanja o programih, kot smo vajeni.', 'id_nosilca'=>17, 'KT'=>6]);
         Predmet::create(['id'=>54,'sifra'=>'63221', 'naziv'=>'Računalniške tehnologije', 'opis'=>'Cilj predmeta Računalniške tehnologije je študentom računalništva in informatike predstaviti fizikalne in tehnološke temelje delovanja in izdelave računalnikov, kvantitativno obravnavo nekaterih relevantnih  primerov s področja fizike trdne snovi in predstavitev uporabe fizikalnih zakonitosti v tehniki izdelave mikroelektronskih, monolitnih vezij, temeljnih gradnikov računalnikov. Eden od ciljev predmeta je tudi predstavitev osnov kvantne mehanike, ki že sama po sebi postaja v računalništvu vse pomembnejša fizikalne teorija.', 'id_nosilca'=>12, 'KT'=>6]);
 
-        Predmet::create(['id'=>55,'sifra'=>'63206', 'naziv'=>'Programiranje in algoritmi', 'opis'=>'', 'id_nosilca'=>1, 'KT'=>6]);
+        Predmet::create(['id'=>55,'sifra'=>'63206', 'naziv'=>'Programiranje in algoritmi', 'opis'=>'', 'KT'=>6]);
     }
 
 }

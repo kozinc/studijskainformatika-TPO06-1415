@@ -20,6 +20,9 @@ Route::post('vpisnilist', 'VpisniListController@handlerVpisniList');
 
 Route::get('potrdiloVpis', 'ListStudentsController@getPotrdilo');
 
+Route::get('advseznam', 'ListStudentsController@getAdvSeznam');
+Route::post('advseznam', 'ListStudentsController@getAdvStudents');
+
 Route::get('vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
 Route::post('vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
 Route::get('vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
@@ -100,10 +103,17 @@ Route::post('izpitni_roki/uredi_izpitni_rok', 'IzpitniRokController@getPredmetRo
 Route::post('izpitni_roki/uredi_izpitni_roka', 'IzpitniRokController@dodajIzpitniRok');
 Route::post('izpitni_roki/uredi_izpitni_rokb', 'IzpitniRokController@spremeniIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}', 'IzpitniRokController@brisiIzpitniRok');
-Route::get('izpitni_roki/uredi_izpitni_rok/{id}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
+Route::get('izpitni_roki/uredi_izpitni_rok/{id}/{izvoz}/{status}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
+Route::post('izpitni_roki/uredi_izpitni_rok/{id}/{izvoz}/{status}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
+Route::get('izpitni_roki/uredi_izpitni_rok/shrani_oceno', 'IzpitniRokController@shraniOceno');
+Route::post('izpitni_roki/uredi_izpitni_rok/shrani_oceno', 'IzpitniRokController@shraniOceno');
+Route::get('izpitni_roki/uredi_izpitni_rok/vrni_prijavo/{id}/{id_studenta}', 'IzpitniRokController@vrniPrijavo');
 
 Route::get('izbirni_predmeti/referent', 'IzbirniPredmetController@getIzbirniPredmetRef');
 Route::post('izbirni_predmeti/referent', 'IzbirniPredmetController@spremeniIzbirnePredmete');
+
+Route::get('razpisani_roki','IzpitController@studentoviRazpisaniRoki');
+Route::post('razpisani_roki','IzpitController@prijava');
 
 
 

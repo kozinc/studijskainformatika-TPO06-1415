@@ -153,6 +153,14 @@ $(document).ready(function(){
         selectableOptgroup: true
     });
 
+    $('.izpitni_roki').click(function(){
+        var izpitni_rok_id = $(this).data('izpitni_rok_id');
+        var action = $(this).data('action');
+        $('#izpitni_rok_id').val(izpitni_rok_id);
+        $('#action').val(action);
+        $('#prijava_na_izpit').submit();
+    });
+
     $('#predmet').change(function(){
         var id_predmeta = $(this).val();
         var izpitni_roki = $('#izpitni_roki');

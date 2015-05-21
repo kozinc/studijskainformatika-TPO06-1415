@@ -33,8 +33,10 @@ class CreateForeignKeysTable extends Migration {
             $table->foreign('id_modula')->references('id')->on('modul');
         });
 
-        Schema::table('predmet', function($table) {
+        Schema::table('predmet_nosilec', function($table) {
             $table->foreign('id_nosilca')->references('id')->on('nosilec');
+            $table->foreign('id_nosilca2')->references('id')->on('nosilec');
+            $table->foreign('id_nosilca3')->references('id')->on('nosilec');
         });
 
         Schema::table('izpitni_rok', function($table) {

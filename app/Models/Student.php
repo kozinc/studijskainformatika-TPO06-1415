@@ -16,6 +16,11 @@ class Student extends Model {
         return $this->belongsToMany('App\Models\StudijskiProgram', 'student_program', 'id_programa', 'id_studenta');
     }
 
+    public function izpitniRoki()
+    {
+        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit',  'id_studenta', 'id_izpitnega_roka');
+    }
+
     public function Predmeti()
     {
         return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_studenta','id_predmeta')->withPivot('ocena','semester','letnik','studijsko_leto');
@@ -30,6 +35,21 @@ class Student extends Model {
     {
         $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->where('letnik','=',$letnik)->lists('id_predmeta');
         return $predmeti;
+    }
+
+    public function razpisaniRoki($from='',$to='')
+    {
+        $predmeti = $this->Predmeti()->wherePivot('studijsko_leto','=',date('Y',strtotime('-1 year')).'/'.date('Y'))->orWherePivot('studijsko_leto','=',date('Y').'/'.date('Y',strtotime('+1 year')))->with('izpitni_roki')->get();
+        $izpitni_roki = [];
+        foreach($predmeti as $predmet){
+            if(!empty($from)){
+                $izpitni_roki[] = $predmet->izpitni_roki()->with('predmet')->where('datum','>=',$from)->get();
+            }else{
+                $izpitni_roki[] = $predmet->izpitni_roki()->with('predmet')->get();
+            }
+        }
+        return $izpitni_roki;
+        //dd($izpitni_roki);
     }
 
     public function polaganja()
@@ -54,7 +74,7 @@ class Student extends Model {
 
     public function trenutniPredmeti()
     {
-        return $this->Predmeti()->withPivot('letnik','semester','studijsko_leto','ocena')->wherePivot('studijsko_leto','=',date('y').'/'.date('Y',strtotime('+1 year')));
+        return $this->Predmeti()->withPivot('letnik','semester','studijsko_leto','ocena')->wherePivot('studijsko_leto','=',date('Y',strtotime('-1 year')).'/'.date('y'));
     }
 
     public function passwordReset(){

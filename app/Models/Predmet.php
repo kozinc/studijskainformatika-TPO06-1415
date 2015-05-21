@@ -50,6 +50,4 @@ class Predmet extends Model {
         $polaganja = $student->polaganja()->where('id_predmeta','=', $this->id)->get();
         return $polaganja;
     }
-
-
 }

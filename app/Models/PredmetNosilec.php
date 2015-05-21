@@ -15,8 +15,7 @@ class PredmetNosilec extends Model {
     {
         return $this->belongsTo('App\Models\Predmet');
     }
-
-
+    
     public function nosilec()
     {
         return $this->belongsTo('App\Models\Nosilec','id_nosilca');
