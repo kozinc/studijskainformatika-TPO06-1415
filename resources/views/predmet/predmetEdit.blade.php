@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-
+    <div class="panel-body">
     <div class="panel panel-default">
         <div class="panel-body">
     @if(isset($odgovor))
@@ -25,40 +25,75 @@
             <label for ="naziv">Naziv</label>
             <input type="text" name="naziv" id="naziv" class="form-control" value="{{ $predmet->naziv }}" >
         </div>
-        <div class="form-group">
-            <label for="nosilec">Nosilec</label>
-            <select name="id_nosilca" id="nosilec" class="form-control" >
-                @foreach($nosilci as $nosilec)
-                    <option value="{{ $nosilec->id }}" <?php if($predmet->nosilec->id == $nosilec->id) echo "selected";?> >{{ $nosilec->ime }} {{ $nosilec->priimek }}</option>
-                @endforeach
-            </select>
+        <div class="panel panel-default panel-body">
+            Trojke:
+
+            @if (Session::has('trojka_sporocilo'))
+                @if (Session::get('trojka_sporocilo') != "")
+                    <div class="alert alert-info">{{ Session::get('trojka_sporocilo') }}</div>
+                    <br/>
+                    {{ Session::set('trojka_sporocilo','') }}
+                @endif
+            @endif
+
+            @foreach($predmetnosilci as $predmetnosilec)
+                @if($predmetnosilec->id_predmeta == $predmet->id )
+                    <div class="panel panel-default panel-body">
+                        <a href="{{ action('PredmetNosilecController@edit',['id'=>$predmetnosilec->id]) }}">
+                            {{ $predmetnosilec->studijsko_leto or "Manjkajoče leto"  }}
+                            [{{ $predmetnosilec->id }}]
+                            {{ isset($predmetnosilec->nosilec->ime) ? $predmetnosilec->nosilec->ime : "Error Nosilec1" }}
+                            {{ isset($predmetnosilec->nosilec->priimek) ? $predmetnosilec->nosilec->priimek : "Error Nosilec1" }}
+                            {{ isset($predmetnosilec->nosilec2->ime) ? ', '.$predmetnosilec->nosilec2->ime.' '.$predmetnosilec->nosilec2->priimek : "" }}
+                            {{ isset($predmetnosilec->nosilec3->ime) ? ', '.$predmetnosilec->nosilec3->ime.' '.$predmetnosilec->nosilec3->priimek : "" }}
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+            <div class="panel panel-default panel-body">
+                <a href="{{ action('PredmetNosilecController@create',['id'=>$predmetnosilec->id_predmeta]) }}">Dodaj novo trojko</a>
+            </div>
+
         </div>
 
-        <div class="form-group">
-            <label for="nosilec">Sekundarni nosilec</label>
-            <select name="id_nosilca2" id="nosilec"  class="form-control" >
-                <option value="0" <?php if($predmet->id_nosilca2 == 0) echo "selected";?> > </option>
-                @foreach($nosilci as $nosilec2)
-                    <option value="{{ $nosilec2->id }}"
-                        <?php
-                            if($predmet->id_nosilca2 > 0) { if($predmet->nosilec2->id == $nosilec2->id) echo "selected"; }
-                        ?> >{{ $nosilec2->ime }} {{ $nosilec2->priimek }}</option>
-                @endforeach
-            </select>
-        </div>
+        <!--
+        <div class="panel panel-default panel-body">
+            <div class="form-group">
+                <label for="nosilec">1. Nosilec</label>
+                <select name="id_nosilca" id="nosilec" class="form-control" >
+                    @foreach($nosilci as $nosilec)
+                        <option value="{{ $nosilec->id }}" <?php if($predmet->nosilec->id == $nosilec->id) echo "selected";?> >{{ $nosilec->ime }} {{ $nosilec->priimek }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="nosilec">Terciarni nosilec</label>
-            <select name="id_nosilca3" id="nosilec" class="form-control" >
-                <option value="0" <?php if($predmet->id_nosilca3 == 0) echo "selected";?> > </option>
-                @foreach($nosilci as $nosilec3)
-                    <option value="{{ $nosilec3->id }}"
-                        <?php
-                            if($predmet->id_nosilca3 > 0) { if($predmet->nosilec3->id == $nosilec3->id) echo "selected"; }
-                        ?> >{{ $nosilec3->ime }} {{ $nosilec3->priimek }}</option>
-                @endforeach
-            </select>
+            <div class="form-group">
+                <label for="nosilec">2. nosilec</label>
+                <select name="id_nosilca2" id="nosilec"  class="form-control" >
+                    <option value="0" <?php if($predmet->id_nosilca2 == 0) echo "selected";?> > </option>
+                    @foreach($nosilci as $nosilec2)
+                        <option value="{{ $nosilec2->id }}"
+                            <?php
+                                if($predmet->id_nosilca2 > 0) { if($predmet->nosilec2->id == $nosilec2->id) echo "selected"; }
+                            ?> >{{ $nosilec2->ime }} {{ $nosilec2->priimek }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="nosilec">3. nosilec</label>
+                <select name="id_nosilca3" id="nosilec" class="form-control" >
+                    <option value="0" <?php if($predmet->id_nosilca3 == 0) echo "selected";?> > </option>
+                    @foreach($nosilci as $nosilec3)
+                        <option value="{{ $nosilec3->id }}"
+                            <?php
+                                if($predmet->id_nosilca3 > 0) { if($predmet->nosilec3->id == $nosilec3->id) echo "selected"; }
+                            ?> >{{ $nosilec3->ime }} {{ $nosilec3->priimek }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
+        -->
 
         <div class="form-group">
             <label for="kt">Kreditne točke</label>
@@ -93,6 +128,7 @@
         s-->
             <input type="submit" value="Shrani" >
         </form>
+    </div>
     </div>
 
 

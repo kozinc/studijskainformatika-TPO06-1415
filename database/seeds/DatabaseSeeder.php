@@ -8,6 +8,7 @@ include 'IzpitniRokSeeder.php';
 include 'NosilecSeeder.php';
 include 'OrganSeeder.php';
 include 'PredmetSeeder.php';
+include 'PredmetNosilecSeeder.php';
 include 'ProgramLetnikSeeder.php';
 include 'ReferentSeeder.php';
 include 'ProgramPredmetSeeder.php';
@@ -45,6 +46,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('StudentProgramSeeder');
         $this->call('StudijskiProgramSeeder');
         $this->call('VrstaVpisaSeeder');
+        $this->call('PredmetNosilecSeeder');
+
 		Model::unguard();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 

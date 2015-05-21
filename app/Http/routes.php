@@ -20,6 +20,9 @@ Route::post('vpisnilist', 'VpisniListController@handlerVpisniList');
 
 Route::get('potrdiloVpis', 'ListStudentsController@getPotrdilo');
 
+Route::get('advseznam', 'ListStudentsController@getAdvSeznam');
+Route::post('advseznam', 'ListStudentsController@getAdvStudents');
+
 Route::get('vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
 Route::post('vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
 Route::get('vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
@@ -44,8 +47,11 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::get('vnosOceneReferent/{id_studenta}', 'VnosOceneReferentController@vnesiOceno');
+Route::post('iskanjeReferent', 'VnosOceneReferentController@obdelajObrazecOcena');
 Route::get('predmetiUcitelj', 'PredmetiUciteljController@vrniPredmete');
 Route::get('predmetiUcitelj/{id}/vnosOceneUcitelj/{id_studenta}', 'PredmetiUciteljController@vnesiOceno');
+Route::post('iskanje', 'PredmetiUciteljController@obdelajObrazecOcena');
 Route::get('predmetiUcitelj/{id}', 'PredmetiUciteljController@vrniStudente');
 
 Route::post('predmeti/export', 'PredmetController@export');
@@ -55,6 +61,12 @@ Route::post('predmeti/create', 'PredmetController@store');
 Route::get('predmeti/{id}', 'PredmetController@show' );
 Route::get('predmeti/{id}/edit', 'PredmetController@edit');
 Route::post('predmeti/{id}/edit', 'PredmetController@update');
+
+Route::get('trojka/{id}/edit', 'PredmetNosilecController@edit');
+Route::post('trojka/{id}/edit', 'PredmetNosilecController@update');
+Route::get('trojka/{idp}/create', 'PredmetNosilecController@create');
+Route::post('trojka/{id}/create', 'PredmetNosilecController@store');
+Route::get('trojka/{idp}/delete', 'PredmetNosilecController@delete');
 
 Route::get('programi', 'StudijskiProgramController@index');
 Route::get('programi/create', 'StudijskiProgramController@create');
@@ -99,6 +111,9 @@ Route::get('izpitni_roki/uredi_izpitni_rok/vrni_prijavo/{id}/{id_studenta}', 'Iz
 
 Route::get('izbirni_predmeti/referent', 'IzbirniPredmetController@getIzbirniPredmetRef');
 Route::post('izbirni_predmeti/referent', 'IzbirniPredmetController@spremeniIzbirnePredmete');
+
+Route::get('razpisani_roki','IzpitController@studentoviRazpisaniRoki');
+Route::post('razpisani_roki','IzpitController@prijava');
 
 
 

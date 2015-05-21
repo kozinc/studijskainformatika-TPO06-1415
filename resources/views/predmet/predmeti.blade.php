@@ -14,7 +14,14 @@
                 <td>{{ $predmet->sifra }}</td>
                 <td><a href="{{ action('PredmetController@show',['id'=>$predmet->id]) }}">{{ $predmet->naziv }}</a></td>
                 <td>
-                    <?php
+
+                    <div>
+
+
+                    </div>
+
+
+                    <!-- <?php
 
                     if($predmet->id_nosilca != null){
                         if ($predmet->id_nosilca > 0) {
@@ -38,7 +45,7 @@
                             echo ", $ime3 $priimek3";
                         }
                     }
-                    ?>
+                    ?> -->
                 </td>
                 <td>{{ $predmet->KT }}</td>
             </tr>

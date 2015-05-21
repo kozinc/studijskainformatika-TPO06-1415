@@ -17,6 +17,7 @@ class DeleteEverything extends Migration {
         Schema::dropIfExists('modul');
         Schema::dropIfExists('nosilec');
         Schema::dropIfExists('predmet');
+        Schema::dropIfExists('predmet_nosilec');
         Schema::dropIfExists('program_letnik');
         Schema::dropIfExists('program_modul');
         Schema::dropIfExists('program_predmet');
@@ -47,6 +48,7 @@ class DeleteEverything extends Migration {
         Schema::dropIfExists('modul');
         Schema::dropIfExists('nosilec');
         Schema::dropIfExists('predmet');
+        Schema::dropIfExists('predmet_nosilec');
         Schema::dropIfExists('program_letnik');
         Schema::dropIfExists('program_modul');
         Schema::dropIfExists('program_predmet');
