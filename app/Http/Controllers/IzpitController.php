@@ -13,18 +13,23 @@ class IzpitController extends Controller {
 
         $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-1 week')));
         $polaganja = $student->polaganja()->get();
-        $prijave = $neocenjena_polaganja = [];
+        $prijave = $stevilo_polaganj = $neocenjena_polaganja = [];
         foreach($polaganja as $polaganje){
-            $prijave[] = $polaganje->id_izpitnega_roka;
+            $prijave[] = $polaganje->id;
             if($polaganje->pivot->ocena == 0){
-                $neocenjena_polaganja[] = $polaganje->id_izpitnega_roka;
+                $neocenjena_polaganja[] = $polaganje->id_predmeta;
+            }
+            if(isset($stevilo_polaganj[$polaganje->id_predmeta])){
+                $stevilo_polaganj[$polaganje->id_predmeta]++;
+            }else{
+                $stevilo_polaganj[$polaganje->id_predmeta] = 1;
             }
         }
-        $prijave = $student->polaganja()->lists('id_izpitnega_roka');
-        $neocenjena_polaganja = $student->polaganja()->wherePivot('ocena','=',0)->get();
+        //$neocenjena_polaganja = $student->polaganja()->wherePivot('ocena','=',0)->get();
         $opravljeni_predmeti = $student->Predmeti()->wherePivot('ocena','>',5)->lists('id_predmeta');
         return view('izpitni_roki/studentIzpitniRoki',['izpitni_roki'=>$razpisani_roki,'prijave'=>$prijave,
-            'student'=>$student, 'neocenjena_polaganja'=>$neocenjena_polaganja, 'opravljeni_predmeti'=>$opravljeni_predmeti]);
+            'student'=>$student, 'neocenjena_polaganja'=>$neocenjena_polaganja, 'opravljeni_predmeti'=>$opravljeni_predmeti,
+            'stevilo_polaganj'=>$stevilo_polaganj]);
     }
 
     public function prijava(Request $request)
