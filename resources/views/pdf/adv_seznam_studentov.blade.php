@@ -30,7 +30,7 @@
     <p>Seznam vpisanih za dane kriterije:</p>
 
     @if($letnik_id>0)
-        <p/> Leto: {{ $leta[$leto_id] }} <p/>
+        <p/> Leto: {{ str_replace('/20','-',$leta[$leto_id]) }} <p/>
     @endif
     @if($letnik_id>0)
         <p/> Letnik:
@@ -45,6 +45,9 @@
     @endif
     @if($nacinStudija_id>0)
         <p/> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
+    @endif
+    @if($modul_id>0)
+        <p/> Modul: {{ $moduli[$modul_id] }} <p/>
     @endif
 
 
@@ -69,7 +72,7 @@
 
                 <td>{{ $student->vpisna }}</td>
                 <td>{{ $student->priimek }} {{ $student->ime }} </td>
-                <td>{{ $student->studijsko_leto  }}</td>
+                <td>{{ str_replace('/20','-',$s->studijsko_leto)  }}</td>
                 <td>{{ $student->letnik  }}.letnik</td>
                 <td>{{ $studProgrami[$student->id_programa] }}</td>
                 <td>{{ $vrsteVpisa[$student->vrstavpisa] }}</td>

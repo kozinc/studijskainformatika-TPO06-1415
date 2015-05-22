@@ -40,7 +40,12 @@
                 @if($predmetnosilec->id_predmeta == $predmet->id )
                     <div class="panel panel-default panel-body">
                         <a href="{{ action('PredmetNosilecController@edit',['id'=>$predmetnosilec->id]) }}">
-                            {{ $predmetnosilec->studijsko_leto or "Manjkajoče leto"  }}
+                            <?php
+                                $studijsko_leto = $predmetnosilec->studijsko_leto;
+                                $studijsko_leto = str_replace('/20','-',$studijsko_leto);
+                                echo "$studijsko_leto: ";
+                            ?>
+                            <!-- {{ $predmetnosilec->studijsko_leto or "Manjkajoče leto"  }}-->
                             [{{ $predmetnosilec->id }}]
                             {{ isset($predmetnosilec->nosilec->ime) ? $predmetnosilec->nosilec->ime : "Error Nosilec1" }}
                             {{ isset($predmetnosilec->nosilec->priimek) ? $predmetnosilec->nosilec->priimek : "Error Nosilec1" }}

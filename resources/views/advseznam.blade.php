@@ -4,27 +4,39 @@
     <div class="form-group" style="width:700px; margin: auto; margin-top: 150px">
 
         <p style="font-size: 20px">Seznam vpisanih po različnih kriterijih</p>
-        <br><br>
-        {!! Form::open(array('action' => 'ListStudentsController@getAdvSeznam')) !!}
-            <p/> Leto: {{ $leta[$leto_id] }} <p/>
-            {!! Form::select('leta', $leta, $leto_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
-            <br/><br/>
-            <p/> Letnik: @if($letnik_id>0)
-                            {{ $letniki[$letnik_id].'.letnik' }}
-                         @else
-                            {{ $letniki[$letnik_id] }}
-                         @endif
+        @if($leto_id>0)
+            <p/> Leto: {{ str_replace('/20','-',$leta[$leto_id]) }} <p/>
+        @endif
+        @if($letnik_id>0)
+            <p/> Letnik:
+            {{ $letniki[$letnik_id].'.letnik' }}
             <p/>
+        @endif
+        @if($id_programa>0)
+            <p/> <!-- Stud_Prog_ID: {{ $id_programa }} --> Študijski program: {{ $studProgrami[$id_programa] }} <p/>
+        @endif
+        @if($vrsteVpisa_id>0)
+            <p/> <!-- VrsteVpisa: {{ $vrsteVpisa_id }} --> Vrsta studija: {{ $vrsteVpisa[$vrsteVpisa_id] }} <p/>
+        @endif
+        @if($nacinStudija_id>0)
+            <p/> <!-- NaciniStudija_ID: {{ $nacinStudija_id }} --> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
+        @endif
+        @if($modul_id>0)
+            <p/> <!-- Modul_ID: {{ $modul_id }} --> Modul: {{ $moduli[$modul_id] }} <p/>
+        @endif
+        {!! Form::open(array('action' => 'ListStudentsController@getAdvSeznam')) !!}
+            {!! Form::select('leta', str_replace('/20','-',$leta), $leto_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
+            <br/><br/>
+
             {!! Form::select('letniki', $letniki, $letnik_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
-            <p/> <!-- Stud_Prog_ID: {{ $id_programa }} --> Študijski program: {{ $studProgrami[$id_programa] }} <p/>
             {!! Form::select('studProgrami', $studProgrami, $id_programa, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
-            <p/> <!-- VrsteVpisa: {{ $vrsteVpisa_id }} --> Vrsta studija: {{ $vrsteVpisa[$vrsteVpisa_id] }} <p/>
             {!! Form::select('vrsteVpisa', $vrsteVpisa, $vrsteVpisa_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
-            <p/> <!-- NaciniStudija_ID: {{ $nacinStudija_id }} --> Način študija: {{ $naciniStudija[$nacinStudija_id] }} <p/>
             {!! Form::select('naciniStudija', $naciniStudija, $nacinStudija_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
+            <br/><br/>
+            {!! Form::select('moduli', $moduli, $modul_id, array('class' => 'btn btn-default dropdown-toggle')) !!}
             <br/><br/>
             {!! Form::submit('Izpiši študente', array('class' => 'btn btn-danger')) !!}
         @if(!empty($student_list))
@@ -51,7 +63,7 @@
                     <!--<td>{{ $s->zaporedna }}</td>-->
                     <td>{{ $s->vpisna }}</td>
                     <td>{{ $s->priimek }} {{ $s->ime }} </td>
-                    <td>{{ $s->studijsko_leto  }}</td>
+                    <td>{{ str_replace('/20','-',$s->studijsko_leto)  }}</td>
                     <td>{{ $s->letnik  }}.letnik</td>
                     <td>{{ $studProgrami[$s->id_programa] }}</td>
                     <td>{{ $vrsteVpisa[$s->vrstavpisa] }}</td>

@@ -31,6 +31,7 @@
                             <div>
                             <?php
                             $studijsko_leto = $predmetnosilec->studijsko_leto;
+                            $studijsko_leto = str_replace('/20','-',$studijsko_leto);
                             echo "$studijsko_leto: ";
 
                             if($predmetnosilec->id_nosilca != null){
