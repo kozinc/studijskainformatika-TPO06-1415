@@ -59,7 +59,6 @@
         <table>
             <tr>
                 <th></th>
-                <th></th>
                 <th>Vpisna številka</th>
                 <th>Priimek in ime</th>
                 <th>Študijsko leto</th>
