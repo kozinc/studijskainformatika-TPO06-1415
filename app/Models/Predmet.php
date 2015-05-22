@@ -50,4 +50,26 @@ class Predmet extends Model {
         $polaganja = $student->polaganja()->where('id_predmeta','=', $this->id)->get();
         return $polaganja;
     }
+
+    public function predmetNosilec($studijsko_leto)
+    {
+        $studentPredmet = PredmetNosilec::where('id_predmeta','=',$this->id)->where('studijsko_leto','=',$studijsko_leto)->first();
+        return $studentPredmet;
+    }
+    /*public function nosilec($studijsko_leto)
+    {
+        $studentPredmet = PredmetNosilec::where('id_predmeta','=',$this->id)->where('studijsko_leto','=',$studijsko_leto)->first();
+        return $studentPredmet->nosilec;
+    }
+    public function nosilec2($studijsko_leto)
+    {
+        $studentPredmet = PredmetNosilec::where('id_predmeta','=',$this->id)->where('studijsko_leto','=',$studijsko_leto)->first();
+        return $studentPredmet->nosilec2;
+    }
+    public function nosilec3($studijsko_leto)
+    {
+        $studentPredmet = PredmetNosilec::where('id_predmeta','=',$this->id)->where('studijsko_leto','=',$studijsko_leto)->first();
+        return $studentPredmet->nosilec3;
+    }*/
+
 }

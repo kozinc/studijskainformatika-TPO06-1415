@@ -11,11 +11,12 @@ class PredmetNosilec extends Model {
     protected $guarded = ['id'];
 
 
+
     public function predmet()
     {
         return $this->belongsTo('App\Models\Predmet');
     }
-    
+
     public function nosilec()
     {
         return $this->belongsTo('App\Models\Nosilec','id_nosilca');
@@ -28,6 +29,8 @@ class PredmetNosilec extends Model {
     {
         return $this->belongsTo('App\Models\Nosilec','id_nosilca3');
     }
+
+
 
 
 
