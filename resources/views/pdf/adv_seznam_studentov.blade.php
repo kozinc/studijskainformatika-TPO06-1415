@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-študij FRI</title>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     <style>
         h1, h2, h3, h4, h5, h6 {
             font-family:  DejaVu Sans;
@@ -15,16 +13,17 @@
         p, div {
             font-family: DejaVu Sans;
         }
-        table{
-            width: 700px;
-            border-collapse:collapse
+        table {
+            margin:0px;padding:0px;
+            width:100%;
+            border-collapse:collapse;
         }
-        .fixed_table {
-            table-layout: fixed;
+        td {
+            border-bottom: 0.5px solid #cccccc;
         }
     </style>
 </head>
-<body style="font-family: DejaVu Sans">
+<body>
 
 <div>
     <p>Seznam vpisanih za dane kriterije:</p>
@@ -56,32 +55,34 @@
 
 
     <br><br><br><br><br>
-
-    <table class="table table-hover">
-        <tr>
-            <th></th>
-            <th>Vpisna številka</th>
-            <th>Priimek in ime</th>
-            <th>Študijsko leto</th>
-            <th>Letnik</th>
-            <th>Študijski program</th>
-            <th>Vrsta vpisa</th>
-            <th>Način študija</th>
-        </tr>
-        @foreach($student_list as $student)
+    <div class="CSSTableGenerator">
+        <table>
             <tr>
-                <td>{{ $student->zaporedna}}</td>
-
-                <td>{{ $student->vpisna }}</td>
-                <td>{{ $student->priimek }} {{ $student->ime }} </td>
-                <td>{{ str_replace('/20','-',$student->studijsko_leto)  }}</td>
-                <td>{{ $student->letnik  }}.letnik</td>
-                <td>{{ $studProgrami[$student->id_programa] }}</td>
-                <td>{{ $vrsteVpisa[$student->vrstavpisa] }}</td>
-                <td>{{ $student->nacinstudija }}</td>
+                <th></th>
+                <th></th>
+                <th>Vpisna številka</th>
+                <th>Priimek in ime</th>
+                <th>Študijsko leto</th>
+                <th>Letnik</th>
+                <th>Študijski program</th>
+                <th>Vrsta vpisa</th>
+                <th>Način študija</th>
             </tr>
-        @endforeach
-    </table>
+            @foreach($student_list as $student)
+                <tr>
+                    <td>{{ $student->zaporedna}}</td>
+
+                    <td>{{ $student->vpisna }}</td>
+                    <td>{{ $student->priimek }} {{ $student->ime }} </td>
+                    <td>{{ str_replace('/20','-',$student->studijsko_leto)  }}</td>
+                    <td>{{ $student->letnik  }}.letnik</td>
+                    <td>{{ $studProgrami[$student->id_programa] }}</td>
+                    <td>{{ $vrsteVpisa[$student->vrstavpisa] }}</td>
+                    <td>{{ $student->nacinstudija }}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 </div>
 </body>
 </html>
