@@ -8,7 +8,7 @@
 
     <style>
         h1, h2, h3, h4, h5, h6 {
-            font-family:  DejaVu Sans;
+            font-family:  DejaVu Sans; text-align: center;
         }
         p, div {
             font-family: DejaVu Sans;
@@ -26,8 +26,10 @@
 <body>
 
 <div>
-    <p>Seznam vpisanih za dane kriterije:</p>
-
+    <h2>Seznam vpisanih za dane kriterije:</h2>
+    <div style="text-align: center" >
+        {!! HTML::image('http://www.culture.si/images/thumb/6/6c/Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg/576px-Faculty_of_Computer_and_Information_Science_University_of_Ljubljana_%28logo%29.svg.png', 'Logo - ni povezave', array( 'width' => 250, 'height' => 150 )) !!}
+    </div>
     @if($leto_id>0)
         <p/> Leto: {{ str_replace('/20','-',$leta[$leto_id]) }} <p/>
     @endif

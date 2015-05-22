@@ -513,7 +513,6 @@ class ListStudentsController extends Controller {
             //$program->moduli($program->studijsko_leto,$program)->get()
 
             $student = $sp->student;
-            $student['zaporedna'] = $c;
             $student['vrstavpisa'] = $sp->vrsta_vpisa;
             $student['nacinstudija'] = $sp->nacin_studija;
             $student['letnik'] = $sp->letnik;
@@ -522,13 +521,18 @@ class ListStudentsController extends Controller {
 
             if($modul_push){
                 array_push($student_list, $student);
-                $c++;
+                //$c++;
             }
 
         }
         //var_dump($student_list);
 
         usort($student_list, array($this, "cmp"));
+
+        foreach ($student_list as $sp) {
+            $sp['zaporedna'] = $c;
+            $c++;
+        }
 
         if(count($student_predmet_list) == 0){
             $student_list = '';
