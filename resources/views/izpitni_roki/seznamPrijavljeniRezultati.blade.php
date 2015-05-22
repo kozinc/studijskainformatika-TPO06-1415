@@ -9,23 +9,6 @@
         <p>Datum in ura: {{$datum}} ob {{ $ura  }}h</p>
         <p>Prostor: {{$prostor}}</p>
         <br><br>
-        @if(!empty($studentje))
-            <span class="label label-default">Seznam prijavljenih kandidatov</span>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>2, 'status'=>0]) }}">CSV</a>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>1, 'status'=>0]) }}">PDF</a>
-            <br>
-            <span class="label label-default">Izpis seznama z rezultati pisnega dela izpita</span>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>3, 'status'=>0]) }}">PDF</a>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>4, 'status'=>0]) }}">PDF brez imen</a>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>5, 'status'=>0]) }}">CSV</a>
-            <br>
-            <span class="label label-default">Izpis seznama s končnimi ocenami</span>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>6, 'status'=>0]) }}">PDF</a>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>7, 'status'=>0]) }}">PDF brez imen</a>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>8, 'status'=>0]) }}">CSV</a>
-        @endif
-        <br/><br/>
-        <a class="btn btn-default" href="{{ action('IzpitniRokController@vnesiRezultat',['id'=>$izpit_id]) }}">Vnesi rezultate</a>
         <a class="btn btn-default" href="{{ action('IzpitniRokController@vnesiOcene',['id'=>$izpit_id]) }}">Vnesi ocene</a>
         @if (Session::has('seznam_alert'))
             @if (Session::get('seznam_alert') != "")
@@ -38,20 +21,20 @@
             <table class="table table-hover">
                 <tr>
                     <th></th>
-                    <th>Vpisna št.</th>
+                    <th>Vpisna številka</th>
                     <th>Priimek in ime</th>
-                    <th>Štud. leto</th>
-                    <th>Št. vseh</th>
-                    <th>Št. letos</th>
+                    <th>Študijsko leto poslušanja</th>
+                    <th>Število polaganj</th>
+                    <th>Število točk</th>
+                    <th>Ocena</th>
+                    <th></th>
                     <th></th>
                 </tr>
                 @foreach($studentje as $student)
                     <tr>
                         <td> {{$student->vpisna}} </td>
                         <td> {{$student->priimek}} {{$student->ime}} </td>
-                        <td> {{ substr($student->st_leto, 0, 5). substr($student->st_leto, 7, 9)}} </td>
-                        <td> {{$student->st_vseh}} </td>
-                        <td> {{$student->st_letos}} </td>
+                        <td> {{$student->st_leto}} </td>
                         <td><a class="btn btn-info" href="{{ action('IzpitniRokController@vrniPrijavo',['id'=>$izpit_id, 'id_studenta'=>$student->id]) }}" onclick="if(!confirm('Ste prepričani, da želite vrniti prijavo na izpitni rok študentu {{ $student->ime }} {{ $student->priimek }} z vpisno številko {{ $student->vpisna }} ?')){return false;};">VP</a></td>
                     </tr>
                 @endforeach
