@@ -29,7 +29,7 @@
 <div>
     <p>Seznam vpisanih za dane kriterije:</p>
 
-    @if($letnik_id>0)
+    @if($leto_id>0)
         <p/> Leto: {{ str_replace('/20','-',$leta[$leto_id]) }} <p/>
     @endif
     @if($letnik_id>0)
@@ -52,11 +52,11 @@
 
 
 
+
     <br><br><br><br><br>
 
     <table class="table table-hover">
         <tr>
-            <th></th>
             <th></th>
             <th>Vpisna številka</th>
             <th>Priimek in ime</th>

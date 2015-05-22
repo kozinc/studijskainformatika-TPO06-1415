@@ -544,6 +544,8 @@ class ListStudentsController extends Controller {
             }
             if(!is_null($pdf)){
                 //$predmet = \App\Models\Predmet::find($predmet_id);
+                /*var_dump($moduli);
+                var_dump($modul_id);*/
 
                 //return $pdf->download('vpisni_list.pdf');
                 /*return view('pdf/adv_seznam_studentov',
@@ -557,7 +559,9 @@ class ListStudentsController extends Controller {
                         'vrsteVpisa'=>$vrsteVpisa,
                         'vrsteVpisa_id'=>$vrsteVpisa_id,
                         'naciniStudija'=>$naciniStudija,
-                        'nacinStudija_id'=>$nacinStudija_id
+                        'nacinStudija_id'=>$nacinStudija_id,
+                        'moduli'=>$moduli,
+                        'modul_id'=>$modul_id
                     ]);*/
 
                 $pdf = \App::make('dompdf');
