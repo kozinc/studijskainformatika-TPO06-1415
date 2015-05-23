@@ -14,12 +14,17 @@
             font-family: DejaVu Sans;
         }
         table {
+            page-break-inside:auto;
             margin:0px;padding:0px;
             width:100%;
             border-collapse:collapse;
         }
         td {
             border-bottom: 0.5px solid #cccccc;
+        }
+        #footer {
+            position:fixed;
+            bottom:0;
         }
     </style>
 </head>
@@ -54,5 +59,6 @@
             @endforeach
         </table>
     </div>
+    <div id="footer">1</div>
 </body>
 </html>
