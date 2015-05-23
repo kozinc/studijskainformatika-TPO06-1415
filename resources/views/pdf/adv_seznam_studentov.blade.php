@@ -11,9 +11,10 @@
             font-family:  DejaVu Sans; text-align: center;
         }
         p, div {
-            font-family: DejaVu Sans;
+            font-family: DejaVu Sans; font-size: 11;
         }
         table {
+            page-break-inside:auto;
             margin:0px;padding:0px;
             width:100%;
             border-collapse:collapse;
@@ -22,9 +23,44 @@
             border-bottom: 0.5px solid #cccccc;
         }
     </style>
+
 </head>
 <body>
+<script type="text/php">
 
+if ( isset($pdf) ) {
+
+  $size = 6;
+  $color = array(0,0,0);
+  if (class_exists('Font_Metrics')) {
+    $font = Font_Metrics::get_font("helvetica");
+    $text_height = Font_Metrics::get_font_height($font, $size);
+    $width = Font_Metrics::get_text_width("Page 1 of 2", $font, $size);
+  } elseif (class_exists('Dompdf\\FontMetrics')) {
+    $font = $fontMetrics->getFont("helvetica");
+    $text_height = $fontMetrics->getFontHeight($font, $size);
+    $width = $fontMetrics->getTextWidth("Page 1 of 2", $font, $size);
+  }
+
+  $foot = $pdf->open_object();
+
+  $w = $pdf->get_width();
+  $h = $pdf->get_height();
+
+  // Draw a line along the bottom
+  $y = $h - $text_height - 24;
+  $pdf->line(16, $y, $w - 16, $y, $color, 0.5);
+
+  $pdf->close_object();
+  $pdf->add_object($foot, "all");
+
+  $text = "Stran: {PAGE_NUM} / {PAGE_COUNT}";
+
+  // Center the text
+  $pdf->page_text($w / 2 - $width / 2, $y, $text, $font, $size, $color);
+
+}
+</script>
 <div>
     <h2>Seznam vpisanih za dane kriterije:</h2>
     <div style="text-align: center" >
@@ -52,9 +88,6 @@
             <p/> Modul: {{ $moduli[$modul_id] }} <p/>
         @endif
     @endif
-
-
-
 
     <br><br><br><br><br>
     <div class="CSSTableGenerator">

@@ -2,6 +2,9 @@
 
 use App\Helpers\ExportHelper;
 use DB;
+use CPDF_Adapter;
+use Font_Metrics;
+use PDF;
 use App\Models\VrstaVpisa;
 use App\Models\Modul;
 use App\Models\PredmetNosilec;
@@ -98,7 +101,6 @@ class ListStudentsController extends Controller {
                 ExportHelper::make_csv($export_content,'Seznam vpisanih');
             }
         }
-
         return \View::make('seznam')->with('student_list', $student_list)->with('predmeti', $predmeti2)->with('leta', $leta)->with('predmet_id', $p_id2)->with('leto_id', $leto_id)->with('vrsteVpisa',$vrsteVpisa);
     }
 
@@ -584,6 +586,7 @@ class ListStudentsController extends Controller {
                     ->with('moduli', $moduli)
                     ->with('modul_id', $modul_id)
                     );
+
                 return $pdf->download('advseznam.pdf');
             }else{
                 ExportHelper::make_csv($export_content,'Seznam študentov');
