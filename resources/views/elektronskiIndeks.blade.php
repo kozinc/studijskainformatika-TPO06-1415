@@ -24,7 +24,7 @@
                 <div class="panel-body">
                     <div style="display:none">{{$kt=0}}{{$ocena=0}}{{$stevilo=0}}</div>
                     @foreach($predmeti->get() as $predmet)
-                        @if($predmet->studijsko_leto == $program->studijsko_leto)
+                        @if($predmet->studijsko_leto == $program->studijsko_leto && (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena == 0)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena)>5 && (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) != null))
                             <tr>
                                 <div style="display: none">{{$zaporedna++}}</div>
                                 <td>{{$zaporedna}}</td>
@@ -87,7 +87,7 @@
                         <th>Študijsko leto</th>
                         <th>Število opravljenih izpitov</th>
                         <th>Kreditne točke</th>
-                        <th>Skupna povprečna ocena</th>
+                        <th>Povprečna ocena</th>
                     </tr>
                     @foreach($programi as $program)
                             <div style="display:none">{{$kt=0}}{{$ocena=0}}{{$stevilo=0}}</div>
