@@ -59,7 +59,9 @@
                                 <option>Vnos brez polaganja.</option>
                                 @foreach($predmeti as $p)
                                     @foreach($p->studentovaPolaganja($student) as $polaganje)
-                                        <option class="p{{ $p->id }}" style="display: none">{{ date('d.m.Y',strtotime($polaganje->datum))}}</option>
+                                        @if (($polaganje->datum <= date ('Y-m-d')) && ($polaganje->pivot->ocena == 0))
+                                            <option class="p{{ $p->id }}" style="display: none">{{ date('d.m.Y',strtotime($polaganje->datum))}}</option>
+                                        @endif
                                     @endforeach
                                 @endforeach
                             </select>
