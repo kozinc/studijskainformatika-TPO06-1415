@@ -61,7 +61,8 @@ class PredmetiUciteljController extends Controller
         $datumi = [];
         foreach ($pisaniIzpitniRoki->get() as $ir)
         {
-            if ($ir->datum > date('Y-m-d',strtotime('-30 days')) && ($ir->datum <= date('Y-m-d')))
+            //$ir->datum > date('Y-m-d',strtotime('-30 days'))
+            if (($ir->pivot->ocena == 0) && ($ir->datum <= date('Y-m-d')))
             {
                 $datumi[] = $ir->datum;
             }
@@ -80,6 +81,7 @@ class PredmetiUciteljController extends Controller
         {
             $sp = StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->orderBy('id','desc')->first();
             $sp->ocena = $ocena;
+            $sp->datum_vnosa_ocene = date ('Y-m-d');
             $sp->save();
             //Če je vezano na kak datum, zapišem še tja:
             $datum = $request['datum'];
@@ -88,7 +90,7 @@ class PredmetiUciteljController extends Controller
                 $datum = date('Y-m-d',strtotime($datum));
                 $izpitni_rok = IzpitniRok::where('id_predmeta','=',$predmet->id)->where('datum','=',$datum)->first();
                 $st_izp = \DB::table('student_izpit')->where('id_studenta','=',$student->id)->where('id_izpitnega_roka','=',$izpitni_rok->id)->update(array('ocena'=>$ocena));
-
+                $st_izp = \DB::table('student_izpit')->where('id_studenta','=',$student->id)->where('id_izpitnega_roka','=',$izpitni_rok->id)->update(array('datum_vnosa_ocene'=>date ('Y-m-d')));
             }
         }
         else
