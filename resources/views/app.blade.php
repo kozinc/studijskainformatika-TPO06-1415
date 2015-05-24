@@ -64,6 +64,9 @@
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('KartotecniListController@prikazKartotecniList', ['id'=>\Session::get('id')])  }}">Kartotečni list</a>
                 </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('ElektronskiIndeksController@prikazEIndeks', ['id'=>\Session::get('id')])  }}">Elektronski indeks</a>
+                </div>
             @elseif (\Session::get('vloga') == "ucitelj" )
                 <div class="navbar-header">
                     <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} (učitelj)</a>
