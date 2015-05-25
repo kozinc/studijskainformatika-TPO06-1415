@@ -42,6 +42,9 @@ Route::get('vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
 Route::get('kartotecniList/{id}', 'KartotecniListController@prikazKartotecniList');
 Route::post('kartotecniList/export', 'KartotecniListController@export');
 
+Route::get('elektronskiindeks/{id}', 'ElektronskiIndeksController@prikazEIndeks');
+Route::post('elektronskiindeks/export', 'ElektronskiIndeksController@export');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -105,6 +108,8 @@ Route::post('izpitni_roki/uredi_izpitni_rokb', 'IzpitniRokController@spremeniIzp
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}', 'IzpitniRokController@brisiIzpitniRok');
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}/{izvoz}/{status}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
 Route::post('izpitni_roki/uredi_izpitni_rok/{id}/{izvoz}/{status}/seznam_studentov', 'IzpitniRokController@izpisiSeznam');
+Route::get('izpitni_roki/uredi_izpitni_rok/{id}/vnesi_ocene', 'IzpitniRokController@vnesiOcene');
+Route::get('izpitni_roki/uredi_izpitni_rok/{id}/vnesi_rezultate', 'IzpitniRokController@vnesiRezultat');
 Route::get('izpitni_roki/uredi_izpitni_rok/shrani_oceno', 'IzpitniRokController@shraniOceno');
 Route::post('izpitni_roki/uredi_izpitni_rok/shrani_oceno', 'IzpitniRokController@shraniOceno');
 Route::get('izpitni_roki/uredi_izpitni_rok/vrni_prijavo/{id}/{id_studenta}', 'IzpitniRokController@vrniPrijavo');

@@ -55,8 +55,9 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>70, 'tocke_izpita'=>45, 'ocena'=>5]);
         DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>71, 'tocke_izpita'=>68]);
         DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>73, 'ocena'=>9, 'tocke_izpita'=>85]);
-        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>76, 'ocena'=>10, 'tocke_izpita'=>96]);
-        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>79, 'ocena'=>7, 'tocke_izpita'=>67]);
+        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>77, 'ocena'=>5, 'tocke_izpita'=>45]);
+        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>78]);
+        DB::table('student_izpit')->insert(['id_studenta'=>4, 'id_izpitnega_roka'=>79, 'ocena'=>5, 'tocke_izpita'=>32, 'datum_vnosa_ocene'=>'2015-05-23']);
 
 
         

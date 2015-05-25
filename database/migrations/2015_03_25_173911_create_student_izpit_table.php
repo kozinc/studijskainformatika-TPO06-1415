@@ -20,6 +20,7 @@ class CreateStudentIzpitTable extends Migration {
             $table->integer('tocke_izpita');
             $table->integer('ocena');
             $table->date('datum_vnosa_ocene');
+            $table->integer('vrnjena_prijava');
         });
 
 

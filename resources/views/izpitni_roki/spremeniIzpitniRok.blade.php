@@ -154,7 +154,11 @@
         <th>Status</th>
     </tr>
     @foreach($izpitni_roki as $i)
-        <tr>
+        @if(strtotime($i->datum) > strtotime('30.09.2014'))
+            <tr>
+        @else
+            <tr style="background-color: #efefef">
+                @endif
             <td>{{$i->ime_predmeta}}</td>
             <td>{{$i->nosilec}}</td>
             <td id="datum">{{ $i->datum }}</td>
@@ -164,7 +168,9 @@
             @if($i->ocene != "Ocene so vnešene")
                 <td>
                     @if(Session::get('nosilec') == $nosilci[0] || Session::get('nosilec') == $nosilci[1] || Session::get('nosilec') == $nosilci[2] || Session::get('nosilec') == '')
-                        <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
+                        @if(strtotime($i->datum) > strtotime('30.09.2014'))
+                            <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
+                        @endif
                     @endif
                 </td>
             @else
