@@ -42,7 +42,7 @@
                                     @endif
                                 @endforeach
                             </div>
-                            @if($stevec >0 && ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena))>5)
+                            @if($stevec >0 && ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena)>5)
                                 <tr>
                                     <div style="display:none">{{$stOprIzpit++}}</div>
                                     @if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first() != null)
