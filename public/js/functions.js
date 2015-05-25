@@ -156,9 +156,23 @@ $(document).ready(function(){
     $('.izpitni_roki').click(function(){
         var izpitni_rok_id = $(this).data('izpitni_rok_id');
         var action = $(this).data('action');
+        var polaganje = parseInt($(this).data('polaganje'))+1;
+        var pavzer = $(this).data('pavzer');
         $('#izpitni_rok_id').val(izpitni_rok_id);
         $('#action').val(action);
-        $('#prijava_na_izpit').submit();
+        var confirm_msg;
+        if(action == 'prijava'){
+            confirm_msg = 'To je vaše ' + polaganje + '. polaganje. ';
+            if(pavzer == 1 || polaganje > 3){
+                confirm_msg += 'Opravljanje izpita je plačljivo. ';
+            }
+            confirm_msg += 'Želite nadaljevati s prijavo?';
+        }else {
+            confirm_msg = 'Ste prepričani, da se želite odjaviti od izpita?';
+        }
+        if(confirm(confirm_msg)){
+            $('#prijava_na_izpit').submit();
+        }
     });
 
     $('#predmet').change(function(){
