@@ -16,6 +16,8 @@
             font-family: DejaVu Sans;
         }
 
+        tr:nth-child(even) {background: #EEE}
+        tr:nth-child(odd)  {background: #FFF}
     </style>
 </head>
 
@@ -56,15 +58,6 @@ if ( isset($pdf) ) {
 }
 </script>
 
-<script type="text/php">
-
-if ( isset($pdf) ) {
-
-  $font = Font_Metrics::get_font("helvetica", "bold");
-
-
-}
-</script>
 
 <div style="font-size: 8; text-transform: uppercase;">
     <div>{{$student->priimek}} {{$student->ime}}</div>
@@ -89,7 +82,7 @@ if ( isset($pdf) ) {
 
         <div style="display:none">{{$ktSkupaj=0}}{{$ocenaSkupaj=0}}{{$steviloSkupaj=0}}{{$zaporedna=0}}</div>
         <div style="display: none">{{$stOprIzpit=0}} </div>
-        <table class="zadnjePolaganjeT table">
+        <table class="table">
             <tr>
                 <th></th>
                 <th>Šifra</th>
@@ -194,7 +187,7 @@ if ( isset($pdf) ) {
                                     </div>
                                     @if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first() != null)
                                         @if($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena > 5)
-                                            <div style="display:none">{{$kt=$kt+$predmet->predmet->KT}}{{$ktSkupaj=$ktSkupaj+$predmet->predmet->KT}}</div>
+                                            <div style="display:none">{{$kt=$kt+$predmet->predmet->KT}}</div>
                                             <div style="display:none">{{$ocena=$ocena+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena}}{{$ocenaSkupaj=$ocenaSkupaj+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena}}{{$stevilo++}}{{$steviloSkupaj++}}</div>
                                         @endif
                                     @endif
