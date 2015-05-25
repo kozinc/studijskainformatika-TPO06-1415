@@ -188,8 +188,9 @@ class ElektronskiIndeksController extends Controller {
                         if($predmet->predmet->nosilec3!=null){
                             $nosilciImena .= ', '.$predmet->predmet->nosilec3->ime.' '.$predmet->predmet->nosilec3->priimek;
                         }
-
-                        $content[] = [$predmet->predmet->sifra, $predmet->predmet->naziv, $nosilciImena, $predmet->predmet->KT, $datumPolaganja, $stevec, $polaganjaLetos, $ocena];
+                        if ($ocena > 5) {
+                            $content[] = [$predmet->predmet->sifra, $predmet->predmet->naziv, $nosilciImena, $predmet->predmet->KT, $datumPolaganja, $stevec, $polaganjaLetos, $ocena];
+                        }
                     }
                 }
             }

@@ -44,6 +44,7 @@
                         <li><a href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a></li>
                         <li><a href="{{ action('ListStudentsController@getStudents') }}">Seznam študentov po predmetih</a></li>
                         <li><a href="{{ action('ListStudentsController@getAdvSeznam') }}">Seznam študentov - napredno iskanje</a></li>
+                        <li><a href="{{ action('StanjeVpisaController@index') }}">Stanje vpisa</a></li>
                         <li><a href="{{ action('VpisniListReferentController@obrazecVpisniList') }}">Vpiši študenta</a></li>
                     </ul>
                 </div>
@@ -82,6 +83,12 @@
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('ListStudentsController@getAdvSeznam') }}">Seznam študentov - napredno iskanje</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="{{ action('StanjeVpisaController@index') }}">Stanje vpisa</a>
                 </div>
             @endif
 
