@@ -116,11 +116,13 @@
                                                 @endif
                                             @endforeach
                                         </div>
+                                        @if($stevec >0 && ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena)>5)
                                         @if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first() != null)
                                             @if($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena > 5)
-                                                <div style="display:none">{{$kt=$kt+$predmet->predmet->KT}}{{$ktSkupaj=$ktSkupaj+$predmet->predmet->KT}}</div>
+                                                <div style="display:none">{{$kt=$kt+$predmet->predmet->KT}}</div>
                                                 <div style="display:none">{{$ocena=$ocena+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena}}{{$ocenaSkupaj=$ocenaSkupaj+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena}}{{$stevilo++}}{{$steviloSkupaj++}}</div>
                                             @endif
+                                        @endif
                                         @endif
                                     @endif
                                     <div style="display:none">{{$stevilo}}</div>
@@ -145,7 +147,7 @@
                         <th>Skupna povprečna ocena</th>
                     </tr>
                     <tr>
-                        <td>{{$stOprIzpit}}</td>
+                        <td>{{$zaporedna}}</td>
                         <td>{{$ktSkupaj}}</td>
                         <td>{{($steviloSkupaj==0)?'':number_format((float)($ocenaSkupaj/$steviloSkupaj), 3, '.', '')}}</td>
                     </tr>
