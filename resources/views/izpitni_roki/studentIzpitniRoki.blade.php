@@ -19,7 +19,7 @@
             </tr>
             @foreach($izpitni_roki as $roki_za_predmet)
                 @foreach($roki_za_predmet as $rok)
-                    @if(!in_array($rok->id_predmeta, $opravljeni_predmeti))
+                    @if(!in_array($rok->id_predmeta, $opravljeni_predmeti) || true)
                     <tr>
                         <td></td>
                         <td>{{ $rok->predmet->naziv }}</td>
@@ -41,19 +41,59 @@
                         <td>{{ $rok->ura_izpita }}</td>
                         <td>{{ $rok->predavalnice }}</td>
                         <td>
-                            @if(in_array($rok->id_predmeta,$neocenjena_polaganja))
+                            @if($rok->datum < date('Y-m-d'))
+                                @if(in_array($rok->id,$prijave))
+                                    <p>Rok za odjavo je potekel</p>
+                                @else
+                                    <p>Rok za prijavo je potekel</p>
+                                @endif
+                            @elseif(in_array($rok->id_predmeta,$neocenjena_polaganja))
                                 @if(in_array($rok->id,$prijave))
                                     <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                 @else
                                   <p>Prijava na ta predmet že obstaja.</p>
                                 @endif
-                            @elseif(isset($stevilo_polaganj[$rok->id_predmeta]) && $stevilo_polaganj[$rok->id_predmeta] >= 3 && $stevilo_polaganj[$rok->id_predmeta] < 6)
-                                <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-action="prijava"  data-izpitni_rok_id="{{ $rok->id }}" value="Prijava">
+                            @elseif(isset($letosnja_polaganja[$rok->id_predmeta]) && $letosnja_polaganja[$rok->id_predmeta] >= 3)
+                                <p>Presegli ste dovoljeno število opravljanj v tem študijskem letu.</p>
+                            @elseif(isset($letosnja_polaganja[$rok->id_predmeta]) && $letosnja_polaganja[$rok->id_predmeta] > 3 && $letosnja_polaganja[$rok->id_predmeta] < 6)
+                                <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
+                                   @if($pavzer)
+                                       @if(isset($pavzerska_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$pavzerska_polaganja[$rok->id_predmeta]}}
+                                       @else{{ 'data-polaganje=0' }}
+                                       @endif
+                                   @elseif($redno)
+                                       @if(isset($polaganja_s_statusom[$rok->id_predmeta])){{ 'data-polaganje='.$polaganja_s_statusom[$rok->id_predmeta]}}
+                                       @else {{ 'data-polaganje=0' }}
+                                       @endif
+                                   @elseif($ponavljanje)
+                                       @if(isset($letosnja_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$letosnja_polaganja[$rok->id_predmeta]}}
+                                       @else {{ 'data-polaganje=0' }}
+                                       @endif
+                                   @else {{ 'data-polaganje=0' }}
+                                   @endif
+                                value="Prijava">
                             @elseif($rok->datum > date('Y-m-d',strtotime('+1 day')))
-                                @if(in_array($rok->id,$prijave))
+                                @if(isset($premalo_dni[$rok->id_predmeta]) && $premalo_dni[$rok->id_predmeta] > date('Y-m-d',strtotime('-10 days '.$rok->datum)) )
+                                    <p>Od zadnjega polaganja ni preteklo dovolj dni.</p>
+                                @elseif(in_array($rok->id,$prijave))
                                     <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                 @else
-                                    <input type="button" class="btn btn-success izpitni_roki" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" value="Prijava">
+                                    <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
+                                    @if($pavzer)
+                                        @if(isset($pavzerska_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$pavzerska_polaganja[$rok->id_predmeta]}}
+                                                @else{{ 'data-polaganje=0' }}
+                                                @endif
+                                            @elseif($redno)
+                                        @if(isset($polaganja_s_statusom[$rok->id_predmeta])){{ 'data-polaganje='.$polaganja_s_statusom[$rok->id_predmeta] }}
+                                                @else {{ 'data-polaganje=0' }}
+                                                @endif
+                                            @elseif($ponavljanje)
+                                        @if(isset($letosnja_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$letosnja_polaganja[$rok->id_predmeta]}}
+                                                @else {{ 'data-polaganje=0' }}
+                                                @endif
+                                            @else {{ 'data-polaganje=0' }}
+                                           @endif
+                                           value="Prijava">
                                 @endif
                             @else
                                 @if(in_array($rok->id,$prijave))
