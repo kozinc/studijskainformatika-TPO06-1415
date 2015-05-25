@@ -53,25 +53,10 @@
                                 @else
                                   <p>Prijava na ta predmet že obstaja.</p>
                                 @endif
+                            @elseif(isset($pavzerska_polaganja[$rok->id_predmeta]) && $pavzerska_polaganja[$rok->id_predmeta] >= 6)
+                                <p>Presegli ste dovoljeno skupno število opravljanj predmeta.</p>
                             @elseif(isset($letosnja_polaganja[$rok->id_predmeta]) && $letosnja_polaganja[$rok->id_predmeta] >= 3)
                                 <p>Presegli ste dovoljeno število opravljanj v tem študijskem letu.</p>
-                            @elseif(isset($letosnja_polaganja[$rok->id_predmeta]) && $letosnja_polaganja[$rok->id_predmeta] > 3 && $letosnja_polaganja[$rok->id_predmeta] < 6)
-                                <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
-                                   @if($pavzer)
-                                       @if(isset($pavzerska_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$pavzerska_polaganja[$rok->id_predmeta]}}
-                                       @else{{ 'data-polaganje=0' }}
-                                       @endif
-                                   @elseif($redno)
-                                       @if(isset($polaganja_s_statusom[$rok->id_predmeta])){{ 'data-polaganje='.$polaganja_s_statusom[$rok->id_predmeta]}}
-                                       @else {{ 'data-polaganje=0' }}
-                                       @endif
-                                   @elseif($ponavljanje)
-                                       @if(isset($letosnja_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$letosnja_polaganja[$rok->id_predmeta]}}
-                                       @else {{ 'data-polaganje=0' }}
-                                       @endif
-                                   @else {{ 'data-polaganje=0' }}
-                                   @endif
-                                value="Prijava">
                             @elseif($rok->datum > date('Y-m-d',strtotime('+1 day')))
                                 @if(isset($premalo_dni[$rok->id_predmeta]) && $premalo_dni[$rok->id_predmeta] > date('Y-m-d',strtotime('-10 days '.$rok->datum)) )
                                     <p>Od zadnjega polaganja ni preteklo dovolj dni.</p>

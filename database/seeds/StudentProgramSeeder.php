@@ -33,8 +33,8 @@ class StudentProgramSeeder extends Seeder
 
         //NE SPREMINJAJ ZA STUDENTA Z ID = 17 !!!!!!!!
         DB::table('student_program')->insert(['id_studenta'=>17, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2012-09-20', 'vloga_potrjena'=>'2012-09-24', 'datum_vpisa'=>'2012-09-24', 'studijsko_leto'=>'2012/2013', 'letnik'=>1 ]);
-        DB::table('student_program')->insert(['id_studenta'=>17, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2013-09-20', 'vloga_potrjena'=>'2013-09-24', 'datum_vpisa'=>'2013-09-24', 'studijsko_leto'=>'2013/2014', 'letnik'=>1 ]);
-        DB::table('student_program')->insert(['id_studenta'=>17, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-20', 'datum_vpisa'=>'2014-09-20', 'studijsko_leto'=>'2014/2015', 'letnik'=>1 ]);
+        DB::table('student_program')->insert(['id_studenta'=>17, 'id_programa'=>1,'vrsta_vpisa'=>5, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2013-09-20', 'vloga_potrjena'=>'2013-09-24', 'datum_vpisa'=>'2013-09-24', 'studijsko_leto'=>'2013/2014', 'letnik'=>1 ]);
+        DB::table('student_program')->insert(['id_studenta'=>17, 'id_programa'=>1,'vrsta_vpisa'=>5, 'nacin_studija'=>'redni', 'prosta_izbira'=>0, 'vloga_oddana'=>'2014-09-20', 'vloga_potrjena'=>'2014-09-20', 'datum_vpisa'=>'2014-09-20', 'studijsko_leto'=>'2014/2015', 'letnik'=>1 ]);
 
         //NE SPREMINJAJ ZA STUDENTA Z ID = 9!!!!!!!!!!!!!!!!!!
         DB::table('student_program')->insert(['id_studenta'=>9, 'id_programa'=>1,'vrsta_vpisa'=>1, 'nacin_studija'=>'redni', 'prosta_izbira'=>1, 'vloga_oddana'=>'2012-09-20', 'vloga_potrjena'=>'2012-09-24', 'datum_vpisa'=>'2012-09-24', 'studijsko_leto'=>'2012/2013', 'letnik'=>1 ]);

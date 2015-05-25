@@ -236,6 +236,8 @@ class IzpitniRokSeeder extends Seeder
 
         IzpitniRok::create(['id_predmeta'=>3, 'izpitni_rok'=>4, 'datum'=>'2015-09-06', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
 
+        IzpitniRok::create(['id_predmeta'=>5, 'izpitni_rok'=>4, 'datum'=>'2014-09-22', 'studijsko_leto'=>'2013/2014', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
+
 
     }
 }
