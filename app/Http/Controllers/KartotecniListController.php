@@ -130,7 +130,7 @@ class KartotecniListController extends Controller
                     $content[] = [$predmet->predmet->sifra, $predmet->predmet->naziv, $predmet->predmet->nosilec->ime.' '.$predmet->predmet->nosilec->priimek.' ['.$predmet->predmet->id_nosilca.']', $predmet->predmet->KT, $datumPolaganja, $stevec, $polaganjaLetos, $ocena];
                     }
                 }
-                $content[] = ['Povprečna ocena: ', '','','','',''];
+                $content[] = ['Povprečna ocena: '.(($stevilo==0)?'':number_format((float)($povpOcena/$stevilo), 3, '.', '')), '','','','',''];
                 $content[] = ['KT: '.$kt, '','','','',''];
 
                 $content[] = ['', '', '', '', '', '', '',''];
