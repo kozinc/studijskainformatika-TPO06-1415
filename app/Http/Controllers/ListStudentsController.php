@@ -252,72 +252,63 @@ class ListStudentsController extends Controller {
 
     public function natisniVpisniList($id){
 
+        //dobis studenta za vpisni list
         $student = \App\Models\Student::find($id);
-        $student_program = $student->studentProgram()->where('studijsko_leto', '2014/2015')->first();
 
+        //studijsko leto je zadnje vneseno (2014/15 < 2015/16)
+        $studijsko_leto = $student->studentProgram()->orderBy('studijsko_leto', 'DESC')->first();
+        $student_program = $student->studentProgram()->where('studijsko_leto', $studijsko_leto->studijsko_leto)->first();
+        $studijsko_leto = $studijsko_leto->studijsko_leto;
+
+        //ce za izbranega studenta v bazi ni programa
         if($student_program == null) return redirect()->back();
 
+        //prvi vpis, gleda vse datume in izbere najmanjsega
         $prvi_vpis = $student->studentProgram()->where('id_programa', $student_program->id_programa)->lists('datum_vpisa');
         usort($prvi_vpis, array($this, "cmp2"));
         $prvi_vpis = $prvi_vpis[0];
-        $program = \App\Models\StudijskiProgram::find($student_program->id_programa);
-        $obvezni_predmeti = $program->predmeti()->where('tip', '=', 'obvezni')->where('letnik', '=', $student_program->letnik)->where('studijsko_leto', '2014/2015')->distinct();
-        $izbirni_predmeti = \App\Models\StudentPredmet::where('id_studenta', $id)->where('studijsko_leto', '2014/2015')->lists('id_predmeta');
+
+        $predmeti = \DB::table('student_predmet')->where('id_studenta', $id)->where('studijsko_leto', $studijsko_leto)->lists('id_predmeta');
+        $program = \App\Models\StudijskiProgram::find($student_program->id_programa)->first();
         $izbirni = array();
         $o_predmeti = array();
 
         $st_KT = 0;
 
-        foreach($obvezni_predmeti->get() as $op){
+        foreach ($predmeti as $i) {
+            if (\DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', $studijsko_leto)->exists()) {
+                $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', $studijsko_leto)->first();
+                $pred = \App\Models\Predmet::where('id', $i)->first();
+                $nosilec_id = $program_predmet->id_nosilca1;
+                $nosilec = \App\Models\Nosilec::find($nosilec_id);
+                $nosilci = $nosilec->ime . " " . $nosilec->priimek;
+                if($program_predmet->id_nosilca2 > 0){
+                    $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca2);
+                    $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
+                }
+                if($program_predmet->id_nosilca3 > 0){
+                    $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca3);
+                    $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
+                }
+                $st_KT += $pred->KT;
+                $pred['n'] = $nosilci;
 
-            $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $op->id)->where('studijsko_leto', '2014/2015')->first();
-            $nosilec_id = $program_predmet->id_nosilca1;
-            $nosilec = \App\Models\Nosilec::find($nosilec_id);
-            $nosilci = $nosilec->ime . " " . $nosilec->priimek;
-            if($program_predmet->id_nosilca2 > 0){
-                $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca2);
-                $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
-            }
-            if($program_predmet->id_nosilca3 > 0){
-                $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca3);
-                $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
-            }
-
-            $op['n'] = $nosilci;
-            $st_KT += $op->KT;
-            array_push($o_predmeti, $op);
-        }
-
-        foreach ($izbirni_predmeti as $i) {
-            if (\DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', '2014/2015')->exists()) {
-                $bla = \DB::table('program_predmet')->where('id_predmeta', $i)->where('studijsko_leto', '2014/2015')->first();
-                if ($bla->tip == 'splošno-izbirni' || $bla->tip == 'strokovni-izbirni' || $bla->tip == 'modulski') {
-                    $pred = \App\Models\Predmet::where('id', $i)->first();
-                    $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $op->id)->where('studijsko_leto', '2014/2015')->first();
-                    $nosilec_id = $program_predmet->id_nosilca1;
-                    $nosilec = \App\Models\Nosilec::find($nosilec_id);
-                    $nosilci = $nosilec->ime . " " . $nosilec->priimek;
-                    if($program_predmet->id_nosilca2 > 0){
-                        $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca2);
-                        $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
-                    }
-                    if($program_predmet->id_nosilca3 > 0){
-                        $nosilec = \App\Models\Nosilec::find($program_predmet->id_nosilca3);
-                        $nosilci = $nosilci . ", " . $nosilec->ime . " " . $nosilec->priimek;
-                    }
-                    $st_KT += $pred->KT;
-                    $pred['n'] = $nosilci;
+                //ce je izbirni ga shranis nekam
+                if ($program_predmet->tip == 'splošno-izbirni' || $program_predmet->tip == 'strokovni-izbirni' || $program_predmet->tip == 'modulski') {
                     array_push($izbirni, $pred);
+                }
+                else {
+                    array_push($o_predmeti, $pred);
                 }
             }
         }
 
         ini_set('max_execution_time', 300);
         $pdf = \App::make('dompdf');
-        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('studijsko_leto', '2014/2015')->with('program_student', $student_program)->with('obvezni_predmeti', $o_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni)->with('skupne_KT', $st_KT));
+        $pdf->loadHTML(\View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('studijsko_leto', $studijsko_leto)->with('program_student', $student_program)->with('obvezni_predmeti', $o_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni)->with('skupne_KT', $st_KT));
         return $pdf->download('vpisni_list.pdf');
 
-        //return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('studijsko_leto', '2014/2015')->with('program_student', $student_program)->with('obvezni_predmeti', $o_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni);
+        //return \View::make('pdf/vpisni_list_pdf')->with('student', $student)->with('program', $program)->with('studijsko_leto', $studijsko_leto)->with('program_student', $student_program)->with('obvezni_predmeti', $o_predmeti)->with('prvi_vpis', $prvi_vpis)->with('izbirni', $izbirni)->with('skupne_KT', $st_KT);
 
     }
 

@@ -46,7 +46,8 @@
                 <td style="width: 150px">Vpisna številka</td>
                 <td style="width: 180px">Priimek in ime</td>
                 <td style="width: 150px">Študijsko leto</td>
-                <td style="width: 80px">Polaganje</td>
+                <td style="width: 80px">Št vseh</td>
+                <td style="width: 80px">Št letos</td>
             </tr>
             @foreach($studentje as $student)
                 <tr>
@@ -54,7 +55,8 @@
                     <td> {{$student->vpisna}} </td>
                     <td> {{$student->priimek}} {{$student->ime}} </td>
                     <td> {{$student->st_leto}} </td>
-                    <td> {{$student->st_polaganj}} </td>
+                    <td> {{$student->st_vseh}} </td>
+                    <td> {{$student->st_letos}} </td>
                 </tr>
             @endforeach
         </table>

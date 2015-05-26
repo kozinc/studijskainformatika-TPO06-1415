@@ -21,6 +21,10 @@
         td {
             border-bottom: 0.5px solid #cccccc;
         }
+        #footer {
+            position:fixed;
+            bottom:0;
+        }
     </style>
 </head>
 <body>
@@ -42,7 +46,6 @@
                 @if($imena == 1)
                 <td style="width: 180px">Priimek in ime</td>
                 @endif
-                <td style="width: 150px">Število točk</td>
                 <td style="width: 80px">Ocena</td>
             </tr>
             @foreach($studentje as $student)
@@ -52,7 +55,6 @@
                     @if($imena == 1)
                     <td> {{$student->priimek}} {{$student->ime}} </td>
                     @endif
-                    <td> {{$student->st_tock}} </td>
                     @if($student->ocena != 0)
                         <td> {{$student->ocena}} </td>
                     @else
@@ -62,5 +64,6 @@
             @endforeach
         </table>
     </div>
+    <div id="footer">1</div>
 </body>
 </html>

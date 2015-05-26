@@ -38,6 +38,7 @@ class StudentSeeder extends Seeder
         Student::create(['vpisna' => '63130010', 'ime' => 'Rok', 'priimek' => 'Pogorelec', 'email' => 'rokpogorelec@gmail.com', 'geslo' => \Hash::make('rokpogorelec'), 'emso' => '1005992500935', 'posta' => '1000', 'davcna' => '41839243', 'datum_rojstva' => '1992-05-10', 'obcina' => 'Ljubljana', 'spol' => 'moški', 'naslov' => 'Hajdrihova 20','drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'drzava'=> 'Slovenija', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '031243875']);
         Student::create(['vpisna' => '63120012', 'ime' => 'Štefan', 'priimek' => 'Zimic', 'email' => 'stefanzimic@gmail.com', 'geslo' => \Hash::make('stefanzimic'), 'emso' => '190599150935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041888777']);
 
+        //veronika
         //folk za kazat studente po predmetih
         Student::create(['vpisna' => '63120909', 'ime' => 'Ana', 'priimek' => 'Cojc', 'email' => 'anacojc@gmail.com', 'geslo' => \Hash::make('anacojc'), 'emso' => '190599150935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041888777']);
         Student::create(['vpisna' => '63120910', 'ime' => 'Matej', 'priimek' => 'Čotar', 'email' => 'matejcotar@gmail.com', 'geslo' => \Hash::make('matejcotar'), 'emso' => '190599150935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041888777']);
@@ -49,6 +50,8 @@ class StudentSeeder extends Seeder
         Student::create(['vpisna' => '63120916', 'ime' => 'Tone', 'priimek' => 'Tartuf', 'email' => 'tonetartuf@gmail.com', 'geslo' => \Hash::make('tonetartuf'), 'emso' => '190599150935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041888777']);
         Student::create(['vpisna' => '63120917', 'ime' => 'Franc', 'priimek' => 'Zimic', 'email' => 'franczimic@gmail.com', 'geslo' => \Hash::make('franczimic'), 'emso' => '190599150935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041888777']);
         Student::create(['vpisna' => '63120918', 'ime' => 'Tilen', 'priimek' => 'Žužek', 'email' => 'tilenzuzek@gmail.com', 'geslo' => \Hash::make('tilenzuzek'), 'emso' => '190599150935', 'posta' => '1000', 'datum_rojstva' => '1991-05-19', 'obcina_rojstva' => 'Ljubljana', 'telefon' => '041888777']);
+        //vpisni list drugi letnik
+        Student::create(['vpisna' => '63120919', 'ime' => 'Jure', 'priimek' => 'Kovač', 'email' => 'jurekovac@gmail.com', 'geslo' => \Hash::make('jurekovac'), 'emso' => '190995150935', 'davcna' => '11112222', 'spol' => 'moški', 'naslovPosta' => 'Rjavčeva ulica 9', 'obcinaPosta' => 'Nova Gorica', 'postaPosta' => '5000', 'drzavaPosta' => 'Slovenija', 'naslov' => 'Brstnik 4', 'obcina' => 'Nova Gorica', 'posta' => '5000', 'drzava' => 'Slovenija', 'datum_rojstva' => '1994-07-21', 'obcina_rojstva' => 'Šempeter pri Gorici', 'drzava_rojstva' => 'Slovenija', 'drzavljanstvo' => 'slovensko', 'telefon' => '031222333']);
 
     }
 }

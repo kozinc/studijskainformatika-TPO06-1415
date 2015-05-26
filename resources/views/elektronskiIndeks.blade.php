@@ -7,7 +7,7 @@
     <div class="panel-body">
 
         <div style="display:none">{{$ktSkupaj=0}}{{$ocenaSkupaj=0}}{{$steviloSkupaj=0}}{{$zaporedna=0}}{{$stOprIzpit=0}}</div>
-        <table class="table">
+        <table class="table table-hover">
             <tr>
                 <th></th>
                 <th>Šifra</th>
@@ -86,7 +86,7 @@
         <div class="panel-footer">
             <div class="panel-body">
                     <h4>Povprečne ocene po študijskih letih</h4>
-                <table class="table">
+                <table class="table table-hover">
                     <tr>
                         <th>Študijsko leto</th>
                         <th>Število opravljenih izpitov</th>
@@ -140,7 +140,7 @@
         <div class="panel-footer">
             <div class="panel-body">
                 <h4>Skupna povprečna ocena</h4>
-                <table class="table">
+                <table class="table table-hover">
                     <tr>
                         <th>Število opravljenih izpitov</th>
                         <th>Kreditne točke</th>
