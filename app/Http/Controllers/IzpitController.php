@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class IzpitController extends Controller {
 
-    public function studentoviRazpisaniRoki()
+    public function studentoviRazpisaniRoki($id_studenta=0)
+    {
+        return $this->mojiRazpisaniRoki($id_studenta);
+    }
+    public function mojiRazpisaniRoki($id_studenta=0)
     {
         if(date('m') >= 10){
             $trenutno_leto = date('Y').'/'.date('Y',strtotime('+1 year'));
@@ -15,7 +19,16 @@ class IzpitController extends Controller {
             $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
         }
         $pavzer = $redno = $ponavljanje = false;
-        $student = Student::where('email','=',\Session::get('session_id'))->first();
+        if($id_studenta > 0){
+            $student = Student::find($id_studenta);
+        }else{
+            $student = Student::where('email','=',\Session::get('session_id'))->first();
+        }
+        $referent = false;
+        if(\Session::get('vloga')=='referent'){
+            $referent = true;
+        }
+
         $student_programi = $student->studentProgram()->get();
         $pavzerska_studijska_leta = $regularna_studijska_leta = $redna_studijska_leta = [];
         foreach($student_programi as $sp){
@@ -38,10 +51,9 @@ class IzpitController extends Controller {
                     $ponavljanje = true;
                 }
             }
-
         }
 
-        $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-1 week')));
+        $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-1 week')))->sortBy('datum');
         $polaganja = $student->polaganja()->get();
         $opravljeni_predmeti = $student->Predmeti()->wherePivot('ocena','>',5)->lists('id_predmeta');
         $prijave = $stevilo_polaganj = $neocenjena_polaganja = $pavzerska_polaganja = $letosnja_polaganja =
@@ -95,7 +107,7 @@ class IzpitController extends Controller {
             'student'=>$student, 'neocenjena_polaganja'=>$neocenjena_polaganja, 'opravljeni_predmeti'=>$opravljeni_predmeti,
             'stevilo_polaganj'=>$stevilo_polaganj, 'letosnja_polaganja'=>$letosnja_polaganja,
             'pavzerska_polaganja'=>$pavzerska_polaganja, 'polaganja_s_statusom'=>$polaganja_s_statusom, 'pavzer'=>$pavzer,
-            'redno'=>$redno, 'ponavljanje'=>$ponavljanje, 'premalo_dni'=>$premalo_dni]);
+            'redno'=>$redno, 'ponavljanje'=>$ponavljanje, 'premalo_dni'=>$premalo_dni, 'referent'=>$referent, 'trenutno_leto'=>$trenutno_leto]);
     }
 
     public function prijava(Request $request)

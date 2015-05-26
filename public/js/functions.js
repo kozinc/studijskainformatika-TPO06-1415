@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('.jqueryte').jqte();
+    $('[data-toggle="tooltip"]').tooltip();
     $('#studijski_program_ajax').change(function(){
         var kraj_izvajanja = $('option:selected', this).data('kraj_izvajanja');
         var oznaka = $('option:selected', this).data('oznaka');

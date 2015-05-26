@@ -117,7 +117,8 @@ Route::get('izpitni_roki/uredi_izpitni_rok/vrni_prijavo/{id}/{id_studenta}', 'Iz
 Route::get('izbirni_predmeti/referent', 'IzbirniPredmetController@getIzbirniPredmetRef');
 Route::post('izbirni_predmeti/referent', 'IzbirniPredmetController@spremeniIzbirnePredmete');
 
-Route::get('razpisani_roki','IzpitController@studentoviRazpisaniRoki');
+Route::get('razpisani_roki','IzpitController@mojiRazpisaniRoki');
+Route::get('razpisani_roki/{id_studenta}','IzpitController@studentoviRazpisaniRoki');
 Route::post('razpisani_roki','IzpitController@prijava');
 
 
