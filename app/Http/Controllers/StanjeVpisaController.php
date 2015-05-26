@@ -173,12 +173,14 @@ class StanjeVpisaController extends Controller {
             //@foreach($leta as $leto)
 
             $skupajTotal=0;
+            foreach($programi as $program){
+                $skupajTotalProgram=0;
                 foreach($stStudentov as $row){
-                    if($row->studijsko_leto == $leto){
+                    if($row->studijsko_leto == $leto && $row->id_programa == $program->id){
                         // $programi->get($row->id_programa)->ime
                         // $row->letnik
                         // $row->total
-                        $skupajTotal=$skupajTotal+$row->total;
+                        $skupajTotal=$skupajTotal+$row->total;$skupajTotalProgram=$skupajTotalProgram+$row->total;
                         $content[] = [$programi->get($row->id_programa)->ime, $row->letnik, '', $row->total, '','', '', ''];
                         foreach($programLetniki as $programLetnik){
                             if($programLetnik->id_programa==$row->id_programa){
@@ -198,6 +200,11 @@ class StanjeVpisaController extends Controller {
                         }
                     }
                 }
+                if($skupajTotalProgram > 0){
+                    $content[] = [$program->ime,'Skupno v programu:', '', $skupajTotalProgram, '','', '', ''];
+                    $content[] = ['', '', '', '', '', '', '', ''];
+                }
+            }
                 //<th> </th><th>Skupno v študijskem letu: </th> <th> <b>{{$skupajTotal}}</b> </th>
                 $content[] = ['', '', '', '', '', '', '', ''];
                 $content[] = ['', '', 'Skupno v študijskem letu:', $skupajTotal, '', '', '', ''];
