@@ -13,7 +13,7 @@ class Student extends Model {
 
     public function studijskiProgrami()
     {
-        return $this->belongsToMany('App\Models\StudijskiProgram', 'student_program', 'id_programa', 'id_studenta');
+        return $this->belongsToMany('App\Models\StudijskiProgram', 'student_program', 'id_studenta','id_programa');
     }
 
     public function izpitniRoki()
@@ -39,7 +39,12 @@ class Student extends Model {
 
     public function razpisaniRoki($from='',$to='')
     {
-        $predmeti = $this->Predmeti()->wherePivot('studijsko_leto','=',date('Y',strtotime('-1 year')).'/'.date('Y'))->orWherePivot('studijsko_leto','=',date('Y').'/'.date('Y',strtotime('+1 year')))->with('izpitni_roki')->get();
+        if(date('m') >= 10){
+            $trenutno_leto = date('Y').'/'.date('Y',strtotime('+1 year'));
+        }else{
+            $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
+        }
+        $predmeti = $this->Predmeti()->wherePivot('studijsko_leto','=',$trenutno_leto)->with('izpitni_roki')->get();
         $izpitni_roki = [];
         foreach($predmeti as $predmet){
             if(!empty($from)){
@@ -68,8 +73,15 @@ class Student extends Model {
 
     }
 
-    public function trenutniProgram(){
-        return $this->studijskiProgrami()->withPivot('letnik', 'studijsko_leto', 'vrsta_vpisa', 'nacin_studija', 'datum_vpisa','vloga_potrjena')->wherePivot('studijsko_leto','=',date('y').'/'.date('Y',strtotime('+1 year')))->first();
+    public function trenutniProgram()
+    {
+        if(date('m') >= 10){
+            $trenutno_leto = date('Y').'/'.date('Y',strtotime('+1 year'));
+        }else{
+            $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
+        }
+
+        return $this->studijskiProgrami()->withPivot('letnik', 'studijsko_leto', 'vrsta_vpisa', 'nacin_studija', 'datum_vpisa','vloga_potrjena')->wherePivot('studijsko_leto','=',$trenutno_leto)->first();
     }
 
     public function trenutniPredmeti()

@@ -9,14 +9,75 @@ class IzpitController extends Controller {
 
     public function studentoviRazpisaniRoki()
     {
+        if(date('m') >= 10){
+            $trenutno_leto = date('Y').'/'.date('Y',strtotime('+1 year'));
+        }else{
+            $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
+        }
+        $pavzer = $redno = $ponavljanje = false;
         $student = Student::where('email','=',\Session::get('session_id'))->first();
+        $student_programi = $student->studentProgram()->get();
+        $pavzerska_studijska_leta = $regularna_studijska_leta = $redna_studijska_leta = [];
+        foreach($student_programi as $sp){
+            if($sp->vrsta_vpisa == 5){
+                if($sp->studijsko_leto == $trenutno_leto){
+                    $pavzer = true;
+                }
+                $pavzerska_studijska_leta[] = $sp->studijsko_leto;
+            }else{
+                $regularna_studijska_leta[] = $sp->studijsko_leto;
+            }
+            if($sp->vrsta_vpisa == 1){
+                if($sp->studijsko_leto == $trenutno_leto){
+                    $redno = true;
+                }
+                $redna_studijska_leta[] = $sp->studijsko_leto;
+            }
+            if($sp->vrsta_vpisa == 2){
+                if($sp->studijsko_leto == $trenutno_leto){
+                    $ponavljanje = true;
+                }
+            }
+
+        }
 
         $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-1 week')));
         $polaganja = $student->polaganja()->get();
-        $prijave = $stevilo_polaganj = $neocenjena_polaganja = [];
+        $opravljeni_predmeti = $student->Predmeti()->wherePivot('ocena','>',5)->lists('id_predmeta');
+        $prijave = $stevilo_polaganj = $neocenjena_polaganja = $pavzerska_polaganja = $letosnja_polaganja =
+        $premalo_dni = $redna_polaganja = $polaganja_s_statusom = [];
         foreach($polaganja as $polaganje){
             $prijave[] = $polaganje->id;
-            if($polaganje->pivot->ocena == 0){
+            if(in_array($polaganje->studijsko_leto,$pavzerska_studijska_leta)){
+                if(isset($pavzerska_polaganja[$polaganje->id_predmeta])){
+                    $pavzerska_polaganja[$polaganje->id_predmeta]++;
+                }else{
+                    $pavzerska_polaganja[$polaganje->id_predmeta] = 1;
+                }
+            }
+            if(in_array($polaganje->studijsko_leto,$redna_studijska_leta)){
+                if(isset($redna_polaganja[$polaganje->id_predmeta])){
+                    $redna_polaganja[$polaganje->id_predmeta]++;
+                }else{
+                    $redna_polaganja[$polaganje->id_predmeta] = 1;
+                }
+            }
+            if(in_array($polaganje->studijsko_leto,$regularna_studijska_leta)){
+                if(isset($polaganja_s_statusom[$polaganje->id_predmeta])){
+                    $polaganja_s_statusom[$polaganje->id_predmeta]++;
+                }else{
+                    $polaganja_s_statusom[$polaganje->id_predmeta] = 1;
+                }
+            }
+
+            if($polaganje->studijsko_leto == $trenutno_leto){
+                if(isset($letosnja_polaganja[$polaganje->id_predmeta])){
+                    $letosnja_polaganja[$polaganje->id_predmeta]++;
+                }else{
+                    $letosnja_polaganja[$polaganje->id_predmeta] = 1;
+                }
+            }
+            if($polaganje->pivot->ocena == 0 || ($polaganje->pivot->ocena > 5 && !in_array($polaganje->id_predmeta,$opravljeni_predmeti))){
                 $neocenjena_polaganja[] = $polaganje->id_predmeta;
             }
             if(isset($stevilo_polaganj[$polaganje->id_predmeta])){
@@ -24,12 +85,17 @@ class IzpitController extends Controller {
             }else{
                 $stevilo_polaganj[$polaganje->id_predmeta] = 1;
             }
+            if($polaganje->datum > date('Y-m-d',strtotime('-10 days')) && $polaganje->datum < date('Y-m-d')){
+                $premalo_dni[$polaganje->id_predmeta] = $polaganje->datum;
+            }
+
         }
         //$neocenjena_polaganja = $student->polaganja()->wherePivot('ocena','=',0)->get();
-        $opravljeni_predmeti = $student->Predmeti()->wherePivot('ocena','>',5)->lists('id_predmeta');
         return view('izpitni_roki/studentIzpitniRoki',['izpitni_roki'=>$razpisani_roki,'prijave'=>$prijave,
             'student'=>$student, 'neocenjena_polaganja'=>$neocenjena_polaganja, 'opravljeni_predmeti'=>$opravljeni_predmeti,
-            'stevilo_polaganj'=>$stevilo_polaganj]);
+            'stevilo_polaganj'=>$stevilo_polaganj, 'letosnja_polaganja'=>$letosnja_polaganja,
+            'pavzerska_polaganja'=>$pavzerska_polaganja, 'polaganja_s_statusom'=>$polaganja_s_statusom, 'pavzer'=>$pavzer,
+            'redno'=>$redno, 'ponavljanje'=>$ponavljanje, 'premalo_dni'=>$premalo_dni]);
     }
 
     public function prijava(Request $request)

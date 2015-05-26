@@ -20,7 +20,7 @@ class VrstaVpisaSeeder extends Seeder
         DB::table('vrsta_vpisa')->insert(['sifra'=>2, 'ime'=>'Ponavljanje letnika', 'mozni_letniki'=>'V zadnjem letniku in v dodatnem letu ponavljanje ni več možno.']);
         DB::table('vrsta_vpisa')->insert(['sifra'=>3, 'ime'=>'Nadaljevanje letnika', 'mozni_letniki'=>'Vpis ni več dovoljen.']);
         DB::table('vrsta_vpisa')->insert(['sifra'=>4, 'ime'=>'Podaljsanje statusa študenta', 'mozni_letniki'=>'Vsi letniki, dodatno leto.']);
-        DB::table('vrsta_vpisa')->insert(['sifra'=>5, 'ime'=>'Nadaljevanje letnika', 'mozni_letniki'=>'Vpis ni več dovoljen.']);
+        DB::table('vrsta_vpisa')->insert(['sifra'=>5, 'ime'=>'Brez vpisa', 'mozni_letniki'=>'Vpis ni več dovoljen.']);
         DB::table('vrsta_vpisa')->insert(['sifra'=>8, 'ime'=>'Vpis v semester skupnega štuudijskega programa', 'mozni_letniki'=>'Vsi letniki, samo za skupne študijske programe.']);
         DB::table('vrsta_vpisa')->insert(['sifra'=>7, 'ime'=>'Vpis po merilih za prehode v višji letnik', 'mozni_letniki'=>'Vsi letniki razen prvega, dodatno leto ni dovoljeno.']);
         DB::table('vrsta_vpisa')->insert(['sifra'=>98, 'ime'=>'Vpis za zaključek', 'mozni_letniki'=>'Zadnji letnik. Namenjeno samo strokovnim delavcem v študentskem referatu.']);

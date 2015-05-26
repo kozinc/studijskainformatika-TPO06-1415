@@ -42,6 +42,11 @@ Route::get('vloge/{id}/potrdi', 'VpisniListController@potrdiVlogo');
 Route::get('kartotecniList/{id}', 'KartotecniListController@prikazKartotecniList');
 Route::post('kartotecniList/export', 'KartotecniListController@export');
 
+Route::get('elektronskiindeks/{id}', 'ElektronskiIndeksController@prikazEIndeks');
+Route::post('elektronskiindeks/export', 'ElektronskiIndeksController@export');
+
+Route::get('stanjeVpisa', 'StanjeVpisaController@index');
+Route::post('stanjeVpisa/export', 'StanjeVpisaController@export');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
