@@ -9,7 +9,7 @@
         <p>Datum in ura: {{$datum}} ob {{ $ura  }}h</p>
         <p>Prostor: {{$prostor}}</p>
         <br><br>
-        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>0, 'status'=>0]) }}">Nazaj na seznam prijavljenih</a>
+        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>0, 'status'=>0]) }}"> << Nazaj na seznam prijavljenih</a>
         @if (Session::has('seznam_alert'))
             @if (Session::get('seznam_alert') != "")
                 <div class="alert alert-info">{{ Session::get('seznam_alert') }}</div>

@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('.jqueryte').jqte();
+    $('[data-toggle="tooltip"]').tooltip();
     $('#studijski_program_ajax').change(function(){
         var kraj_izvajanja = $('option:selected', this).data('kraj_izvajanja');
         var oznaka = $('option:selected', this).data('oznaka');
@@ -165,6 +166,7 @@ $(document).ready(function(){
             confirm_msg = 'To je vaše ' + polaganje + '. polaganje. ';
             if(pavzer == 1 || polaganje > 3){
                 confirm_msg += 'Opravljanje izpita je plačljivo. ';
+                $('#placilo_izpita').val(1);
             }
             confirm_msg += 'Želite nadaljevati s prijavo?';
         }else {

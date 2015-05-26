@@ -176,7 +176,7 @@
             </tr>
         </table>
 
-        <br><br><br><br><br><br>
+        <br><br>
         <div style="background-color: #9d9d9d">
             <label>PRILOGA 1: PREDMETNIK</label>
         </div>
