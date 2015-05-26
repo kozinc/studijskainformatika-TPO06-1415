@@ -66,8 +66,8 @@ class StudentPredmetSeeder extends Seeder
 
         StudentPredmet::create(['id_studenta'=>3, 'id_predmeta'=>3, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>5, 'tocke_izpita'=>70]);
         StudentPredmet::create(['id_studenta'=>3, 'id_predmeta'=>4, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>6, 'tocke_izpita'=>50]);
-        StudentPredmet::create(['id_studenta'=>3, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>9, 'tocke_izpita'=>86]);
-        StudentPredmet::create(['id_studenta'=>3, 'id_predmeta'=>9, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>9, 'tocke_izpita'=>81]);
+        StudentPredmet::create(['id_studenta'=>3, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>0]);
+        StudentPredmet::create(['id_studenta'=>3, 'id_predmeta'=>9, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>0]);
 
         StudentPredmet::create(['id_studenta'=>16, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>16, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>6]);
@@ -92,7 +92,7 @@ class StudentPredmetSeeder extends Seeder
         StudentPredmet::create(['id_studenta'=>16, 'id_predmeta'=>37, 'letnik'=>2, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>0]);
 
         //Rok Pogorelc Dvakratni pavzer
-        StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>6]);
+        StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>5]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>7]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>3, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>8]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>4, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2012/2013', 'ocena'=>5]);
@@ -103,7 +103,7 @@ class StudentPredmetSeeder extends Seeder
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>9, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>5]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>10, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2012/2013', 'ocena'=>4]);
 
-        //StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>8]);
+        StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>5]);
         //StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>2, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>7]);
         //StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>3, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>5]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>4, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2013/2014', 'ocena'=>8]);
@@ -114,6 +114,7 @@ class StudentPredmetSeeder extends Seeder
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>9, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2013/2014', 'ocena'=>5]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>10, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2013/2014', 'ocena'=>5]);
 
+        StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>1, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>5]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>5, 'letnik'=>1, 'semester'=>1, 'studijsko_leto'=>'2014/2015', 'ocena'=>5]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>6, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>0]);
         StudentPredmet::create(['id_studenta'=>17, 'id_predmeta'=>7, 'letnik'=>1, 'semester'=>2, 'studijsko_leto'=>'2014/2015', 'ocena'=>0]);

@@ -100,12 +100,11 @@ class IzpitController extends Controller {
             if($polaganje->datum > date('Y-m-d',strtotime('-10 days')) && $polaganje->datum < date('Y-m-d')){
                 $premalo_dni[$polaganje->id_predmeta] = $polaganje->datum;
             }
-
         }
         //$neocenjena_polaganja = $student->polaganja()->wherePivot('ocena','=',0)->get();
         return view('izpitni_roki/studentIzpitniRoki',['izpitni_roki'=>$razpisani_roki,'prijave'=>$prijave,
             'student'=>$student, 'neocenjena_polaganja'=>$neocenjena_polaganja, 'opravljeni_predmeti'=>$opravljeni_predmeti,
-            'stevilo_polaganj'=>$stevilo_polaganj, 'letosnja_polaganja'=>$letosnja_polaganja,
+            'stevilo_polaganj'=>$stevilo_polaganj, 'letosnja_polaganja'=>$letosnja_polaganja, 'redna_polaganja'=>$redna_polaganja,
             'pavzerska_polaganja'=>$pavzerska_polaganja, 'polaganja_s_statusom'=>$polaganja_s_statusom, 'pavzer'=>$pavzer,
             'redno'=>$redno, 'ponavljanje'=>$ponavljanje, 'premalo_dni'=>$premalo_dni, 'referent'=>$referent, 'trenutno_leto'=>$trenutno_leto]);
     }

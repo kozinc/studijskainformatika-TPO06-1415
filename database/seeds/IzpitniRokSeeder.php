@@ -141,7 +141,7 @@ class IzpitniRokSeeder extends Seeder
         //2014/2015 1.letnik BUN-RI
         IzpitniRok::create(['id_predmeta'=>1, 'izpitni_rok'=>1, 'datum'=>'2015-01-21', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
         IzpitniRok::create(['id_predmeta'=>1, 'izpitni_rok'=>2, 'datum'=>'2015-02-05', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
-        IzpitniRok::create(['id_predmeta'=>1, 'izpitni_rok'=>3, 'datum'=>'2015-09-08', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
+        IzpitniRok::create(['id_predmeta'=>1, 'izpitni_rok'=>4, 'datum'=>'2015-09-08', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
         IzpitniRok::create(['id_predmeta'=>2, 'izpitni_rok'=>1, 'datum'=>'2015-02-01', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
         IzpitniRok::create(['id_predmeta'=>2, 'izpitni_rok'=>2, 'datum'=>'2015-02-18', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
         IzpitniRok::create(['id_predmeta'=>2, 'izpitni_rok'=>3, 'datum'=>'2015-09-04', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
@@ -238,6 +238,6 @@ class IzpitniRokSeeder extends Seeder
 
         IzpitniRok::create(['id_predmeta'=>5, 'izpitni_rok'=>4, 'datum'=>'2014-09-22', 'studijsko_leto'=>'2013/2014', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
 
-
+        IzpitniRok::create(['id_predmeta'=>1, 'izpitni_rok'=>3, 'datum'=>'2015-02-16', 'studijsko_leto'=>'2014/2015', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
     }
 }

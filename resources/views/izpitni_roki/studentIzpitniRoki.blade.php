@@ -121,6 +121,10 @@
                                             @endif
                                         @elseif(isset($pavzerska_polaganja[$rok->id_predmeta]) && $pavzerska_polaganja[$rok->id_predmeta] >= 6)
                                             <p>Presegli ste dovoljeno skupno število opravljanj predmeta.</p>
+                                        @elseif(isset($skupna_polaganja[$rok->id_predmeta]) && $skupna_polaganja[$rok->id_predmeta]  >= 6)
+                                            <p>Presegli ste dovoljeno skupno število opravljanj predmeta.</p>
+                                        @elseif(isset($redna_polaganja[$rok->id_predmeta]) && isset($pavzerska_polaganja[$rok->id_predmeta]) && ($redna_polaganja[$rok->id_predmeta] + $pavzerska_polaganja[$rok->id_predmeta]) >= 6)
+                                            <p>Presegli ste dovoljeno skupno število opravljanj predmeta.</p>
                                         @elseif(isset($letosnja_polaganja[$rok->id_predmeta]) && $letosnja_polaganja[$rok->id_predmeta] >= 3)
                                             <p>Presegli ste dovoljeno število opravljanj v tem študijskem letu.</p>
                                         @elseif($rok->datum > date('Y-m-d',strtotime('+1 day')))
