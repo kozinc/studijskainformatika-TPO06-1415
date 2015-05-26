@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\MailHelper;
 
@@ -45,12 +46,16 @@ class Student extends Model {
             $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
         }
         $predmeti = $this->Predmeti()->wherePivot('studijsko_leto','=',$trenutno_leto)->with('izpitni_roki')->get();
-        $izpitni_roki = [];
+        $izpitni_roki = new Collection();
         foreach($predmeti as $predmet){
             if(!empty($from)){
-                $izpitni_roki[] = $predmet->izpitni_roki()->with('predmet')->where('datum','>=',$from)->get();
+                $roki = $predmet->izpitni_roki()->with('predmet')->where('datum','>=',$from)->get();
             }else{
-                $izpitni_roki[] = $predmet->izpitni_roki()->with('predmet')->get();
+                $roki = $predmet->izpitni_roki()->with('predmet')->get();
+            }
+            foreach($roki as $rok){
+                $rok->letnik = $predmet->pivot->letnik;
+                $izpitni_roki->add($rok);
             }
         }
         return $izpitni_roki;
@@ -59,7 +64,7 @@ class Student extends Model {
 
     public function polaganja()
     {
-        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit', 'id_studenta', 'id_izpitnega_roka' )->withPivot('ocena', 'tocke_izpita');
+        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit', 'id_studenta', 'id_izpitnega_roka' )->withPivot('ocena', 'tocke_izpita', 'datum_prijave', 'datum_odjave', 'placilo_izpita');
     }
 
     public function sklepi()

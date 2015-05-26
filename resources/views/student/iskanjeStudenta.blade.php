@@ -28,6 +28,7 @@
                     <th>Priimek</th>
                     <th>Email</th>
                     <th>Telefonska številka</th>
+                    <th>Izpitni roki</th>
                     <th>Kartotečni list</th>
                     <th>Elektronski indeks</th>
                     @if($vnosOcene == 1)
@@ -47,6 +48,7 @@
                             <td><a href="{{ action('StudentController@show',['id'=>$student->id]) }}">{{ $student->priimek }}</a></td>
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->telefon }}</td>
+                            <td><a href="{{ action('IzpitController@studentoviRazpisaniRoki',['id_studenta'=>$student->id]) }}">Ogled izpitnih rokov</a></td>
                             <td><a href="{{ action('KartotecniListController@prikazKartotecniList',['id'=>$student->id]) }}">Klikni za ogled</a></td>
                             <td><a href="{{ action('ElektronskiIndeksController@prikazEIndeks',['id'=>$student->id]) }}">Ogled E-Indeksa</a></td>
                             @if((\Session::get('vloga')  == 'referent' ))

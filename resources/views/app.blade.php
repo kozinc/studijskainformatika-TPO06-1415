@@ -57,7 +57,7 @@
                     <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
-                    <a class="navbar-brand" href="{{ action('IzpitController@studentoviRazpisaniRoki')  }}">Izpitni roki</a>
+                    <a class="navbar-brand" href="{{ action('IzpitController@mojiRazpisaniRoki')  }}">Izpitni roki</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a class="navbar-brand" href="{{ action('VpisniListController@obrazecVpisniList')  }}">Vpisni list</a>
