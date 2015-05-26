@@ -43,8 +43,23 @@
                         <div style="display: none">{{$skupajTotalProgram=0}}</div>
                         @foreach($stStudentov as $row)
                             @if($row->studijsko_leto == $leto && $row->id_programa == $program->id)
+                                <div style="display: none">{{$skupajTotalProgram=$skupajTotalProgram+$row->total}}</div>
+                            @endif
+                        @endforeach
+                        @if($skupajTotalProgram > 0)
+                            <tr><td></td><td></td><td></td><td></td></tr>
+                            <tr style="background: #F9f9f9">
+                                <th>{{$program->ime}}</th>
+                                <th>Letnik</th>
+                                <th></th>
+                                <th>Število študentov</th>
+                            </tr>
+                        @endif
+                        <div style="display: none">{{$skupajTotalProgram=0}}</div>
+                        @foreach($stStudentov as $row)
+                            @if($row->studijsko_leto == $leto && $row->id_programa == $program->id)
                                 <tr>
-                                    <td>{{$programi->get($row->id_programa)->ime}}</td>
+                                    <td><!--$programi->get($row->id_programa)->ime}}--></td>
                                     <td style="width: 20%; text-align: center;">{{$row->letnik}}.</td>
                                     <td style="width: 15%"></td>
                                     <td style="width: 20%; text-align: center;">{{$row->total}}</td>
@@ -79,6 +94,7 @@
                                     @endforeach
                             @endif
                         @endforeach
+                        <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
                         @if($skupajTotalProgram > 0)
                             <tr style="background: #EEE">
                                 <th>{{$program->ime}}</th>
@@ -89,7 +105,7 @@
                         @endif
                     @endforeach
                     <tr style="background: #DDD">
-                    <th> </th><th>Skupno v študijskem letu: </th> <th> <b>{{$skupajTotal}}</b> </th>
+                    <th> </th><th>Skupno v študijskem letu: </th> <td></td><th> <b>{{$skupajTotal}}</b> </th>
                     </tr>
                 </table>
             </div>

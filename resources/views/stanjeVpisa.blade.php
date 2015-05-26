@@ -17,19 +17,34 @@
             <div class="panel-body">
                 <h3>Študijsko leto: {{str_replace('/20','-',$leto)}}</h3>
                 <table class="table table-hover">
-                    <tr style="background: #F9f9f9">
+                    <tr style="background: #EEEEEE">
                         <th>Program</th>
-                        <th>Letnik</th>
+                        <th><!--Letnik--></th>
                         <th></th>
-                        <th>Število študentov</th>
+                        <th><!--Število študentov--></th>
                         <div style="display: none">{{$skupajTotal=0}}</div>
                     </tr>
                     @foreach($programi as $program)
                         <div style="display: none">{{$skupajTotalProgram=0}}</div>
                         @foreach($stStudentov as $row)
                             @if($row->studijsko_leto == $leto && $row->id_programa == $program->id)
+                                <div style="display: none">{{$skupajTotalProgram=$skupajTotalProgram+$row->total}}</div>
+                            @endif
+                        @endforeach
+                        @if($skupajTotalProgram > 0)
+                            <tr><td></td><td></td><td></td><td></td></tr>
+                            <tr style="background: #F9f9f9">
+                                <th>{{$program->ime}}</th>
+                                <th>Letnik</th>
+                                <th></th>
+                                <th>Število študentov</th>
+                            </tr>
+                        @endif
+                        <div style="display: none">{{$skupajTotalProgram=0}}</div>
+                        @foreach($stStudentov as $row)
+                            @if($row->studijsko_leto == $leto && $row->id_programa == $program->id)
                                 <tr>
-                                    <td>{{$programi->get($row->id_programa)->ime}}</td>
+                                    <td></td>
                                     <td style="width: 20%">{{$row->letnik}}.</td>
                                     <td style="width: 15%"></td>
                                     <td style="width: 20%">{{$row->total}}</td>
@@ -73,7 +88,7 @@
                             </tr>
                         @endif
                     @endforeach
-
+                    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
                     <tr style="background: #DDD">
                         <th></th>
                         <th>Skupno v študijskem letu: </th>
