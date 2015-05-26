@@ -475,9 +475,8 @@ class IzpitniRokController extends Controller {
             return $pdf->download('my.pdf');
         }
         else if($izvoz == 2){
-            $export_content = [['Vpisna številka','Priimek in ime','Študijsko leto','Število polaganj']];
             foreach($studentje as $s){
-                $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->st_leto, $s->st_polaganj];
+                $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->st_leto, $s->st_vseh, $s->st_letos];
             }
             \App\Helpers\ExportHelper::make_csv($export_content,'Seznam prijavljenih na izpit');
         }
@@ -492,11 +491,26 @@ class IzpitniRokController extends Controller {
             return $pdf->download('seznam_ocene.pdf');
         }
         else if($izvoz == 5){
-            $export_content = [['Vpisna številka','Priimek in ime','Število točk','Ocena']];
             foreach($studentje as $s){
                 $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->st_tock, $s->ocena];
             }
             \App\Helpers\ExportHelper::make_csv($export_content,'Seznam rezultatov izpita');
+        }
+        else if($izvoz == 6){
+            $pdf = \App::make('dompdf');
+            $pdf->loadHTML(\View::make('pdf/seznam_studentov_ocene')->with('nosilci', $nosilci)->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet)->with('studijsko_leto', $studijsko_leto)->with('ura', $ura)->with('prostor', $prostor)->with("imena", 1));
+            return $pdf->download('seznam_ocene.pdf');
+        }
+        else if($izvoz == 7){
+            $pdf = \App::make('dompdf');
+            $pdf->loadHTML(\View::make('pdf/seznam_studentov_ocene')->with('nosilci', $nosilci)->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet)->with('studijsko_leto', $studijsko_leto)->with('ura', $ura)->with('prostor', $prostor)->with("imena", 0));
+            return $pdf->download('seznam_ocene.pdf');
+        }
+        else if($izvoz == 8){
+            foreach($studentje as $s){
+                $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->ocena];
+            }
+            \App\Helpers\ExportHelper::make_csv($export_content,'Seznam končnih ocen');
         }
         else if($izvoz == 9){
             return \View::make('izpitni_roki/seznamPrijavljeniOcene')->with('izpit_id', $id)->with('nosilci', $nosilci)->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet)->with('studijsko_leto', $studijsko_leto)->with('ura', $ura)->with('prostor', $prostor);

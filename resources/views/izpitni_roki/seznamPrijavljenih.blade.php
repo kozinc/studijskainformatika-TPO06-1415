@@ -11,8 +11,8 @@
         <br><br>
         @if(!empty($studentje))
             <span class="label label-default">Seznam prijavljenih kandidatov</span>
-            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>2, 'status'=>0]) }}">CSV</a>
             <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>1, 'status'=>0]) }}">PDF</a>
+            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>2, 'status'=>0]) }}">CSV</a>
             <br>
             <span class="label label-default">Izpis seznama z rezultati pisnega dela izpita</span>
             <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>3, 'status'=>0]) }}">PDF</a>
