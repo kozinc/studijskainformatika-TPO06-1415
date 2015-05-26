@@ -20,7 +20,10 @@ class CreateStudentIzpitTable extends Migration {
             $table->integer('tocke_izpita');
             $table->integer('ocena');
             $table->date('datum_vnosa_ocene');
+            $table->date('datum_prijave')->nullable();
+            $table->date('datum_odjave')->nullable();
             $table->integer('vrnjena_prijava');
+            $table->integer('placilo_izpita')->nullable();
         });
 
 

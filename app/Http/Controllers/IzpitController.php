@@ -113,8 +113,9 @@ class IzpitController extends Controller {
     {
         $student = Student::find($request['student_id']);
         $izpitni_rok = IzpitniRok::find($request['izpitni_rok_id']);
+        $placilo_izpita = $request['placilo_izpita'];
         if($request['action']=='prijava'){
-            $student->izpitniRoki()->attach($izpitni_rok->id);
+            $student->izpitniRoki()->attach($izpitni_rok->id,['placilo_izpita'=>$placilo_izpita, 'datum_prijave'=>date('Y-m-d')]);
             return \Redirect::back()->with('odgovor','Prijava uspešna.');
         }elseif($request['action']=='odjava'){
             $student->izpitniRoki()->detach($izpitni_rok->id);

@@ -16,6 +16,7 @@
                 <input type="hidden" name="action" id="action" value="">
                 <input type="hidden" name="student_id" value="{{ $student->id }}">
                 <input type="hidden" name="izpitni_rok_id" id="izpitni_rok_id" value="">
+                <input type="hidden" name="placilo_izpita" id="placilo_izpita" value="0">
                 <table class="table">
                     <tr>
                         <th>Letnik</th>

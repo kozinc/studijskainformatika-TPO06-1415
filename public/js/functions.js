@@ -166,6 +166,7 @@ $(document).ready(function(){
             confirm_msg = 'To je vaše ' + polaganje + '. polaganje. ';
             if(pavzer == 1 || polaganje > 3){
                 confirm_msg += 'Opravljanje izpita je plačljivo. ';
+                $('#placilo_izpita').val(1);
             }
             confirm_msg += 'Želite nadaljevati s prijavo?';
         }else {
