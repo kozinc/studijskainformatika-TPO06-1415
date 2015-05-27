@@ -82,7 +82,7 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>109, 'ocena'=>10, 'tocke_izpita'=>96]);
 
         //Nejc Bizjak ponovno v 1.letniku :(
-        DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>118, 'ocena'=>4, 'tocke_izpita'=>38]);
+        DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>118, 'ocena'=>5, 'tocke_izpita'=>38]);
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>119, 'ocena'=>5, 'tocke_izpita'=>41]);
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>120, 'ocena'=>5, 'tocke_izpita'=>744]);
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>121, 'ocena'=>9, 'tocke_izpita'=>89]);
@@ -134,7 +134,7 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>97, 'ocena'=>9, 'tocke_izpita'=>25]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>100, 'ocena'=>9, 'tocke_izpita'=>24]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>103, 'ocena'=>9, 'tocke_izpita'=>38]);
-        DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>106, 'ocena'=>4, 'tocke_izpita'=>34]);
+        DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>106, 'ocena'=>5, 'tocke_izpita'=>34]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>107, 'ocena'=>5, 'tocke_izpita'=>40]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>108, 'ocena'=>5, 'tocke_izpita'=>48]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>109, 'ocena'=>8, 'tocke_izpita'=>74]);
@@ -142,9 +142,9 @@ class StudentIzpitSeeder extends Seeder
         //2.letnik 1.semester
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>154, 'ocena'=>9, 'tocke_izpita'=>82]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>157, 'ocena'=>5, 'tocke_izpita'=>45]);
-        DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>160, 'ocena'=>4, 'tocke_izpita'=>30]);
+        DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>160, 'ocena'=>5, 'tocke_izpita'=>30]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>161, 'ocena'=>5, 'tocke_izpita'=>45]);
-        DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>163, 'ocena'=>4, 'tocke_izpita'=>30]);
+        DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>163, 'ocena'=>5, 'tocke_izpita'=>30]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>166, 'ocena'=>10, 'tocke_izpita'=>93]);
 
 
@@ -176,14 +176,14 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>3, 'ocena'=>5, 'tocke_izpita'=>45]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>6, 'ocena'=>7, 'tocke_izpita'=>67]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>9, 'ocena'=>8, 'tocke_izpita'=>87]);
-        DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>12, 'ocena'=>4, 'tocke_izpita'=>31]);
+        DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>12, 'ocena'=>5, 'tocke_izpita'=>31]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>13, 'ocena'=>5, 'tocke_izpita'=>42]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>15, 'ocena'=>5, 'tocke_izpita'=>47]);
-        DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>18, 'ocena'=>4, 'tocke_izpita'=>34]);
+        DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>18, 'ocena'=>5, 'tocke_izpita'=>34]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>21, 'ocena'=>3, 'tocke_izpita'=>24]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>24, 'ocena'=>5, 'tocke_izpita'=>44]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>27, 'ocena'=>5, 'tocke_izpita'=>56]);
-        DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>30, 'ocena'=>4, 'tocke_izpita'=>34]);
+        DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>30, 'ocena'=>5, 'tocke_izpita'=>34]);
 
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>82, 'ocena'=>5, 'tocke_izpita'=>41]);
         DB::table('student_izpit')->insert(['id_studenta'=>17, 'id_izpitnega_roka'=>91, 'ocena'=>5, 'tocke_izpita'=>47]);
@@ -251,7 +251,57 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>27, 'id_izpitnega_roka'=>116, 'ocena'=>0, 'tocke_izpita'=>0]);
         DB::table('student_izpit')->insert(['id_studenta'=>28, 'id_izpitnega_roka'=>116, 'ocena'=>0, 'tocke_izpita'=>0]);
 
-               //
+        // Testni podatki za Žan Peteh (id30)
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>1, 'ocena'=>5, 'tocke_izpita'=>37]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>2, 'ocena'=>8, 'tocke_izpita'=>73]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>5, 'ocena'=>5, 'tocke_izpita'=>46]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>6, 'ocena'=>10, 'tocke_izpita'=>90]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>7, 'ocena'=>9, 'tocke_izpita'=>89]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>10, 'ocena'=>8, 'tocke_izpita'=>73]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>13, 'ocena'=>9, 'tocke_izpita'=>86]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>17, 'ocena'=>8, 'tocke_izpita'=>75]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>19, 'ocena'=>9, 'tocke_izpita'=>89]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>22, 'ocena'=>8, 'tocke_izpita'=>73]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>25, 'ocena'=>10, 'tocke_izpita'=>96]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>29, 'ocena'=>5, 'tocke_izpita'=>33]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>30, 'ocena'=>6, 'tocke_izpita'=>58]);
+
+        //Žan Peteh v 2.letniku
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>31, 'ocena'=>10, 'tocke_izpita'=>93]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>34, 'ocena'=>10, 'tocke_izpita'=>92]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>37, 'ocena'=>10, 'tocke_izpita'=>97]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>40, 'ocena'=>5, 'tocke_izpita'=>28]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>41, 'ocena'=>5, 'tocke_izpita'=>24]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>42, 'ocena'=>10, 'tocke_izpita'=>90]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>43, 'ocena'=>10, 'tocke_izpita'=>90]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>46, 'ocena'=>10, 'tocke_izpita'=>92]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>49, 'ocena'=>10, 'tocke_izpita'=>97]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>52, 'ocena'=>10, 'tocke_izpita'=>96]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>55, 'ocena'=>10, 'tocke_izpita'=>94]);
+
+        //Žan Peteh v 3.letniku
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>59, 'ocena'=>5, 'tocke_izpita'=>34]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>60, 'ocena'=>10, 'tocke_izpita'=>96]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>61, 'ocena'=>10, 'tocke_izpita'=>99]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>64, 'ocena'=>9, 'tocke_izpita'=>85]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>67, 'ocena'=>5, 'tocke_izpita'=>24]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>68, 'ocena'=>8, 'tocke_izpita'=>78]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>70, 'tocke_izpita'=>45, 'ocena'=>5]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>71, 'tocke_izpita'=>68]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>73, 'ocena'=>9, 'tocke_izpita'=>85]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>77, 'ocena'=>5, 'tocke_izpita'=>45]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>78]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>79, 'ocena'=>5, 'tocke_izpita'=>32, 'datum_vnosa_ocene'=>'2015-05-23']);
+        //Žan Peteh - magistrski
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>202, 'ocena'=>10, 'tocke_izpita'=>99]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>203, 'ocena'=>10, 'tocke_izpita'=>99]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>204, 'ocena'=>9, 'tocke_izpita'=>8]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>205, 'ocena'=>8, 'tocke_izpita'=>78]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>206, 'ocena'=>6, 'tocke_izpita'=>68]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>207, 'ocena'=>9, 'tocke_izpita'=>87]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>208, 'ocena'=>5]);
+        DB::table('student_izpit')->insert(['id_studenta'=>30, 'id_izpitnega_roka'=>209, 'ocena'=>7, 'tocke_izpita'=>60]);
+
 
     }
 

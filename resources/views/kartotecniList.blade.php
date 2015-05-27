@@ -1,6 +1,4 @@
 @extends('app')
-@extends('app')
-
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading"><h3 style="color: #005580">Kartotečni list osebe {{$student->ime}} {{$student->priimek}} ({{$student->vpisna}})</h3></div>

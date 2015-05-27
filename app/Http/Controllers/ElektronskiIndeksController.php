@@ -7,6 +7,7 @@ use App\Models\ProgramLetnik;
 use App\Models\StudentPredmet;
 use App\Models\Student;
 use App\Models\StudentProgram;
+use App\Models\StudijskiProgram;
 use Illuminate\Http\Request;
 use App\Helpers\ExportHelper;
 use Illuminate\Support\Facades\Redirect;
@@ -109,11 +110,18 @@ class ElektronskiIndeksController extends Controller {
         }
         else
         {
+            //studijski program    $id_programa         $studProgrami       $studProgram
+            //$id_programa = 0;
+            $studProgrami = StudijskiProgram::all();
+            //$studProgram = $studProgrami[$id_programa];
 
             $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena')->get();
             $programiStudenta = $programiStudenta->sortBy('vloga_potrjena');
             $predmeti = StudentPredmet::where('id_studenta','=',$student->id);
-            return view('elektronskiIndeks', ['student'=>$student, 'programi'=>$programiStudenta, 'predmeti'=>$predmeti]);
+            return view('elektronskiIndeks', ['student'=>$student,
+                                              'programi'=>$programiStudenta,
+                                              'predmeti'=>$predmeti,
+                                              'studProgrami'=>$studProgrami]);
         }
 
     }
@@ -122,16 +130,25 @@ class ElektronskiIndeksController extends Controller {
     {
         //tu ne sme biti iz seje
         $student = Student::find($request['id_studenta']);
+        $id_programa = $request['id_programa'];
         $programiStudenta = $student->studentProgram()->whereNotNull('vloga_potrjena')->get();
         $programiStudenta = $programiStudenta->sortBy('vloga_potrjena');
         $predmeti = StudentPredmet::where('id_studenta','=',$student->id);
+        $studProgram = StudijskiProgram::where('id','=',$id_programa)->first();
+        var_dump($studProgram->ime);
 
         if(isset($request['pdf']))
         {
             $pdf = \App::make('dompdf');
             ini_set('max_execution_time', 300);
-            $pdf->loadHTML(\View::make('pdf/elektronskiIndeks_pdf')->with('student', $student)->with('programi', $programiStudenta)->with('predmeti', $predmeti));
-            return $pdf->download('elektronskiIndeks.pdf');
+            $pdf->loadHTML(\View::make('pdf/elektronskiIndeks_pdf')
+                ->with('student', $student)
+                ->with('programi', $programiStudenta)
+                ->with('predmeti', $predmeti)
+                ->with('studProgram',$studProgram)
+                ->with('id_programa',$id_programa)
+            );
+            return $pdf->stream('elektronskiIndeks.pdf');
         }
         elseif (isset($request['csv']))
         {
@@ -146,50 +163,52 @@ class ElektronskiIndeksController extends Controller {
                 $kt = 0;
                 $povpOcena = 0;
                 $stevilo = 0;
-
-                foreach($predmeti->get() as $predmet)
+                if($id_programa == $program->id_programa)
                 {
-                    if($predmet->studijsko_leto == $program->studijsko_leto)
+                    foreach($predmeti->get() as $predmet)
                     {
-                        $stevec = 0;
-                        $trenutniDatum=$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first();
-                        if($trenutniDatum!=null)
+                        if($predmet->studijsko_leto == $program->studijsko_leto)
                         {
-                            $trenutniDatum=$trenutniDatum->datum;
-                        }
-
-                        foreach ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum') as $datumIzpita)
-                        {
-                            if ($datumIzpita->datum <= $trenutniDatum)
+                            $stevec = 0;
+                            $trenutniDatum=$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first();
+                            if($trenutniDatum!=null)
                             {
-                                $stevec++;
+                                $trenutniDatum=$trenutniDatum->datum;
                             }
-                        }
-                        $datumPolaganja = (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':date('d.m.Y',strtotime($student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum));
-                        $polaganjaLetos = (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->count();
-                        $ocena = (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
-                        if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first() != null)
-                        {
-                            if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena > 5)
-                            {
-                                $kt=$kt+$predmet->predmet->KT;
-                                $ktSkupaj=$ktSkupaj+$predmet->predmet->KT;
-                                $povpOcena=$povpOcena+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
-                                $ocenaSkupaj=$ocenaSkupaj+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
-                                $stevilo++;
-                                $steviloSkupaj++;
 
+                            foreach ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum') as $datumIzpita)
+                            {
+                                if ($datumIzpita->datum <= $trenutniDatum)
+                                {
+                                    $stevec++;
+                                }
                             }
-                        }
-                        $nosilciImena = $predmet->predmet->nosilec->ime.' '.$predmet->predmet->nosilec->priimek;
-                        if($predmet->predmet->nosilec2!=null){
-                            $nosilciImena .= ', '.$predmet->predmet->nosilec2->ime.' '.$predmet->predmet->nosilec2->priimek;
-                        }
-                        if($predmet->predmet->nosilec3!=null){
-                            $nosilciImena .= ', '.$predmet->predmet->nosilec3->ime.' '.$predmet->predmet->nosilec3->priimek;
-                        }
-                        if ($ocena > 5) {
-                            $content[] = [$predmet->predmet->sifra, $predmet->predmet->naziv, $nosilciImena, $predmet->predmet->KT, $datumPolaganja, $stevec, $polaganjaLetos, $ocena];
+                            $datumPolaganja = (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':date('d.m.Y',strtotime($student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first()->datum));
+                            $polaganjaLetos = (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->count();
+                            $ocena = (($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)?'':$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
+                            if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first() != null)
+                            {
+                                if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena > 5)
+                                {
+                                    $kt=$kt+$predmet->predmet->KT;
+                                    $ktSkupaj=$ktSkupaj+$predmet->predmet->KT;
+                                    $povpOcena=$povpOcena+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
+                                    $ocenaSkupaj=$ocenaSkupaj+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
+                                    $stevilo++;
+                                    $steviloSkupaj++;
+
+                                }
+                            }
+                            $nosilciImena = $predmet->predmet->nosilec->ime.' '.$predmet->predmet->nosilec->priimek;
+                            if($predmet->predmet->nosilec2!=null){
+                                $nosilciImena .= ', '.$predmet->predmet->nosilec2->ime.' '.$predmet->predmet->nosilec2->priimek;
+                            }
+                            if($predmet->predmet->nosilec3!=null){
+                                $nosilciImena .= ', '.$predmet->predmet->nosilec3->ime.' '.$predmet->predmet->nosilec3->priimek;
+                            }
+                            if ($ocena > 5) {
+                                $content[] = [$predmet->predmet->sifra, $predmet->predmet->naziv, $nosilciImena, $predmet->predmet->KT, $datumPolaganja, $stevec, $polaganjaLetos, $ocena];
+                            }
                         }
                     }
                 }
@@ -205,7 +224,7 @@ class ElektronskiIndeksController extends Controller {
 
                 foreach($predmeti->get() as $predmet)
                 {
-                    if($predmet->studijsko_leto == $program->studijsko_leto)
+                    if($predmet->studijsko_leto == $program->studijsko_leto && $id_programa == $program->id_programa)
                     {
                         $stevec = 0;
                         $trenutniDatum=$student->polaganja()->where('studijsko_leto','=',$program->studijsko_leto)->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortByDesc('datum')->first();
@@ -229,17 +248,19 @@ class ElektronskiIndeksController extends Controller {
                             if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena > 5)
                             {
                                 $kt=$kt+$predmet->predmet->KT;
-                                $ktSkupaj=$ktSkupaj+$predmet->predmet->KT;
+                                //$ktSkupaj=$ktSkupaj+$predmet->predmet->KT;
                                 $povpOcena=$povpOcena+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
-                                $ocenaSkupaj=$ocenaSkupaj+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
+                                //$ocenaSkupaj=$ocenaSkupaj+$student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->get()->sortByDesc('datum')->first()->pivot->ocena;
                                 $stevilo++;
-                                $steviloSkupaj++;
+                                //$steviloSkupaj++;
 
                             }
                         }
                     }
                 }
-                $content[] = [$predmet->studijsko_leto,$stevilo, $kt, (($stevilo==0)?'':number_format((float)($povpOcena/$stevilo), 3, '.', '')),'','','',''];
+                if($stevilo>0){
+                    $content[] = [$predmet->studijsko_leto,$stevilo, $kt, (($stevilo==0)?'':number_format((float)($povpOcena/$stevilo), 2, '.', '')),'','','',''];
+                }
             }
             //Število opravljenih izpitov	Kreditne točke	Skupna povprečna ocena
             $content[] = ['', '','','','',''];

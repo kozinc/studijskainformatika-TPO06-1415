@@ -86,9 +86,9 @@
                                     </td>
                                     <td>
                                         @if(in_array($rok->id,$prijave))
-                                             <input type="button" class="btn btn-danger izpitni_roki" data-toggle="tooltip" title="Hooray!" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
+                                             <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                         @else
-                                            <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-toggle="tooltip" title="Hooray!" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
+                                            <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
                                             @if($pavzer)
                                                 @if(isset($pavzerska_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$pavzerska_polaganja[$rok->id_predmeta]}}
                                                 @else{{ 'data-polaganje=0' }}
@@ -116,7 +116,7 @@
                                             @endif
                                         @elseif(in_array($rok->id_predmeta,$neocenjena_polaganja))
                                             @if(in_array($rok->id,$prijave))
-                                                <input type="button" class="btn btn-danger izpitni_roki" data-toggle="tooltip" title="Hooray!" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
+                                                <input type="button" class="btn btn-danger izpitni_roki" data-toggle="tooltip" title="Odjavite se lahko do {{ date('d.m.Y 0:59',strtotime($rok->datum.' -1 day')) }}" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                             @else
                                                 <p>Prijava na ta predmet že obstaja.</p>
                                             @endif
