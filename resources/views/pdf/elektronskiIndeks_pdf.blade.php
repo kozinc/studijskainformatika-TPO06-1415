@@ -73,6 +73,7 @@ if ( isset($pdf) ) {
 <h3>
     <div style="text-transform: uppercase;"> {{$student->priimek}}, {{$student->ime}} {{$student->vpisna}}</div>
     Elektronski indeks
+    <div>{{$studProgram->ime}}</div>
 </h3>
 
 @foreach($programi as $program)
