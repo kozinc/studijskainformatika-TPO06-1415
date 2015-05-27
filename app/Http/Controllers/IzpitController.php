@@ -53,7 +53,7 @@ class IzpitController extends Controller {
             }
         }
 
-        $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-1 week')))->sortBy('datum');
+        $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-2 weeks')))->sortBy('datum');
         $polaganja = $student->polaganja()->get();
         $opravljeni_predmeti = $student->Predmeti()->wherePivot('ocena','>',5)->lists('id_predmeta');
         $prijave = $stevilo_polaganj = $neocenjena_polaganja = $pavzerska_polaganja = $letosnja_polaganja =
