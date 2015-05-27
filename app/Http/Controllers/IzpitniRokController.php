@@ -11,17 +11,6 @@ class IzpitniRokController extends Controller {
         $predmeti = \App\Models\Predmet::orderBy('naziv', 'ASC')->lists('id');
         $predmeti2 = array();
 
-        //izloci diplomsko delo in magistersko delo
-        foreach($predmeti as $p){
-            $pr = \App\Models\Predmet::where('id', $p)->first();
-            $ime = $pr->sifra . " - " . $pr->naziv;
-            if($pr->sifra != '11111'){
-                if($pr->sifra != '22222') array_push($predmeti2, $ime);
-            }
-        }
-        array_unshift($predmeti2, 'Izberi predmet...');
-        //
-
         // doloci katere predmete lahko ureja
         if(\Session::get("vloga") == "ucitelj"){
             $prof_email = \Session::get('session_id');
@@ -29,6 +18,32 @@ class IzpitniRokController extends Controller {
             \Session::set('nosilec', $ucitelj->id);
         }
         else \Session::set('nosilec', '');
+        //
+
+        //izloci diplomsko delo in magistersko delo
+        foreach($predmeti as $p){
+            $pr = \App\Models\Predmet::where('id', $p)->first();
+            $ime = $pr->sifra . " - " . $pr->naziv;
+            if(\Session::get('nosilec') > 0){
+                $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015');
+                $program_predmet_first = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015')->first();
+
+                if($program_predmet_first->id_predmeta == 55){
+                    if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
+                        array_push($predmeti2, $ime);
+                    }
+                }
+                else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ) {
+                    if ($pr->sifra != '11111') {
+                        if ($pr->sifra != '22222') array_push($predmeti2, $ime);
+                    }
+                }
+            }
+            else if($pr->sifra != '11111'){
+                if($pr->sifra != '22222') array_push($predmeti2, $ime);
+            }
+        }
+        array_unshift($predmeti2, 'Izberi predmet...');
         //
 
         $nosilci = array();
@@ -49,11 +64,28 @@ class IzpitniRokController extends Controller {
         //izloci diplomsko delo in magistersko delo
         foreach($predmeti as $p){
             $pr = \App\Models\Predmet::where('id', $p)->first();
-            if($pr->sifra != '11111'){
+            $ime = $pr->sifra . " - " . $pr->naziv;
+            if(\Session::get('nosilec') > 0){
+                $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015');
+                $program_predmet_first = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015')->first();
+
+                if($program_predmet_first->id_predmeta == 55){
+                    if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
+                        array_push($predmeti2, $p);
+                    }
+                }
+                else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ){
+                    if ($pr->sifra != '11111') {
+                        if ($pr->sifra != '22222') array_push($predmeti2, $p);
+                    };
+                }
+            }
+            else if($pr->sifra != '11111'){
                 if($pr->sifra != '22222') array_push($predmeti2, $p);
             }
         }
         array_unshift($predmeti2, 0);
+
         $predmet_id = $predmeti2[$predmet_id2];
         \Session::set("izbrani_predmet", $predmet_id);
         $predmet = \App\Models\Predmet::find($predmet_id);
@@ -83,8 +115,10 @@ class IzpitniRokController extends Controller {
                 if(strtotime($a) > strtotime($letos)) $datumi_izpitov[$ids[$j]] = $a;
             }
 
+            $program_predmet_bla = \DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', '2014/2015');
+
             //za kononenko divjak primer
-            if(\DB::table('program_predmet')->where('id_predmeta', $predmet_id)->where('studijsko_leto', '2014/2015')->count() > 1){
+            if($program_predmet_bla->first()->id_predmeta == 55){
 
                 $izpitni_roki_nosilci = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->orderBy('datum', 'DESC')->lists('id_nosilca');
                 $nosilci_list = array();
@@ -121,6 +155,7 @@ class IzpitniRokController extends Controller {
                     $nosilec3 = '';
 
                     $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
+                    echo $i['nosilec'];
                     $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
                     $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
                     $today = date("Y-m-d");
@@ -197,14 +232,31 @@ class IzpitniRokController extends Controller {
         }
 
         $predmeti2 = array();
+        //izloci diplomsko delo in magistersko delo
         foreach($predmeti as $p){
             $pr = \App\Models\Predmet::where('id', $p)->first();
             $ime = $pr->sifra . " - " . $pr->naziv;
-            if($pr->sifra != '11111'){
+            if(\Session::get('nosilec') > 0){
+                $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015');
+                $program_predmet_first = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015')->first();
+
+                if($program_predmet_first->id_predmeta == 55){
+                    if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
+                        array_push($predmeti2, $ime);
+                    }
+                }
+                else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ){
+                    if ($pr->sifra != '11111') {
+                        if ($pr->sifra != '22222') array_push($predmeti2, $ime);
+                    }
+                }
+            }
+            else if($pr->sifra != '11111'){
                 if($pr->sifra != '22222') array_push($predmeti2, $ime);
             }
         }
         array_unshift($predmeti2, 'Izberi predmet...');
+        //
         return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti2)->with('predmet_id', $predmet_id2)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov)->with('nosilci', $nosilci)->with('dd_nosilci', $dd_nosilci);
     }
 
@@ -241,7 +293,7 @@ class IzpitniRokController extends Controller {
             //$send_mail->send("veronika.blazic@gmail.com", $mail, "Referat FRI - Sprememba izpitnega roka", $s);
         }
 
-        $send_mail->send("veronika.blazic@gmail.com", "veronika.blazic@gmail.com", "Referat FRI - Sprememba izpitnega roka", $s);
+        //$send_mail->send("veronika.blazic@gmail.com", "veronika.blazic@gmail.com", "Referat FRI - Sprememba izpitnega roka", $s);
     }
 
     // brise izpitni rok, odjavi studente
@@ -344,11 +396,12 @@ class IzpitniRokController extends Controller {
         $nova_ura = \Input::get('ura1');
         $nov_prostor = \Input::get('prostor1');
 
-        if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 55){
-            $rok = \DB::table('student_izpit')->where('id_izpitnega_roka', $star_izpitni_rok_id);
-            $predmet = \App\Models\Predmet::find($rok->id_predmeta);
+        if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
+            //$rok = \DB::table('student_izpit')->where('id_izpitnega_roka', $star_izpitni_rok_id)->first();
+            $izpit = \App\Models\IzpitniRok::find($star_izpitni_rok_id);
+            $predmet = \App\Models\Predmet::find($izpit->id_predmeta);
             if($predmet->id == 55){
-                if($rok->id_nosilca != \Session::get('nosilec')) {
+                if($izpit->id_nosilca != \Session::get('nosilec')) {
                     \Session::set("izpitni_roki_sporocilo", "Nimate pooblastil za spreminjanje tega izpitnega roka");
                     return self::getSpremeniIzpitniRok();
                 }
@@ -373,6 +426,11 @@ class IzpitniRokController extends Controller {
 
             $deli_datuma = explode('.', $nov_izpitni_rok);
             $nov_izpitni_rok = $deli_datuma[2] . "-"  . $deli_datuma[1] . "-" . $deli_datuma[0];
+
+            if(\App\Models\IzpitniRok::where('datum', $nov_izpitni_rok)->where('id_predmeta', $predmet_id)->exists()){
+                \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - za izbrani datum že obstaja izpitni rok");
+                return self::getSpremeniIzpitniRok();
+            }
 
             $spremeni_datum = \App\Models\IzpitniRok::where('id', $star_izpitni_rok_id)->first();
             $spremeni_datum->datum = $nov_izpitni_rok;
