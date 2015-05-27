@@ -90,13 +90,11 @@
         <br/>
 
         @if($izpitni_roki != '' || Session::get('izpitni_roki_sporocilo') == "Za predmet ni razpisanih izpitnih rokov")
-            @if(Session::get('nosilec') == $nosilci[0] || Session::get('nosilec') == $nosilci[1] || Session::get('nosilec') == $nosilci[2] || Session::get('nosilec') == '')
-                @if($predmet_id != 0)
-                    <button id="izpit_button1" class="btn btn-default">Dodaj izpitni rok</button>
-                    @if($izpitni_roki != '')
-                        <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
-                        <br/>
-                    @endif
+            @if($predmet_id != 0)
+                <button id="izpit_button1" class="btn btn-default">Dodaj izpitni rok</button>
+                @if($izpitni_roki != '')
+                    <button id="izpit_button2"  class="btn btn-default">Spremeni izpitni rok</button>
+                    <br/>
                 @endif
             @endif
 
@@ -104,7 +102,7 @@
                 <div class="form-group" id="obrazec_izpit1" style="width:200px; margin-left: 10px">
                     <br>
                     {!! Form::open(array('action' => 'IzpitniRokController@dodajIzpitniRok')) !!}
-                    @if(count($dd_nosilci)>0)
+                    @if(count($dd_nosilci)>0 && $dd_nosilci[0]!=0)
                         {!! Form::select('nosilec', $dd_nosilci, 0, array('class' => 'btn btn-default dropdown-toggle')) !!}
                     @endif
                     {!! Form::text('date', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker')) !!}
@@ -167,10 +165,8 @@
             <td>{{ $i->st_prijav }} @if($i->st_prijav > 0) / <a href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$i->id, 'izvoz'=>0, 'status'=>0]) }}">Seznam študentov</a> @endif</td>
             @if($i->ocene != "Ocene so vnešene")
                 <td>
-                    @if(Session::get('nosilec') == $nosilci[0] || Session::get('nosilec') == $nosilci[1] || Session::get('nosilec') == $nosilci[2] || Session::get('nosilec') == '')
-                        @if(strtotime($i->datum) > strtotime('30.09.2014'))
-                            <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
-                        @endif
+                    @if(strtotime($i->datum) > strtotime('30.09.2014'))
+                        <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
                     @endif
                 </td>
             @else
@@ -185,12 +181,12 @@
 <script>
     $(function() {
         $("#datepicker").datepicker({
-            minDate: 1,
+            minDate: 2,
             dateFormat: 'dd.mm.yy'
         });
 
         $("#datepicker1").datepicker({
-            minDate: 1,
+            minDate: 2,
             dateFormat: 'dd.mm.yy'
         });
     });
