@@ -420,6 +420,7 @@ class IzpitniRokController extends Controller {
                     }
                 }
             }
+            $student['placilo'] = $student_izpit_ocena->placilo_izpita;
             $student['st_letos'] = $st_polaganj_letos;
             $student['st_vseh'] = $st_polaganj;
             $predmeti_studenta = \DB::table('student_predmet')->where('id_studenta', $student->id)->where('id_predmeta', $izpit->id_predmeta)->orderBy('studijsko_leto', 'ASC')->first();

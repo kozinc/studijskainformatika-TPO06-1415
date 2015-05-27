@@ -43,6 +43,7 @@
                     <th>Štud. leto</th>
                     <th>Št. vseh</th>
                     <th>Št. letos</th>
+                    <th>Plačilo</th>
                     <th></th>
                 </tr>
                 @foreach($studentje as $student)
@@ -52,6 +53,7 @@
                         <td> {{ substr($student->st_leto, 0, 5). substr($student->st_leto, 7, 9)}} </td>
                         <td> {{$student->st_vseh}} </td>
                         <td> {{$student->st_letos}} </td>
+                        <td> {{$student->placilo}} </td>
                         <td><a class="btn btn-info" href="{{ action('IzpitniRokController@vrniPrijavo',['id'=>$izpit_id, 'id_studenta'=>$student->id]) }}" onclick="if(!confirm('Ste prepričani, da želite vrniti prijavo na izpitni rok študentu {{ $student->ime }} {{ $student->priimek }} z vpisno številko {{ $student->vpisna }} ?')){return false;};">VP</a></td>
                     </tr>
                 @endforeach
