@@ -155,7 +155,6 @@ class IzpitniRokController extends Controller {
                     $nosilec3 = '';
 
                     $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
-                    echo $i['nosilec'];
                     $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
                     $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
                     $today = date("Y-m-d");
@@ -257,7 +256,7 @@ class IzpitniRokController extends Controller {
         }
         array_unshift($predmeti2, 'Izberi predmet...');
         //
-        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti2)->with('predmet_id', $predmet_id2)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov)->with('nosilci', $nosilci)->with('dd_nosilci', $dd_nosilci);
+        return \View::make('izpitni_roki/spremeniIzpitniRok')->with('predmeti', $predmeti2)->with('predmet_id', $predmet_id2)->with('izpitni_roki', $izpitni_roki_list)->with('datumi_izpitov', $datumi_izpitov)->with('nosilci', $nosilci)->with('dd_nosilci', $dd_nosilci)->with('dejanski_id_predmeta', $predmet_id);
     }
 
 
@@ -408,7 +407,9 @@ class IzpitniRokController extends Controller {
             }
         }
 
+        //special za divjak/kononenko
         if($predmet_id == 55){
+
             $star_izpitni_rok = \App\Models\IzpitniRok::find($star_izpitni_rok_id);
             $nosilec_id = $star_izpitni_rok->id_nosilca;
 
@@ -419,6 +420,15 @@ class IzpitniRokController extends Controller {
                 \Session::set("izpitni_roki_sporocilo", "Napaka pri shranjevanju - za izbrani datum že obstaja izpitni rok");
                 return self::getSpremeniIzpitniRok();
             }
+
+            $spremeni_datum = \App\Models\IzpitniRok::where('id', $star_izpitni_rok_id)->first();
+            $spremeni_datum->datum = $nov_izpitni_rok1;
+            if($nova_ura != "") $spremeni_datum->ura_izpita = $nova_ura;
+            if($nov_prostor != "") $spremeni_datum->predavalnice = $nov_prostor;
+            $spremeni_datum->save();
+            \Session::set("izpitni_roki_sporocilo", "Izpitni rok je bil uspešno shranjen");
+            return self::getSpremeniIzpitniRok();
+
         }
 
         if($nov_izpitni_rok != ""){
