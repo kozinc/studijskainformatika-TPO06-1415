@@ -55,8 +55,8 @@
                     <div class="form-group">
                         <div class="col-lg-4">
                             <label for="sel1">Datum izpitnega roka </label>
-                            <select class="form-control" id="izpitni_roki" name="datum">
-                                <option>Vnos brez polaganja.</option>
+                            <select class="form-control" id="izpitni_roki_vnos" name="datum">
+                                <option value="brez_prijave">Vnos brez prijave.</option>
                                 @foreach($predmeti as $p)
                                     @foreach($p->studentovaPolaganja($student) as $polaganje)
                                         @if (($polaganje->datum <= date ('Y-m-d')) && ($polaganje->pivot->ocena == 0))
@@ -65,6 +65,12 @@
                                     @endforeach
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group skrijDatum">
+                        <div class="col-lg-4">
+                            <label for="sel1">Datum vnosa ocene </label>
+                            <input type="text" id="datum_vnosa" name="datum_vnosa" value={{date('d.m.Y')}} class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

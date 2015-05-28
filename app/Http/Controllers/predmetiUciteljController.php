@@ -77,15 +77,31 @@ class PredmetiUciteljController extends Controller
         $student = Student::where('vpisna','=',$request['vpisna'])->first();
         $predmet = Predmet::where('sifra','=',$request['sifra'])->first();
         $ocena = $request['ocena'];
-        if (is_numeric($ocena) && $ocena > 4 && $ocena < 11)
+        if (is_numeric($ocena) && $ocena > 0 && $ocena < 11)
         {
             $sp = StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->orderBy('id','desc')->first();
             $sp->ocena = $ocena;
-            $sp->datum_vnosa_ocene = date ('Y-m-d');
+            //Če je vezano na kak datum, zapišem še tja:
+            $datum = $request['datum'];
+            if ($datum == "brez_prijave")
+            {
+                if (date('Y-m-d', strtotime($request['datum_vnosa'])) > date ('Y-m-d'))
+                {
+                    return Redirect::back()->withErrors(['Datum vnosa ocene ne sme biti večji od današnjega.']);
+                }
+                else
+                {
+                    $sp->datum_vnosa_ocene = date('Y-m-d', strtotime($request['datum_vnosa']));
+                }
+            }
+            else
+            {
+                $sp->datum_vnosa_ocene = date('Y-m-d');
+            }
             $sp->save();
             //Če je vezano na kak datum, zapišem še tja:
             $datum = $request['datum'];
-            if ($datum != "Vnos brez polaganja.")
+            if ($datum != "brez_prijave")
             {
                 $datum = date('Y-m-d',strtotime($datum));
                 $izpitni_rok = IzpitniRok::where('id_predmeta','=',$predmet->id)->where('datum','=',$datum)->first();
