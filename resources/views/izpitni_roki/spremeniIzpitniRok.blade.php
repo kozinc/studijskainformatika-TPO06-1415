@@ -189,7 +189,7 @@
                 <td>
                     @if(strtotime($i->datum) > strtotime('30.09.2014'))
                         @if($dejanski_id_predmeta == 55)
-                            @if(\Session::get('imepriimek') == $i->nosilec)
+                            @if(\Session::get('imepriimek') == $i->nosilec || \Session::get('vloga')=="referent")
                                 <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
                             @endif
                         @else
