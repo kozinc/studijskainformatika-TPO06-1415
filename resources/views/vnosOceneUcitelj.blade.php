@@ -47,12 +47,18 @@
                 <div class="form-group">
                     <div class="col-lg-4">
                         <label for="sel1">Datum izpitnega roka </label>
-                        <select class="form-control" id="sel1" name="datum">
-                            <option>Vnos brez polaganja.</option>
+                        <select class="form-control" id="izpitni_roki_vnos" name="datum">
+                            <option value="brez_prijave">Vnos brez prijave.</option>
                             @foreach($datumi as $datum)
                                 <option role="presentation">{{date('d.m.Y',strtotime($datum))}}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                <div class="form-group skrijDatum">
+                    <div class="col-lg-4" >
+                        <label for="sel1">Datum vnosa ocene </label>
+                        <input type="text" id="datum_vnosa" name="datum_vnosa" value={{date('d.m.Y')}} class="form-control">
                     </div>
                 </div>
                 <div class="form-group">

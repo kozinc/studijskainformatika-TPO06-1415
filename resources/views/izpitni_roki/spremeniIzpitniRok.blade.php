@@ -26,7 +26,7 @@
     <div class="container-fluid">
         @if (\Session::get('vloga') == "referent" )
             <div class="navbar-header">
-                <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
+                <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} (referent)</a>
             </div>
             <div class="nav navbar-nav navbar-right">
                 <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
@@ -41,22 +41,27 @@
                 <a class="navbar-brand" href="{{ action('PredmetController@index') }}">Predmeti</a>
             </div>
             <div class="nav navbar-nav navbar-right dropdown">
-                <a class="navbar-brand" href="" class="dropdown-toggle" data-toggle="dropdown" role="button">Študenti</a>
+                <a class="navbar-brand" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Študenti</a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ action('HomeController@datoteka') }}">Uvoz novih študentov</a></li>
                     <li><a href="{{ action('VpisniListController@seznamVlog') }}">Potrdi vpisane študente</a></li>
                     <li><a href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a></li>
                     <li><a href="{{ action('ListStudentsController@getStudents') }}">Seznam študentov po predmetih</a></li>
+                    <li><a href="{{ action('ListStudentsController@getAdvSeznam') }}">Seznam študentov - napredno iskanje</a></li>
+                    <li><a href="{{ action('StanjeVpisaController@index') }}">Stanje vpisa</a></li>
                     <li><a href="{{ action('VpisniListReferentController@obrazecVpisniList') }}">Vpiši študenta</a></li>
                 </ul>
             </div>
 
         @elseif (\Session::get('vloga') == "student" )
             <div class="navbar-header">
-                <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
+                <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} (študent)</a>
             </div>
             <div class="nav navbar-nav navbar-right">
                 <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <a class="navbar-brand" href="{{ action('IzpitController@mojiRazpisaniRoki')  }}">Izpitni roki</a>
             </div>
             <div class="nav navbar-nav navbar-right">
                 <a class="navbar-brand" href="{{ action('VpisniListController@obrazecVpisniList')  }}">Vpisni list</a>
@@ -64,19 +69,36 @@
             <div class="nav navbar-nav navbar-right">
                 <a class="navbar-brand" href="{{ action('KartotecniListController@prikazKartotecniList', ['id'=>\Session::get('id')])  }}">Kartotečni list</a>
             </div>
+            <div class="nav navbar-nav navbar-right">
+                <a class="navbar-brand" href="{{ action('ElektronskiIndeksController@prikazEIndeks', ['id'=>\Session::get('id')])  }}">Elektronski indeks</a>
+            </div>
         @elseif (\Session::get('vloga') == "ucitelj" )
             <div class="navbar-header">
-                <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} ({{\Session::get('vloga')}})</a>
+                <a class="navbar-brand">Pozdravljeni, {{\Session::get('imepriimek')}} (učitelj)</a>
             </div>
             <div class="nav navbar-nav navbar-right">
                 <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">Odjava</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+                <a class="navbar-brand" href="{{ action('PredmetiUciteljController@vrniPredmete') }}">Moji predmeti</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <a class="navbar-brand" href="{{ action('IzpitniRokController@getSpremeniIzpitniRok') }}">Izpitni roki</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
                 <a class="navbar-brand" href="{{ action('StudentController@searchForm') }}">Podatki o študentih</a>
             </div>
+            <div class="nav navbar-nav navbar-right">
+                <a class="navbar-brand" href="{{ action('ListStudentsController@getAdvSeznam') }}">Seznam študentov - napredno iskanje</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <a class="navbar-brand" href="{{ action('StanjeVpisaController@index') }}">Stanje vpisa</a>
+            </div>
         @endif
+
     </div>
 </nav>
+
 
     <div class="form-group" style="width:1200px; margin: auto; margin-top: 150px">
 
@@ -102,7 +124,7 @@
                 <div class="form-group" id="obrazec_izpit1" style="width:200px; margin-left: 10px">
                     <br>
                     {!! Form::open(array('action' => 'IzpitniRokController@dodajIzpitniRok')) !!}
-                    @if(count($dd_nosilci)>0 && $dd_nosilci[0]!=0)
+                    @if($dejanski_id_predmeta == 55)
                         {!! Form::select('nosilec', $dd_nosilci, 0, array('class' => 'btn btn-default dropdown-toggle')) !!}
                     @endif
                     {!! Form::text('date', null, array('type' => 'text', 'class' => 'form-control datepicker','placeholder' => 'Datum izpita', 'id' => 'datepicker')) !!}
@@ -166,12 +188,18 @@
             @if($i->ocene != "Ocene so vnešene")
                 <td>
                     @if(strtotime($i->datum) > strtotime('30.09.2014'))
-                        <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
+                        @if($dejanski_id_predmeta == 55)
+                            @if(\Session::get('imepriimek') == $i->nosilec)
+                                <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
+                            @endif
+                        @else
+                            <a href="{{ action('IzpitniRokController@brisiIzpitniRok',['id'=>$i->id]) }}" onclick="if(!confirm('Ste prepričani, da želite izbrisati izpitni rok? Vsi prijavljeni študenje bodo obveščeni s strani sistema.')){return false;};">Briši</a>
+                        @endif
                     @endif
-                </td>
-            @else
-                <td>{{ $i->ocene }}</td>
-            @endif
+            </td>
+                    @else
+                        <td>{{ $i->ocene }}</td>
+                    @endif
         </tr>
     @endforeach
 </table>

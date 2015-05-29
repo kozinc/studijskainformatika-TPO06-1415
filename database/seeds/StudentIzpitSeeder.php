@@ -86,6 +86,8 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>119, 'ocena'=>5, 'tocke_izpita'=>41]);
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>120, 'ocena'=>5, 'tocke_izpita'=>744]);
         DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>121, 'ocena'=>9, 'tocke_izpita'=>89]);
+        DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>136, 'ocena'=>9, 'tocke_izpita'=>89, 'datum_vnosa_ocene'=>'2015-05-27']);
+
         //DB::table('student_izpit')->insert(['id_studenta'=>3, 'id_izpitnega_roka'=>127, 'ocena'=>9, 'tocke_izpita'=>83]);
 
         //Ivanka Uhan v 1.letniku
