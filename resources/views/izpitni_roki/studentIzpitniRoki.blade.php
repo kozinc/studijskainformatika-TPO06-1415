@@ -56,54 +56,57 @@
                                 @if($referent)
                                     <td>
                                         <ul>
-                                        @if(in_array($rok->id_predmeta, $opravljeni_predmeti))
-                                            <li>Študent že ima oceno pri tem predmetu</li>
-                                        @endif
-                                        @if($rok->datum < date('Y-m-d'))
-                                            @if(in_array($rok->id,$prijave))
-                                                <li>Rok za odjavo je potekel</li>
-                                            @else
-                                                <li>Rok za prijavo je potekel</li>
+                                            @if(in_array($rok->id_predmeta, $opravljeni_predmeti))
+                                                <li>Študent že ima oceno pri tem predmetu</li>
                                             @endif
-                                        @endif
-                                        @if(in_array($rok->id_predmeta,$neocenjena_polaganja))
-                                            @if(!in_array($rok->id,$prijave))
-                                                <li>Prijava na ta predmet že obstaja.</li>
+                                            @if($rok->datum < date('Y-m-d'))
+                                                @if(in_array($rok->id,$prijave))
+                                                    <li>Rok za odjavo je potekel</li>
+                                                @else
+                                                    <li>Rok za prijavo je potekel</li>
+                                                @endif
                                             @endif
-                                        @endif
-                                        @if(isset($pavzerska_polaganja[$rok->id_predmeta]) && $pavzerska_polaganja[$rok->id_predmeta] >= 6)
-                                            <li>Preseženo dovoljeno skupno število opravljanj predmeta.</li>
-                                        @endif
-                                        @if(isset($letosnja_polaganja[$rok->id_predmeta]) && $letosnja_polaganja[$rok->id_predmeta] >= 3)
-                                            <li>Preseženo dovoljeno število opravljanj v tem študijskem letu.</li>
-                                        @endif
-                                        @if($rok->datum > date('Y-m-d',strtotime('+1 day')))
-                                            @if(isset($premalo_dni[$rok->id_predmeta]) && $premalo_dni[$rok->id_predmeta] > date('Y-m-d',strtotime('-10 days '.$rok->datum)) )
-                                                <li>Od zadnjega polaganja ni preteklo dovolj dni.</li>
+                                            @if(in_array($rok->id_predmeta,$neocenjena_polaganja))
+                                                @if(!in_array($rok->id,$prijave))
+                                                    <li>Prijava na ta predmet že obstaja.</li>
+                                                @endif
                                             @endif
-                                        @endif
+                                            @if(isset($pavzerska_polaganja[$rok->id_predmeta]) && $pavzerska_polaganja[$rok->id_predmeta] >= 6)
+                                                <li>Presegli ste dovoljeno skupno število opravljanj predmeta.</li>
+                                            @elseif(isset($skupna_polaganja[$rok->id_predmeta]) && $skupna_polaganja[$rok->id_predmeta]  >= 6)
+                                                <li>Presegli ste dovoljeno skupno število opravljanj predmeta.</li>
+                                            @elseif(isset($redna_polaganja[$rok->id_predmeta]) && isset($pavzerska_polaganja[$rok->id_predmeta]) && ($redna_polaganja[$rok->id_predmeta] + $pavzerska_polaganja[$rok->id_predmeta]) >= 6)
+                                                <li>Presegli ste dovoljeno skupno število opravljanj predmeta.</li>
+                                            @elseif(isset($letosnja_polaganja[$rok->id_predmeta]) && $letosnja_polaganja[$rok->id_predmeta] >= 3)
+                                                <li>Presegli ste dovoljeno število opravljanj v tem študijskem letu.</li>
+                                                @if($rok->datum > date('Y-m-d',strtotime('+1 day')))
+                                                    @if(isset($premalo_dni[$rok->id_predmeta]) && $premalo_dni[$rok->id_predmeta] > date('Y-m-d',strtotime('-10 days '.$rok->datum)) )
+                                                        <li>Od zadnjega polaganja ni preteklo dovolj dni.</li>
+                                                    @endif
+                                                @endif
+                                            @endif
                                         </ul>
                                     </td>
                                     <td>
-                                        @if(in_array($rok->id,$prijave))
-                                             <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
+                                    @if(in_array($rok->id,$prijave))
+                                            <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-referent="0" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                         @else
-                                            <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
+                                            <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-referent="1" data-action="prijava" value="Prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
                                             @if($pavzer)
                                                 @if(isset($pavzerska_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$pavzerska_polaganja[$rok->id_predmeta]}}
-                                                @else{{ 'data-polaganje=0' }}
-                                                @endif
-                                            @elseif($redno)
+                                                        @else{{ 'data-polaganje=0' }}
+                                                        @endif
+                                                    @elseif($redno)
                                                 @if(isset($polaganja_s_statusom[$rok->id_predmeta])){{ 'data-polaganje='.$polaganja_s_statusom[$rok->id_predmeta] }}
-                                                @else {{ 'data-polaganje=0' }}
-                                                @endif
-                                            @elseif($ponavljanje)
+                                                        @else {{ 'data-polaganje=0' }}
+                                                        @endif
+                                                    @elseif($ponavljanje)
                                                 @if(isset($letosnja_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$letosnja_polaganja[$rok->id_predmeta]}}
-                                                @else {{ 'data-polaganje=0' }}
-                                                @endif
-                                            @else {{ 'data-polaganje=0' }}
-                                            @endif
-                                                   value="Prijava">
+                                                        @else {{ 'data-polaganje=0' }}
+                                                        @endif
+                                                    @else {{ 'data-polaganje=0' }}
+                                                   @endif
+                                                   >
                                         @endif
                                     </td>
                                 @else
@@ -116,7 +119,7 @@
                                             @endif
                                         @elseif(in_array($rok->id_predmeta,$neocenjena_polaganja))
                                             @if(in_array($rok->id,$prijave))
-                                                <input type="button" class="btn btn-danger izpitni_roki" data-toggle="tooltip" title="Odjavite se lahko do {{ date('d.m.Y 0:59',strtotime($rok->datum.' -1 day')) }}" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
+                                                <input type="button" class="btn btn-danger izpitni_roki" data-toggle="tooltip" data-referent="0" title="Odjavite se lahko do {{ date('d.m.Y 0:59',strtotime($rok->datum.' -1 day')) }}" data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                             @else
                                                 <p>Prijava na ta predmet že obstaja.</p>
                                             @endif
@@ -132,9 +135,9 @@
                                             @if(isset($premalo_dni[$rok->id_predmeta]) && $premalo_dni[$rok->id_predmeta] > date('Y-m-d',strtotime('-10 days '.$rok->datum)) )
                                                 <p>Od zadnjega polaganja ni preteklo dovolj dni.</p>
                                             @elseif(in_array($rok->id,$prijave))
-                                                <input type="button" class="btn btn-danger izpitni_roki" data-toggle="tooltip" title="Prijavite se lahko do {{ date('d.m.Y 0:59',strtotime($rok->datum.' -1 day')) }}." data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
+                                                <input type="button" class="btn btn-danger izpitni_roki" data-toggle="tooltip" data-referent="0" title="Prijavite se lahko do {{ date('d.m.Y 0:59',strtotime($rok->datum.' -1 day')) }}." data-action="odjava" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                             @else
-                                                <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-toggle="tooltip" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
+                                                <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-toggle="tooltip" data-referent="0" data-action="prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
                                                 @if($pavzer)
                                                     @if(isset($pavzerska_polaganja[$rok->id_predmeta]))
                                                        title="Prijavite se lahko do {{ date('d.m.Y 0:59',strtotime($rok->datum.' -1 day')) }}. To bo vaše {{ $pavzerska_polaganja[$rok->id_predmeta]+1 }}. polaganje. Izpit je plačljiv! " {{ 'data-polaganje='.$pavzerska_polaganja[$rok->id_predmeta]}}
