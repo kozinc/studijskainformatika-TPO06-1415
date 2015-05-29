@@ -9,6 +9,7 @@
     <script src="{{ asset('js/jquery-te-1.4.0.min.js') }}"></script>
     <script src="{{ asset('js/functions.js') }}"></script>
     <style>
+        body { font-family: Deja Vu Sans; }
         h1, h2, h3, h4, h5, h6 {
             font-family:  DejaVu Sans;
         }
@@ -21,7 +22,7 @@
     </style>
 </head>
 
-<body style="font-family: Arial ">
+<body >
 <script type="text/php">
 
 if ( isset($pdf) ) {
@@ -149,7 +150,7 @@ if ( isset($pdf) ) {
                     <!-- ZA VSAK LETNIK/študijsko leto V PROGRAMU KONEC--> <!-- KONEC ZANKE za trenutni letnik/študijsko leto -->
             @endforeach
 </div>
-
+<div class="CSSTableGenerator">
 <table class="table">
     <tr>
         <th></th>
@@ -220,7 +221,7 @@ if ( isset($pdf) ) {
                                         ->where('studijsko_leto','=',$program->studijsko_leto)
                                         ->get()->sortByDesc('datum')->first()->pivot->ocena
                                 >5)
-                                <tr>
+                                <tr style="font-size: 10pt">
                                     <div style="display: none">{{$zaporedna++}}</div>
                                     <td>{{$zaporedna}}</td>
                                     <td>{{$predmet->predmet->sifra}}</td>
@@ -264,13 +265,13 @@ if ( isset($pdf) ) {
         @endif
     @endforeach
 </table>
-
+</div>
 <br/>
 
 <div class="panel-footer">
-    <div class="panel-body">
+    <div class="panel-body CSSTableGenerator">
         <h4>Povprečne ocene po študijskih letih za program</h4>
-        <table class="table table-hover">
+        <table class="table">
             <tr>
                 <th>Študijsko leto</th>
                 <th>Število opravljenih izpitov</th>
@@ -346,9 +347,9 @@ if ( isset($pdf) ) {
 </div>
 
 <div class="panel-footer">
-    <div class="panel-body">
+    <div class="panel-body CSSTableGenerator">
         <h4>Skupna povprečna ocena</h4>
-        <table class="table table-hover">
+        <table class="table">
             <tr>
                 <th>Število opravljenih izpitov</th>
                 <th>Kreditne točke</th>
