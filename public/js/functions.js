@@ -72,6 +72,15 @@ $(document).ready(function(){
         }
     });
 
+    $('#izpitni_roki_vnos').change(function(){
+        var value = $(this).val();
+        if(value=='brez_prijave'){
+            $('.skrijDatum').show();
+        }else{
+            $('.skrijDatum').hide();
+        }
+    });
+
     $('#struktura-open').click(function(){
        $('#struktura').hide();
     });
@@ -159,18 +168,28 @@ $(document).ready(function(){
         var action = $(this).data('action');
         var polaganje = parseInt($(this).data('polaganje'))+1;
         var pavzer = $(this).data('pavzer');
+        var referent = $(this).data('referent');
         $('#izpitni_rok_id').val(izpitni_rok_id);
         $('#action').val(action);
         var confirm_msg;
         if(action == 'prijava'){
-            confirm_msg = 'To je vaše ' + polaganje + '. polaganje. ';
+            if(referent == 1){
+                confirm_msg = 'To je študentovo ' + polaganje + '. polaganje. ';
+            }else{
+                confirm_msg = 'To je vaše ' + polaganje + '. polaganje. ';
+            }
             if(pavzer == 1 || polaganje > 3){
+
                 confirm_msg += 'Opravljanje izpita je plačljivo. ';
                 $('#placilo_izpita').val(1);
             }
             confirm_msg += 'Želite nadaljevati s prijavo?';
         }else {
-            confirm_msg = 'Ste prepričani, da se želite odjaviti od izpita?';
+            if(referent == 1){
+                confirm_msg = 'Ste prepričani, da želite študenta odjaviti od izpita?';
+            }else{
+                confirm_msg = 'Ste prepričani, da se želite odjaviti od izpita?';
+            }
         }
         if(confirm(confirm_msg)){
             $('#prijava_na_izpit').submit();
@@ -179,7 +198,7 @@ $(document).ready(function(){
 
     $('#predmet').change(function(){
         var id_predmeta = $(this).val();
-        var izpitni_roki = $('#izpitni_roki');
+        var izpitni_roki = $('#izpitni_roki_vnos');
         izpitni_roki.children('.p'+id_predmeta).show().siblings(':not(.p'+id_predmeta+')').hide();
     })
 
