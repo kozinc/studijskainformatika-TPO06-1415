@@ -148,7 +148,7 @@ class ElektronskiIndeksController extends Controller {
                 ->with('studProgram',$studProgram)
                 ->with('id_programa',$id_programa)
             );
-            return $pdf->stream('elektronskiIndeks.pdf');
+            return $pdf->download('elektronskiIndeks.pdf');
         }
         elseif (isset($request['csv']))
         {

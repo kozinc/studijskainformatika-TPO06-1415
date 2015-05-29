@@ -72,6 +72,15 @@ $(document).ready(function(){
         }
     });
 
+    $('#izpitni_roki_vnos').change(function(){
+        var value = $(this).val();
+        if(value=='brez_prijave'){
+            $('.skrijDatum').show();
+        }else{
+            $('.skrijDatum').hide();
+        }
+    });
+
     $('#struktura-open').click(function(){
        $('#struktura').hide();
     });
@@ -189,7 +198,7 @@ $(document).ready(function(){
 
     $('#predmet').change(function(){
         var id_predmeta = $(this).val();
-        var izpitni_roki = $('#izpitni_roki');
+        var izpitni_roki = $('#izpitni_roki_vnos');
         izpitni_roki.children('.p'+id_predmeta).show().siblings(':not(.p'+id_predmeta+')').hide();
     })
 
