@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class StudentProgram extends Model {
 
 protected $table = 'student_program';
-protected $fillable = ['letnik','vrsta_vpisa','studijsko_leto','nacin_studija','datum_vpisa', 'vloga_oddana', 'vloga_potrjena', 'prosta_izbira'];
+protected $fillable = ['letnik','vrsta_vpisa','studijsko_leto','nacin_studija','datum_vpisa', 'vloga_oddana', 'vloga_potrjena', 'prosta_izbira', 'oblika_studija', 'vrsta_studija'];
 protected $guarded = ['id', 'id_studenta', 'id_programa'];
 public $timestamps = false;
 

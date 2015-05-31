@@ -29,7 +29,7 @@
 </head>
 <body>
 
-    <h3>Seznam prijavljenih na izpit</h3>
+    <h3>Seznam končnih ocen</h3>
 
     <p>Predmet: [{{$predmet->sifra}}] {{$predmet->naziv}}</p>
     <p>Izpraševalci: {{$nosilci}}</p>
@@ -42,10 +42,11 @@
         <table>
             <tr style="background-color: #cccccc">
                 <td style="width: 50px"> </td>
-                <td style="width: 150px">Vpisna številka</td>
+                <td style="width: 150px">Vpisna št.</td>
                 @if($imena == 1)
                 <td style="width: 180px">Priimek in ime</td>
                 @endif
+                <td>Št. polaganj</td>
                 <td style="width: 80px">Ocena</td>
             </tr>
             @foreach($studentje as $student)
@@ -55,6 +56,7 @@
                     @if($imena == 1)
                     <td> {{$student->priimek}} {{$student->ime}} </td>
                     @endif
+                    <td> {{$student->st_vseh}}</td>
                     @if($student->ocena != 0)
                         <td> {{$student->ocena}} </td>
                     @else

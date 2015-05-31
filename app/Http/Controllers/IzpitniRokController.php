@@ -576,8 +576,9 @@ class IzpitniRokController extends Controller {
             return $pdf->download('seznam_ocene.pdf');
         }
         else if($izvoz == 8){
+            $export_content = [['Vpisna številka','Priimek in ime', 'Število polaganj', 'Ocena']];
             foreach($studentje as $s){
-                $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->ocena];
+                $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->st_vseh, $s->ocena];
             }
             \App\Helpers\ExportHelper::make_csv($export_content,'Seznam končnih ocen');
         }
@@ -637,12 +638,13 @@ class IzpitniRokController extends Controller {
         }
 
         if($student_program->vrsta_vpisa == 2) return $st_polaganj . "-" . ($st_polaganj - $st_polaganj_letos);
-        else return $st_polaganj . "-0";
+        else return $st_polaganj;
     }
 
-    public function vrniPrijavo($id_izpita, $id_studenta){
+    public function vrniPrijavo($id_izpita, $id_studenta, $view){
         \DB::table('student_izpit')->where('id_izpitnega_roka', $id_izpita)->where('id_studenta', $id_studenta)->update(array('vrnjena_prijava' => 1));
-        return self::izpisiSeznam($id_izpita, 0, 1);
+        if($view == 1) return self::izpisiSeznam($id_izpita, 0, 1);
+        else if($view == 2) return self::izpisiSeznam($id_izpita, 9, 1);
     }
 
     public function vnesiRezultat($id){

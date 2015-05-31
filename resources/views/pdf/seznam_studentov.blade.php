@@ -43,9 +43,9 @@
         <table>
             <tr style="background-color: #cccccc">
                 <td style="width: 50px"> </td>
-                <td style="width: 150px">Vpisna številka</td>
+                <td style="width: 150px">Vpisna št.</td>
                 <td style="width: 180px">Priimek in ime</td>
-                <td style="width: 150px">Študijsko leto</td>
+                <td style="width: 150px">Štud. leto</td>
                 <td style="width: 80px">Št vseh</td>
                 <td style="width: 80px">Št letos</td>
             </tr>
@@ -54,7 +54,7 @@
                     <td> {{$student->zaporedna_st}} </td>
                     <td> {{$student->vpisna}} </td>
                     <td> {{$student->priimek}} {{$student->ime}} </td>
-                    <td> {{$student->st_leto}} </td>
+                    <td> {{ substr($student->st_leto, 0, 5). substr($student->st_leto, 7, 9)}} </td>
                     <td> {{$student->st_vseh}} </td>
                     <td> {{$student->st_letos}} </td>
                 </tr>

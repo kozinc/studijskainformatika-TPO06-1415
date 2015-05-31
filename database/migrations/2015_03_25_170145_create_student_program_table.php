@@ -25,6 +25,8 @@ class CreateStudentProgramTable extends Migration {
             $table->date('datum_vpisa')->nullable();;
             $table->string('studijsko_leto');
             $table->integer('letnik');
+            $table->string('oblika_studija');
+            $table->string('vrsta_studija');
         });
 
 

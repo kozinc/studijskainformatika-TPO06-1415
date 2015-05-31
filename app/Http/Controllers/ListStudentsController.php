@@ -270,6 +270,8 @@ class ListStudentsController extends Controller {
 
         $predmeti = \DB::table('student_predmet')->where('id_studenta', $id)->where('studijsko_leto', $studijsko_leto)->lists('id_predmeta');
         $program = \App\Models\StudijskiProgram::find($student_program->id_programa)->first();
+        $vrsta_vpisa = \App\Models\VrstaVpisa::where('sifra', $student_program->vrsta_vpisa)->first();
+        $student_program['vrsta_vpisa'] = $vrsta_vpisa->ime;
         $izbirni = array();
         $o_predmeti = array();
 

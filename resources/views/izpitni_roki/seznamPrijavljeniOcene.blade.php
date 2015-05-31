@@ -31,6 +31,7 @@
                     <th>Št. letos</th>
                     <th>Št. točk</th>
                     <th>Ocena</th>
+                    <th></th>
                 </tr>
                 @foreach($studentje as $student)
                     <tr>
@@ -41,7 +42,8 @@
                         <td> {{$student->st_letos}} </td>
                         <td> {{$student->st_tock}} </td>
                         {!! Form::hidden('id'.$student->id, $student->id) !!}
-                        <td> {!! Form::select('ocena'.$student->id, ['/', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], $student->ocena, array('class' => 'btn btn-default dropdown-toggle')) !!} </td>
+                        <td> {!! Form::select('ocena'.$student->id, ['/', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], $student->ocena, array('class' => 'btn btn-default dropdown-toggle')) !!}
+                        <td><a class="btn btn-info" href="{{ action('IzpitniRokController@vrniPrijavo',['id'=>$izpit_id, 'id_studenta'=>$student->id, 'view'=>2]) }}" onclick="if(!confirm('Ste prepričani, da želite vrniti prijavo na izpitni rok študentu {{ $student->ime }} {{ $student->priimek }} z vpisno številko {{ $student->vpisna }} ?')){return false;};">VP</a></td>
                     </tr>
                 @endforeach
             </table>
