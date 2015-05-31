@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
+
 class IzpitniRokController extends Controller {
 
     public function __construct(){
@@ -660,7 +662,6 @@ class IzpitniRokController extends Controller {
         $student_ids = array();
         $rezultati = array();
 
-        //prvi in drugi input nista id/ocene
         $counter = 0;
         foreach($input as $i){
             if($counter >= 2){
@@ -672,7 +673,13 @@ class IzpitniRokController extends Controller {
 
         for($i = 0; $i < count($rezultati); $i++){
             $student = \App\Models\Student::find($student_ids[$i]);
+            if (!(is_numeric($rezultati[$i])) || $rezultati[$i] < 0 || $rezultati[$i] > 100)
+            {
+                return Redirect::back()->withErrors(['Rezultati morajo biti števila med 0 in 100.']);
+            }
+
             \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->update(array('tocke_izpita' => $rezultati[$i]));
+
         }
 
         return self::izpisiSeznam($izpit_id, 9, 0);
