@@ -553,17 +553,17 @@ class IzpitniRokController extends Controller {
         }
         else if($izvoz == 3){
             $pdf = \App::make('dompdf');
-            $pdf->loadHTML(\View::make('pdf/seznam_studentov_ocene')->with('nosilci', $nosilci)->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet)->with('studijsko_leto', $studijsko_leto)->with('ura', $ura)->with('prostor', $prostor)->with("imena", 1));
-            return $pdf->download('seznam_ocene.pdf');
+            $pdf->loadHTML(\View::make('pdf/seznam_studentov_rezultati')->with('nosilci', $nosilci)->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet)->with('studijsko_leto', $studijsko_leto)->with('ura', $ura)->with('prostor', $prostor)->with("imena", 1));
+            return $pdf->download('seznam_rezultati.pdf');
         }
         else if($izvoz == 4){
             $pdf = \App::make('dompdf');
-            $pdf->loadHTML(\View::make('pdf/seznam_studentov_ocene')->with('nosilci', $nosilci)->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet)->with('studijsko_leto', $studijsko_leto)->with('ura', $ura)->with('prostor', $prostor)->with("imena", 0));
-            return $pdf->download('seznam_ocene.pdf');
+            $pdf->loadHTML(\View::make('pdf/seznam_studentov_rezultati')->with('nosilci', $nosilci)->with('studentje', $studentje)->with('datum', $datum)->with('predmet', $predmet)->with('studijsko_leto', $studijsko_leto)->with('ura', $ura)->with('prostor', $prostor)->with("imena", 0));
+            return $pdf->download('seznam_rezultati.pdf');
         }
         else if($izvoz == 5){
             foreach($studentje as $s){
-                $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->st_tock, $s->ocena];
+                $export_content[] = [ $s->vpisna, $s->priimek.' '.$s->ime, $s->st_tock];
             }
             \App\Helpers\ExportHelper::make_csv($export_content,'Seznam rezultatov izpita');
         }
@@ -676,13 +676,18 @@ class IzpitniRokController extends Controller {
 
         for($i = 0; $i < count($rezultati); $i++){
             $student = \App\Models\Student::find($student_ids[$i]);
-            if (!(is_numeric($rezultati[$i])) || $rezultati[$i] < 0 || $rezultati[$i] > 100)
+            if ($rezultati[$i] == '')
+            {
+                \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->update(array('tocke_izpita' => null));
+            }
+            else if (!(is_numeric($rezultati[$i])) || $rezultati[$i] < 0 || $rezultati[$i] > 100)
             {
                 return Redirect::back()->withErrors(['Rezultati morajo biti števila med 0 in 100.']);
             }
-
-            \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->update(array('tocke_izpita' => $rezultati[$i]));
-
+            else
+            {
+                \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->update(array('tocke_izpita' => $rezultati[$i]));
+            }
         }
 
         return self::izpisiSeznam($izpit_id, 9, 0);
