@@ -652,4 +652,29 @@ class IzpitniRokController extends Controller {
     public function vnesiOcene($id){
         return self::izpisiSeznam($id, 9, 0);
     }
+
+    public function shraniRezultat()
+    {
+        $input = \Input::all();
+        $izpit_id = \Input::get('izpit_id');
+        $student_ids = array();
+        $rezultati = array();
+
+        //prvi in drugi input nista id/ocene
+        $counter = 0;
+        foreach($input as $i){
+            if($counter >= 2){
+                if($counter % 2 == 0) array_push($student_ids, $i);
+                else array_push($rezultati, $i);
+            }
+            $counter++;
+        }
+
+        for($i = 0; $i < count($rezultati); $i++){
+            $student = \App\Models\Student::find($student_ids[$i]);
+            \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->update(array('tocke_izpita' => $rezultati[$i]));
+        }
+
+        return self::izpisiSeznam($izpit_id, 9, 0);
+    }
 }

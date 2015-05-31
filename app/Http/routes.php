@@ -114,6 +114,7 @@ Route::get('izpitni_roki/uredi_izpitni_rok/{id}/vnesi_ocene', 'IzpitniRokControl
 Route::get('izpitni_roki/uredi_izpitni_rok/{id}/vnesi_rezultate', 'IzpitniRokController@vnesiRezultat');
 Route::get('izpitni_roki/uredi_izpitni_rok/shrani_oceno', 'IzpitniRokController@shraniOceno');
 Route::post('izpitni_roki/uredi_izpitni_rok/shrani_oceno', 'IzpitniRokController@shraniOceno');
+Route::post('izpitni_roki/uredi_izpitni_rok/shrani_rezultat', 'IzpitniRokController@shraniRezultat');
 Route::get('izpitni_roki/uredi_izpitni_rok/vrni_prijavo/{id}/{id_studenta}', 'IzpitniRokController@vrniPrijavo');
 
 Route::get('izbirni_predmeti/referent', 'IzbirniPredmetController@getIzbirniPredmetRef');
