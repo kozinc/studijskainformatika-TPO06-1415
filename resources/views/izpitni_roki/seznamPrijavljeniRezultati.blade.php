@@ -29,6 +29,7 @@
                                 <th>Št. vseh</th>
                                 <th>Št. letos</th>
                                 <th>Rezultat</th>
+                                <th></th>
                             </tr>
                             @foreach($studentje as $student)
                                 <tr>
@@ -39,6 +40,7 @@
                                     <td> {{$student->st_letos}} </td>
                                     {!! Form::hidden('id'.$student->id, $student->id) !!}
                                     <td><div class="col-lg-3"><input type="text" id={{"rezultati".$student->id}} name={{"rezultati".$student->id}} value="" class="form-control"></div></td>
+                                    <td><a class="btn btn-info" href="{{ action('IzpitniRokController@vrniPrijavo',['id'=>$izpit_id, 'id_studenta'=>$student->id, 'view'=>3]) }}" onclick="if(!confirm('Ste prepričani, da želite vrniti prijavo na izpitni rok študentu {{ $student->ime }} {{ $student->priimek }} z vpisno številko {{ $student->vpisna }} ?')){return false;};">VP</a></td>
                                 </tr>
                             @endforeach
                         </table>
