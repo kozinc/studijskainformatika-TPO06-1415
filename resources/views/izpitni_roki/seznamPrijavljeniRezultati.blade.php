@@ -15,6 +15,7 @@
                 Datum in ura: {{$datum}} ob {{ $ura  }}h <br><br>
                 Prostor: {{$prostor}} <br><br>
 
+
                 <div class="form-group">
                     @if($studentje != '')
                         {!! Form::open(array('action' => 'IzpitniRokController@shraniRezultat')) !!}

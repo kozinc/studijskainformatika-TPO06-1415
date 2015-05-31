@@ -119,7 +119,7 @@
                 @endif
             </tr>
         </table>
-        <br><br><br>
+        <br>
         <div style="background-color: #9d9d9d">
             <label>PODATKI O VPISU</label>
         </div>
@@ -151,20 +151,22 @@
         </table>
         <table class="fixed_table">
             <tr>
-                <td class="sort" style="font-size: 12px">Vrsta vpisa</td>
+                <td class="sort" style="font-size: 12px">Vrsta študija</td>
             </tr>
             <tr>
-                <td class="sort">{{ $program_student->vrsta_vpisa }}</td>
+                <td class="sort">{{$program_student->oblika_studija}}</td>
             </tr>
         </table>
         <table class="fixed_table">
             <tr>
-                <td class="sort" style="font-size: 12px">Način študija</td>
-                <td class="sort" style="font-size: 12px">Letnik</td>
+                <td class="sort" style="font-size: 12px">Vrsta vpisa</td>
+                <td class="sort" style="font-size: 12px">Letnik/dodatno leto</td>
+                <td class="sort" style="font-size: 12px">Način študija in oblika študija</td>
             </tr>
             <tr>
-                <td class="sort">{{ $program_student->nacin_studija }}</td>
-                <td class="sort">{{ $program_student->letnik }}</td>
+                <td class="sort">{{ $program_student->vrsta_vpisa }}
+                <td class="sort">{{ $program_student->letnik }}.</td>
+                <td class="sort">{{ $program_student->nacin_studija }}, {{ $program_student->vrsta_studija }}</td>
             </tr>
         </table>
         <table class="fixed_table">
