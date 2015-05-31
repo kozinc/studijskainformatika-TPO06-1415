@@ -158,7 +158,7 @@ class IzpitniRokController extends Controller {
 
                     $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
                     $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
-                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
+                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->where('vrnjena_prijava', 0)->distinct()->count();
                     $today = date("Y-m-d");
                     if($today < $i->datum){
                         $i['ocene'] = "Spremeni/Briši";
@@ -204,7 +204,7 @@ class IzpitniRokController extends Controller {
 
                     $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
                     $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
-                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->distinct()->count();
+                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->where('vrnjena_prijava', 0)->distinct()->count();
                     $today = date("Y-m-d");
                     if($today < $i->datum){
                         $i['ocene'] = "Spremeni/Briši";
