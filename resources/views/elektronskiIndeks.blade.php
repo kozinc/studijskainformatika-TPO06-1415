@@ -308,8 +308,8 @@
                                     <th>Skupna povprečna ocena</th>
                                 </tr>
                                 <tr>
-                                    <td>{{$P1}}</td>
-                                    <td>{{$P2}}</td>
+                                    <td>{{$zaporedna}}</td>
+                                    <td>{{$P2}} od {{$stProg->KT}}</td>
                                     <td>{{($P1==0)?'':number_format((float)($P3/$P1), 3, '.', '')}}</td>
                                 </tr>
                             </table>

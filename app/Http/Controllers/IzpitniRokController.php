@@ -645,6 +645,7 @@ class IzpitniRokController extends Controller {
         \DB::table('student_izpit')->where('id_izpitnega_roka', $id_izpita)->where('id_studenta', $id_studenta)->update(array('vrnjena_prijava' => 1));
         if($view == 1) return self::izpisiSeznam($id_izpita, 0, 1);
         else if($view == 2) return self::izpisiSeznam($id_izpita, 9, 1);
+        else if($view == 3) return self::izpisiSeznam($id_izpita, 10, 1);
     }
 
     public function vnesiRezultat($id){
@@ -653,5 +654,30 @@ class IzpitniRokController extends Controller {
 
     public function vnesiOcene($id){
         return self::izpisiSeznam($id, 9, 0);
+    }
+
+    public function shraniRezultat()
+    {
+        $input = \Input::all();
+        $izpit_id = \Input::get('izpit_id');
+        $student_ids = array();
+        $rezultati = array();
+
+        //prvi in drugi input nista id/ocene
+        $counter = 0;
+        foreach($input as $i){
+            if($counter >= 2){
+                if($counter % 2 == 0) array_push($student_ids, $i);
+                else array_push($rezultati, $i);
+            }
+            $counter++;
+        }
+
+        for($i = 0; $i < count($rezultati); $i++){
+            $student = \App\Models\Student::find($student_ids[$i]);
+            \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->update(array('tocke_izpita' => $rezultati[$i]));
+        }
+
+        return self::izpisiSeznam($izpit_id, 9, 0);
     }
 }

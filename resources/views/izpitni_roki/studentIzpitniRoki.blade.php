@@ -8,6 +8,7 @@
                 <p>Študent:{{ $student->ime.' '.$student->priimek }}</p>
                 <p>Vpisna: {{ $student->vpisna }}</p>
                 <p>Vrsta vpisa v študijskem letu {{ str_replace('/20','-',$trenutno_leto) }}: @if($redno) Prvi vpis v letnik @elseif($pavzer) Nevpisani @elseif($ponavljanje) Ponavljanje letnika @endif</p>
+                <a href="{{ action('KartotecniListController@prikazKartotecniList', ['id'=>$student->id]) }}">Kartotečni list</a>
             @endif
         </div>
         <div class="panel-body">
@@ -59,7 +60,7 @@
                                             @if(in_array($rok->id_predmeta, $opravljeni_predmeti))
                                                 <li>Študent že ima oceno pri tem predmetu</li>
                                             @endif
-                                            @if($rok->datum < date('Y-m-d'))
+                                            @if($rok->datum < date('Y-m-d',strtotime('+ 1 day')))
                                                 @if(in_array($rok->id,$prijave))
                                                     <li>Rok za odjavo je potekel</li>
                                                 @else
