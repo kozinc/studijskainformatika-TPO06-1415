@@ -15,20 +15,28 @@
                         <span class="label label-default">Seznam prijavljenih kandidatov</span>
                         <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>1, 'status'=>0]) }}">PDF</a>
                         <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>2, 'status'=>0]) }}">CSV</a>
-                        <br>
-                        <span class="label label-default">Izpis seznama z rezultati pisnega dela izpita</span>
-                        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>3, 'status'=>0]) }}">PDF</a>
-                        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>4, 'status'=>0]) }}">PDF brez imen</a>
-                        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>5, 'status'=>0]) }}">CSV</a>
-                        <br>
-                        <span class="label label-default">Izpis seznama s končnimi ocenami</span>
-                        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>6, 'status'=>0]) }}">PDF</a>
-                        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>7, 'status'=>0]) }}">PDF brez imen</a>
-                        <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>8, 'status'=>0]) }}">CSV</a>
+                        @if (date('Y-m-d',strtotime($datum)) <= date('Y-m-d'))
+                            <br>
+                            <span class="label label-default">Izpis seznama z rezultati pisnega dela izpita</span>
+                            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>3, 'status'=>0]) }}">PDF</a>
+                            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>4, 'status'=>0]) }}">PDF brez imen</a>
+                            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>5, 'status'=>0]) }}">CSV</a>
+                            <br>
+                            <span class="label label-default">Izpis seznama s končnimi ocenami</span>
+                            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>6, 'status'=>0]) }}">PDF</a>
+                            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>7, 'status'=>0]) }}">PDF brez imen</a>
+                            <a class="btn btn-default" href="{{ action('IzpitniRokController@izpisiSeznam',['id'=>$izpit_id, 'izvoz'=>8, 'status'=>0]) }}">CSV</a>
+
+                        @endif
                     @endif
-                    <br/><br/>
-                    <a class="btn btn-default" href="{{ action('IzpitniRokController@vnesiRezultat',['id'=>$izpit_id]) }}">Vnesi rezultate</a>
-                    <a class="btn btn-default" href="{{ action('IzpitniRokController@vnesiOcene',['id'=>$izpit_id]) }}">Vnesi ocene</a>
+                    @if (date('Y-m-d',strtotime($datum)) <= date('Y-m-d'))
+                        <br/><br/>
+                        <a class="btn btn-default" href="{{ action('IzpitniRokController@vnesiRezultat',['id'=>$izpit_id]) }}">Vnesi rezultate</a>
+                        <a class="btn btn-default" href="{{ action('IzpitniRokController@vnesiOcene',['id'=>$izpit_id]) }}">Vnesi ocene</a>
+                    @else
+                        <br><br>
+                        Vnos rezultatov in ocen pred datumom izpita ni mogoč!
+                    @endif
                     @if (Session::has('seznam_alert'))
                         @if (Session::get('seznam_alert') != "")
                             <div class="alert alert-info">{{ Session::get('seznam_alert') }}</div>
