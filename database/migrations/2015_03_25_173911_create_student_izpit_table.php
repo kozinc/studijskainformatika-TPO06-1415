@@ -21,7 +21,8 @@ class CreateStudentIzpitTable extends Migration {
             $table->integer('ocena');
             $table->date('datum_vnosa_ocene');
             $table->date('datum_prijave')->nullable();
-            $table->date('datum_odjave')->nullable();
+            $table->dateTime('datum_odjave')->nullable();
+            $table->string('odjavitelj')->nullable();
             $table->integer('vrnjena_prijava');
             $table->integer('placilo_izpita')->nullable();
         });

@@ -64,7 +64,7 @@ class Student extends Model {
 
     public function polaganja()
     {
-        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit', 'id_studenta', 'id_izpitnega_roka' )->withPivot('ocena', 'tocke_izpita', 'datum_prijave', 'datum_odjave', 'placilo_izpita');
+        return $this->belongsToMany('App\Models\IzpitniRok', 'student_izpit', 'id_studenta', 'id_izpitnega_roka' )->withPivot('ocena', 'tocke_izpita', 'datum_prijave', 'datum_odjave','odjavitelj', 'placilo_izpita');
     }
 
     public function sklepi()

@@ -57,6 +57,9 @@
                                 @if($referent)
                                     <td>
                                         <ul>
+                                            @if(in_array($rok->id, $ocenjena_polaganja))
+                                                <li>Ta izpit je že ocenjen, zato odjava ni mogoča.</li>
+                                            @endif
                                             @if(in_array($rok->id_predmeta, $opravljeni_predmeti))
                                                 <li>Študent že ima oceno pri tem predmetu</li>
                                             @endif
@@ -90,8 +93,10 @@
                                     </td>
                                     <td>
                                     @if(in_array($rok->id,$prijave))
+                                        @if(!in_array($rok->id,$ocenjena_polaganja))
                                             <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-referent="0" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
-                                        @else
+                                        @endif
+                                    @else
                                             <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-referent="1" data-action="prijava" value="Prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
                                             @if($pavzer)
                                                 @if(isset($pavzerska_polaganja[$rok->id_predmeta])){{ 'data-polaganje='.$pavzerska_polaganja[$rok->id_predmeta]}}

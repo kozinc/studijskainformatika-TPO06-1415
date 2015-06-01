@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Referent;
 use App\Models\Student;
 use App\Models\IzpitniRok;
 use Illuminate\Http\Request;
@@ -52,12 +53,11 @@ class IzpitController extends Controller {
                 }
             }
         }
-
         $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-2 weeks')))->sortBy('datum');
-        $polaganja = $student->polaganja()->get();
+        $polaganja = $student->polaganja()->whereNull('datum_odjave')->get();
         $opravljeni_predmeti = $student->Predmeti()->wherePivot('ocena','>',5)->lists('id_predmeta');
         $prijave = $stevilo_polaganj = $neocenjena_polaganja = $pavzerska_polaganja = $letosnja_polaganja =
-        $premalo_dni = $redna_polaganja = $polaganja_s_statusom = [];
+        $premalo_dni = $redna_polaganja = $polaganja_s_statusom = $ocenjena_polaganja = [];
         foreach($polaganja as $polaganje){
             $prijave[] = $polaganje->id;
             if(in_array($polaganje->studijsko_leto,$pavzerska_studijska_leta)){
@@ -92,6 +92,9 @@ class IzpitController extends Controller {
             if($polaganje->pivot->ocena == 0 || ($polaganje->pivot->ocena > 5 && !in_array($polaganje->id_predmeta,$opravljeni_predmeti))){
                 $neocenjena_polaganja[] = $polaganje->id_predmeta;
             }
+            if($polaganje->pivot->ocena > 0 || $polaganje->pivot->tocke_izpita > 0){
+                $ocenjena_polaganja[] = $polaganje->pivot->id_izpitnega_roka;
+            }
             if(isset($stevilo_polaganj[$polaganje->id_predmeta])){
                 $stevilo_polaganj[$polaganje->id_predmeta]++;
             }else{
@@ -101,12 +104,12 @@ class IzpitController extends Controller {
                 $premalo_dni[$polaganje->id_predmeta] = $polaganje->datum;
             }
         }
-        //$neocenjena_polaganja = $student->polaganja()->wherePivot('ocena','=',0)->get();
         return view('izpitni_roki/studentIzpitniRoki',['izpitni_roki'=>$razpisani_roki,'prijave'=>$prijave,
             'student'=>$student, 'neocenjena_polaganja'=>$neocenjena_polaganja, 'opravljeni_predmeti'=>$opravljeni_predmeti,
             'stevilo_polaganj'=>$stevilo_polaganj, 'letosnja_polaganja'=>$letosnja_polaganja, 'redna_polaganja'=>$redna_polaganja,
             'pavzerska_polaganja'=>$pavzerska_polaganja, 'polaganja_s_statusom'=>$polaganja_s_statusom, 'pavzer'=>$pavzer,
-            'redno'=>$redno, 'ponavljanje'=>$ponavljanje, 'premalo_dni'=>$premalo_dni, 'referent'=>$referent, 'trenutno_leto'=>$trenutno_leto]);
+            'redno'=>$redno, 'ponavljanje'=>$ponavljanje, 'premalo_dni'=>$premalo_dni, 'referent'=>$referent,
+            'trenutno_leto'=>$trenutno_leto, 'ocenjena_polaganja'=>$ocenjena_polaganja]);
     }
 
     public function prijava(Request $request)
@@ -118,7 +121,15 @@ class IzpitController extends Controller {
             $student->izpitniRoki()->attach($izpitni_rok->id,['placilo_izpita'=>$placilo_izpita, 'datum_prijave'=>date('Y-m-d')]);
             return \Redirect::back()->with('odgovor','Prijava uspešna.');
         }elseif($request['action']=='odjava'){
-            $student->izpitniRoki()->detach($izpitni_rok->id);
+            $odjavitelj = '';
+            if(\Session::get('vloga') == 'referent'){
+                $referent = Referent::where('email','=',\Session::get('session_id'))->first();
+                $odjavitelj = '['.$referent->id.'] '.$referent->ime.' '.$referent->priimek.' (referent)';
+            }else{
+                $odjavitelj = '['.$student->id.'] '.$student->ime.' '.$student->priimek.' (študent)';
+                $student = Student::where('email','=',\Session::get('session_id'))->first();
+            }
+            $student->izpitniRoki()->updateExistingPivot($izpitni_rok->id, ['datum_odjave'=>date('Y-m-d H:i:s'), 'odjavitelj'=>$odjavitelj]);
             return \Redirect::back()->with('odgovor','Odjava uspešna.');
         }
         return \Redirect::back()->withErrors('Prišlo je do neznane napake!');
