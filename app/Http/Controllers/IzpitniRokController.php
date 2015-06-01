@@ -349,13 +349,17 @@ class IzpitniRokController extends Controller {
         $pp = \DB::table('program_predmet')->where('id', $program_predmeti[0])->first();
         $nos = \App\Models\Nosilec::find($pp->id_nosilca1);
         $dd_nosilci[0] = $nos->ime . " " . $nos->priimek;
-        $pp = \DB::table('program_predmet')->where('id', $program_predmeti[1])->first();
-        $nos = \App\Models\Nosilec::find($pp->id_nosilca1);
-        $dd_nosilci[1] = $nos->ime . " " . $nos->priimek;
+
+        if(count($program_predmeti) > 1) {
+            $pp = \DB::table('program_predmet')->where('id', $program_predmeti[1])->first();
+            $nos = \App\Models\Nosilec::find($pp->id_nosilca1);
+            $dd_nosilci[1] = $nos->ime . " " . $nos->priimek;
+        }
+
+        $duplo = 0;
 
         $double = \App\Models\IzpitniRok::where('id_predmeta', $predmet_id)->where('datum', $datum) -> lists('id_nosilca');
         if($nosilec != ''){
-            $duplo = 0;
             foreach($double as $d){
                 $nos = \App\Models\Nosilec::find($d);
                 $ime = $nos->ime . " " . $nos->priimek;
