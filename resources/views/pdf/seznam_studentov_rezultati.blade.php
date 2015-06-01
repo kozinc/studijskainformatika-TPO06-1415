@@ -43,7 +43,6 @@
                 <td style="width: 180px">Priimek in ime</td>
                 @endif
                 <td style="width: 150px">Število točk</td>
-                <td style="width: 80px">Ocena</td>
             </tr>
             @foreach($studentje as $student)
                 <tr>
@@ -53,11 +52,6 @@
                     <td> {{$student->priimek}} {{$student->ime}} </td>
                     @endif
                     <td> {{$student->st_tock}} </td>
-                    @if($student->ocena != 0)
-                        <td> {{$student->ocena}} </td>
-                    @else
-                        <td> \ </td>
-                    @endif
                 </tr>
             @endforeach
         </table>

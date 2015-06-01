@@ -17,7 +17,7 @@ class CreateStudentIzpitTable extends Migration {
             $table->increments('id');
             $table->integer('id_studenta')->unsigned();
             $table->integer('id_izpitnega_roka')->unsigned();
-            $table->integer('tocke_izpita');
+            $table->integer('tocke_izpita')->nullable();
             $table->integer('ocena');
             $table->date('datum_vnosa_ocene');
             $table->date('datum_prijave')->nullable();
