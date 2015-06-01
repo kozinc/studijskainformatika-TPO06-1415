@@ -31,7 +31,7 @@
                                 <div style="display: none">{{$skupajTotalProgram=$skupajTotalProgram+$row->total}}</div>
                             @endif
                         @endforeach
-                        @if($skupajTotalProgram > 0)
+
                             <tr><td></td><td></td><td></td><td></td></tr>
                             <tr style="background: #F9f9f9">
                                 <th>{{$program->ime}}</th>
@@ -39,54 +39,69 @@
                                 <th></th>
                                 <th>Število študentov</th>
                             </tr>
-                        @endif
+
                         <div style="display: none">{{$skupajTotalProgram=0}}</div>
-                        @foreach($stStudentov as $row)
-                            @if($row->studijsko_leto == $leto && $row->id_programa == $program->id)
-                                <tr>
-                                    <td></td>
-                                    <td style="width: 20%">{{$row->letnik}}.</td>
-                                    <td style="width: 15%"></td>
-                                    <td style="width: 20%">{{$row->total}}</td>
-                                    <div style="display: none">{{$skupajTotal=$skupajTotal+$row->total}}{{$skupajTotalProgram=$skupajTotalProgram+$row->total}}</div>
-                                </tr>
-                                    @foreach($programLetniki as $programLetnik)
-                                        @if($programLetnik->id_programa==$row->id_programa)
-                                            @if($programLetnik->letnik==$row->letnik)
-                                                @if($programLetnik->stevilo_modulov > 0)
-                                                    <!-- Moduli -->
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>{{$row->letnik}}. letnik</th>
-                                                        <th>Modul</th>
-                                                        <th>Število Študentov</th>
-                                                    </tr>
-                                                    @foreach($moduli as $modul)
-                                                        @if($modul_array[$modul->ime] > 0)
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>{{$modul->ime}}</td>
-                                                                <td><!-- {{$programLetnik}} -->
-                                                                    {{$modul_array[$modul->ime]}}
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
+                        @for($i=1;$i<4;$i++)
+                            <div style="display: none">{{$stStudentovImaLetnik=false}}</div>
+                            @foreach($stStudentov as $row)
+                                @if($i == $row->letnik && $row->studijsko_leto == $leto && $row->id_programa == $program->id)
+                                    <div style="display: none">{{$stStudentovImaLetnik=true}}</div>
+                                    <!-- true -> $stStudentov ima število študentov za ta letnik -->
+                                    @if($row->letnik == $i && $row->studijsko_leto == $leto && $row->id_programa == $program->id)
+                                        <tr>
+                                            <td></td>
+                                            <td style="width: 20%">{{$row->letnik}}.</td>
+                                            <td style="width: 15%"></td>
+                                            <td style="width: 20%">{{$row->total}}</td>
+                                            <div style="display: none">{{$skupajTotal=$skupajTotal+$row->total}}{{$skupajTotalProgram=$skupajTotalProgram+$row->total}}</div>
+                                        </tr>
+                                        @foreach($programLetniki as $programLetnik)
+                                            @if($programLetnik->id_programa==$row->id_programa)
+                                                @if($programLetnik->letnik==$row->letnik)
+                                                    @if($programLetnik->stevilo_modulov > 0)
+                                                        <!-- Moduli -->
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>{{$row->letnik}}. letnik</th>
+                                                            <th>Modul</th>
+                                                            <th>Število Študentov</th>
+                                                        </tr>
+                                                        @foreach($moduli as $modul)
+                                                            @if($modul_array[$modul->ime] > 0)
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>{{$modul->ime}}</td>
+                                                                    <td><!-- {{$programLetnik}} -->
+                                                                        {{$modul_array[$modul->ime]}}
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 @endif
                                             @endif
-                                        @endif
-                                    @endforeach
+                                        @endforeach
+                                    @endif
+                                @endif
+                            @endforeach
+                            @if($stStudentovImaLetnik==false)
+                                <tr>
+                                    <td></td>
+                                    <td style="width: 20%">{{$i}}.</td>
+                                    <td style="width: 15%"></td>
+                                    <td style="width: 20%">0</td>
+                                </tr>
                             @endif
-                        @endforeach
-                        @if($skupajTotalProgram > 0)
+                        @endfor
+
                             <tr style="background: #EEE">
                                 <th>{{$program->ime}}</th>
                                 <th>Skupno v programu:</th>
                                 <th></th>
                                 <th>{{$skupajTotalProgram}}</th>
                             </tr>
-                        @endif
+
                     @endforeach
                     <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
                     <tr style="background: #DDD">
