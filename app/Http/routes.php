@@ -25,9 +25,9 @@ Route::post('advseznam', 'ListStudentsController@getAdvStudents');
 
 Route::get('vpisnilistReferent', 'VpisniListReferentController@obrazecVpisniList');
 Route::post('vpisnilistReferent/potrdi', 'VpisniListReferentController@handlerVpisniList');
-Route::get('vpisnilistReferent/{id}', 'VpisniListReferentController@prikaziStudenta');
+Route::get('vpisnilistReferent/{id_student_program}', 'VpisniListReferentController@prikaziStudenta');
 Route::post('vpisnilistReferent/najdiStudenta', 'VpisniListReferentController@searchStudent');
-Route::post('vpisnilistReferent/{id}/ponovi', 'VpisniListReferentController@ponoviVlogo');
+Route::post('vpisnilistReferent/{id_student_program}/ponovi', 'VpisniListReferentController@ponoviVlogo');
 
 Route::post('login', 'LoginController@login_handler');
 Route::post('home', 'LoginController@login_handler');
