@@ -397,7 +397,9 @@ class StanjeVpisaController extends Controller {
         //var_dump($id_programa);
 
         $stStudentov = $stStudentov
-            ->orderBy('letnik')
+            ->orderBy('student_predmet.studijsko_leto','desc')
+            ->orderBy('program_predmet.id_programa')
+            ->orderBy('student_predmet.letnik')
             ->orderBy('total','desc')
             ->get()
             ;
