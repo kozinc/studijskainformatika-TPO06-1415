@@ -139,12 +139,15 @@ $(document).ready(function(){
 
     $('.count_kt').change(function(){
         var selected_options = $('.count_kt option:selected');
+        var obvezni_kt = 0;
+        $('.obvezni').each(function(){
+            obvezni_kt = obvezni_kt + $(this).data('kt');
+        });
         var kt = 0;
         selected_options.each(function(){
             kt = kt + $(this).data('kt');
         });
-        var skupno = $('#kt_skupno');
-        skupno.html(skupno.data('obvezni')+kt);
+        $('#kt_skupno').html(obvezni_kt + kt);
     });
 
     $('#vsaPolaganja').click(function(){

@@ -83,21 +83,20 @@ class VpisniListReferentController extends Controller {
         $programStudenta->vloga_oddana = null;
         $programStudenta->vloga_potrjena = null;
         $programStudenta->save();
-
         return Redirect::back();
     }
 
 
-    public function prikaziStudenta($id,$odgovor='')
+    public function prikaziStudenta($id_student_programa,$odgovor='')
     {
-        $student = Student::find($id);
+        $programStudenta = StudentProgram::find($id_student_programa);
+        $student = $programStudenta->student()->first();
         $samoZaPotrditev = false;
 
         if (!is_null($student))
         {
-
             //preverimo ce obstaja zeton
-            $programStudenta = $student->studentProgram()->where('vloga_potrjena','=',null)->first();
+            //$programStudenta = $student->studentProgram()->where('vloga_potrjena','=',null)->first();
             if(!is_null($programStudenta))
             {
                 $samoZaPotrditev = true;
@@ -132,7 +131,6 @@ class VpisniListReferentController extends Controller {
                         'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli, 'predmetiPrejsnjiLetnik'=>$predmetiPrejsnjiLetnik,
                         'predmetiProsti'=>$predmetiProsti,'predmetiDodatniProsti'=>$predmetiDodatniProsti, 'programLetnik'=>$programLetnik,
                         'potrditev'=>true]);
-
                 }
                 else
                 {
@@ -147,7 +145,7 @@ class VpisniListReferentController extends Controller {
                     $predmetiPrejsnjiLetnik = $student->predmetiVLetniku($programStudenta->letnik - 1);
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
-                    $izbraniPredmeti = $student->predmetiVPRogramu($program,$programStudenta->letnik);
+                    $izbraniPredmeti = $student->predmetiVPRogramu($programStudenta->studijsko_leto);
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,'predmetiPrejsnjiLetnik'=>$predmetiPrejsnjiLetnik,
@@ -171,6 +169,7 @@ class VpisniListReferentController extends Controller {
 
     public function handlerVpisniList(Request $request)
     {
+
         $id_programa = $request['id'];
         $programStudenta = StudentProgram::find($id_programa);
         if($programStudenta->vloga_oddana == null){
@@ -188,11 +187,11 @@ class VpisniListReferentController extends Controller {
             $programStudenta->save();
             return Redirect('studenti/'.$programStudenta->id_studenta);
         }
-        if(isset($request['potrdi'])){
+ /*       if(isset($request['potrdi'])){
             $programStudenta->vloga_potrjena = date('Y-m-d');
             $programStudenta->save();
             return Redirect('studenti/'.$programStudenta->id_studenta);
-        }
+        }*/
         //shranimo oz. posodobimo podatke o studentu
         $student = Student::find($request['id_studenta']);
 
@@ -344,23 +343,28 @@ class VpisniListReferentController extends Controller {
         $programStudenta->save();
         //+++++++++++shrani se OBVEZNI predmetnik študenta za to študijsko leto++++++++++++++
         $program = StudijskiProgram::find($programStudenta->id_programa);
+        $programLetnik = ProgramLetnik::where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik)->first();
         $predmeti = $program->predmeti()->where('studijsko_leto','=',$programStudenta->studijsko_leto)->where('letnik','=', $programStudenta->letnik)->where('tip','=','obvezni');
+        $obstojeciPredmeti = $student->trenutniPredmeti($programStudenta->studijsko_leto)->get();
+        $obstojeciPredmeti_ids = $obstojeciPredmeti->lists('id');
+        $predmetnik = [];
+        $izbrani_kt = 0;
+        $skupno_min_kt = $programLetnik->stevilo_modulov * 3 * 6 + $programLetnik->stevilo_strokovnih_predmetov * 6 + $programLetnik->stevilo_prostih_predmetov * 6;
+        $skupno_izbrani_kt = 0;
         foreach($predmeti->get() as $predmet)
         {
-            StudentPredmet::create(['id_studenta'=>$programStudenta->id_studenta, 'id_predmeta'=>$predmet->id, 'letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto]);
+            $predmetnik[$predmet->id] = ['letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto];
         }
-        $sporocilo = "Vloga uspešno oddana in potrjena.";
-        return view ('/referent/vpisnilistReferent', ['student'=>$student , 'studentNajden'=>1, 'empty' => 0,'sporocilo'=> $sporocilo, 'odgovor'=>$sporocilo, 'potrditev'=>false]);
-        /*
-         *         //PREDMETNIIK
+        //PREDMETNIIK
         $program = $programStudenta->studijski_program;
         $programLetnik = ProgramLetnik::where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik)->first();
         $povprecnaOcena = $program->povprecnaOcena($student);
-        DB::beginTransaction();
+        //DB::beginTransaction();
         if($programLetnik->stevilo_modulov > 0)
         {
             $min_kt = $programLetnik->stevilo_modulov * 3 * 6;
             $modulski = $request['modulski-predmeti'];
+            $modulski_kt = 0;
             if(is_array($modulski)){
                 $modul_check = [];
                 $izbrani_kt = 0;
@@ -368,27 +372,37 @@ class VpisniListReferentController extends Controller {
                 {
                     $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
                     $izbrani_kt += $predmet->KT;
+                    $modulski_kt += $predmet->KT;
+                    $skupno_izbrani_kt += $predmet->KT;
+
                     if(isset($modul_check[$predmet->pivot->id_modula])){
                         $modul_check[$predmet->pivot->id_modula]++;
                     }else{
                         $modul_check[$predmet->pivot->id_modula] = 1;
                     }
-                    $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
-                    $studentPredmet->save();
+                    $predmetnik[$predmet->id] = ['letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto];
                 }
+            }
+            if($modulski_kt < $min_kt){
+                return Redirect::back()->withErrors('Število izbranih modulskih predmetov se ne ujema s predpisanim.');
             }
         }
         if($programLetnik->stevilo_strokovnih_predmetov > 0)
         {
             $strokovni = $request['strokovni-predmeti'];
+            $min_kt = $programLetnik->stevilo_strokovnih_predmetov * 6;
+            $izbrani_kt = 0;
             if(is_array($strokovni)){
                 foreach($strokovni as $predmet_id)
                 {
                     $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
+                    $predmetnik[$predmet->id] = ['letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto];
                     $izbrani_kt += $predmet->KT;
-                    $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
-                    $studentPredmet->save();
+                    $skupno_izbrani_kt += $predmet->KT;
                 }
+            }
+            if($izbrani_kt < $min_kt){
+                return Redirect::back()->withErrors('Število izbranih strokovnih predmetov se ne ujema s predpisanim.');
             }
         }
         if($programLetnik->stevilo_prostih_predmetov > 0)
@@ -399,12 +413,29 @@ class VpisniListReferentController extends Controller {
                 {
                     $predmet = $program->predmet($predmet_id, $programStudenta->studijsko_leto);
                     $izbrani_kt += $predmet->KT;
-                    $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
-                    $studentPredmet->save();
+                    $skupno_izbrani_kt += $predmet->KT;
+                    $predmetnik[$predmet->id] = ['letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto];
                 }
             }
         }
-         */
+        if( $skupno_min_kt > $skupno_izbrani_kt ){
+            return Redirect::back()->withErrors('Število kreditnih točk se ne ujema s predpisanim.');
+        }
+
+        $detachable = array_values(array_diff($obstojeciPredmeti_ids,array_keys($predmetnik)));
+        $attachable = array_diff(array_keys($predmetnik),$obstojeciPredmeti_ids);
+        if(!empty($detachable)){
+            $student->Predmeti()->detach($detachable);
+        }
+        if(!empty($attachable)){
+            $novi_predmeti = [];
+            foreach($attachable as $att){
+                $novi_predmeti[$att] = $predmetnik[$att];
+            }
+            $student->Predmeti()->attach($novi_predmeti);
+        }
+        $sporocilo = "Vloga uspešno oddana in potrjena.";
+        return Redirect('studenti/'.$student->id)->with('odgovor',$sporocilo);
     }
 
 }
