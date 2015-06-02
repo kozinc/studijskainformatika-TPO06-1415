@@ -10,8 +10,10 @@
 
         <input class="btn" type="submit" name="csv" value="Izvozi CSV">
         <input class="btn" type="submit" name="pdf" value="Izvozi PDF">
+        <a class="btn panel-default" href="{{ action('StanjeVpisaController@StanjeVpisaZaPredmeteShow') }}">Stanje vpisa po predmetih</a>
         {!! Form::close() !!}
 
+        <br/>
     @foreach($leta as $leto)
         <div class="panel panel-default">
             <div class="panel-body">
@@ -51,7 +53,22 @@
                                         <tr>
                                             <td></td>
                                             <td style="width: 20%">{{$row->letnik}}.</td>
-                                            <td style="width: 15%"></td>
+                                            <td style="width: 15%">
+                                                @if (\Session::get('vloga') == "referent" )
+                                                    <div style="display: none">
+                                                        <!-- creating parameters for StanjeVpisaZaPredmeteShow -->
+                                                        <?php
+                                                            $paramArray = array();
+                                                            $leto_id = array_search($leto, $leta);
+                                                            $paramArray['leta'] = $leto_id;
+                                                            $paramArray['letniki'] = $row->letnik-1;
+                                                            $paramArray['studProgrami'] = $row->id_programa;
+
+                                                        ?>
+                                                    </div>
+                                                    <?php echo link_to_action('StanjeVpisaController@StanjeVpisaZaPredmeteShow', 'Stanje vpisa - predmeti', $paramArray); ?>
+                                                @endif
+                                            </td>
                                             <td style="width: 20%">{{$row->total}}</td>
                                             <div style="display: none">{{$skupajTotal=$skupajTotal+$row->total}}{{$skupajTotalProgram=$skupajTotalProgram+$row->total}}</div>
                                         </tr>
@@ -89,7 +106,23 @@
                                 <tr>
                                     <td></td>
                                     <td style="width: 20%">{{$i}}.</td>
-                                    <td style="width: 15%"></td>
+                                    <td style="width: 15%">
+                                        @if (\Session::get('vloga') == "referent" )
+                                            <div style="display: none">
+                                                <!-- creating parameters for StanjeVpisaZaPredmeteShow -->
+                                                <?php
+                                                $paramArray = array();
+                                                $leto_id = array_search($leto, $leta);
+                                                $paramArray['leta'] = $leto_id;
+                                                $paramArray['letniki'] = $i-1;
+                                                $paramArray['studProgrami'] = $row->id_programa;
+
+                                                ?>
+                                                {{ action('StanjeVpisaController@StanjeVpisaZaPredmeteShow', $paramArray)  }}
+                                            </div>
+                                            <?php echo link_to_action('StanjeVpisaController@StanjeVpisaZaPredmeteShow', 'Stanje vpisa - predmeti', $paramArray); ?>
+                                        @endif
+                                    </td>
                                     <td style="width: 20%">0</td>
                                 </tr>
                             @endif
@@ -98,7 +131,23 @@
                             <tr style="background: #EEE">
                                 <th>{{$program->ime}}</th>
                                 <th>Skupno v programu:</th>
-                                <th></th>
+                                <th>
+                                    @if (\Session::get('vloga') == "referent" )
+                                        <div style="display: none">
+                                            <!-- creating parameters for StanjeVpisaZaPredmeteShow -->
+                                            <?php
+                                            $paramArray = array();
+                                            $leto_id = array_search($leto, $leta);
+                                            $paramArray['leta'] = $leto_id;
+                                            $paramArray['letniki'] = 0;
+                                            $paramArray['studProgrami'] = $program->id;
+
+                                            ?>
+                                            {{ action('StanjeVpisaController@StanjeVpisaZaPredmeteShow', $paramArray)  }}
+                                        </div>
+                                        <?php echo link_to_action('StanjeVpisaController@StanjeVpisaZaPredmeteShow', 'Stanje vpisa - predmeti', $paramArray); ?>
+                                    @endif
+                                </th>
                                 <th>{{$skupajTotalProgram}}</th>
                             </tr>
 
@@ -107,7 +156,23 @@
                     <tr style="background: #DDD">
                         <th></th>
                         <th>Skupno v študijskem letu: </th>
-                        <th></th>
+                        <th>
+                            @if (\Session::get('vloga') == "referent" )
+                                <div style="display: none">
+                                    <!-- creating parameters for StanjeVpisaZaPredmeteShow -->
+                                    <?php
+                                    $paramArray = array();
+                                    $leto_id = array_search($leto, $leta);
+                                    $paramArray['leta'] = $leto_id;
+                                    $paramArray['letniki'] = 0;
+                                    $paramArray['studProgrami'] = 0;
+
+                                    ?>
+                                    {{ action('StanjeVpisaController@StanjeVpisaZaPredmeteShow', $paramArray)  }}
+                                </div>
+                                <?php echo link_to_action('StanjeVpisaController@StanjeVpisaZaPredmeteShow', 'Stanje vpisa - predmeti', $paramArray); ?>
+                            @endif
+                        </th>
                         <th><b>{{$skupajTotal}}</b></th>
                     </tr>
 
