@@ -204,7 +204,7 @@ class IzpitniRokController extends Controller {
 
                     $i['nosilec'] = $nosilec1 . "" . $nosilec2 . "" .$nosilec3;
                     $i['ime_predmeta'] = $predmet->sifra . " - " . $predmet->naziv;
-                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->where('vrnjena_prijava', 0)->distinct()->count();
+                    $i['st_prijav'] = \DB::table('student_izpit')->where('id_izpitnega_roka', $i->id)->where('vrnjena_prijava', 0)->whereNull('datum_odjave')->distinct()->count();
                     $today = date("Y-m-d");
                     if($today < $i->datum){
                         $i['ocene'] = "Spremeni/Briši";
@@ -472,7 +472,7 @@ class IzpitniRokController extends Controller {
             \Session::set('seznam_alert', '');
         }
 
-        $student_izpit = \DB::table('student_izpit')->whereNull('datum_odjave')->where('id_izpitnega_roka', $id)->where('vrnjena_prijava', 0)->get();
+        $student_izpit = \DB::table('student_izpit')->where('id_izpitnega_roka', $id)->where('vrnjena_prijava', 0)->get();
         $izpit =  \App\Models\IzpitniRok::where('id', $id)->first();
         $predmet = \App\Models\Predmet::where('id', $izpit->id_predmeta)->first();
         $studijsko_leto = $izpit->studijsko_leto;
@@ -482,8 +482,8 @@ class IzpitniRokController extends Controller {
         $counter = 0;
         foreach ($student_izpit as $s){
             $student = \App\Models\Student::where('id', $s->id_studenta)->first();
-            $student_izpit_ocena =  \DB::table('student_izpit')->whereNull('datum_odjave')->where('id_izpitnega_roka', $id)->where('id_studenta', $student->id)->first();
-            $izpiti_studenta = \DB::table('student_izpit')->whereNull('datum_odjave')->where('id_studenta', $student->id)->lists('id_izpitnega_roka');
+            $student_izpit_ocena =  \DB::table('student_izpit')->where('id_izpitnega_roka', $id)->where('id_studenta', $student->id)->whereNull('datum_odjave')->first();
+            $izpiti_studenta = \DB::table('student_izpit')->where('id_studenta', $student->id)->whereNull('datum_odjave')->lists('id_izpitnega_roka');
             $st_polaganj = self::sestejSkupnePrijave($student->id, $izpit->id);
             $st_polaganj_letos = 0;
             foreach($izpiti_studenta as $i){
@@ -605,6 +605,8 @@ class IzpitniRokController extends Controller {
         $student_ids = array();
         $ocene = array();
 
+        $izpit = \App\Models\IzpitniRok::find($izpit_id);
+
         //prvi in drugi input nista id/ocene
         $counter = 0;
         foreach($input as $i){
@@ -617,7 +619,8 @@ class IzpitniRokController extends Controller {
 
         for($i = 0; $i < count($ocene); $i++){
             $student = \App\Models\Student::find($student_ids[$i]);
-            \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->update(array('ocena' => $ocene[$i]));
+            \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student->id)->whereNull('datum_odjave')->update(array('ocena' => $ocene[$i]));
+            \DB::table('student_predmet')->where('id_predmeta', $izpit->id_predmeta)->where('id_studenta', $student->id)->where('studijsko_leto', $izpit->studijsko_leto)->update(array('ocena' => $ocene[$i]));
         }
 
         return self::izpisiSeznam($izpit_id, 9, 0);
@@ -630,7 +633,7 @@ class IzpitniRokController extends Controller {
         $student_program = \App\Models\StudentProgram::where('id_studenta', $student->id)->where('studijsko_leto', $studijsko_leto)->first();
 
         //vse prijave za ta predmet
-        $izpiti_studenta = \DB::table('student_izpit')->where('id_studenta', $student->id)->lists('id_izpitnega_roka');
+        $izpiti_studenta = \DB::table('student_izpit')->where('id_studenta', $student->id)->whereNull('datum_odjave')->lists('id_izpitnega_roka');
         $st_polaganj = 0;
         $st_polaganj_letos = 0;
         foreach($izpiti_studenta as $i){

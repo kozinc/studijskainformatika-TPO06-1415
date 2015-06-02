@@ -1,6 +1,3 @@
-@if(isset($sklep))
-    <h2>Sklep številka {{ $sklep->id }}</h2>
-@endif
 @if($errors->any())
     <div class="alert alert-danger" role="alert">
         {{$errors->first()}}

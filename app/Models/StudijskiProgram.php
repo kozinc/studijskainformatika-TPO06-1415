@@ -45,7 +45,7 @@ class StudijskiProgram extends Model
 
     public function dodatni_prosti_predmeti(Student $student, $studijsko_leto,$letnik)
     {
-        $izbrani_predmeti = $student->predmetiVProgramu();
+        $izbrani_predmeti = $student->predmetiVProgramu($studijsko_leto);
         $letnik = $letnik - 1;
         $dodatni = $this->belongsToMany('App\Models\Predmet', 'program_predmet', 'id_programa', 'id_predmeta')
             ->withPivot('letnik', 'studijsko_leto', 'tip', 'semester')

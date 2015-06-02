@@ -15,8 +15,6 @@
                 {{$errors->first()}}
             </div>
         @endif
-
-
         @if($studentNajden == 0)
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -237,15 +235,18 @@
                             @foreach($predmetiObvezni as $predmet)
                                 <?php $kt = $kt + $predmet->KT; ?>
                                 <tr>
-                                    <td>{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</td>
+                                    <td class="obvezni" data-kt="{{ $predmet->KT }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</td>
                                 </tr>
                             @endforeach
                         </table>
                         @if($programLetnik->stevilo_strokovnih_predmetov > 0)
                             <h3>Strokovni izbirni predmeti</h3>
                             <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_strokovnih_predmetov*6 }}</p>
-                            <select multiple="multiple" class="multi-select count_kt" id="strokovni-predmeti-select" name="strokovni-predmeti-select[]" >
+                            <select multiple="multiple" class="multi-select count_kt" id="strokovni-predmeti-select" name="strokovni-predmeti[]" >
                                 @foreach($predmetiStrokovni as $predmet)
+                                    <?php if(in_array($predmet->id,$izbraniPredmeti)){
+                                        $kt = $kt + $predmet->KT;
+                                    } ?>
                                     <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                 @endforeach
                             </select>
@@ -257,6 +258,9 @@
                                 @foreach($moduli as $modul)
                                     <optgroup label="{{ $modul->ime }}">
                                         @foreach($modul->predmeti as $predmet)
+                                            <?php if(in_array($predmet->id,$izbraniPredmeti)){
+                                                $kt = $kt + $predmet->KT;
+                                            } ?>
                                             <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                         @endforeach
                                     </optgroup>
@@ -268,16 +272,22 @@
                             <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_prostih_predmetov*6 }}</p>
                             <select multiple="multiple" class="multi-select count_kt" id="prosti-predmeti-select" name="prosti-predmeti[]" >
                                 @foreach($predmetiProsti as $predmet)
+                                    <?php if(in_array($predmet->id,$izbraniPredmeti)){
+                                        $kt = $kt + $predmet->KT;
+                                    } ?>
                                     <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                 @endforeach
                                 @foreach($predmetiDodatniProsti as $predmet)
+                                        <?php if(in_array($predmet->id,$izbraniPredmeti)){
+                                            $kt = $kt + $predmet->KT;
+                                        } ?>
                                     <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                 @endforeach
                             </select>
                         @endif
                         <br>
                         <div>
-                            <p>Število kreditnih točk: <span data-obvezni="{{ $kt }}" id="kt_skupno">60</span>/60</p>
+                            <p>Število kreditnih točk: <span data-obvezni="{{ $kt }}" id="kt_skupno">{{ $kt }}</span>/60</p>
                         </div>
                     </div>
                 </div>

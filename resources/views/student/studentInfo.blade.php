@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+    @include('response')
     <div class="panel panel-default">
         <div class="panel-heading"><h3>Podatki o študentu {{$student->ime}} {{$student->priimek}}</h3></div>
         <div class="panel-body">
@@ -99,7 +100,7 @@
                             </td>
                             <td>
                                 @if($sp->studijsko_leto > date('Y',strtotime('-1 year')))
-                                    <a href="{{ action('VpisniListReferentController@prikaziStudenta',['id'=>$sp->id_studenta]) }}">Uredi žeton</a>
+                                    <a href="{{ action('VpisniListReferentController@prikaziStudenta',['id_student_program'=>$sp->id]) }}">Uredi žeton</a>
                                 @endif
                             </td>
                             <td>

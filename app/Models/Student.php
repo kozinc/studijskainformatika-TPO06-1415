@@ -27,9 +27,9 @@ class Student extends Model {
         return $this->belongsToMany('App\Models\Predmet', 'student_predmet', 'id_studenta','id_predmeta')->withPivot('ocena','semester','letnik','studijsko_leto');
     }
 
-    public function predmetiVProgramu()
+    public function predmetiVProgramu($studijsko_leto)
     {
-        $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->lists('id_predmeta');
+        $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->where('studijsko_leto','=',$studijsko_leto)->lists('id_predmeta');
         return $predmeti;
     }
     public function predmetiVLetniku($letnik)
@@ -89,9 +89,12 @@ class Student extends Model {
         return $this->studijskiProgrami()->withPivot('letnik', 'studijsko_leto', 'vrsta_vpisa', 'nacin_studija', 'datum_vpisa','vloga_potrjena')->wherePivot('studijsko_leto','=',$trenutno_leto)->first();
     }
 
-    public function trenutniPredmeti()
+    public function trenutniPredmeti($studijsko_leto='')
     {
-        return $this->Predmeti()->withPivot('letnik','semester','studijsko_leto','ocena')->wherePivot('studijsko_leto','=',date('Y',strtotime('-1 year')).'/'.date('y'));
+        if(empty($studijsko_leto)){
+            $studijsko_leto = date('Y',strtotime('-1 year')).'/'.date('y');
+        }
+        return $this->Predmeti()->withPivot('letnik','semester','studijsko_leto','ocena')->wherePivot('studijsko_leto','=',$studijsko_leto);
     }
 
     public function passwordReset(){
