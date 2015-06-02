@@ -48,6 +48,8 @@ Route::post('elektronskiindeks/export', 'ElektronskiIndeksController@export');
 Route::get('stanjeVpisa', 'StanjeVpisaController@index');
 Route::post('stanjeVpisa/export', 'StanjeVpisaController@export');
 
+Route::any('stanjeVpisaZaPredmete', 'StanjeVpisaController@StanjeVpisaZaPredmeteShow');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

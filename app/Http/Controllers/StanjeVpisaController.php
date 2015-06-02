@@ -2,9 +2,13 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Nosilec;
+use App\Models\StudentPredmet;
 use DB;
 use App\Models\Modul;
 use App\Models\ProgramLetnik;
+use App\Models\Predmet;
+use App\Models\PredmetNosilec;
 use App\Models\StudentProgram;
 use App\Models\StudijskiProgram;
 use Illuminate\Http\Request;
@@ -215,13 +219,61 @@ class StanjeVpisaController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Stanje vpisa za v posamezne predmete:
+     *      za izbrano:
+     *          študijsko leto,
+     *          študijski program in
+     *          letnik
 	 *
+     * podatki o številu vpisanih študentov v posamezne predmete
 	 * @return Response
 	 */
-	public function store()
+	public function StanjeVpisaZaPredmeteIzberi()
 	{
-		//
+		// tukaj je izbira
+        /*
+         * za izbrano:
+     *          študijsko leto,         OK
+     *          študijski program in    OK
+     *          letnik                  OK
+         * */
+        //dobi string leto      $leto_id            $leta               $leto
+        $leto_id = 0;// \Input::get('leta')
+        $leta =  array_unique(\App\Models\StudentProgram::orderBy('studijsko_leto','desc')->lists('studijsko_leto'));
+        //$leta = array_merge($anyOption,$leta2);
+        $leta = array_values($leta);
+        $leto = $leta[$leto_id];
+
+        //$leto = \Input::get('leta');
+
+        //studijski program    $id_programa         $studProgrami       $studProgram
+        $id_programa = 0;// \Input::get('studProgrami')
+        $studProgrami = array_unique(\App\Models\StudijskiProgram::lists('ime'));
+        //$studProgrami = array_merge($anyOption,$studProgrami2);
+        $studProgrami = array_values($studProgrami);
+        $studProgram = $studProgrami[$id_programa];
+
+        //letnik               $letnik_id           $letniki            $letnik
+        $letnik_id = 0; // \Input::get('letniki')
+        $letniki = array_unique(\App\Models\StudentProgram::lists('letnik'));
+        //$letniki = array_merge($anyOption,$letniki2);
+        $letniki = array_values($letniki);
+        $letnik = $letniki[$letnik_id];
+
+        return \View::make('stanjeVpisaZaPredmete')
+            // leto
+            ->with('leta', $leta)
+            ->with('leto_id', 0)
+            // letnik
+            ->with('letniki', $letniki)
+            ->with('letnik_id', 0)
+            // stud program
+            ->with('studProgrami', $studProgrami)
+            ->with('id_programa', 0)
+
+            ->with('stStudentov', '');
+
+
 	}
 
 	/**
@@ -230,10 +282,221 @@ class StanjeVpisaController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		//
-	}
+    public function StanjeVpisaZaPredmeteShow(Request $request)
+    {
+        // tukaj je izbira
+        /*
+         * za izbrano:
+     *          študijsko leto,         OK
+     *          študijski program in    OK
+     *          letnik                  OK
+         * */
+        //var_dump(\Input::all());
+        $anyOption = array("0" => "Ne glede");
+        //dobi string leto      $leto_id            $leta               $leto
+        $leto_id = \Request::get('leta');
+        if(is_null($leto_id)){
+            $leto_id=0;
+        }
+
+        $leta =  array_unique(\App\Models\StudentProgram::orderBy('studijsko_leto','desc')->lists('studijsko_leto'));
+        //$leta = array_merge($anyOption,$leta2);
+        $leta = array_values($leta);
+        $leto = $leta[$leto_id];
+
+        //$leto = \Input::get('leta');
+
+        //studijski program    $id_programa         $studProgrami       $studProgram
+        $id_programa = \Request::get('studProgrami');
+        if(is_null($id_programa)){
+            $id_programa=0;
+        }
+        $studProgrami2 = array_unique(\App\Models\StudijskiProgram::lists('ime'));
+        $studProgrami = array_merge($anyOption,$studProgrami2);
+        $studProgrami = array_values($studProgrami);
+        $studProgram = $studProgrami[$id_programa];
+        $studProgramiID = array_unique(\App\Models\StudijskiProgram::lists('id'));
+        //var_dump($studProgramiID[$id_programa]);
+
+        //letnik               $letnik_id           $letniki            $letnik
+        $letnik_id =   \Request::get('letniki');
+        if(is_null($letnik_id)){
+            $letnik_id=0;
+        }
+        $letniki2 = array_unique(\App\Models\StudentProgram::lists('letnik'));
+        $letniki = array_merge($anyOption,$letniki2);
+        $letniki = array_values($letniki);
+        $letnik = $letniki[$letnik_id];
+
+        //$programPredmet = Pr::all();
+        $predmetNosilec = PredmetNosilec::all();
+        $nosilci = Nosilec::all();
+        $predmeti = Predmet::all();
+
+        $stStudentov = '';
+
+        //var_dump(\Request::all());
+        if(count(\Request::all())==0){
+            return \View::make('stanjeVpisaZaPredmete')
+                // leto
+                ->with('leta', $leta)
+                ->with('leto_id', 0)
+                // letnik
+                ->with('letniki', $letniki)
+                ->with('letnik_id', 0)
+                // stud program
+                ->with('studProgrami', $studProgrami)
+                ->with('id_programa', 0)
+
+                ->with('stStudentov', '');
+        }
+
+        /*
+            SELECT program_predmet.*, student_predmet.id_predmeta, count(*) as total
+            FROM student_predmet
+            INNER JOIN program_predmet
+                ON student_predmet.id_predmeta = program_predmet.id_predmeta
+            WHERE ( student_predmet.studijsko_leto = program_predmet.studijsko_leto
+                AND student_predmet.letnik = program_predmet.letnik
+
+                AND student_predmet.studijsko_leto = $leto
+                AND student_predmet.letnik         = $letnik
+                AND program_predmet.id_programa    = $id_programa
+                )
+            GROUP BY student_predmet.id_predmeta
+         * */
+
+        //var_dump($leta);
+        //var_dump($leto);
+        //var_dump("Letnik");
+        //var_dump($letnik);
+        //var_dump("Id Programa");
+        //var_dump($id_programa);
+        //var_dump(intval($id_programa));
+
+        $stStudentov = DB::table('student_predmet')
+            ->select('program_predmet.id_programa',
+                'student_predmet.*',
+                DB::raw('count(*) as total'))
+            ->from('student_predmet')
+            ->join('program_predmet', function ($join){
+                $join->on( 'student_predmet.id_predmeta', '=', 'program_predmet.id_predmeta');
+                $join->on( 'student_predmet.studijsko_leto', '=', 'program_predmet.studijsko_leto');
+                $join->on( 'student_predmet.letnik', '=', 'program_predmet.letnik');
+            })
+            ->groupBy('student_predmet.id_predmeta','student_predmet.studijsko_leto','student_predmet.letnik','program_predmet.id_programa');
+        //if($leto_id > 0){
+            $stStudentov = $stStudentov->where('student_predmet.studijsko_leto','=',$leto);
+        //}
+        if($letnik_id > 0){
+            $stStudentov = $stStudentov->where('student_predmet.letnik','=',$letnik);
+        }
+        if($id_programa > 0){
+            $stStudentov = $stStudentov->where('program_predmet.id_programa','=',$id_programa);
+        }
+        //var_dump($id_programa);
+
+        $stStudentov = $stStudentov
+            ->orderBy('letnik')
+            ->orderBy('total','desc')
+            ->get()
+            ;
+        /*
+        $stStudentov_list = StudentPredmet::all();
+        $stStudentov_list = $stStudentov->where('letnik',$leto);
+        $stStudentov_list = $stStudentov->where('studijsko_leto',$studijsko_leto);
+        $stStudentov_list = $stStudentov->groupBy('letnik','studijsko_leto','id_predmeta');
+
+        $stStudentov = array();
+
+        foreach($stStudentov_list as $stStudent ){
+            $stStudentov['id_predmeta'] = $stStudent->id_predmeta;
+            $stStudentov['letnik'] = $stStudent->letnik;
+            $stStudentov['studijsko_leto'] = $stStudent->studijsko_leto;
+
+        }*/
+
+
+
+        //var_dump("Count:");
+        //var_dump($stStudentov);
+
+        //$stStudentov=$stStudentov->get();
+
+        $csv = \Input::get('csv');
+        $pdf = \Input::get('pdf');
+        if(!is_null($csv) || !is_null($pdf)){
+            if(!is_null($pdf)){
+
+                $pdf = \App::make('dompdf');
+                $pdf->loadHTML(\View::make('pdf/stanjeVpisaZaPredmete_pdf')
+                    // leto
+                    ->with('leta', $leta)
+                    ->with('leto_id', $leto_id)
+                    // letnik
+                    ->with('letniki', $letniki)
+                    ->with('letnik_id', $letnik_id)
+                    // stud program
+                    ->with('studProgrami', $studProgrami)
+                    ->with('id_programa', $id_programa)
+
+                    ->with('predmetNosilec', $predmetNosilec)
+                    ->with('nosilci', $nosilci)
+                    ->with('predmeti', $predmeti)
+
+                    ->with('stStudentov', $stStudentov)
+                );
+
+                return $pdf->download('StanjeVpisaZaPredmete.pdf');
+            }
+            if(!is_null($csv)) {//!is_null($csv)
+                $content[] = ['Šifra', 'Predmet', 'Nosilec', 'Študijsko leto', 'Letnik', 'Program', 'Število vpisanih'];
+                foreach ($stStudentov as $s) {
+
+
+                    $nosilci = $predmetNosilec->find($s->id_predmeta)->nosilec->ime . ' ' . $predmetNosilec->find($s->id_predmeta)->nosilec->priimek;
+
+                    if (isset($predmetNosilec->find($s->id_predmeta)->nosilec2->ime) && isset($predmetNosilec->find($s->id_predmeta)->nosilec2->priimek)) {
+                        $nosilci = $nosilci . ', ' . $predmetNosilec->find($s->id_predmeta)->nosilec2->ime . ' ' . $predmetNosilec->find($s->id_predmeta)->nosilec2->priimek;
+                    }
+                    if (isset($predmetNosilec->find($s->id_predmeta)->nosilec3->ime) && isset($predmetNosilec->find($s->id_predmeta)->nosilec3->priimek)) {
+                        $nosilci = $nosilci . ', ' . $predmetNosilec->find($s->id_predmeta)->nosilec3->ime . ' ' . $predmetNosilec->find($s->id_predmeta)->nosilec3->priimek;
+                    }
+
+                    $content[] = [
+                        $predmeti->find($s->id_predmeta)->sifra,
+                        $predmeti->find($s->id_predmeta)->naziv,
+                        $nosilci,
+                        $s->studijsko_leto,
+                        $s->letnik,
+                        $studProgrami[$id_programa],
+                        $s->total
+                    ];
+                }
+                ExportHelper::make_csv($content, 'Stanje Vpisa', '');
+            }
+        }
+
+
+        return \View::make('stanjeVpisaZaPredmete')
+            // leto
+            ->with('leta', $leta)
+            ->with('leto_id', $leto_id)
+            // letnik
+            ->with('letniki', $letniki)
+            ->with('letnik_id', $letnik_id)
+            // stud program
+            ->with('studProgrami', $studProgrami)
+            ->with('id_programa', $id_programa)
+
+            ->with('predmetNosilec', $predmetNosilec)
+            ->with('nosilci', $nosilci)
+            ->with('predmeti', $predmeti)
+
+            ->with('stStudentov', $stStudentov);
+
+
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
