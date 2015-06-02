@@ -148,6 +148,7 @@ class StudentIzpitSeeder extends Seeder
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>161, 'ocena'=>5, 'tocke_izpita'=>45]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>163, 'ocena'=>5, 'tocke_izpita'=>30]);
         DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>166, 'ocena'=>10, 'tocke_izpita'=>93]);
+        DB::table('student_izpit')->insert(['id_studenta'=>1, 'id_izpitnega_roka'=>175, 'ocena'=>0, ]);
 
 
         //Miha dlan
