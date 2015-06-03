@@ -179,6 +179,7 @@
         </table>
 
         <br><br>
+        <div style="page-break-before: always;"></div>
         <div style="background-color: #9d9d9d">
             <label>PRILOGA 1: PREDMETNIK</label>
         </div>
