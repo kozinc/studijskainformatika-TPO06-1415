@@ -29,6 +29,7 @@
 
     <p>Predmet: [{{$predmet->sifra}}] {{$predmet->naziv}}</p>
     <p>Izpraševalci: {{$nosilci}}</p>
+    <p>Študijsko leto: {{$studijsko_leto}}</p>
     <p>Datum in ura: {{$datum}} ob {{ $ura  }}h</p>
     <p>Prostor: {{$prostor}}</p>
 
@@ -42,7 +43,8 @@
                 @if($imena == 1)
                 <td style="width: 180px">Priimek in ime</td>
                 @endif
-                <td style="width: 150px">Število točk</td>
+                <td>Št. polaganj</td>
+                <td>Število točk</td>
             </tr>
             @foreach($studentje as $student)
                 <tr>
@@ -51,6 +53,7 @@
                     @if($imena == 1)
                     <td> {{$student->priimek}} {{$student->ime}} </td>
                     @endif
+                    <td> {{$student->st_vseh}}</td>
                     <td> {{$student->st_tock}} </td>
                 </tr>
             @endforeach
