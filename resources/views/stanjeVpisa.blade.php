@@ -68,7 +68,7 @@
                                                                 $paramArray = array();
                                                                 $leto_id = array_search($leto, $leta);
                                                                 $paramArray['leta'] = $leto_id;
-                                                                $paramArray['letniki'] = $row->letnik-1;
+                                                                $paramArray['letniki'] = $row->letnik;
                                                                 $paramArray['studProgrami'] = $row->id_programa;
 
                                                             ?>
@@ -127,7 +127,7 @@
                                                     $paramArray = array();
                                                     $leto_id = array_search($leto, $leta);
                                                     $paramArray['leta'] = $leto_id;
-                                                    $paramArray['letniki'] = $i-1;
+                                                    $paramArray['letniki'] = $i;
                                                     $paramArray['studProgrami'] = $row->id_programa;
 
                                                     ?>
