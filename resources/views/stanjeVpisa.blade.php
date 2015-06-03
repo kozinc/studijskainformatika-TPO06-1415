@@ -10,7 +10,9 @@
 
         <input class="btn" type="submit" name="csv" value="Izvozi CSV">
         <input class="btn" type="submit" name="pdf" value="Izvozi PDF">
-        <a class="btn panel-default" href="{{ action('StanjeVpisaController@StanjeVpisaZaPredmeteShow') }}">Stanje vpisa po predmetih</a>
+		@if (\Session::get('vloga') == "referent" )
+			<a class="btn panel-default" href="{{ action('StanjeVpisaController@StanjeVpisaZaPredmeteShow') }}">Stanje vpisa po predmetih</a>
+		@endif
         {!! Form::close() !!}
 
         <br/>

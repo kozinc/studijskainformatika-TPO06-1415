@@ -3,7 +3,7 @@
     @include('response')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Razpisani izpitni roki v študijskem letu {{ str_replace('/20','-',$trenutno_leto) }}</h3>
+            <h3>Razpisani izpitni roki v študijskem letu {{ str_replace('/20','-',$trenutno_leto) }}   {{ date('H:i:s') }}</h3>
             @if($referent)
                 <p>Študent:{{ $student->ime.' '.$student->priimek }}</p>
                 <p>Vpisna: {{ $student->vpisna }}</p>
@@ -63,7 +63,7 @@
                                             @if(in_array($rok->id_predmeta, $opravljeni_predmeti))
                                                 <li>Študent že ima oceno pri tem predmetu</li>
                                             @endif
-                                            @if($rok->datum < date('Y-m-d',strtotime('+ 1 day')))
+                                            @if($rok->datum <= date('Y-m-d',strtotime('+ 1 day')))
                                                 @if(in_array($rok->id,$prijave))
                                                     <li>Rok za odjavo je potekel</li>
                                                 @else
@@ -93,8 +93,8 @@
                                     </td>
                                     <td>
                                     @if(in_array($rok->id,$prijave))
-                                        @if(!in_array($rok->id,$ocenjena_polaganja))
-                                            <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-referent="0" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
+                                        @if(!in_array($rok->id,$ocenjena_polaganja) && !in_array($rok->id_predmeta, $opravljeni_predmeti))
+                                            <input type="button" class="btn btn-danger izpitni_roki" data-action="odjava" data-referent="1" data-izpitni_rok_id="{{ $rok->id }}" value="Odjava">
                                         @endif
                                     @else
                                             <input type="button" class="btn btn-success izpitni_roki placljiv_izpit" data-referent="1" data-action="prijava" value="Prijava" data-izpitni_rok_id="{{ $rok->id }}" data-pavzer="{{ intval($pavzer) }}"
@@ -117,7 +117,7 @@
                                     </td>
                                 @else
                                     <td>
-                                        @if($rok->datum < date('Y-m-d'))
+                                        @if($rok->datum <= date('Y-m-d',strtotime('+ 1 day')))
                                             @if(in_array($rok->id,$prijave))
                                                 <p>Rok za odjavo je potekel</p>
                                             @else
