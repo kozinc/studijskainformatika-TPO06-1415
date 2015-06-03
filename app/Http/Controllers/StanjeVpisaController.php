@@ -71,20 +71,38 @@ class StanjeVpisaController extends Controller {
         $query = StudentProgram::query();
         $student_list = $query->get();
 
+        //to šteje št. študentov na modul za VSA leta -> popravi, da šteje posebej za eno leto
+
         $modul_array = array();
         foreach($moduli as $modul){
-            $modul_array[$modul->ime] = 0;
+            foreach($leta as $l) {
+                $modul_array[$l][$modul->ime] = 0;
+            }
         }
+        array_search($leto,$leta);
+
         foreach ($student_list as $sp) {
-            foreach($leta as $leto) {
-                if ($sp->studijsko_leto == $leto) {
+            foreach($leta as $l) {
+                if ($sp->studijsko_leto == $l) {
                     foreach ($letniki as $letnik) {
                         if($sp->letnik == $letnik) {
                             foreach ($programi as $program) {
                                 if($sp->id_programa == $program->id) {
-                                    foreach ($sp->moduli($leto, $sp)->get() as $modul1) {
-                                        $modul_array[$modul1->ime] = $modul_array[$modul1->ime] + 1;
-        }   }   }   }   }   }   }   }
+                                    foreach ($sp->moduli($l, $sp)->get() as $modul1) {
+                                        $modul_array[$l][$modul1->ime] = $modul_array[$l][$modul1->ime] + 1;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        $show = false;
+        //var_dump($modul_array);
 
         return \View::make('stanjeVpisa')
             ->with('programi', $programi)
@@ -93,6 +111,7 @@ class StanjeVpisaController extends Controller {
             ->with('leto_id', 0)
             ->with('programLetniki', $programLetnik)
             ->with('moduli', $moduli)
+            ->with('show', $show)
             ->with('modul_array', $modul_array);
 	}
 
@@ -106,7 +125,7 @@ class StanjeVpisaController extends Controller {
         //$anyOption = array("0" => "Ne glede");
         //dobi string leto      $leto_id            $leta               $leto
         $leto_id = \Input::get('leta');
-        $leta= array_unique(\App\Models\StudentProgram::lists('studijsko_leto'));
+        $leta =  array_unique(\App\Models\StudentProgram::orderBy('studijsko_leto','desc')->lists('studijsko_leto'));
         //$leta = array_merge($anyOption,$leta2);
         $leta = array_values($leta);
         $leto = $leta[$leto_id];
@@ -121,7 +140,7 @@ class StanjeVpisaController extends Controller {
             ->groupBy('id_programa','letnik','studijsko_leto')
             ->orderBy('letnik')
             ->get();
-        $programLetniki = ProgramLetnik::all()->keyBy('id');
+        $programLetnik = $programLetniki = ProgramLetnik::all()->keyBy('id');
         $moduli = DB::table('modul')
             ->select('id_programa','ime','letnik')
             ->groupBy('ime')
@@ -131,18 +150,33 @@ class StanjeVpisaController extends Controller {
 
         $modul_array = array();
         foreach($moduli as $modul){
-            $modul_array[$modul->ime] = 0;
+            foreach($leta as $l) {
+                $modul_array[$l][$modul->ime] = 0;
+            }
         }
+        //array_search($leto,$leta);
+
         foreach ($student_list as $sp) {
-            foreach($leta as $leto) {
-                if ($sp->studijsko_leto == $leto) {
+            foreach($leta as $l) {
+                if ($sp->studijsko_leto == $l) {
                     foreach ($letniki as $letnik) {
                         if($sp->letnik == $letnik) {
                             foreach ($programi as $program) {
                                 if($sp->id_programa == $program->id) {
-                                    foreach ($sp->moduli($leto, $sp)->get() as $modul1) {
-                                        $modul_array[$modul1->ime] = $modul_array[$modul1->ime] + 1;
-                                    }   }   }   }   }   }   }   }
+                                    foreach ($sp->moduli($l, $sp)->get() as $modul1) {
+                                        $modul_array[$l][$modul1->ime] = $modul_array[$l][$modul1->ime] + 1;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        $show = true;
         /*
             //'programi'=>$programi
             //'stStudentov'=>$stStudentov,
@@ -215,7 +249,17 @@ class StanjeVpisaController extends Controller {
             //@endforeach
             return ExportHelper::make_csv($content, $title, '');
         }
-        return Redirect::back();
+
+        return \View::make('stanjeVpisa')
+            ->with('programi', $programi)
+            ->with('stStudentov', $stStudentov)
+            ->with('leta', $leta)
+            ->with('leto_id', $leto_id)
+            ->with('izbranoLeto', $leto)
+            ->with('programLetniki', $programLetnik)
+            ->with('moduli', $moduli)
+            ->with('show', $show)
+            ->with('modul_array', $modul_array);
 	}
 
 	/**
