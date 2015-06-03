@@ -44,7 +44,7 @@
                 <td style="width: 180px">Priimek in ime</td>
                 @endif
                 <td>Št. polaganj</td>
-                <td>Število točk</td>
+                <td>Št. točk</td>
             </tr>
             @foreach($studentje as $student)
                 <tr>
