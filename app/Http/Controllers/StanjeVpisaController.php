@@ -223,16 +223,23 @@ class StanjeVpisaController extends Controller {
                         foreach($programLetniki as $programLetnik){
                             if($programLetnik->id_programa==$row->id_programa){
                                 if($programLetnik->letnik==$row->letnik){
-                                    if($programLetnik->stevilo_modulov > 0) {
+                                    $steviloZaModule=0;
+
+                                    foreach($modul_array[$leto] as $m){
+                                        $steviloZaModule = $steviloZaModule + $m;
+                                    }
+
+                                    if($programLetnik->stevilo_modulov > 0 && $steviloZaModule > 0) {
                                         $content[] = ['', '', 'Modul', 'Število študentov', '', '', '', ''];
                                         foreach ($moduli as $modul) {
-                                            if ($modul_array[$modul->ime] > 0) {
+                                            if ($modul_array[$leto][$modul->ime] > 0) {
                                                 // $modul->ime
                                                 // $modul_array[$modul->ime]
-                                                $content[] = ['', '', $modul->ime, $modul_array[$modul->ime], '', '', '', ''];
+                                                $content[] = ['', '', $modul->ime, $modul_array[$leto][$modul->ime], '', '', '', ''];
                                             }
                                         }
                                     }
+
                                 }
                             }
                         }
@@ -445,6 +452,7 @@ class StanjeVpisaController extends Controller {
             ->orderBy('program_predmet.id_programa')
             ->orderBy('student_predmet.letnik')
             ->orderBy('total','desc')
+            ->orderBy('id_predmeta')
             ->get()
             ;
         /*

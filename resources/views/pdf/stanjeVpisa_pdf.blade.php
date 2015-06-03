@@ -74,7 +74,13 @@
                                         @foreach($programLetniki as $programLetnik)
                                             @if($programLetnik->id_programa==$row->id_programa)
                                                 @if($programLetnik->letnik==$row->letnik)
-                                                    @if($programLetnik->stevilo_modulov > 0)
+                                                    <div style="display: none" >
+                                                        {{$steviloZaModule=0}}
+                                                        @foreach($modul_array[$leto] as $m)
+                                                            {{$steviloZaModule = $steviloZaModule + $m}}
+                                                        @endforeach
+                                                    </div>
+                                                    @if($programLetnik->stevilo_modulov > 0 && $steviloZaModule > 0)
                                                         <!-- Moduli -->
                                                         <tr>
                                                             <th></th>
@@ -83,13 +89,13 @@
                                                             <th>Število Študentov</th>
                                                         </tr>
                                                         @foreach($moduli as $modul)
-                                                            @if($modul_array[$modul->ime] > 0)
+                                                            @if($modul_array[$leto][$modul->ime] > 0)
                                                                 <tr>
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td>{{$modul->ime}}</td>
                                                                     <td><!-- {{$programLetnik}} -->
-                                                                        {{$modul_array[$modul->ime]}}
+                                                                        {{$modul_array[$leto][$modul->ime]}}
                                                                     </td>
                                                                 </tr>
                                                             @endif
