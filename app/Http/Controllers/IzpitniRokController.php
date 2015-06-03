@@ -610,11 +610,18 @@ class IzpitniRokController extends Controller {
         //prvi in drugi input nista id/ocene
         $counter = 0;
         foreach($input as $i){
-            if($counter >= 2){
-                if($counter % 2 == 0) array_push($student_ids, $i);
-                else array_push($ocene, $i);
+            if($i != 'checked'){
+                if($counter >= 2){
+                    if($counter % 2 == 0) array_push($student_ids, $i);
+                    else array_push($ocene, $i);
+                }
+                $counter++;
             }
-            $counter++;
+            else {
+                $student_id = array_pop($student_ids);
+                array_pop($ocene);
+                \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student_id)->update(array('vrnjena_prijava' => 1));
+            }
         }
 
         for($i = 0; $i < count($ocene); $i++){
@@ -650,13 +657,6 @@ class IzpitniRokController extends Controller {
         else return $st_polaganj;
     }
 
-    public function vrniPrijavo($id_izpita, $id_studenta, $view){
-        \DB::table('student_izpit')->where('id_izpitnega_roka', $id_izpita)->where('id_studenta', $id_studenta)->update(array('vrnjena_prijava' => 1));
-        if($view == 1) return self::izpisiSeznam($id_izpita, 0, 1);
-        else if($view == 2) return self::izpisiSeznam($id_izpita, 9, 1);
-        else if($view == 3) return self::izpisiSeznam($id_izpita, 10, 1);
-    }
-
     public function vnesiRezultat($id){
         return self::izpisiSeznam($id, 10, 0);
     }
@@ -674,11 +674,18 @@ class IzpitniRokController extends Controller {
 
         $counter = 0;
         foreach($input as $i){
-            if($counter >= 2){
-                if($counter % 2 == 0) array_push($student_ids, $i);
-                else array_push($rezultati, $i);
+            if($i != 'checked'){
+                if($counter >= 2){
+                    if($counter % 2 == 0) array_push($student_ids, $i);
+                    else array_push($rezultati, $i);
+                }
+                $counter++;
             }
-            $counter++;
+            else {
+                $student_id = array_pop($student_ids);
+                array_pop($rezultati);
+                \DB::table('student_izpit')->where('id_izpitnega_roka', $izpit_id)->where('id_studenta', $student_id)->update(array('vrnjena_prijava' => 1));
+            }
         }
 
         for($i = 0; $i < count($rezultati); $i++){
