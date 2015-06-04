@@ -51,10 +51,10 @@
                         <td>{{$zaporedna}}</td>
                         <td>{{ isset($predmeti->find($s->id_predmeta)->sifra) ? $predmeti->find($s->id_predmeta)->sifra : "Error" }}</td>
                         <td>{{ isset($predmeti->find($s->id_predmeta)->naziv) ? $predmeti->find($s->id_predmeta)->naziv : "Error" }} </td>
-                        <th>{{ isset($predmetNosilec->find($s->id_predmeta)->nosilec->ime) ? $predmetNosilec->find($s->id_predmeta)->nosilec->ime : "Error Nosilec1" }}
-                            {{ isset($predmetNosilec->find($s->id_predmeta)->nosilec->priimek) ? $predmetNosilec->find($s->id_predmeta)->nosilec->priimek : "Error Nosilec1" }}
-                            {{ isset($predmetNosilec->find($s->id_predmeta)->nosilec2->ime) ? ', '.$predmetNosilec->find($s->id_predmeta)->nosilec2->ime.' '.$predmetNosilec->find($s->id_predmeta)->nosilec2->priimek : "" }}
-                            {{ isset($predmetNosilec->find($s->id_predmeta)->nosilec3->ime) ? ', '.$predmetNosilec->find($s->id_predmeta)->nosilec2->ime.' '.$predmetNosilec->find($s->id_predmeta)->nosilec3->priimek : "" }}
+                        <th>{{ isset($predmeti->find($s->id_predmeta)->nosilec->ime) ? $predmeti->find($s->id_predmeta)->nosilec->ime : "Error Nosilec1" }}
+                            {{ isset($predmeti->find($s->id_predmeta)->nosilec->priimek) ? $predmeti->find($s->id_predmeta)->nosilec->priimek : "Error Nosilec1" }}
+                            {{ isset($predmeti->find($s->id_predmeta)->nosilec2->ime) ? ', '.$predmeti->find($s->id_predmeta)->nosilec2->ime.' '.$predmeti->find($s->id_predmeta)->nosilec2->priimek : "" }}
+                            {{ isset($predmeti->find($s->id_predmeta)->nosilec3->ime) ? ', '.$predmeti->find($s->id_predmeta)->nosilec2->ime.' '.$predmeti->find($s->id_predmeta)->nosilec3->priimek : "" }}
 
                         </th>
                         <td>{{ $s->studijsko_leto }}</td>
