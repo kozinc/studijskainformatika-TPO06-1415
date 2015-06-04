@@ -70,9 +70,10 @@
                     <th>Nosilec</th>
                     <th>Semester</th>
                     <th>Kreditne točke</th>
+                    <th>Odstani</th>
                 </tr>
                 <tr>
-                    <td colspan="6">Obvezni predmeti</td>
+                    <td colspan="7">Obvezni predmeti</td>
                 </tr>
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='obvezni')
@@ -112,11 +113,18 @@
                             @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                         </td>
                         <td>{{ $predmet->KT }}</td>
+                        <td>
+                            <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                <input type="submit" class="btn btn-danger" value="X">
+                            </form>
+                        </td>
                     </tr>
                     @endif
                 @endforeach
                 <tr>
-                    <td colspan="6">Strokovni izbirni predmeti</td>
+                    <td colspan="7">Strokovni izbirni predmeti</td>
                 </tr>
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='strokovni-izbirni')
@@ -129,6 +137,13 @@
                                 @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
                     @endif
                 @endforeach
@@ -143,11 +158,19 @@
                     <th>Nosilec</th>
                     <th>Semester</th>
                     <th>Kreditne točke</th>
+                    <th>Odstrani</th>
                 </tr>
                 @foreach($program->moduli as $modul)
                     @if($modul->letnik == $letnik->letnik && $modul->studijsko_leto==$studijsko_leto)
                         <tr>
                             <td colspan="6">{{ $modul->ime }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniModul',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_modula" value="{{ $modul->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
                         @foreach($modul->predmeti as $predmet)
                         <tr>
@@ -187,6 +210,13 @@
                                 @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     @endif
@@ -206,6 +236,7 @@
                     <th>Nosilec</th>
                     <th>Semester</th>
                     <th>Kreditne točke</th>
+                    <th>Odstrani</th>
                 </tr>
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->tip=='splošno-izbirni' && $predmet->pivot->studijsko_leto == $studijsko_leto)
@@ -246,6 +277,13 @@
                                 @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
             @endif
             @endforeach
@@ -319,7 +357,6 @@
                     </select>
                 </div>
                 <input type="submit" class="btn btn-success" value="Shrani">
-                <input type="submit" name="delete" class="btn btn-danger" value="Odstrani">
             </form>
         </div>
         </div>
