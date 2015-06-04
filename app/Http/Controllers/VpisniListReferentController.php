@@ -386,8 +386,7 @@ class VpisniListReferentController extends Controller {
                 if($povprecnaOcena < 8){
                     foreach($modul_check as $mc)
                     {
-                        if($mc != 3 && (count($modulski) <= $programLetnik->stevilo_modulov)){
-                            DB::rollBack();
+                        if($mc != 3 && (count($modulski) <= $programLetnik->stevilo_modulov*3)){
                             return Redirect::back()->withErrors('Študent nima dovolj visokega povprečja za prosto izbiro modulskih predmetov.');
                         }
                     }

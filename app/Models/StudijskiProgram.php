@@ -80,6 +80,7 @@ class StudijskiProgram extends Model
             ->join('program_predmet','predmet.id','=','program_predmet.id_predmeta')
             ->where('program_predmet.id_programa','=',$this->id)
             ->where('student_predmet.id_studenta','=',$student->id)
+            ->where('ocena','>',0)
             ->lists('ocena');
         if(count($ocene) >0 ){
             $povprecnaOcena = array_sum($ocene)/count($ocene);
