@@ -52,7 +52,6 @@ class StudijskiProgram extends Model
             ->wherePivot('letnik','=',$letnik)
             ->wherePivot('tip','=','strokovni-izbirni')
             ->wherePivot('studijsko_leto','=',$studijsko_leto)
-            ->whereNotIn('predmet.id',$izbrani_predmeti)
             ->orderBy('letnik', 'semester', 'asc');
         return $dodatni;
     }

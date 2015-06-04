@@ -275,7 +275,7 @@
                                     <?php if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){
                                         $kt = $kt + $predmet->KT;
                                     } ?>
-                                @if(!in_array($predmet->id, $predmetiPrejsnjiLetnik))
+                                @if(!in_array($predmet->id, $predmetiPrejsnjiLetnik) ||true)
                                     <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                 @endif
                                 @endforeach
@@ -283,7 +283,7 @@
                                     <?php if(in_array($predmet->id,$izbraniPredmeti)){
                                         $kt = $kt + $predmet->KT;
                                     } ?>
-                                    @if(!in_array($predmet->id, $predmetiPrejsnjiLetnik))
+                                    @if(!in_array($predmet->id, $predmetiPrejsnjiLetnik)  ||true)
                                         <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
                                     @endif
                                 @endforeach

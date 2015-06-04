@@ -145,6 +145,7 @@ class VpisniListReferentController extends Controller {
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
                     $izbraniPredmeti = $student->predmetiVPRogramu($programStudenta->studijsko_leto);
+                    //dd($predmetiDodatniProsti->lists('id'), $predmetiPrejsnjiLetnik);
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
                         'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,'predmetiPrejsnjiLetnik'=>$predmetiPrejsnjiLetnik,
@@ -428,7 +429,7 @@ class VpisniListReferentController extends Controller {
                 }
             }
         }
-         if( ($skupno_min_kt -$programLetnik->stevilo_obveznih_predmetov)  > $skupno_izbrani_kt ){
+         if( ($skupno_min_kt -$programLetnik->stevilo_obveznih_predmetov)  != $skupno_izbrani_kt ){
             return Redirect::back()->withErrors('Skupno število kreditnih točk se ne ujema s predpisanim.');
         }
 
