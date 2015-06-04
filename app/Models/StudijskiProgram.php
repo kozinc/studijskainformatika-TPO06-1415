@@ -88,7 +88,6 @@ class StudijskiProgram extends Model
         }else{
             return 0;
         }
-
     }
 
     public function studenti()

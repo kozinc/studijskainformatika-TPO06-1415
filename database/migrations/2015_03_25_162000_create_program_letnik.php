@@ -22,6 +22,7 @@ class CreateProgramLetnik extends Migration {
             $table->integer('stevilo_strokovnih_predmetov')->unsigned();
             $table->integer('stevilo_prostih_predmetov')->unsigned();
             $table->integer('stevilo_modulov')->unsigned();
+            $table->integer('stevilo_kt_modulskih')->unsigned();
             $table->integer('KT_za_napredovanje')->unsigned();
             $table->integer('KT_za_ponavljanje')->unsigned();
             $table->timestamps();

@@ -209,7 +209,7 @@ class StudijskiProgramController extends Controller {
             if(isset($request['delete'])){
                 $program->predmeti()->where('studijsko_leto' ,'=', $sl)->detach($predmet->id);
             }else {
-                $program->predmeti()->updateExistingPivot($existingPredmet->id, ['studijsko_leto' => $sl, 'letnik' => $request['letnik'], 'id_modula' => $id_modula, 'tip' => $request['tip'], 'semester' => $request['semester']]);
+                \DB::table('program_predmet')->where('id_programa','=',$program->id)->where('id_predmeta','=',$existingPredmet->id)->where('studijsko_leto','=',$sl)->update(['letnik' => $request['letnik'], 'id_modula' => $id_modula, 'tip' => $request['tip'], 'semester' => $request['semester']]);
             }
         }
 

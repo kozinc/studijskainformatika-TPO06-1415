@@ -26,13 +26,13 @@
         <div id="letnik-{{ $letnik->letnik }}" @if($letnik->letnik!=1)style="display:none"@endif>
             <div class="letnik-info">
                 <p>Kreditne točke: {{ $letnik->KT }}</p>
-                <p>Število obveznih predmetov: {{ $letnik->stevilo_obveznih_predmetov }}</p>
-                <p>Število strokovno izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
-                <p>Število prosto izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
+                <p>Število KT obveznih predmetov: {{ $letnik->stevilo_obveznih_predmetov }}</p>
+                <p>Število KT strokovno izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
+                <p>Število KT prosto izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
                 <p>Število modulov: {{ $letnik->stevilo_modulov }}</p>
-                @if($letnik->stevilo_obveznih_predmetov != $program->obvezni_predmeti($studijsko_leto,$letnik->letnik )->count())
+                @if($letnik->stevilo_obveznih_predmetov != $program->obvezni_predmeti($studijsko_leto,$letnik->letnik )->sum('KT'))
                     <div class="alert alert-warning" role="alert">
-                        Število obveznih predmetov se ne ujema!
+                        Število KT obveznih predmetov se ne ujema!
                     </div>
                 @endif
                 @if($letnik->stevilo_modulov > $program->moduli($studijsko_leto,$letnik->letnik)->count())
@@ -40,12 +40,12 @@
                         Povečajte število modulov!
                     </div>
                 @endif
-                @if($letnik->stevilo_strokovnih_predmetov > $program->strokovni_predmeti($studijsko_leto,$letnik->letnik)->count())
+                @if($letnik->stevilo_strokovnih_predmetov > $program->strokovni_predmeti($studijsko_leto,$letnik->letnik)->sum('KT'))
                     <div class="alert alert-warning" role="alert">
                         Povečajte število strokovnih predmetov!
                     </div>
                 @endif
-                @if($letnik->stevilo_prostih_predmetov > $program->prosti_predmeti($studijsko_leto)->count())
+                @if($letnik->stevilo_prostih_predmetov > $program->prosti_predmeti($studijsko_leto)->sum('KT'))
                     <div class="alert alert-warning" role="alert">
                         Povečajte število prsto izbirnih predmetov predmetov!
                     </div>
@@ -196,7 +196,7 @@
 
 
     @endforeach
-        <div id="splošno-izbirni">
+        <div id="splošno-izbirni" style="display: none;">
             <h3>Prosto izbirni predmeti</h3>
             <table class="table" class="predmeti">
                 <tr>
@@ -259,14 +259,6 @@
                 <input type="hidden" name="letnik" value="{{ $letnik->letnik }}">
                 <h3>Dodaj predmet v predmetnik</h3>
                 <div class="form-group">
-                    <label for="predmet">Predmet</label>
-                    <select name="predmet" id="predmet" class="form-control">
-                        @foreach($predmeti->sortBy('sifra') as $predmet)
-                            <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="tip-select">Tip</label>
                     <select name="tip" id="tip-select" class="form-control">
                         <option value="obvezni">Obvezni</option>
@@ -295,9 +287,17 @@
                         </div>
                         <div class="form-group">
                             <label for="opis">Opis</label>
-                            <textarea id="opis" name="opis" clasS="form-control" placeholder="Opis modula..."></textarea>
+                            <textarea id="opis" name="opis_modula" clasS="form-control" placeholder="Opis modula..."></textarea>
                         </div>
                     </div>
+                </div>
+                <div class="form-group predmet">
+                    <label for="predmet">Predmet</label>
+                    <select name="predmet" id="predmet" class="form-control">
+                        @foreach($predmeti->sortBy('sifra') as $predmet)
+                            <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group letnik">
                     <label for="letnik">Letnik</label>
@@ -307,11 +307,11 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group predmet_kt">
                     <label for="KT">Kreditne točke</label>
                     <input type="number" name="KT" id="KT" value="6" class="form-control">
                 </div>
-                <div class="form-group">
+                <div class="form-group predmet_semester">
                     <label for="semester">Semester</label>
                     <select name="semester" id="semester" class="form-control">
                         <option value="1">Zimski</option>

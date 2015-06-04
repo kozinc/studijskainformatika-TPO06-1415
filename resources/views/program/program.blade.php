@@ -82,15 +82,15 @@
                                 <input type="number" min="0" id="KT_{{ $letnik->letnik }}" name="KT_{{ $letnik->letnik }}" class="form-control" value="{{ $letnik->KT }}">
                             </div>
                             <div class="form-group">
-                                <label for="obvezni_predmeti_{{ $letnik->letnik }}">Število obveznih predmetov</label>
+                                <label for="obvezni_predmeti_{{ $letnik->letnik }}">Število KT obveznih predmetov</label>
                                 <input type="number" min="0" id="obvezni_predmeti_{{ $letnik->letnik }}" name="obvezni_predmeti_{{ $letnik->letnik }}" class="form-control" value="{{ $letnik->stevilo_obveznih_predmetov }}">
                             </div>
                             <div class="form-group">
-                                <label for="strokovni_predmeti_{{ $letnik->letnik }}">Število strokovnih predmetov</label>
+                                <label for="strokovni_predmeti_{{ $letnik->letnik }}">Število KT strokovnih predmetov</label>
                                 <input type="number" min="0" id="strokovni_predmeti_{{ $letnik->letnik }}" name="strokovni_predmeti_{{ $letnik->letnik }}" class="form-control" value="{{ $letnik->stevilo_strokovnih_predmetov }}">
                             </div>
                             <div class="form-group">
-                                <label for="prosti_predmeti_{{ $letnik->letnik }}">Število prosto izbirnih predmetov</label>
+                                <label for="prosti_predmeti_{{ $letnik->letnik }}">Število KT prosto izbirnih predmetov</label>
                                 <input type="number" min="0" id="prosti_predmeti_{{ $letnik->letnik }}" name="prosti_predmeti_{{ $letnik->letnik }}" class="form-control" value="{{ $letnik->stevilo_prostih_predmetov }}">
                             </div>
                             <div class="form-group">
@@ -108,15 +108,15 @@
                                 <input type="number" min="0" id="KT_{{ $i }}" name="KT_{{ $i }}" class="form-control" value="0">
                             </div>
                             <div class="form-group">
-                                <label for="obvezni_predmeti_{{ $i }}">Število obveznih predmetov</label>
+                                <label for="obvezni_predmeti_{{ $i }}">Število KT obveznih predmetov</label>
                                 <input type="number" min="0" id="obvezni_predmeti_{{ $i }}" name="obvezni_predmeti_{{ $i }}" class="form-control" value="0">
                             </div>
                             <div class="form-group">
-                                <label for="strokovni_predmeti_{{ $i }}">Število strokovnih predmetov</label>
+                                <label for="strokovni_predmeti_{{ $i }}">Število KT strokovnih predmetov</label>
                                 <input type="number" min="0" id="strokovni_predmeti_{{ $i }}" name="strokovni_predmeti_{{ $i }}" class="form-control" value="0">
                             </div>
                             <div class="form-group">
-                                <label for="prosti_predmeti_{{ $i }}">Število prosto izbirnih predmetov</label>
+                                <label for="prosti_predmeti_{{ $i }}">Število KT prosto izbirnih predmetov</label>
                                 <input type="number" min="0" id="prosti_predmeti_{{ $i }}" name="prosti_predmeti_{{ $i }}" class="form-control" value="0">
                             </div>
                             <div class="form-group">
@@ -135,11 +135,11 @@
                     <div class="form-group">
                         <label for="KT_skupaj">Kreditne točke</label>
                         <input type="number" id="KT_skupaj" class="form-control" disabled value="{{ array_sum($program->letniki->lists('KT')) }}">
-                        <label for="obvezni_skupaj">Število obveznih predmetov</label>
+                        <label for="obvezni_skupaj">Število KT obveznih predmetov</label>
                         <input type="number" id="obvezni_skupaj" class="form-control" disabled value="{{ array_sum($program->letniki->lists('stevilo_obveznik_skupaj')) }}">
-                        <label for="strokovni_skupaj">Število strokovnih predmetov</label>
+                        <label for="strokovni_skupaj">Število KT strokovnih predmetov</label>
                         <input type="number" id="strokovni_skupaj" class="form-control" disabled value="{{ array_sum($program->letniki->lists('stevilo_strokovnih_predmetov')) }}">
-                        <label for="prosti_skupaj">Število prostih predmetov</label>
+                        <label for="prosti_skupaj">Število KTprostih predmetov</label>
                         <input type="number" id="prosti_skupaj" class="form-control" disabled value="{{ array_sum($program->letniki->lists('stevilo_prostih_predmetov')) }}">
                         <label for="moduli_skupaj">Število modulv</label>
                         <input type="number" id="moduli_skupaj" class="form-control" disabled value="{{ array_sum($program->letniki->lists('stevilo_modulov')) }}">
@@ -148,22 +148,24 @@
                 </form>
             </div>
             <br>
-            <div class="btn-group-vertical" id="program-predmetniki">
+            <div class="btn-group-vertical" id="program-predmetniki" style="display: none;">
                 <h3>Študijsko leto</h3>
+                <div class="input-block-level">
+                    <select name="studijsko_leto" id="predmetnik_leto_select">
+                        @for($i = date('Y',strtotime('-1 year')); $i < date('Y',strtotime('+4 years')); $i++)
+                            @if(!in_array($i.'-'.substr((string)($i+1),2,2),$studijska_leta))
+                                <option value="{{ $i.'-'.substr((string)($i+1),2,2) }}">{{ $i.'-'.substr((string)($i+1),2,2) }}</option>
+                            @endif
+                        @endfor
+                    </select>
+                    <input type="button" class="btn btn-success" data-href="{{ $program->id }}/predmetnik-" id="dodaj_predmetnik" value="Dodaj predmetnik">
+                </div>
             @foreach($studijska_leta as $leto)
                 <a class="" href="{{ $program->id }}/predmetnik-{{ $leto }}">{{ $leto }}</a>
                 <br>
             @endforeach
-            </div>
-            <div class="input-block-level">
-                <select name="studijsko_leto" id="predmetnik_leto_select">
-                    @for($i = date('Y',strtotime('-1 year')); $i < date('Y',strtotime('+4 years')); $i++)
-                        @if(!in_array($i.'-'.substr((string)($i+1),2,2),$studijska_leta))
-                            <option value="{{ $i.'-'.substr((string)($i+1),2,2) }}">{{ $i.'-'.substr((string)($i+1),2,2) }}</option>
-                        @endif
-                    @endfor
-                </select>
-                <input type="button" class="btn btn-success" data-href="{{ $program->id }}/predmetnik-" id="dodaj_predmetnik" value="Dodaj predmetnik">
+
+
             </div>
         </div>
     </div>

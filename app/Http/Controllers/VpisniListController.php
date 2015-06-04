@@ -259,18 +259,15 @@ class VpisniListController extends Controller {
         $program = $programStudenta->studijski_program;
         $programLetnik = ProgramLetnik::where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik)->first();
         $povprecnaOcena = $program->povprecnaOcena($student);
-        $skupno_min_kt = $programLetnik->stevilo_modulov * 3 * 6 + $programLetnik->stevilo_strokovnih_predmetov * 6 + $programLetnik->stevilo_prostih_predmetov * 6;
+        $skupno_min_kt = $programLetnik->stevilo_kt_modulskih + $programLetnik->stevilo_strokovnih_predmetov + $programLetnik->stevilo_prostih_predmetov;
         $skupno_izbrani_kt = 0;
         DB::beginTransaction();
         if($programLetnik->stevilo_modulov > 0)
         {
-            $min_kt = $programLetnik->stevilo_modulov * 3 * 6;
+            $min_kt = $programLetnik->stevilo_kt_modulskih;
+            $min_modulov = $programLetnik->stevilo_modulov;
             $modulski = $request['modulski-predmeti'];
             if(!is_array($modulski))return Redirect::back()->withErrors('Število kreditnih točk izbranih modulskih predmetov se ne ujema s predpisanim.');
-            if(count($modulski) < $programLetnik->stevilo_modulov * 3){
-                DB::rollBack();
-                return Redirect::back()->withErrors('Število izbranih modulskih predmetov se ne ujema s predpisanim.');
-            }
             $modul_check = [];
             $izbrani_kt = 0;
             foreach($modulski as $predmet_id)
@@ -285,6 +282,10 @@ class VpisniListController extends Controller {
                 }
                 $studentPredmet = new StudentPredmet(['letnik'=>$programStudenta->letnik, 'semester'=>$predmet->pivot->semester,'studijsko_leto'=>$programStudenta->studijsko_leto,'ocena'=>0,'id_studenta'=>$student->id, 'id_predmeta'=> $predmet->id]);
                 $studentPredmet->save();
+            }
+            if(count($modulski) < $programLetnik->stevilo_modulov * 3){
+                DB::rollBack();
+                return Redirect::back()->withErrors('Število izbranih modulskih predmetov se ne ujema s predpisanim.');
             }
             if($povprecnaOcena < 8){
                 foreach($modul_check as $mc)
