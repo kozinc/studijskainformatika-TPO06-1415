@@ -241,7 +241,7 @@
                         </table>
                         @if($programLetnik->stevilo_strokovnih_predmetov > 0)
                             <h3>Strokovni izbirni predmeti</h3>
-                            <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_strokovnih_predmetov*6 }}</p>
+                            <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_strokovnih_predmetov }}</p>
                             <select multiple="multiple" class="multi-select count_kt" id="strokovni-predmeti-select" name="strokovni-predmeti[]" >
                                 @foreach($predmetiStrokovni as $predmet)
                                     <?php if(in_array($predmet->id,$izbraniPredmeti)){
@@ -253,7 +253,7 @@
                         @endif
                         @if($programLetnik->stevilo_modulov > 0)
                             <h3>Modulski predmeti</h3>
-                            <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_modulov*3*6 }}</p>
+                            <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_kt_modulskih }}</p>
                             <select multiple="multiple" class="multi-select count_kt" id="modulski-predmeti-select" name="modulski-predmeti[]" >
                                 @foreach($moduli as $modul)
                                     <optgroup label="{{ $modul->ime }}">
@@ -269,19 +269,23 @@
                         @endif
                         @if($programLetnik->stevilo_prostih_predmetov > 0)
                             <h3>Prosto izbirni predmeti</h3>
-                            <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_prostih_predmetov*6 }}</p>
+                            <p>Število zahtevanih kreditnih točk: {{ $programLetnik->stevilo_prostih_predmetov }}</p>
                             <select multiple="multiple" class="multi-select count_kt" id="prosti-predmeti-select" name="prosti-predmeti[]" >
                                 @foreach($predmetiProsti as $predmet)
+                                    <?php if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){
+                                        $kt = $kt + $predmet->KT;
+                                    } ?>
+                                @if(!in_array($predmet->id, $predmetiPrejsnjiLetnik))
+                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                @endif
+                                @endforeach
+                                @foreach($predmetiDodatniProsti as $predmet)
                                     <?php if(in_array($predmet->id,$izbraniPredmeti)){
                                         $kt = $kt + $predmet->KT;
                                     } ?>
-                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
-                                @endforeach
-                                @foreach($predmetiDodatniProsti as $predmet)
-                                        <?php if(in_array($predmet->id,$izbraniPredmeti)){
-                                            $kt = $kt + $predmet->KT;
-                                        } ?>
-                                    <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                    @if(!in_array($predmet->id, $predmetiPrejsnjiLetnik))
+                                        <option data-kt="{{ $predmet->KT }}" @if(in_array($predmet->id,$izbraniPredmeti) && !in_array($predmet->id, $predmetiPrejsnjiLetnik)){{ 'selected' }}@endif value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         @endif

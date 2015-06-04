@@ -17,7 +17,7 @@ class CreateModulTable extends Migration {
         $table->increments('id');
         $table->integer('id_programa')->unsigned();
         $table->string('ime');
-        $table->text('opis');
+        $table->text('opis')->nullable();
         $table->integer('letnik')->unsigned();
         $table->string('studijsko_leto');
         $table->timestamps();

@@ -60,6 +60,9 @@ class ListStudentsController extends Controller {
             $student = \App\Models\Student::find($s);
             $student['zaporedna'] = $c;
             $student['vrstavpisa'] = \App\Models\StudentProgram::where('id_studenta', $s)->where('studijsko_leto', $l)->pluck('vrsta_vpisa');
+            if(!isset($student['vrstavpisa'])){
+                $student['vrstavpisa'] = 5;
+            }
             array_push($student_list, $student);
             $c++;
         }

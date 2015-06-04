@@ -28,13 +28,13 @@ $(document).ready(function(){
         $('.predmetnik-form').each(function(){
             $(this).hide();
         });
-
+        div_predmetnik.show();
         div_predmetnik.siblings().each(function(){
             if(!$(this).hasClass('dodaj-predmet')){
                 $(this).hide();
             }
         });
-        div_predmetnik.show();
+
 
         $(this).siblings().each(function(){
            $(this).removeClass('active');
@@ -52,11 +52,15 @@ $(document).ready(function(){
 
         if(tip=='modulski'){
             $('.modul').show();
-            $('.letnik').show();
+            $('.letnik').hide();
         }else if(tip == 'splošno-izbirni'){
+            $('.predmet_kt, .predmet_semester').show();
+
             $('.modul').hide();
             $('.letnik').hide();
         }else{
+            $('.predmet_kt, .predmet_semester').show();
+
             $('.modul').hide();
             $('.letnik').show();
         }
@@ -67,8 +71,11 @@ $(document).ready(function(){
         var value = $(this).val();
         if(value=='new'){
             $('.nov-modul').show();
+            $('.predmet_kt, .predmet_semesterm, .predmet').hide();
         }else{
             $('.nov-modul').hide();
+            $('.predmet_kt, .predmet_semester, .predmet').show();
+
         }
     });
 
@@ -90,13 +97,13 @@ $(document).ready(function(){
         $(this).addClass('active');
         $(this).siblings().removeClass('active');
 
+        $('#program-predmetniki').hide();
         if(data == 'info'){
             $('#program-info').show();
             $('#struktura').hide();
-            $('#program-predmetniki').hide();
         }else if(data == 'struktura'){
             $('#program-info').hide();
-            $('#program-predmetniki').hide();
+
             $('#struktura').show();
         }else{
             $('#program-predmetniki').show();

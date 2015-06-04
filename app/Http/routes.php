@@ -46,7 +46,7 @@ Route::get('elektronskiindeks/{id}', 'ElektronskiIndeksController@prikazEIndeks'
 Route::post('elektronskiindeks/export', 'ElektronskiIndeksController@export');
 
 Route::get('stanjeVpisa', 'StanjeVpisaController@index');
-Route::post('stanjeVpisa/export', 'StanjeVpisaController@export');
+Route::post('stanjeVpisa', 'StanjeVpisaController@export');
 
 Route::any('stanjeVpisaZaPredmete', 'StanjeVpisaController@StanjeVpisaZaPredmeteShow');
 
@@ -83,6 +83,8 @@ Route::put('programi/{id}', 'StudijskiProgramController@update');
 Route::post('programi/{id}/strukutura', 'StudijskiProgramController@spremeni_strukturo');
 Route::get('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@showPredmetnik');
 Route::post('programi/{id}/predmetnik-{studijsko_leto}', 'StudijskiProgramController@editPredmetnik');
+Route::post('programi/{id}/predmetnik-{studijsko_leto}/delete', 'StudijskiProgramController@odstraniPredmet');
+Route::post('programi/{id}/predmetnik-{studijsko_leto}/deleteModul', 'StudijskiProgramController@odstraniModul');
 Route::get('programi/{id}/predmetnik/create', 'StudijskiProgramController@createPredmetnik');
 Route::post('programi/{id}/predmetnik/create', 'StudijkskiProgramController@storePredmetnik');
 

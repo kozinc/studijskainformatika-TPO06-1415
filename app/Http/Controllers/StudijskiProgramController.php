@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\StudentPredmet;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Models\ProgramLetnik;
@@ -209,11 +210,34 @@ class StudijskiProgramController extends Controller {
             if(isset($request['delete'])){
                 $program->predmeti()->where('studijsko_leto' ,'=', $sl)->detach($predmet->id);
             }else {
-                $program->predmeti()->updateExistingPivot($existingPredmet->id, ['studijsko_leto' => $sl, 'letnik' => $request['letnik'], 'id_modula' => $id_modula, 'tip' => $request['tip'], 'semester' => $request['semester']]);
+                \DB::table('program_predmet')->where('id_programa','=',$program->id)->where('id_predmeta','=',$existingPredmet->id)->where('studijsko_leto','=',$sl)->update(['letnik' => $request['letnik'], 'id_modula' => $id_modula, 'tip' => $request['tip'], 'semester' => $request['semester']]);
             }
         }
 
         return Redirect::back()->with('odgovor', 'Predmetnik posodobljen.');
+    }
+
+    public function odstraniPredmet($id, $studijsko_leto, Request $request)
+    {
+        $program = StudijskiProgram::find($id);
+        $leto = substr($studijsko_leto,0,4);
+        $sl = $leto.'/'.((int)$leto+1);
+        $program->predmeti()->where('studijsko_leto' ,'=', $sl)->detach($request['id_predmeta']);
+        return Redirect::back()->with('odgovor', 'Predmet odstranjen.');
+    }
+
+    public function odstraniModul($id, $studijsko_leto, Request $request)
+    {
+        $program = StudijskiProgram::find($id);
+        $leto = substr($studijsko_leto,0,4);
+        $sl = $leto.'/'.((int)$leto+1);
+        $predmeti = $program->predmeti()->where('studijsko_leto' ,'=', $sl)->where('id_modula','=',$request['id_modula'])->get();
+        foreach($predmeti as $predmet){
+            $predmet->delete();
+        }
+        Modul::where('id','=',$request['id_modula'])->delete();
+        return Redirect::back()->with('odgovor', 'Modul odstranjen.');
+
     }
 
 }

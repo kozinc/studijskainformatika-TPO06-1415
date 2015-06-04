@@ -7,7 +7,7 @@ class ProgramLetnik extends Model {
 
 
     protected $table = 'program_letnik';
-    protected $fillable = ['id_programa', 'letnik', 'KT','stevilo_obveznih_predmetov', 'stevilo_strokovnih_predmetov','stevilo_prostih_predmetov', 'stevilo_modulov'];
+    protected $fillable = ['id_programa', 'letnik', 'KT','stevilo_obveznih_predmetov', 'stevilo_strokovnih_predmetov','stevilo_prostih_predmetov', 'stevilo_kt_modulskih','stevilo_modulov'];
     protected $guarded = ['id'];
     protected $dates = ['created_at', 'updated_at'];
 

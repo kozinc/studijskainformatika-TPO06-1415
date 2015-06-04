@@ -26,13 +26,13 @@
         <div id="letnik-{{ $letnik->letnik }}" @if($letnik->letnik!=1)style="display:none"@endif>
             <div class="letnik-info">
                 <p>Kreditne točke: {{ $letnik->KT }}</p>
-                <p>Število obveznih predmetov: {{ $letnik->stevilo_obveznih_predmetov }}</p>
-                <p>Število strokovno izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
-                <p>Število prosto izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
+                <p>Število KT obveznih predmetov: {{ $letnik->stevilo_obveznih_predmetov }}</p>
+                <p>Število KT strokovno izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
+                <p>Število KT prosto izbirnih predmetov: {{ $letnik->stevilo_strokovnih_predmetov }}</p>
                 <p>Število modulov: {{ $letnik->stevilo_modulov }}</p>
-                @if($letnik->stevilo_obveznih_predmetov != $program->obvezni_predmeti($studijsko_leto,$letnik->letnik )->count())
+                @if($letnik->stevilo_obveznih_predmetov != $program->obvezni_predmeti($studijsko_leto,$letnik->letnik )->sum('KT'))
                     <div class="alert alert-warning" role="alert">
-                        Število obveznih predmetov se ne ujema!
+                        Število KT obveznih predmetov se ne ujema!
                     </div>
                 @endif
                 @if($letnik->stevilo_modulov > $program->moduli($studijsko_leto,$letnik->letnik)->count())
@@ -40,12 +40,12 @@
                         Povečajte število modulov!
                     </div>
                 @endif
-                @if($letnik->stevilo_strokovnih_predmetov > $program->strokovni_predmeti($studijsko_leto,$letnik->letnik)->count())
+                @if($letnik->stevilo_strokovnih_predmetov > $program->strokovni_predmeti($studijsko_leto,$letnik->letnik)->sum('KT'))
                     <div class="alert alert-warning" role="alert">
                         Povečajte število strokovnih predmetov!
                     </div>
                 @endif
-                @if($letnik->stevilo_prostih_predmetov > $program->prosti_predmeti($studijsko_leto)->count())
+                @if($letnik->stevilo_prostih_predmetov > $program->prosti_predmeti($studijsko_leto)->sum('KT'))
                     <div class="alert alert-warning" role="alert">
                         Povečajte število prsto izbirnih predmetov predmetov!
                     </div>
@@ -70,9 +70,10 @@
                     <th>Nosilec</th>
                     <th>Semester</th>
                     <th>Kreditne točke</th>
+                    <th>Odstani</th>
                 </tr>
                 <tr>
-                    <td colspan="6">Obvezni predmeti</td>
+                    <td colspan="7">Obvezni predmeti</td>
                 </tr>
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='obvezni')
@@ -112,11 +113,18 @@
                             @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                         </td>
                         <td>{{ $predmet->KT }}</td>
+                        <td>
+                            <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                <input type="submit" class="btn btn-danger" value="X">
+                            </form>
+                        </td>
                     </tr>
                     @endif
                 @endforeach
                 <tr>
-                    <td colspan="6">Strokovni izbirni predmeti</td>
+                    <td colspan="7">Strokovni izbirni predmeti</td>
                 </tr>
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->letnik == $letnik->letnik && $predmet->pivot->studijsko_leto == $studijsko_leto && $predmet->pivot->tip=='strokovni-izbirni')
@@ -129,6 +137,13 @@
                                 @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
                     @endif
                 @endforeach
@@ -143,11 +158,19 @@
                     <th>Nosilec</th>
                     <th>Semester</th>
                     <th>Kreditne točke</th>
+                    <th>Odstrani</th>
                 </tr>
                 @foreach($program->moduli as $modul)
                     @if($modul->letnik == $letnik->letnik && $modul->studijsko_leto==$studijsko_leto)
                         <tr>
                             <td colspan="6">{{ $modul->ime }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniModul',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_modula" value="{{ $modul->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
                         @foreach($modul->predmeti as $predmet)
                         <tr>
@@ -187,6 +210,13 @@
                                 @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     @endif
@@ -196,7 +226,7 @@
 
 
     @endforeach
-        <div id="splošno-izbirni">
+        <div id="splošno-izbirni" style="display: none;">
             <h3>Prosto izbirni predmeti</h3>
             <table class="table" class="predmeti">
                 <tr>
@@ -206,6 +236,7 @@
                     <th>Nosilec</th>
                     <th>Semester</th>
                     <th>Kreditne točke</th>
+                    <th>Odstrani</th>
                 </tr>
                 @foreach($program->predmeti as $predmet)
                     @if($predmet->pivot->tip=='splošno-izbirni' && $predmet->pivot->studijsko_leto == $studijsko_leto)
@@ -246,6 +277,13 @@
                                 @if($predmet->pivot->semester==1){{ 'Zimski' }}@else {{ 'Poletni' }} @endif
                             </td>
                             <td>{{ $predmet->KT }}</td>
+                            <td>
+                                <form method="post" action="{{ action('StudijskiProgramController@odstraniPredmet',['id'=>$program->id,'studijsko_leto'=>str_replace('/20','-',$studijsko_leto)]) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="id_predmeta" value="{{ $predmet->id }}">
+                                    <input type="submit" class="btn btn-danger" value="X">
+                                </form>
+                            </td>
                         </tr>
             @endif
             @endforeach
@@ -258,14 +296,6 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="letnik" value="{{ $letnik->letnik }}">
                 <h3>Dodaj predmet v predmetnik</h3>
-                <div class="form-group">
-                    <label for="predmet">Predmet</label>
-                    <select name="predmet" id="predmet" class="form-control">
-                        @foreach($predmeti->sortBy('sifra') as $predmet)
-                            <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
-                        @endforeach
-                    </select>
-                </div>
                 <div class="form-group">
                     <label for="tip-select">Tip</label>
                     <select name="tip" id="tip-select" class="form-control">
@@ -295,9 +325,17 @@
                         </div>
                         <div class="form-group">
                             <label for="opis">Opis</label>
-                            <textarea id="opis" name="opis" clasS="form-control" placeholder="Opis modula..."></textarea>
+                            <textarea id="opis" name="opis_modula" clasS="form-control" placeholder="Opis modula..."></textarea>
                         </div>
                     </div>
+                </div>
+                <div class="form-group predmet">
+                    <label for="predmet">Predmet</label>
+                    <select name="predmet" id="predmet" class="form-control">
+                        @foreach($predmeti->sortBy('sifra') as $predmet)
+                            <option value="{{ $predmet->id }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group letnik">
                     <label for="letnik">Letnik</label>
@@ -307,11 +345,11 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group predmet_kt">
                     <label for="KT">Kreditne točke</label>
                     <input type="number" name="KT" id="KT" value="6" class="form-control">
                 </div>
-                <div class="form-group">
+                <div class="form-group predmet_semester">
                     <label for="semester">Semester</label>
                     <select name="semester" id="semester" class="form-control">
                         <option value="1">Zimski</option>
@@ -319,7 +357,6 @@
                     </select>
                 </div>
                 <input type="submit" class="btn btn-success" value="Shrani">
-                <input type="submit" name="delete" class="btn btn-danger" value="Odstrani">
             </form>
         </div>
         </div>
