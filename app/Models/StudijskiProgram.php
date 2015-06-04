@@ -76,11 +76,8 @@ class StudijskiProgram extends Model
     public function povprecnaOcena(Student $student)
     {
         $ocene = \DB::table('student_predmet')
-            ->join('predmet','student_predmet.id_predmeta','=','predmet.id')
-            ->join('program_predmet','predmet.id','=','program_predmet.id_predmeta')
-            ->where('program_predmet.id_programa','=',$this->id)
-            ->where('student_predmet.id_studenta','=',$student->id)
-            ->where('ocena','>',0)
+            ->where('id_studenta','=',$student->id)
+            ->where('ocena','>',5)
             ->lists('ocena');
         if(count($ocene) >0 ){
             $povprecnaOcena = array_sum($ocene)/count($ocene);

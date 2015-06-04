@@ -383,6 +383,7 @@ class VpisniListReferentController extends Controller {
                     }
                     $predmetnik[$predmet->id] = ['letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto];
                 }
+                dd($povprecnaOcena);
                 if($povprecnaOcena < 8){
                     foreach($modul_check as $mc)
                     {
