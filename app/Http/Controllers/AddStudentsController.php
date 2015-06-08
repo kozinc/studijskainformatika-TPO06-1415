@@ -80,6 +80,8 @@ class AddStudentsController extends Controller {
                         $student_program -> id_studenta = $id;
                         $student_program -> id_programa = $predmet_id;
                         $student_program -> vrsta_vpisa = 1;
+                        $student_program -> studijsko_leto = '2015/2016';
+                        $student_program -> letnik = 1;
 
                         $student_program -> save();
                     }
