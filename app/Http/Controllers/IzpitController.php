@@ -3,6 +3,7 @@
 use App\Models\Referent;
 use App\Models\Student;
 use App\Models\IzpitniRok;
+use App\Models\StudentProgram;
 use Illuminate\Http\Request;
 
 
@@ -19,6 +20,7 @@ class IzpitController extends Controller {
         }else{
             $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
         }
+
         $pavzer = $redno = $ponavljanje = false;
         if($id_studenta > 0){
             $student = Student::find($id_studenta);
@@ -28,6 +30,11 @@ class IzpitController extends Controller {
         $referent = false;
         if(\Session::get('vloga')=='referent'){
             $referent = true;
+        }
+
+        $trenutni_program = StudentProgram::where('id_studenta',$student->id)->orderBy('studijsko_leto','desc')->first();
+        if(!is_null($trenutni_program)){
+            $trenutno_leto = $trenutni_program->studijsko_leto;
         }
 
         $student_programi = $student->studentProgram()->get();
@@ -53,7 +60,8 @@ class IzpitController extends Controller {
                 }
             }
         }
-        $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-2 weeks')))->sortBy('datum');
+
+        $razpisani_roki = $student->razpisaniRoki(date('Y-m-d',strtotime('-2 weeks')),$trenutno_leto)->sortBy('datum');
         $polaganja = $student->polaganja()->whereNull('datum_odjave')->get();
         $opravljeni_predmeti = $student->Predmeti()->wherePivot('ocena','>',5)->lists('id_predmeta');
         $prijave = $stevilo_polaganj = $neocenjena_polaganja = $pavzerska_polaganja = $letosnja_polaganja =

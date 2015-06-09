@@ -252,8 +252,8 @@ class IzpitniRokSeeder extends Seeder
 
         //Novi moduli
         IzpitniRok::create(['id_predmeta'=>56, 'izpitni_rok'=>1, 'datum'=>'2014-06-20', 'studijsko_leto'=>'2015/2016', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
-        IzpitniRok::create(['id_predmeta'=>56, 'izpitni_rok'=>2, 'datum'=>'2014-06-29', 'studijsko_leto'=>'2016/2016', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
-        IzpitniRok::create(['id_predmeta'=>56, 'izpitni_rok'=>3, 'datum'=>'2014-08-31', 'studijsko_leto'=>'201/2016', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
+        IzpitniRok::create(['id_predmeta'=>56, 'izpitni_rok'=>2, 'datum'=>'2014-06-29', 'studijsko_leto'=>'2015/2016', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
+        IzpitniRok::create(['id_predmeta'=>56, 'izpitni_rok'=>3, 'datum'=>'2014-08-31', 'studijsko_leto'=>'2015/2016', 'ura_izpita'=>'12:30:00', 'predavalnice'=>'P1, P22']);
 
     }
 }

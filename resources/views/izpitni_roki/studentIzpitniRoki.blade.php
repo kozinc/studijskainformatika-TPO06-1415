@@ -3,7 +3,7 @@
     @include('response')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Razpisani izpitni roki v študijskem letu {{ str_replace('/20','-',$trenutno_leto) }}   {{ date('H:i:s') }}</h3>
+            <h3>Razpisani izpitni roki v študijskem letu {{ str_replace('/20','-',$trenutno_leto) }} </h3>
             @if($referent)
                 <p>Študent:{{ $student->ime.' '.$student->priimek }}</p>
                 <p>Vpisna: {{ $student->vpisna }}</p>

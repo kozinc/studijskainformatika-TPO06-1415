@@ -25,7 +25,7 @@ class PredmetiUciteljController extends Controller
 
     public function vrniPredmete()
     {
-        $studijsko_leto = '2014/2015';
+        $studijsko_leto = '2015/2016';
         $vloga = (\Session::get('vloga'));
 
         if ($vloga != 'ucitelj')
@@ -45,7 +45,7 @@ class PredmetiUciteljController extends Controller
     public function vrniStudente($id_predmeta)
     {
         $predmet = Predmet::find($id_predmeta);
-        $studijsko_leto = "2014/2015";
+        $studijsko_leto = "2015/2015";
         $studentPredmeti = \App\Models\StudentPredmet::with('student')->where('id_predmeta', $id_predmeta)->where('studijsko_leto', "=", "2014/2015")->get();
         $studenti = [];
         foreach($studentPredmeti as $sp)

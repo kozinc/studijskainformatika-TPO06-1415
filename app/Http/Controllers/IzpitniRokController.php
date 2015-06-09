@@ -29,17 +29,21 @@ class IzpitniRokController extends Controller {
             if(\Session::get('nosilec') > 0){
                 $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015');
                 $program_predmet_first = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015')->first();
+                if(!is_null($program_predmet_first)){
+                    if(!is_null($program_predmet_first)){
+                        if($program_predmet_first->id_predmeta == 55){
+                            if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
+                                array_push($predmeti2, $ime);
+                            }
+                        }
+                        else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ) {
+                            if ($pr->sifra != '11111') {
+                                if ($pr->sifra != '22222') array_push($predmeti2, $ime);
+                            }
+                        }
+                    }
+                }
 
-                if($program_predmet_first->id_predmeta == 55){
-                    if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
-                        array_push($predmeti2, $ime);
-                    }
-                }
-                else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ) {
-                    if ($pr->sifra != '11111') {
-                        if ($pr->sifra != '22222') array_push($predmeti2, $ime);
-                    }
-                }
             }
             else if($pr->sifra != '11111'){
                 if($pr->sifra != '22222') array_push($predmeti2, $ime);
@@ -70,16 +74,17 @@ class IzpitniRokController extends Controller {
             if(\Session::get('nosilec') > 0){
                 $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015');
                 $program_predmet_first = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015')->first();
-
-                if($program_predmet_first->id_predmeta == 55){
-                    if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
-                        array_push($predmeti2, $p);
+                if(!is_null($program_predmet_first)){
+                    if($program_predmet_first->id_predmeta == 55){
+                        if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
+                            array_push($predmeti2, $p);
+                        }
                     }
-                }
-                else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ){
-                    if ($pr->sifra != '11111') {
-                        if ($pr->sifra != '22222') array_push($predmeti2, $p);
-                    };
+                    else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ){
+                        if ($pr->sifra != '11111') {
+                            if ($pr->sifra != '22222') array_push($predmeti2, $p);
+                        };
+                    }
                 }
             }
             else if($pr->sifra != '11111'){
@@ -240,15 +245,16 @@ class IzpitniRokController extends Controller {
             if(\Session::get('nosilec') > 0){
                 $program_predmet = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015');
                 $program_predmet_first = \DB::table('program_predmet')->where('id_predmeta', $p)->where('studijsko_leto', '2014/2015')->first();
-
-                if($program_predmet_first->id_predmeta == 55){
-                    if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
-                        array_push($predmeti2, $ime);
+                if(!is_null($program_predmet_first)){
+                    if($program_predmet_first->id_predmeta == 55){
+                        if(\Session::get('nosilec') == 17 || \Session::get('nosilec') == 35){
+                            array_push($predmeti2, $ime);
+                        }
                     }
-                }
-                else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ){
-                    if ($pr->sifra != '11111') {
-                        if ($pr->sifra != '22222') array_push($predmeti2, $ime);
+                    else if($program_predmet_first->id_nosilca1 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca2 == \Session::get('nosilec') || $program_predmet->first()->id_nosilca3 == \Session::get('nosilec') ){
+                        if ($pr->sifra != '11111') {
+                            if ($pr->sifra != '22222') array_push($predmeti2, $ime);
+                        }
                     }
                 }
             }
@@ -384,7 +390,12 @@ class IzpitniRokController extends Controller {
             $izpitni_rok->datum = $datum;
             $izpitni_rok->id_predmeta = $predmet_id;
             $izpitni_rok->id_nosilca = $id;
-            $izpitni_rok->studijsko_leto = "2014/2015";
+            if(date('m',strtotime($datum)) >= 10 ){
+                $izpitni_rok->studijsko_leto = date('Y',strtotime($datum)).'/'.date('Y',strtotime($datum.' +1 year'));
+            }else{
+                $izpitni_rok->studijsko_leto = date('Y',strtotime($datum.' -1 year')).'/'.date('Y',strtotime($datum));
+            }
+            //$izpitni_rok->studijsko_leto = "2014/2015";
             $izpitni_rok->ura_izpita = $ura;
             $izpitni_rok->predavalnice = $predavalnice;
             $izpitni_rok->save();

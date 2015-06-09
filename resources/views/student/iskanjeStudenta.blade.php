@@ -40,7 +40,7 @@
                     <th></th>
                 </tr>
 
-                @if(isset($studenti) && $studenti != null)
+                @if(isset($studenti) && !empty($studenti))
                     @foreach($studenti as $student)
                         <tr>
                             <td><a href="{{ action('StudentController@show',['id'=>$student->id]) }}">{{ $student->vpisna }}</a></td>
@@ -55,8 +55,17 @@
                                 <td><a href="{{ action('ListStudentsController@getPotrdilo',['id'=>$student->id]) }}">Natisni potrdilo o vpisu</a></td>
                                 <td><a href="{{ action('ListStudentsController@natisniVpisniList',['id'=>$student->id]) }}">Natisni vpisni list</a></td>
                             @elseif($vnosOcene == 1)
-                                <td>{{ ((\App\Models\StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->where('studijsko_leto','=',$studijsko_leto)->first()->ocena) == null) ?'':(\App\Models\StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->where('studijsko_leto','=',$studijsko_leto)->first()->ocena)}}</td>
-                                <td>{{(\App\Models\StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->where('studijsko_leto','=',$studijsko_leto)->first()->tocke_izpita==null)?'':\App\Models\StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->where('studijsko_leto','=',$studijsko_leto)->first()->tocke_izpita}}</td>
+                                <?php
+                                $kir_retardiran_query = \App\Models\StudentPredmet::where('id_studenta','=',$student->id)->where('id_predmeta','=',$predmet->id)->where('studijsko_leto','=',$studijsko_leto)->first();
+                                $ocena ='';
+                                    $tocke_izpita = '';
+                                if(!is_null($kir_retardiran_query)){
+                                        $ocena = $kir_retardiran_query->ocena;
+                                        $tocke_izpita = $kir_retardiran_query->tocke_izpita;
+                                    }
+                                ?>
+                                <td>{{ $ocena}}</td>
+                                <td>{{ $tocke_izpita }}</td>
                                 <td><a href="{{ action('PredmetiUciteljController@vnesiOceno',['id'=>$predmet->id, 'id_studenta'=>$student->id]) }}">Vnos ocene</a></td>
                             @endif
                         </tr>

@@ -43,18 +43,23 @@ class Student extends Model {
         return $predmeti;
     }
 
-    public function razpisaniRoki($from='',$to='')
+    public function razpisaniRoki($from='',$studijsko_leto='')
     {
-        if(date('m') >= 10){
-            $trenutno_leto = date('Y').'/'.date('Y',strtotime('+1 year'));
+        if(empty($studijsko_leto)){
+            if(date('m') >= 10){
+                $trenutno_leto = date('Y').'/'.date('Y',strtotime('+1 year'));
+            }else{
+                $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
+            }
         }else{
-            $trenutno_leto = date('Y',strtotime('-1 year')).'/'.date('Y');
+            $trenutno_leto = $studijsko_leto;
         }
+
         $predmeti = $this->Predmeti()->wherePivot('studijsko_leto','=',$trenutno_leto)->with('izpitni_roki')->get();
         $izpitni_roki = new Collection();
         foreach($predmeti as $predmet){
             if(!empty($from)){
-                $roki = $predmet->izpitni_roki()->with('predmet')->where('datum','>=',$from)->get();
+                $roki = $predmet->izpitni_roki()->with('predmet')->where('datum','>=',$from)->where('studijsko_leto',$trenutno_leto)->get();
             }else{
                 $roki = $predmet->izpitni_roki()->with('predmet')->get();
             }
