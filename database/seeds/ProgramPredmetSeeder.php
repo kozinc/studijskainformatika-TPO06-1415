@@ -250,7 +250,6 @@ class ProgramPredmetSeeder extends Seeder
 
         //programiranje in algoritmi 2014/2015
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>55, 'id_nosilca1'=>17, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'letnik'=>1, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
-        DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>55, 'id_nosilca1'=>35, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'letnik'=>1, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
 
         //mag 2014/2015
         DB::table('program_predmet')->insert(['id_programa'=>1, 'id_predmeta'=>40, 'id_nosilca1'=>22, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'letnik'=>3, 'semester'=>2,'tip'=>'splošno-izbirni', 'studijsko_leto'=>'2014/2015']);
