@@ -90,25 +90,24 @@ class PredmetSeeder extends Seeder
         Predmet::create(['id'=>55,'sifra'=>'63206', 'naziv'=>'Programiranje in algoritmi', 'opis'=>'', 'KT'=>6, 'id_nosilca'=>17]);
 
         //MODUL INFORMACIJSKI SISTEMI
-        Predmet::create(['id'=>56,'sifra'=>'63249', 'naziv'=>'Elektronsko poslovanje', 'opis'=>'', 'KT'=>6,        'id_nosilca1'=>37, 'id_nosilca2'=>38, 'id_nosilca3'=>0]);
-        Predmet::create(['id'=>57,'sifra'=>'63251', 'naziv'=>'Poslovna inteligenca', 'opis'=>'','id_nosilca1'=>35, 'id_nosilca2'=>39, 'id_nosilca3'=>0, 'KT'=>6]);
-        Predmet::create(['id'=>58,'sifra'=>'63250', 'naziv'=>'Organizacija in management', 'opis'=>'','id_nosilca1'=>35, 'id_nosilca2'=>40, 'id_nosilca3'=>0, 'KT'=>6]);
+        Predmet::create(['id'=>56,'sifra'=>'63249', 'naziv'=>'Elektronsko poslovanje', 'opis'=>'', 'KT'=>6,        'id_nosilca'=>37, 'id_nosilca2'=>38, 'id_nosilca3'=>0]);
+        Predmet::create(['id'=>57,'sifra'=>'63251', 'naziv'=>'Poslovna inteligenca', 'opis'=>'','id_nosilca'=>35, 'id_nosilca2'=>39, 'id_nosilca3'=>0, 'KT'=>6]);
+        Predmet::create(['id'=>58,'sifra'=>'63250', 'naziv'=>'Organizacija in management', 'opis'=>'','id_nosilca'=>35, 'id_nosilca2'=>40, 'id_nosilca3'=>0, 'KT'=>6]);
 
         //MODUL ALGORITMI IN SISTEMSKI PROGRAMI
-        Predmet::create(['id'=>63,'sifra'=>'63263', 'naziv'=>'Računska zahtevnost in hevristično programiranje', 'opis'=>'','id_nosilca1'=>34, 'id_nosilca2'=>41, 'id_nosilca3'=>0, 'KT'=>6]);
-        Predmet::create(['id'=>64,'sifra'=>'63264', 'naziv'=>'Sistemska programska oprema', 'opis'=>'','id_nosilca1'=>35, 'id_nosilca2'=>33, 'id_nosilca3'=>0, 'KT'=>6]);
-        Predmet::create(['id'=>65,'sifra'=>'63265', 'naziv'=>'Prevajalniki', 'opis'=>'','id_nosilca1'=>10, 'id_nosilca2'=>41, 'id_nosilca3'=>0,
-            'KT'=>6]);
+        Predmet::create(['id'=>63,'sifra'=>'63263', 'naziv'=>'Računska zahtevnost in hevristično programiranje', 'opis'=>'','id_nosilca'=>34, 'id_nosilca2'=>41, 'id_nosilca3'=>0, 'KT'=>6]);
+        Predmet::create(['id'=>64,'sifra'=>'63264', 'naziv'=>'Sistemska programska oprema', 'opis'=>'','id_nosilca'=>35, 'id_nosilca2'=>33, 'id_nosilca3'=>0, 'KT'=>6]);
+        Predmet::create(['id'=>65,'sifra'=>'63265', 'naziv'=>'Prevajalniki', 'opis'=>'','id_nosilca'=>10, 'id_nosilca2'=>41, 'id_nosilca3'=>0, 'KT'=>6]);
 
         //MODUL UMETNA INTELIGENCA
-        Predmet::create(['id'=>66,'sifra'=>'63266', 'naziv'=>'Inteligentni sistemi', 'opis'=>'','id_nosilca1'=>9, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'KT'=>6]);
-        Predmet::create(['id'=>67,'sifra'=>'63267', 'naziv'=>'Umetno zaznavanje', 'opis'=>'','id_nosilca1'=>42, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'KT'=>6]);
-        Predmet::create(['id'=>68,'sifra'=>'63268', 'naziv'=>'Razvoj inteligentnih sistemov','id_nosilca1'=>12, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>66,'sifra'=>'63266', 'naziv'=>'Inteligentni sistemi', 'opis'=>'','id_nosilca'=>9, 'id_nosilca2'=>0, 'id_nosilca3'=>0, 'KT'=>6]);
+        Predmet::create(['id'=>67,'sifra'=>'63267', 'naziv'=>'Umetno zaznavanje', 'opis'=>'','id_nosilca'=>42, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'KT'=>6]);
+        Predmet::create(['id'=>68,'sifra'=>'63268', 'naziv'=>'Razvoj inteligentnih sistemov','id_nosilca'=>12, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'opis'=>'', 'KT'=>6]);
 
         //MODUL RAČUNALNIŠKA OMREŽJA
-        Predmet::create(['id'=>59,'sifra'=>'63257', 'naziv'=>'Modeliranje računalniških omrežij', 'opis'=>'','id_nosilca1'=>17, 'id_nosilca2'=>9, 'id_nosilca3'=>0,'KT'=>6]);
-        Predmet::create(['id'=>60,'sifra'=>'63258', 'naziv'=>'Komunikacijski protokoli', 'opis'=>'','id_nosilca1'=>43, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'KT'=>6]);
-        Predmet::create(['id'=>61,'sifra'=>'63259', 'naziv'=>'Brezžična in senzorska omrežja', 'opis'=>'','id_nosilca1'=>44, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'KT'=>6]);
+        Predmet::create(['id'=>59,'sifra'=>'63257', 'naziv'=>'Modeliranje računalniških omrežij', 'opis'=>'','id_nosilca'=>17, 'id_nosilca2'=>9, 'id_nosilca3'=>0,'KT'=>6]);
+        Predmet::create(['id'=>60,'sifra'=>'63258', 'naziv'=>'Komunikacijski protokoli', 'opis'=>'','id_nosilca'=>43, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'KT'=>6]);
+        Predmet::create(['id'=>61,'sifra'=>'63259', 'naziv'=>'Brezžična in senzorska omrežja', 'opis'=>'','id_nosilca'=>44, 'id_nosilca2'=>0, 'id_nosilca3'=>0,'KT'=>6]);
 
 
 
