@@ -67,7 +67,7 @@ class VpisniListController extends Controller {
                     $leto = (date('Y'));
                     $leto = substr ($leto, 2);
                     $novaVpisna =  '63'.$leto;
-                    $letosnjiStudentZadnji = Student::where('vpisna', 'LIKE', $novaVpisna.'%')->orderBy('vpisna')->first();
+                    $letosnjiStudentZadnji = Student::where('vpisna', 'LIKE', $novaVpisna.'%')->orderBy('vpisna','desc')->first();
                     $student->vpisna = $novaVpisna.substr($letosnjiStudentZadnji->vpisna, 4) + 1;
                     $student->save();
                     $program = StudijskiProgram::find($programStudenta->id_programa);
@@ -304,7 +304,7 @@ class VpisniListController extends Controller {
         }
         if($programLetnik->stevilo_strokovnih_predmetov > 0)
         {
-            $min_kt = $programLetnik->stevilo_strokovnih_predmetov * 6;
+            $min_kt = $programLetnik->stevilo_strokovnih_predmetov;
             $strokovni = $request['strokovni-predmeti'];
             if(!is_array($strokovni))return Redirect::back()->withErrors('Število kreditnih točk izbranih strokovnih predmetov se ne ujema s predpisanim.');
             $izbrani_kt = 0;
@@ -324,7 +324,7 @@ class VpisniListController extends Controller {
         }
         if($programLetnik->stevilo_prostih_predmetov > 0)
         {
-            $min_kt = $programLetnik->stevilo_prostih_predmetov * 6;
+            $min_kt = $programLetnik->stevilo_prostih_predmetov;
             $prosti = $request['prosti-predmeti'];
             $izbrani_kt = 0;
             if(is_array($prosti)){

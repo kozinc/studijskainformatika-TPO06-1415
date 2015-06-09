@@ -145,10 +145,19 @@ class VpisniListReferentController extends Controller {
                     $moduli = $program->moduli($programStudenta->studijsko_leto,$programStudenta->letnik)->get();
                     $programLetnik = $program->letnik($programStudenta->letnik);
                     $izbraniPredmeti = $student->predmetiVPRogramu($programStudenta->studijsko_leto);
+                    $obstojeciPredmeti = $student->trenutniPredmeti($programStudenta->studijsko_leto)->get();
+                    $opravljeniPredmeti_ids = $student->opravljeniPredmetiVLetniku($programStudenta->letnik);
+
+                    $predmetiObvezni2 = [];
+                    foreach($predmetiObvezni as $po){
+                        if(!in_array($po->id,$opravljeniPredmeti_ids)){
+                            $predmetiObvezni2[] = $po;
+                        }
+                    }
                     //dd($predmetiDodatniProsti->lists('id'), $predmetiPrejsnjiLetnik);
                     return view('/referent/vpisnilistReferent',['student'=>$student , 'studentNajden'=>1, 'empty' => 1, 'programStudenta'=>$programStudenta,
                         'program'=>$program, 'vrste_vpisa'=> $vrste_vpisa, 'vrsta_vpisa'=> $vrsta_vpisa->ime, 'datum_prvega_vpisa' => $prviVpis->datum_vpisa,
-                        'predmetiObvezni' => $predmetiObvezni, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,'predmetiPrejsnjiLetnik'=>$predmetiPrejsnjiLetnik,
+                        'predmetiObvezni' => $predmetiObvezni2, 'predmetiStrokovni'=>$predmetiStrokovni, 'moduli'=>$moduli,'predmetiPrejsnjiLetnik'=>$predmetiPrejsnjiLetnik,
                         'predmetiProsti'=>$predmetiProsti,'predmetiDodatniProsti'=>$predmetiDodatniProsti, 'programLetnik'=>$programLetnik, 'izbraniPredmeti'=>$izbraniPredmeti,
                         'potrditev'=>true]);
                 }
@@ -346,14 +355,18 @@ class VpisniListReferentController extends Controller {
         $programLetnik = ProgramLetnik::where('id_programa','=',$program->id)->where('letnik','=',$programStudenta->letnik)->first();
         $predmeti = $program->predmeti()->where('studijsko_leto','=',$programStudenta->studijsko_leto)->where('letnik','=', $programStudenta->letnik)->where('tip','=','obvezni');
         $obstojeciPredmeti = $student->trenutniPredmeti($programStudenta->studijsko_leto)->get();
+        $opravljeniPredmeti_ids = $student->opravljeniPredmetiVLetniku($programStudenta->letnik);
         $obstojeciPredmeti_ids = $obstojeciPredmeti->lists('id');
+
         $predmetnik = [];
         $izbrani_kt = 0;
         $skupno_min_kt = $programLetnik->stevilo_kt_modulskih + $programLetnik->stevilo_obveznih_predmetov + $programLetnik->stevilo_strokovnih_predmetov + $programLetnik->stevilo_prostih_predmetov;
         $skupno_izbrani_kt = 0;
         foreach($predmeti->get() as $predmet)
         {
-            $predmetnik[$predmet->id] = ['letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto];
+            if(!in_array($predmet->id, $opravljeniPredmeti_ids)){
+                $predmetnik[$predmet->id] = ['letnik'=>$programStudenta->letnik, 'studijsko_leto'=>$programStudenta->studijsko_leto];
+            }
         }
         //PREDMETNIIK
         $program = $programStudenta->studijski_program;

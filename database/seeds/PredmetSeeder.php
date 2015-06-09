@@ -88,6 +88,31 @@ class PredmetSeeder extends Seeder
         Predmet::create(['id'=>54,'sifra'=>'63221', 'naziv'=>'Računalniške tehnologije', 'opis'=>'Cilj predmeta Računalniške tehnologije je študentom računalništva in informatike predstaviti fizikalne in tehnološke temelje delovanja in izdelave računalnikov, kvantitativno obravnavo nekaterih relevantnih  primerov s področja fizike trdne snovi in predstavitev uporabe fizikalnih zakonitosti v tehniki izdelave mikroelektronskih, monolitnih vezij, temeljnih gradnikov računalnikov. Eden od ciljev predmeta je tudi predstavitev osnov kvantne mehanike, ki že sama po sebi postaja v računalništvu vse pomembnejša fizikalne teorija.', 'id_nosilca'=>12, 'KT'=>6]);
 
         Predmet::create(['id'=>55,'sifra'=>'63206', 'naziv'=>'Programiranje in algoritmi', 'opis'=>'', 'KT'=>6]);
+
+        //MODUL INFORMACIJSKI SISTEMI
+        Predmet::create(['id'=>56,'sifra'=>'63249', 'naziv'=>'Elektronsko poslovanje', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>57,'sifra'=>'63251', 'naziv'=>'Poslovna inteligenca', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>58,'sifra'=>'63250', 'naziv'=>'Organizacija in management', 'opis'=>'', 'KT'=>6]);
+
+        //MODUL ALGORITMI IN SISTEMSKI PROGRAMI
+        Predmet::create(['id'=>63,'sifra'=>'63263', 'naziv'=>'Računska zahtevnost in hevristično programiranje', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>64,'sifra'=>'63264', 'naziv'=>'Sistemska programska oprema', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>65,'sifra'=>'63265', 'naziv'=>'Prevajalniki', 'opis'=>'', 'KT'=>6]);
+
+        //MODUL UMETNA INTELIGENCA
+        Predmet::create(['id'=>66,'sifra'=>'63266', 'naziv'=>'Inteligentni sistemi', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>67,'sifra'=>'63267', 'naziv'=>'Umetno zaznavanje', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>68,'sifra'=>'63268', 'naziv'=>'Razvoj inteligentnih sistemov', 'opis'=>'', 'KT'=>6]);
+
+        //MODUL RAČUNALNIŠKA OMREŽJA
+        Predmet::create(['id'=>59,'sifra'=>'63257', 'naziv'=>'Modeliranje računalniških omrežij', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>60,'sifra'=>'63258', 'naziv'=>'Komunikacijski protokoli', 'opis'=>'', 'KT'=>6]);
+        Predmet::create(['id'=>61,'sifra'=>'63259', 'naziv'=>'Brezžična in senzorska omrežja', 'opis'=>'', 'KT'=>6]);
+
+        
+
+
+
     }
 
 }

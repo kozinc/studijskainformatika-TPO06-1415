@@ -166,12 +166,12 @@ class StudentController extends Controller {
             $predmeti = $student->trenutniPredmeti();
             $program = $student->trenutniProgram();
             if(!is_null($program)){
-                $vrsta_vpisa = VrstaVpisa::find($program->pivot->vrsta_vpisa);
+                $vrsta_vpisa = VrstaVpisa::where('sifra','=',$program->pivot->vrsta_vpisa)->first();
             }else{
                 $vrsta_vpisa = null;
             }
 
-            return view('/student/elektronskiIndeks', ['student'=>$student]);
+            return view('/elektronskiIndeks', ['student'=>$student, 'studProgrami'=>$program]);
         }
         return \Redirect::back();
 

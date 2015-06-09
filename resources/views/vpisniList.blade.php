@@ -211,7 +211,7 @@
                         @foreach($predmetiObvezni as $predmet)
                             <?php $kt = $kt + $predmet->KT; ?>
                             <tr>
-                                <td>{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</td>
+                                <td class="obvezni" data-kt="{{ $predmet->KT }}">{{ '['.$predmet->sifra.'] '.$predmet->naziv.' ('.$predmet->KT.' KT)' }}</td>
                             </tr>
                         @endforeach
                     </table>

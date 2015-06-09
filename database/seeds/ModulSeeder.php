@@ -41,10 +41,23 @@ class ModulSeeder extends Seeder
         Modul::create(['id_programa' => 1, 'ime' => 'Umetna inteligenca', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2013/2014']);
         Modul::create(['id_programa' => 1, 'ime' => 'Umetna inteligenca', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2014/2015']);
         Modul::create(['id_programa' => 1, 'ime' => 'Umetna inteligenca', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2015/2016']);
-
+        //21,22,23,24
         Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2012/2013']);
         Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2013/2014']);
         Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2014/2015']);
         Modul::create(['id_programa' => 1, 'ime' => 'Računalniški sistemi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2015/2016']);
+
+        //25,26,27,28
+        Modul::create(['id_programa' => 1, 'ime' => 'Obvladovanje informatike', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2012/2013']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Obvladovanje informatike', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2013/2014']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Obvladovanje informatike', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2014/2015']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Obvladovanje informatike', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2015/2016']);
+
+        //29,30,31,32
+        Modul::create(['id_programa' => 1, 'ime' => 'Algoritmi in sistemski programi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2012/2013']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Algoritmi in sistemski programi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2013/2014']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Algoritmi in sistemski programi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2014/2015']);
+        Modul::create(['id_programa' => 1, 'ime' => 'Algoritmi in sistemski programi', 'opis' => '', 'letnik' => 3, 'studijsko_leto' => '2015/2016']);
+
     }
 }

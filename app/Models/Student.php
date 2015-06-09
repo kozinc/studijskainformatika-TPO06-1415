@@ -37,6 +37,11 @@ class Student extends Model {
         $predmeti = \DB::table('student_predmet')->where('id_studenta','=',$this->id)->where('letnik','=',$letnik)->lists('id_predmeta');
         return $predmeti;
     }
+    public function opravljeniPredmetiVLetniku($letnik){
+
+        $predmeti = \DB::table('student_predmet')->where('ocena','>',5)->where('id_studenta','=',$this->id)->where('letnik','=',$letnik)->lists('id_predmeta');
+        return $predmeti;
+    }
 
     public function razpisaniRoki($from='',$to='')
     {

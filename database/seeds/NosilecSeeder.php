@@ -52,8 +52,18 @@ class NosilecSeeder extends Seeder
         Nosilec::create(['id' => 34, 'ime' => 'Miha', 'priimek' => 'Mraz', 'naziv' => 'prof. dr.', 'geslo' => Hash::make('mihamraz'), 'email' => 'miha.mraz@fri.uni-lj.si']);
         Nosilec::create(['id' => 35, 'ime' => 'Saša', 'priimek' => 'Divjak', 'naziv' => 'prof. dr.', 'geslo' => Hash::make('sasadivjak'), 'email' => 'sasa.divjak@fri.uni-lj.si']);
 
+
         //Prazen nosilec za diplomsko delo, Ne brisat.
         Nosilec::create(['id' => 36, 'ime' => '', 'priimek' => '', 'naziv' => '', 'geslo' => '', 'email' => '']);
+
+        Nosilec::create(['id' => 37, 'ime' => 'Denis', 'priimek' => 'Trček', 'naziv' => 'prof. dr.', 'geslo' => Hash::make('denistrcek'), 'email' => 'denis.trcek@fri.uni-lj.si']);
+        Nosilec::create(['id' => 38, 'ime' => 'Marjan', 'priimek' => 'Krisper', 'naziv' => 'izr. prof. dr.', 'geslo' => Hash::make('marjankrisper'), 'email' => 'marjankrisper@fri.uni-lj.si']);
+        Nosilec::create(['id' => 39, 'ime' => 'Blaž', 'priimek' => 'Zupan', 'naziv' => 'prof. dr.', 'geslo' => Hash::make('blazzupan'), 'email' => 'blaz.zupan@fri.uni-lj.si']);
+        Nosilec::create(['id' => 40, 'ime' => 'Tomaž', 'priimek' => 'Hovelja', 'naziv' => 'doc. dr.', 'geslo' => Hash::make('tomazhovelja'), 'email' => 'tomaz.hovelja@fri.uni-lj.si']);
+        Nosilec::create(['id' => 41, 'ime' => 'Mattia', 'priimek' => 'Petroni', 'naziv' => 'as.', 'geslo' => Hash::make('mattiapetroni'), 'email' => 'mattia.petroni@fri.uni-lj.si']);
+        Nosilec::create(['id' => 42, 'ime' => 'Tomaž', 'priimek' => 'Dobravec', 'naziv' => 'as.', 'geslo' => Hash::make('tomazdobravec'), 'email' => 'tomaz.dobravec@fri.uni-lj.si']);
+        Nosilec::create(['id' => 43, 'ime' => 'Matej', 'priimek' => 'Kristan', 'naziv' => 'as.', 'geslo' => Hash::make('matejkristan'), 'email' => 'matej.kristan@fri.uni-lj.si']);
+        Nosilec::create(['id' => 44, 'ime' => 'Danijel', 'priimek' => 'Skočaj', 'naziv' => 'as.', 'geslo' => Hash::make('danijelskocaj'), 'email' => 'danijelskocaj@fri.uni-lj.si']);
 
     }
 }
