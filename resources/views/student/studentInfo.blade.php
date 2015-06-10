@@ -171,7 +171,7 @@
 
                                     <?php $stevec=1; ?>
 
-                                    @if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->get()->sortBy('datum')->isEmpty())
+                                    @if ($student->polaganja()->where('id_predmeta','=',$predmet->id_predmeta)->whereNull('datum_odjave')->get()->sortBy('datum')->isEmpty())
                                         <tr>
                                             <td>Pri predmetu še ni polaganj. </td>
                                         </tr>

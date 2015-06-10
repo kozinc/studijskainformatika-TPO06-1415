@@ -486,7 +486,7 @@ class IzpitniRokController extends Controller {
         $student_izpit = \DB::table('student_izpit')->where('id_izpitnega_roka', $id)->where('vrnjena_prijava', 0)->get();
         $izpit =  \App\Models\IzpitniRok::where('id', $id)->first();
         $predmet = \App\Models\Predmet::where('id', $izpit->id_predmeta)->first();
-        $studijsko_leto = $izpit->studijsko_leto;
+        $studijsko_leto = $trenutno_leto = $izpit->studijsko_leto;
         $program_predmet = \DB::table('program_predmet')->where('studijsko_leto', $studijsko_leto)->where('id_predmeta', $izpit->id_predmeta)->first();
         $studentje = array();
 
@@ -505,14 +505,17 @@ class IzpitniRokController extends Controller {
                     }
                 }
             }
-            $student['placilo'] = $student_izpit_ocena->placilo_izpita;
-            $student['st_letos'] = $st_polaganj_letos;
-            $student['st_vseh'] = $st_polaganj;
-            $predmeti_studenta = \DB::table('student_predmet')->where('id_studenta', $student->id)->where('id_predmeta', $izpit->id_predmeta)->orderBy('studijsko_leto', 'ASC')->first();
-            $student['st_leto'] = $predmeti_studenta->studijsko_leto;
-            $student['st_tock'] = $student_izpit_ocena->tocke_izpita;
-            $student['ocena'] = $student_izpit_ocena->ocena;
-            array_push($studentje, $student);
+            if(!is_null($student_izpit_ocena)){
+                $student['placilo'] = $student_izpit_ocena->placilo_izpita;
+                $student['st_tock'] = $student_izpit_ocena->tocke_izpita;
+                $student['ocena'] = $student_izpit_ocena->ocena;
+                $student['st_letos'] = $st_polaganj_letos;
+                $student['st_vseh'] = $st_polaganj;
+                $predmeti_studenta = \DB::table('student_predmet')->where('id_studenta', $student->id)->where('id_predmeta', $izpit->id_predmeta)->orderBy('studijsko_leto', 'ASC')->first();
+                $student['st_leto'] = $izpit->studijsko_leto;
+                array_push($studentje, $student);
+            }
+
         }
 
         $datum = date("d.m.Y", strtotime($izpit->datum));
