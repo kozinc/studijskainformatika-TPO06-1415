@@ -214,7 +214,7 @@
         });
 
         $("#datepicker1").datepicker({
-            minDate: 2,
+            minDate: 0,
             dateFormat: 'dd.mm.yy'
         });
     });

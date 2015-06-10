@@ -164,9 +164,9 @@
                 <td class="sort" style="font-size: 12px">Način študija in oblika študija</td>
             </tr>
             <tr>
-                <td class="sort">{{ $program_student->vrsta_vpisa }}
+                <td class="sort">{{ $program_student->vrsta_vpisa }} </td>
                 <td class="sort">{{ $program_student->letnik }}.</td>
-                <td class="sort">{{ $program_student->nacin_studija }}, {{ $program_student->vrsta_studija }}</td>
+                <td class="sort">{{ $program_student->nacin_studija }}, na lokaciji</td>
             </tr>
         </table>
         <table class="fixed_table">
