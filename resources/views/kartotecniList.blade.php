@@ -103,7 +103,7 @@
                                             }
                                         ?>
 
-                                        @if (($student->polaganja()->whereNull('datum_odjave')->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null)
+                                        @if (($student->polaganja()->whereNull('datum_odjave')->where('id_predmeta','=',$predmet->id_predmeta)->where('studijsko_leto','=',$program->studijsko_leto)->first()) == null && $datum_zadnjega_vnosa != null)
                                             <td></td>
                                         @else
                                             @if($brez_polaganja == 0)
